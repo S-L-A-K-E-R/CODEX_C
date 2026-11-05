@@ -1,0 +1,190 @@
+{
+  "hello-world": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    printf(\"Hello, world!\\n\");\n    return 0;\n}\n"
+  },
+  "boarding-pass": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    printf(\"CODEX C\\nPassenger: learner\\nStatus: ready\\n\");\n    return 0;\n}\n"
+  },
+  "personal-pass": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int number;\n    if (scanf(\"%d\", &number) != 1) return 1;\n    printf(\"CODEX C\\nPassenger: %d\\nStatus: ready\\n\", number);\n    return 0;\n}\n"
+  },
+  "tiny-banner": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    printf(\"========\\n C MODE \\n========\\n\");\n    return 0;\n}\n"
+  },
+  "clockwork": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int s;\n    if (scanf(\"%d\", &s) != 1) return 1;\n    printf(\"%d h %d min %d sec\\n\", s/3600, s/60%60, s%60);\n    return 0;\n}\n"
+  },
+  "weather-station": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    double c;\n    if (scanf(\"%lf\", &c) != 1) return 1;\n    printf(\"%.1f F\\n\", 1.8*c+32);\n    return 0;\n}\n"
+  },
+  "clockwork-days": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int s;\n    if (scanf(\"%d\", &s) != 1) return 1;\n    printf(\"%d d %d h %d min %d sec\\n\",s/86400,s/3600%24,s/60%60,s%60);\n    return 0;\n}\n"
+  },
+  "cafe-bill": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    double a,b,c;\n    if(scanf(\"%lf %lf %lf\",&a,&b,&c)!=3)return 1;\n    printf(\"%.2f\\n\",(a+b+c)/3.0);\n    return 0;\n}\n"
+  },
+  "lift-check": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int load;\n    if(scanf(\"%d\",&load)!=1)return 1;\n    puts(load<=500?\"GO\":\"WAIT\");\n    return 0;\n}\n"
+  },
+  "ticket-machine": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int age;\n    if(scanf(\"%d\",&age)!=1)return 1;\n    if(age<6) puts(\"0\");\n    else if(age<18) puts(\"5\");\n    else puts(\"10\");\n    return 0;\n}\n"
+  },
+  "lift-check-sensors": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int load, people;\n    if(scanf(\"%d %d\",&load,&people)!=2)return 1;\n    puts(load<=500 && people<=6?\"GO\":\"WAIT\");\n    return 0;\n}\n"
+  },
+  "calendar-check": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int y;\n    if(scanf(\"%d\",&y)!=1)return 1;\n    puts(y%400==0 || (y%4==0 && y%100!=0)?\"LEAP\":\"COMMON\");\n    return 0;\n}\n"
+  },
+  "countdown": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    for(int i=n;i>=1;i--)printf(\"%d\\n\",i);\n    puts(\"Lift off!\");\n    return 0;\n}\n"
+  },
+  "step-counter": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n, total=0;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    for(int i=1;i<=n;i++)total+=i;\n    printf(\"%d\\n\",total);\n    return 0;\n}\n"
+  },
+  "step-counter-even": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,s=0;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    for(int i=2;i<=n;i+=2)s+=i;\n    printf(\"%d\\n\",s);\n    return 0;\n}\n"
+  },
+  "digit-counter": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,count=0;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    do{count++;n/=10;}while(n>0);\n    printf(\"%d\\n\",count);\n    return 0;\n}\n"
+  },
+  "sensor-sum": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,a[100],s=0;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>100)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%d\",&a[i])!=1)return 1;s+=a[i];}\n    printf(\"%d\\n\",s);\n    return 0;\n}\n"
+  },
+  "lost-value": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,a[100],x,found=-1;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>100)return 1;\n    for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    for(int i=0;i<n;i++)if(a[i]==x){found=i;break;}\n    printf(\"%d\\n\",found);\n    return 0;\n}\n"
+  },
+  "sensor-range": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,x,lo,hi;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>100)return 1;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    lo=hi=x;\n    for(int i=1;i<n;i++){if(scanf(\"%d\",&x)!=1)return 1;if(x<lo)lo=x;if(x>hi)hi=x;}\n    printf(\"%d %d\\n\",lo,hi);\n    return 0;\n}\n"
+  },
+  "reverse-readings": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,a[100];\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>100)return 1;\n    for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;\n    for(int i=n-1;i>=0;i--)printf(\"%d%s\",a[i],i?\" \":\"\\n\");\n    return 0;\n}\n"
+  },
+  "linear-machine": {
+    "main.c": "#include <stdio.h>\n\nint transform(int x) { return 3*x+2; }\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",transform(x));\n    return 0;\n}\n"
+  },
+  "even-predicate": {
+    "main.c": "#include <stdio.h>\n\nint is_even(int n) { return n%2==0; }\nint main(void) {\n    int n;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    printf(\"%d\\n\",is_even(n));\n    return 0;\n}\n"
+  },
+  "linear-pipeline": {
+    "main.c": "#include <stdio.h>\n\nint transform(int x) { return 3*x+2; }\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",transform(transform(x)));\n    return 0;\n}\n"
+  },
+  "greatest-common": {
+    "main.c": "#include <stdio.h>\n\nint gcd(int a,int b){while(b){int r=a%b;a=b;b=r;}return a;}\nint main(void) {\n    int a,b;\n    if(scanf(\"%d %d\",&a,&b)!=2)return 1;\n    printf(\"%d\\n\",gcd(a,b));\n    return 0;\n}\n"
+  },
+  "pointer-boost": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    int *p=&x;\n    (*p)++;\n    printf(\"%d\\n\",x);\n    return 0;\n}\n"
+  },
+  "swap-values": {
+    "main.c": "#include <stdio.h>\n\nvoid swap(int *a,int *b){int t=*a;*a=*b;*b=t;}\nint main(void) {\n    int a,b;\n    if(scanf(\"%d %d\",&a,&b)!=2)return 1;\n    swap(&a,&b);\n    printf(\"%d %d\\n\",a,b);\n    return 0;\n}\n"
+  },
+  "rotate-values": {
+    "main.c": "#include <stdio.h>\n\nvoid rotate(int *a,int *b,int *c){int t=*c;*c=*b;*b=*a;*a=t;}\nint main(void) {\n    int a,b,c;\n    if(scanf(\"%d %d %d\",&a,&b,&c)!=3)return 1;\n    rotate(&a,&b,&c);\n    printf(\"%d %d %d\\n\",a,b,c);\n    return 0;\n}\n"
+  },
+  "pointer-distance": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,a[100];\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>100)return 1;\n    for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;\n    int *p=a;\n    for(int i=1;i<n;i++)if(a[i]<*p)p=&a[i];\n    printf(\"%ld\\n\",(long)(p-a));\n    return 0;\n}\n"
+  },
+  "word-length": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    char s[101];\n    if(scanf(\"%100s\",s)!=1)return 1;\n    int n=0;while(s[n])n++;\n    printf(\"%d\\n\",n);\n    return 0;\n}\n"
+  },
+  "mirror-word": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    char s[101];\n    if(scanf(\"%100s\",s)!=1)return 1;\n    int n=0,ok=1;while(s[n])n++;\n    for(int i=0;i<n/2;i++)if(s[i]!=s[n-1-i])ok=0;\n    puts(ok?\"YES\":\"NO\");\n    return 0;\n}\n"
+  },
+  "word-profile": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    char s[101];\n    if(scanf(\"%100s\",s)!=1)return 1;\n    int n=0,v=0;\n    while(s[n]){char c=s[n];if(c>='A' && c<='Z')c+='a'-'A';if(c=='a'||c=='e'||c=='i'||c=='o'||c=='u'||c=='y')v++;n++;}\n    printf(\"%d %d\\n\",n,v);\n    return 0;\n}\n"
+  },
+  "reverse-word": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    char s[101];\n    if(scanf(\"%100s\",s)!=1)return 1;\n    int n=0;while(s[n])n++;\n    for(int i=0;i<n/2;i++){char t=s[i];s[i]=s[n-1-i];s[n-1-i]=t;}\n    puts(s);\n    return 0;\n}\n"
+  },
+  "point-move": {
+    "main.c": "#include <stdio.h>\n\ntypedef struct { int x,y; } Point;\nint main(void) {\n    Point p;int dx,dy;\n    if(scanf(\"%d %d %d %d\",&p.x,&p.y,&dx,&dy)!=4)return 1;\n    p.x+=dx;p.y+=dy;\n    printf(\"%d %d\\n\",p.x,p.y);\n    return 0;\n}\n"
+  },
+  "rectangle-record": {
+    "main.c": "#include <stdio.h>\n\ntypedef struct{int width,height;} Rect;\nint main(void) {\n    Rect r;\n    if(scanf(\"%d %d\",&r.width,&r.height)!=2)return 1;\n    printf(\"%d %d\\n\",r.width*r.height,2*(r.width+r.height));\n    return 0;\n}\n"
+  },
+  "point-route": {
+    "main.c": "#include <stdio.h>\n\ntypedef struct{int x,y;} Point;\nint main(void) {\n    Point p;int n,dx,dy;\n    if(scanf(\"%d %d %d\",&p.x,&p.y,&n)!=3 || n<0 || n>100)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%d %d\",&dx,&dy)!=2)return 1;p.x+=dx;p.y+=dy;}\n    printf(\"%d %d\\n\",p.x,p.y);\n    return 0;\n}\n"
+  },
+  "top-student": {
+    "main.c": "#include <stdio.h>\n\ntypedef struct{char name[32];int score;} Student;\nint main(void) {\n    Student s[30];int n,best=0;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>30)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%31s %d\",s[i].name,&s[i].score)!=2)return 1;if(s[i].score>s[best].score)best=i;}\n    printf(\"%s %d\\n\",s[best].name,s[best].score);\n    return 0;\n}\n"
+  },
+  "dynamic-sum": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    int n,s=0;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>1000)return 1;\n    int *a=malloc((size_t)n*sizeof *a);\n    if(!a)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%d\",&a[i])!=1){free(a);return 1;}s+=a[i];}\n    printf(\"%d\\n\",s);\n    free(a);\n    return 0;\n}\n"
+  },
+  "dynamic-copy": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    int n;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>1000)return 1;\n    int *a=malloc((size_t)n*sizeof *a),*b=malloc((size_t)n*sizeof *b);\n    if(!a||!b){free(a);free(b);return 1;}\n    for(int i=0;i<n;i++){if(scanf(\"%d\",&a[i])!=1){free(a);free(b);return 1;}b[i]=a[i];}\n    b[0]++;printf(\"%d %d\\n\",a[0],b[0]);\n    free(a);free(b);\n    return 0;\n}\n"
+  },
+  "dynamic-append": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    int n,s=0,x;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>1000)return 1;\n    int *a=malloc((size_t)n*sizeof *a);if(!a)return 1;\n    for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1){free(a);return 1;}\n    if(scanf(\"%d\",&x)!=1){free(a);return 1;}\n    int *tmp=realloc(a,(size_t)(n+1)*sizeof *a);if(!tmp){free(a);return 1;}\n    a=tmp;a[n]=x;\n    for(int i=0;i<=n;i++)s+=a[i];\n    printf(\"%d\\n\",s);free(a);\n    return 0;\n}\n"
+  },
+  "dynamic-average": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    int n;double sum=0;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>1000)return 1;\n    double *a=malloc((size_t)n*sizeof *a);if(!a)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%lf\",&a[i])!=1){free(a);return 1;}sum+=a[i];}\n    printf(\"%.2f\\n\",sum/n);free(a);\n    return 0;\n}\n"
+  },
+  "split-square": {
+    "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",square(x));\n    return 0;\n}\n",
+    "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint square(int x);\n#endif\n",
+    "maths.c": "#include \"maths.h\"\nint square(int x){return x*x;}\n"
+  },
+  "split-absolute": {
+    "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",absolute(x));\n    return 0;\n}\n",
+    "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint absolute(int x);\n#endif\n",
+    "maths.c": "#include \"maths.h\"\nint absolute(int x){return x<0?-x:x;}\n"
+  },
+  "split-fourth": {
+    "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",fourth(x));\n    return 0;\n}\n",
+    "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint square(int x);\nint fourth(int x);\n#endif\n",
+    "maths.c": "#include \"maths.h\"\nint square(int x){return x*x;}\nint fourth(int x){return square(square(x));}\n"
+  },
+  "split-sign": {
+    "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",sign(x));\n    return 0;\n}\n",
+    "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint sign(int x);\n#endif\n",
+    "maths.c": "#include \"maths.h\"\nint sign(int x){return (x>0)-(x<0);}\n"
+  },
+  "seed-step": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int s;\n    if(scanf(\"%d\",&s)!=1)return 1;\n    printf(\"%d\\n\",(17*s+43)%100);\n    return 0;\n}\n"
+  },
+  "rand-repeat": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    unsigned seed;\n    if(scanf(\"%u\",&seed)!=1)return 1;\n    srand(seed);int a=rand();\n    srand(seed);int b=rand();\n    puts(a==b?\"SAME\":\"DIFFERENT\");\n    return 0;\n}\n"
+  },
+  "seed-sequence": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int s,n;\n    if(scanf(\"%d %d\",&s,&n)!=2)return 1;\n    for(int i=0;i<n;i++){s=(17*s+43)%100;printf(\"%d\\n\",s);}\n    return 0;\n}\n"
+  },
+  "dice-range": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",1+x%6);\n    return 0;\n}\n"
+  },
+  "file-roundtrip": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int x,y;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    FILE *f=fopen(\"value.txt\",\"w\");if(!f)return 1;\n    fprintf(f,\"%d\\n\",x);fclose(f);\n    f=fopen(\"value.txt\",\"r\");if(!f)return 1;\n    int ok=fscanf(f,\"%d\",&y);fclose(f);if(ok!=1)return 1;\n    printf(\"%d\\n\",y);\n    return 0;\n}\n"
+  },
+  "file-count": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    char s[101];\n    if(scanf(\"%100s\",s)!=1)return 1;\n    FILE *f=fopen(\"word.txt\",\"w\");if(!f)return 1;fputs(s,f);fclose(f);\n    f=fopen(\"word.txt\",\"r\");if(!f)return 1;int n=0;\n    while(fgetc(f)!=EOF)n++;fclose(f);printf(\"%d\\n\",n);\n    return 0;\n}\n"
+  },
+  "file-roundtrip-many": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,x,sum=0;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>100)return 1;\n    FILE *f=fopen(\"values.txt\",\"w\");if(!f)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%d\",&x)!=1){fclose(f);return 1;}fprintf(f,\"%d\\n\",x);}fclose(f);\n    f=fopen(\"values.txt\",\"r\");if(!f)return 1;\n    while(fscanf(f,\"%d\",&x)==1)sum+=x;\n    fclose(f);printf(\"%d\\n\",sum);\n    return 0;\n}\n"
+  },
+  "file-append": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    char a[101],b[101],line[104];\n    if(scanf(\"%100s %100s\",a,b)!=2)return 1;\n    FILE *f=fopen(\"journal.txt\",\"w\");if(!f)return 1;fprintf(f,\"%s\\n\",a);fclose(f);\n    f=fopen(\"journal.txt\",\"a\");if(!f)return 1;fprintf(f,\"%s\\n\",b);fclose(f);\n    f=fopen(\"journal.txt\",\"r\");if(!f)return 1;while(fgets(line,sizeof line,f))fputs(line,stdout);fclose(f);\n    return 0;\n}\n"
+  },
+  "recursive-factorial": {
+    "main.c": "#include <stdio.h>\n\nint fact(int n){return n==0?1:n*fact(n-1);}\nint main(void) {\n    int n;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    printf(\"%d\\n\",fact(n));\n    return 0;\n}\n"
+  },
+  "recursive-digits": {
+    "main.c": "#include <stdio.h>\n\nint digits(int n){return n==0?0:n%10+digits(n/10);}\nint main(void) {\n    int n;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    printf(\"%d\\n\",digits(n));\n    return 0;\n}\n"
+  },
+  "factorial-series": {
+    "main.c": "#include <stdio.h>\n\nint fact(int n){return n==0?1:n*fact(n-1);}\nint main(void) {\n    int n,s=0;\n    if(scanf(\"%d\",&n)!=1)return 1;\n    for(int i=0;i<=n;i++)s+=fact(i);\n    printf(\"%d\\n\",s);\n    return 0;\n}\n"
+  },
+  "binary-search": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,a[100],x,lo=0,found=-1;\n    if(scanf(\"%d\",&n)!=1 || n<1 || n>100)return 1;\n    for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;\n    if(scanf(\"%d\",&x)!=1)return 1;int hi=n-1;\n    while(lo<=hi){int mid=lo+(hi-lo)/2;if(a[mid]==x){found=mid;break;}if(a[mid]<x)lo=mid+1;else hi=mid-1;}\n    printf(\"%d\\n\",found);\n    return 0;\n}\n"
+  },
+  "stack-undo": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,stack[100],count=0;\n    if(scanf(\"%d\",&n)!=1 || n<0 || n>100)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%d\",&stack[count])!=1)return 1;count++;}\n    while(count>0)printf(\"%d\\n\",stack[--count]);\n    return 0;\n}\n"
+  },
+  "queue-service": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int n,q[100],head=0;\n    if(scanf(\"%d\",&n)!=1 || n<0 || n>100)return 1;\n    for(int i=0;i<n;i++)if(scanf(\"%d\",&q[i])!=1)return 1;\n    while(head<n)printf(\"%d\\n\",q[head++]);\n    return 0;\n}\n"
+  },
+  "stack-commands": {
+    "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int q,s[100],n=0;char cmd[5];\n    if(scanf(\"%d\",&q)!=1 || q<1 || q>100)return 1;\n    for(int i=0;i<q;i++){if(scanf(\"%4s\",cmd)!=1)return 1;if(cmd[1]=='u'){int x;if(scanf(\"%d\",&x)!=1)return 1;s[n++]=x;}else if(n)printf(\"%d\\n\",s[--n]);else puts(\"EMPTY\");}\n    return 0;\n}\n"
+  },
+  "linked-chain": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node{int value;struct Node *next;} Node;\nvoid clear(Node *p){while(p){Node *next=p->next;free(p);p=next;}}\nint main(void) {\n    int n,x;Node *head=NULL;\n    if(scanf(\"%d\",&n)!=1 || n<0 || n>100)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%d\",&x)!=1){clear(head);return 1;}Node *p=malloc(sizeof *p);if(!p){clear(head);return 1;}p->value=x;p->next=head;head=p;}\n    for(Node *p=head;p;p=p->next)printf(\"%d\\n\",p->value);\n    clear(head);\n    return 0;\n}\n"
+  }
+}

@@ -2,16 +2,16 @@
 
 Milestones are defined by working behaviour and review, not completion-time estimates.
 
-| Milestone | Deliverable | Exit condition |
-|---|---|---|
-| Specification | Product, curriculum, architecture, quality and status documents | Available in this repository for review |
-| Prototype recovery | Transfer source, content, tests, lockfile, notices and workflows | A clean checkout installs, tests and builds |
-| 0.1 — owner review | 15 lessons, 60 challenges, 3 projects, full workspace, browser C, local profile/backups | Verified Pages deployment and clear remaining limitations |
-| 0.2 — classroom pilot | Teacher-reviewed foundations, deeper practice, full light/dark support, EN/FR structure, browser/accessibility checks | Students can complete the core learning flow without setup help |
-| 0.3 — persistence and authoring | IndexedDB, migrations, conflict copies, milestone tombstones, assignment manifests | Interrupted saves and cross-device imports preserve work |
-| 0.4 — deeper C | Expanded strings/ownership, search/sort, linked lists, queues/stacks and modular projects | Each task has reviewed pedagogy and portable tests |
-| 0.5 — optional portability | Offline strategy, selected-file backup and optional provider connection | Explicit consent, recovery and conflict handling work |
-| 1.0 — classroom release | Cohesive curriculum, documented browser matrix and maintained release process | Teacher acceptance and the release checklist pass |
+| Milestone                       | Deliverable                                                                                                           | Exit condition                                                  |
+| ------------------------------- | --------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Specification                   | Product, curriculum, architecture, quality and status documents                                                       | Available in this repository for review                         |
+| Prototype recovery — complete   | Source, content, tests, lockfile, notices and workflows recovered                                                     | Unit, native, WASM and production build checks pass             |
+| 0.1 — owner review              | 15 lessons, 60 challenges, 3 projects, full workspace, browser C, local profile/backups                               | Verified Pages deployment and clear remaining limitations       |
+| 0.2 — classroom pilot           | Teacher-reviewed foundations, deeper practice, full light/dark support, EN/FR structure, browser/accessibility checks | Students can complete the core learning flow without setup help |
+| 0.3 — persistence and authoring | IndexedDB, migrations, conflict copies, milestone tombstones, assignment manifests                                    | Interrupted saves and cross-device imports preserve work        |
+| 0.4 — deeper C                  | Expanded strings/ownership, search/sort, linked lists, queues/stacks and modular projects                             | Each task has reviewed pedagogy and portable tests              |
+| 0.5 — optional portability      | Offline strategy, selected-file backup and optional provider connection                                               | Explicit consent, recovery and conflict handling work           |
+| 1.0 — classroom release         | Cohesive curriculum, documented browser matrix and maintained release process                                         | Teacher acceptance and the release checklist pass               |
 
 ## Next review priorities
 
@@ -22,7 +22,7 @@ Milestones are defined by working behaviour and review, not completion-time esti
 5. Where is more practice useful, and where is repetition unnecessary?
 6. What licence should cover original application code and teaching text?
 
-These decisions can be reviewed progressively. They do not prevent the technical source recovery and initial deployment work.
+These decisions can be reviewed progressively. They do not prevent the initial deployment work.
 
 ## Separate design efforts
 

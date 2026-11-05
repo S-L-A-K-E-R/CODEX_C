@@ -1,16 +1,16 @@
 # Curriculum and exercise design
 
-This document defines the content direction for CODEX C. The local prototype's content files have not yet been transferred into this repository. The examples below distinguish proposed teaching patterns from a complete published exercise bank.
+This document defines the content direction for CODEX C. The initial content bank is in src/data/content.json. The examples below distinguish current content from proposed expansions.
 
 ## Initial content structure
 
 The prototype was built around 15 chapters, each with a short lesson, two core exercises, one gold extension and one optional task: 60 exercises in total. This establishes a complete technical and pedagogical format, but four exercises are not the final practice volume for a major chapter.
 
-| Stage | Chapters | Teaching emphasis |
-|---|---|---|
-| Foundations | First programs, variables/calculations, decisions, loops, arrays | Start confidently, follow state, handle boundaries, build small complete programs |
-| Data and memory | Functions, pointers, strings, structures, dynamic memory | Decompose work, represent data, understand indirection and ownership |
-| Build and explore | Modular projects, randomness, files, recursion, data structures | Combine concepts, define contracts, investigate tradeoffs and build larger work |
+| Stage             | Chapters                                                         | Teaching emphasis                                                                 |
+| ----------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| Foundations       | First programs, variables/calculations, decisions, loops, arrays | Start confidently, follow state, handle boundaries, build small complete programs |
+| Data and memory   | Functions, pointers, strings, structures, dynamic memory         | Decompose work, represent data, understand indirection and ownership              |
+| Build and explore | Modular projects, randomness, files, recursion, data structures  | Combine concepts, define contracts, investigate tradeoffs and build larger work   |
 
 All chapters remain open for teacher-led sessions. The path recommends an order. Gold tasks require their original core task; optional work does not gate the core path.
 
@@ -18,14 +18,14 @@ All chapters remain open for teacher-led sessions. The path recommends an order.
 
 Begin with recognition and prediction, then trace execution, complete a scaffold, repair a plausible mistake, write a solution and transfer the idea. Avoid requiring a student to make a large algorithmic leap at the same time as introducing unfamiliar syntax.
 
-| Practice mode | Example of the learning purpose |
-|---|---|
-| Predict | Determine whether integer division retains the fractional part |
-| Trace | Record an accumulator and loop index after each iteration |
-| Complete | Add the missing update while the input/output structure is provided |
-| Repair | Correct an off-by-one condition and explain the boundary |
-| Construct | Implement a small task from its input/output contract |
-| Transfer | Extend the task to a new representation or constraint |
+| Practice mode | Example of the learning purpose                                     |
+| ------------- | ------------------------------------------------------------------- |
+| Predict       | Determine whether integer division retains the fractional part      |
+| Trace         | Record an accumulator and loop index after each iteration           |
+| Complete      | Add the missing update while the input/output structure is provided |
+| Repair        | Correct an off-by-one condition and explain the boundary            |
+| Construct     | Implement a small task from its input/output contract               |
+| Transfer      | Extend the task to a new representation or constraint               |
 
 The full edition should use this balance rather than treating more input/output puzzles as the only form of progress. Prediction and reflection interfaces still need implementation beyond the prototype's executable tasks.
 
@@ -45,23 +45,23 @@ A harder version should add reasoning, not just change a constant.
 
 ## Chapter expansion targets
 
-| Chapter | Useful additional practice | Common mistake to address |
-|---|---|---|
-| First programs | Escape sequences, formatted input, output order | Missing semicolon, unmatched quotes, confusing source with output |
-| Variables | Units, integer/floating division, rounding contracts | Using integer division when a fractional result is required |
-| Decisions | Inclusive boundaries, combined conditions, validation | Using assignment as a comparison or overlapping ranges |
-| Loops | Sentinels, totals, nesting, invariants | Missing update, wrong termination condition, off-by-one |
-| Arrays | Empty/one-element cases where allowed, search, rotations | Reading outside bounds or mixing an index with a value |
-| Functions | Several callers, parameters, return contracts | Confusing a local copy with the caller's variable |
-| Pointers | Indirection, swap, output parameters, pointer/array relations | Dereferencing an uninitialised pointer |
-| Strings | Terminators, bounded reads, transformations, parsing | Forgetting the terminator or assuming unlimited input |
-| Structures | Record collections, comparison, sorting keys | Treating related fields as unrelated parallel variables |
-| Dynamic memory | Failure paths, resizing, ownership, freeing | Lost allocation after realloc or unclear ownership |
-| Modular programs | Headers, guards, declarations/definitions, linking | Defining the same object in several translation units |
-| Randomness | Repeatability, seeds, ranges, experimental summaries | Assuming rand is portable or cryptographically secure |
-| Files | Missing file, EOF, append, round-trip format | Using feof as a read condition or ignoring errors |
-| Recursion | Base cases, stack trace, iterative comparison | A recursive call that does not approach the base case |
-| Data structures | Push/pop, enqueue/dequeue, wraparound, cleanup | Confusing empty/full state or leaking removed nodes |
+| Chapter          | Useful additional practice                                    | Common mistake to address                                         |
+| ---------------- | ------------------------------------------------------------- | ----------------------------------------------------------------- |
+| First programs   | Escape sequences, formatted input, output order               | Missing semicolon, unmatched quotes, confusing source with output |
+| Variables        | Units, integer/floating division, rounding contracts          | Using integer division when a fractional result is required       |
+| Decisions        | Inclusive boundaries, combined conditions, validation         | Using assignment as a comparison or overlapping ranges            |
+| Loops            | Sentinels, totals, nesting, invariants                        | Missing update, wrong termination condition, off-by-one           |
+| Arrays           | Empty/one-element cases where allowed, search, rotations      | Reading outside bounds or mixing an index with a value            |
+| Functions        | Several callers, parameters, return contracts                 | Confusing a local copy with the caller's variable                 |
+| Pointers         | Indirection, swap, output parameters, pointer/array relations | Dereferencing an uninitialised pointer                            |
+| Strings          | Terminators, bounded reads, transformations, parsing          | Forgetting the terminator or assuming unlimited input             |
+| Structures       | Record collections, comparison, sorting keys                  | Treating related fields as unrelated parallel variables           |
+| Dynamic memory   | Failure paths, resizing, ownership, freeing                   | Lost allocation after realloc or unclear ownership                |
+| Modular programs | Headers, guards, declarations/definitions, linking            | Defining the same object in several translation units             |
+| Randomness       | Repeatability, seeds, ranges, experimental summaries          | Assuming rand is portable or cryptographically secure             |
+| Files            | Missing file, EOF, append, round-trip format                  | Using feof as a read condition or ignoring errors                 |
+| Recursion        | Base cases, stack trace, iterative comparison                 | A recursive call that does not approach the base case             |
+| Data structures  | Push/pop, enqueue/dequeue, wraparound, cleanup                | Confusing empty/full state or leaking removed nodes               |
 
 Aim initially for approximately 8–12 reviewed tasks in each major chapter, adjusted to classroom need. This is a content-development target, not an implemented count or a completion-time estimate.
 

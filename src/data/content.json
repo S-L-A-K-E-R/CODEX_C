@@ -1,0 +1,2594 @@
+{
+  "chapters": [
+    {
+      "id": "first-programs",
+      "title": "Your first programs",
+      "subtitle": "From a blank page to your first output.",
+      "stage": 0,
+      "concepts": ["main", "printf", "scanf"],
+      "lesson": [
+        [
+          "One small program",
+          "A C program starts in main. Instructions inside its braces run in order. A semicolon finishes most statements. return 0 tells the environment that the program finished successfully."
+        ],
+        [
+          "Give the computer a voice",
+          "Include stdio.h to use printf. Text goes between double quotes. The escape sequence \\n starts a new line; it is part of the string. Output is case-sensitive."
+        ],
+        [
+          "Give it some input",
+          "scanf(\"%d\", &value) reads an integer into an existing variable. The & means its address; we explore that later. Check scanf's return value before using the input. In this workspace, enter the complete input before pressing Run."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    printf(\"Hello, world!\\n\");\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "variables",
+      "title": "Variables & calculations",
+      "subtitle": "Turn everyday information into useful results.",
+      "stage": 0,
+      "concepts": ["int", "double", "division", "remainder"],
+      "lesson": [
+        [
+          "A name for a value",
+          "Declare an int for whole numbers or a double for fractional values. Initialise variables before reading them. Assignment (=) replaces the stored value. It is not a mathematical equation."
+        ],
+        [
+          "Choose your arithmetic",
+          "For nonnegative integers, / gives a whole-number quotient and % gives a remainder. 125 / 60 is 2; 125 % 60 is 5. Use a floating operand, such as 3.0, when you want a fractional result."
+        ],
+        [
+          "Make the output useful",
+          "printf(\"%d\", count) prints an int. printf(\"%.2f\", value) prints a double with two digits after the decimal point. scanf uses %lf when reading a double."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    int seconds = 125;\n    int minutes = seconds / 60;\n    int remaining = seconds % 60;\n    printf(\"%d min %d sec\\n\", minutes, remaining);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "decisions",
+      "title": "Making decisions",
+      "subtitle": "Teach a program to choose what happens next.",
+      "stage": 0,
+      "concepts": ["if", "else", "comparisons", "logical operators"],
+      "lesson": [
+        [
+          "Ask a yes-or-no question",
+          "A comparison such as score >= 10 produces 0 (false) or 1 (true). if runs a block when its condition is nonzero; else handles the other path. Use == to compare, not =."
+        ],
+        [
+          "Boundary values matter",
+          "When checking a threshold, try a value below it, equal to it, and above it. Order an else-if chain so each range has a single clear destination."
+        ],
+        [
+          "Combine conditions",
+          "&& means both conditions must hold; || means at least one holds. ! negates a condition. Short-circuit evaluation skips the right side when the result is already known."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    int score = 12;\n    if (score >= 10) {\n        printf(\"Passed\\n\");\n    } else {\n        printf(\"Try again\\n\");\n    }\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "loops",
+      "title": "Loops & repetition",
+      "subtitle": "Let a small instruction do a lot of work.",
+      "stage": 0,
+      "concepts": ["for", "while", "accumulators", "loop bounds"],
+      "lesson": [
+        [
+          "Repeat with a plan",
+          "A for loop has initialisation, a condition checked before each iteration, and an update after each iteration. for (int i = 0; i < n; i++) visits n positions: 0 through n-1."
+        ],
+        [
+          "Carry a result forward",
+          "An accumulator remembers work across iterations. Initialise a sum to 0, or a product to 1. Then update it once for each value you process."
+        ],
+        [
+          "Know when to stop",
+          "A while loop repeats while its condition stays nonzero. Make sure something changes toward stopping. Use Stop if your experiment runs forever; your editor stays responsive."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    int sum = 0;\n    for (int i = 1; i <= 4; i++) {\n        sum += i;\n    }\n    printf(\"%d\\n\", sum);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf",
+      "widget": "loop"
+    },
+    {
+      "id": "arrays",
+      "title": "Arrays & collections",
+      "subtitle": "Work with a whole collection of values.",
+      "stage": 0,
+      "concepts": ["indexing", "bounds", "traversal", "search"],
+      "lesson": [
+        [
+          "Give each value an index",
+          "int values[5] reserves five integers. The valid indexes are 0, 1, 2, 3, 4. C does not automatically check bounds; going outside them is undefined behaviour."
+        ],
+        [
+          "Traverse a collection",
+          "Keep the element count separate from the capacity. Read or process elements with a loop from 0 up to, but not including, the count."
+        ],
+        [
+          "Search deliberately",
+          "A linear search visits items until it finds the target. Return its first zero-based index, or -1 if absent. Finding the largest item starts with an actual element, not an arbitrary zero."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    int samples[4] = {18, 21, 19, 22};\n    int total = 0;\n    for (int i = 0; i < 4; i++) total += samples[i];\n    printf(\"Average: %.1f\\n\", total / 4.0);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "functions",
+      "title": "Functions & decomposition",
+      "subtitle": "Name a small job. Reuse it with confidence.",
+      "stage": 1,
+      "concepts": ["parameters", "return values", "scope", "prototypes"],
+      "lesson": [
+        [
+          "A named operation",
+          "A function packages an operation with a name, parameters, and return type. int twice(int x) receives a copy of x and returns an integer. Each call has its own local variables."
+        ],
+        [
+          "Keep responsibilities small",
+          "Let main handle input and output. Let a helper function calculate a result. This makes it easier to test and reason about one responsibility at a time."
+        ],
+        [
+          "Declare before calling",
+          "Place a function definition above its first use, or declare a prototype before main. A void parameter list means no parameters. An ordinary argument is passed by value."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\nint twice(int x) {\n    return 2 * x;\n}\nint main(void) {\n    printf(\"%d\\n\", twice(6));\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "pointers",
+      "title": "Pointers & memory",
+      "subtitle": "Follow an address. Change the right value.",
+      "stage": 1,
+      "concepts": ["addresses", "dereferencing", "output parameters", "const"],
+      "lesson": [
+        [
+          "An address, not a mystery",
+          "A pointer stores an address. int *p = &score points p at score. & obtains an address; *p accesses the value at that address. A pointer must refer to a valid live object before you dereference it."
+        ],
+        [
+          "Change a caller’s value",
+          "Passing a pointer copies the address. A function can use that copied address to modify the original object. This is why scanf needs &value."
+        ],
+        [
+          "Respect lifetime and bounds",
+          "Never dereference an uninitialised or null pointer. Never return the address of a local variable. Pointer arithmetic is valid within an array (and one past it), but you cannot dereference the one-past position."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    int score = 10;\n    int *p = &score;\n    *p = 25;\n    printf(\"%d\\n\", score);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf",
+      "widget": "pointer"
+    },
+    {
+      "id": "strings",
+      "title": "Strings & text",
+      "subtitle": "Read, inspect, and transform characters.",
+      "stage": 1,
+      "concepts": [
+        "char arrays",
+        "null terminator",
+        "bounds",
+        "text algorithms"
+      ],
+      "lesson": [
+        [
+          "A string ends with zero",
+          "A C string is an array of char ending with a null character, \\0. That terminator occupies a position, so a buffer for 40 text characters needs capacity 41."
+        ],
+        [
+          "Read within the buffer",
+          "Use fgets for whole lines. For a whitespace-free word in char word[101], scanf(\"%100s\", word) leaves room for the terminator. An array name already gives the first element’s address here."
+        ],
+        [
+          "Walk to the terminator",
+          "Loop while text[i] != '\\0'. Do not compare strings with ==; compare characters, or use strcmp once you understand how strings work. The challenges here use ASCII text."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    char word[] = \"code\";\n    int length = 0;\n    while (word[length] != '\\0') length++;\n    printf(\"%d\\n\", length);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "structures",
+      "title": "Structures & records",
+      "subtitle": "Keep related values together.",
+      "stage": 1,
+      "concepts": ["struct", "typedef", "members", "records"],
+      "lesson": [
+        [
+          "Describe a meaningful thing",
+          "A structure groups related members, possibly with different types. typedef struct { int x; int y; } Point creates a convenient name for a point type."
+        ],
+        [
+          "Use the member you need",
+          "For a structure value p, write p.x. For a pointer ptr to a structure, write ptr->x. Structure assignment copies its members; arrays embedded in the structure are copied too."
+        ],
+        [
+          "Separate data from behaviour",
+          "Functions can accept or return structures. Pass a pointer when you need to modify the caller’s record. Keep input validation and formatting at the boundary."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\ntypedef struct { int x; int y; } Point;\nint main(void) {\n    Point p = {3, 4};\n    printf(\"%d %d\\n\", p.x, p.y);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "dynamic-memory",
+      "title": "Dynamic memory",
+      "subtitle": "Make space when you know how much you need.",
+      "stage": 1,
+      "concepts": ["malloc", "free", "realloc", "ownership"],
+      "lesson": [
+        [
+          "Allocate at runtime",
+          "malloc(n * sizeof *items) requests room for n elements and returns a pointer or NULL. Include stdlib.h. Check the result before using it; malloc does not initialise the elements."
+        ],
+        [
+          "Give each allocation an owner",
+          "Decide which part of the program is responsible for calling free. Release memory once, after the last use. Reading after free, freeing twice, or losing the last pointer to an allocation is a bug."
+        ],
+        [
+          "Grow safely",
+          "Store realloc's result in a temporary pointer. If growth fails, the original allocation is still valid. If it succeeds, use the new pointer; the old address may no longer be valid."
+        ]
+      ],
+      "example": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    int *values = malloc(3 * sizeof *values);\n    if (!values) return 1;\n    values[0] = 42;\n    printf(\"%d\\n\", values[0]);\n    free(values);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf",
+      "widget": "pointer"
+    },
+    {
+      "id": "modular",
+      "title": "Headers & multiple files",
+      "subtitle": "Give each part of a program a clear home.",
+      "stage": 2,
+      "concepts": ["headers", "include guards", "translation units", "linker"],
+      "lesson": [
+        [
+          "A declaration is a promise",
+          "A header describes the interface: prototypes, shared types, and constants. A .c file provides the definitions. Include your own header with double quotes."
+        ],
+        [
+          "Compile, then link",
+          "Each .c file becomes a separate object file. The linker joins them and resolves references. A function can be declared many times consistently, but normally has exactly one definition."
+        ],
+        [
+          "Protect the interface",
+          "Use an include guard: #ifndef NAME_H, #define NAME_H, the declarations, then #endif. Keep implementation details out of headers. All .c tabs in this workspace are compiled together."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\nint square(int n);\nint square(int n) { return n*n; }\nint main(void) {\n    printf(\"%d\\n\", square(5));\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "randomness",
+      "title": "Randomness & simulation",
+      "subtitle": "Explore repeatable experiments.",
+      "stage": 2,
+      "concepts": ["rand", "srand", "seeds", "simulation"],
+      "lesson": [
+        [
+          "Pseudorandom is reproducible",
+          "rand() produces a pseudorandom integer between 0 and RAND_MAX. srand(seed) selects a repeatable sequence for that implementation. Seed once before a simulation, not on every draw."
+        ],
+        [
+          "Map a range carefully",
+          "For a simple classroom die, 1 + rand() % 6 maps to 1–6. This has a small modulo bias; it is not a statistically perfect method or suitable for security. Exact sequences can differ between C libraries."
+        ],
+        [
+          "Test properties, not magic numbers",
+          "To test rand portably, check bounds or repeatability after reseeding. For exercises needing exact numeric outputs across compilers, use an explicitly defined generator. Our small teaching generator is (17*state + 43) % 100, not a secure or high-quality RNG."
+        ]
+      ],
+      "example": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    srand(42);\n    for (int i = 0; i < 5; i++) {\n        printf(\"%d\\n\", 1 + rand() % 6);\n    }\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "files",
+      "title": "Files & persistence",
+      "subtitle": "Save a result. Read it back.",
+      "stage": 2,
+      "concepts": ["FILE", "fopen", "fclose", "virtual filesystem"],
+      "lesson": [
+        [
+          "Open, check, use, close",
+          "fopen returns a FILE pointer, or NULL on failure. Mode \"w\" creates or truncates a file; \"a\" appends; \"r\" reads. Always check the pointer and close the stream after use."
+        ],
+        [
+          "Use familiar formatted operations",
+          "fprintf and fscanf are like printf and scanf, with a FILE pointer as their first argument. Check read results. fgetc returns int so it can represent every byte and EOF."
+        ],
+        [
+          "Files here are virtual",
+          "Your C program sees an in-memory filesystem. It cannot access your real disk. Each run starts fresh from the editor files; generated text files appear in the Files panel and can be downloaded. They are not automatically added to your next run."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    FILE *f = fopen(\"note.txt\", \"w\");\n    if (!f) return 1;\n    fprintf(f, \"A small success.\\n\");\n    fclose(f);\n    printf(\"Saved note.txt\\n\");\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf",
+      "widget": "values"
+    },
+    {
+      "id": "recursion",
+      "title": "Recursion & algorithms",
+      "subtitle": "Solve a smaller version of the same problem.",
+      "stage": 2,
+      "concepts": ["base case", "recursive step", "call stack", "complexity"],
+      "lesson": [
+        [
+          "Stop at a base case",
+          "A recursive function calls itself with a smaller problem. It must reach a base case that returns directly. Each unfinished call occupies space on the call stack."
+        ],
+        [
+          "Follow one call at a time",
+          "For factorial, fact(0) is 1 and fact(n) is n*fact(n-1). Trace the calls down to zero, then the returned results back up. Use bounded inputs to avoid integer overflow and stack exhaustion."
+        ],
+        [
+          "Choose recursion for a reason",
+          "Recursion often fits trees and divide-and-conquer algorithms. A loop may be simpler for linear repetition. Naive recursive Fibonacci repeats work exponentially; do not use it for large inputs."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\nint factorial(int n) {\n    if (n == 0) return 1;\n    return n * factorial(n - 1);\n}\nint main(void) {\n    printf(\"%d\\n\", factorial(5));\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf",
+      "widget": "loop"
+    },
+    {
+      "id": "data-structures",
+      "title": "Stacks, queues & lists",
+      "subtitle": "Choose the structure that fits the job.",
+      "stage": 2,
+      "concepts": ["LIFO", "FIFO", "linked nodes", "invariants"],
+      "lesson": [
+        [
+          "Last in, first out",
+          "A stack returns the most recently pushed value first. An array and a count are enough for a bounded stack. Check capacity before push and check nonempty before pop."
+        ],
+        [
+          "First in, first out",
+          "A queue returns the earliest enqueued value first. A head index and element count can describe a circular buffer; modulo arithmetic wraps an index."
+        ],
+        [
+          "Link separately allocated nodes",
+          "A linked list node stores a value and a pointer to the next node. Preserve the next pointer before freeing the current node. Know which pointer owns the chain and update it carefully when inserting or removing."
+        ]
+      ],
+      "example": "#include <stdio.h>\n\n\nint main(void) {\n    int stack[3];\n    int count = 0;\n    stack[count++] = 10;\n    stack[count++] = 20;\n    while (count > 0) printf(\"%d\\n\", stack[--count]);\n    return 0;\n}\n",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf",
+      "widget": "pointer"
+    }
+  ],
+  "exercises": [
+    {
+      "id": "hello-world",
+      "chapter": "first-programs",
+      "title": "Hello, world.",
+      "kind": "core",
+      "brief": "Write your first C program. Print exactly Hello, world! on one line. This is your first small win: turn an instruction into something that runs.",
+      "input": "No input.",
+      "output": "One line: Hello, world!",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "",
+          "output": "Hello, world!\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Hello, world..\n    return 0;\n}\n"
+      },
+      "hints": [
+        "You need one printf call inside main.",
+        "Put the message between double quotes.",
+        "Finish the message with \\n, then close the parentheses and add a semicolon."
+      ],
+      "minutes": 5,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "boarding-pass",
+      "chapter": "first-programs",
+      "title": "Your boarding pass",
+      "kind": "core",
+      "brief": "A terminal needs a three-line boarding pass. Display CODEX C, then Passenger: learner, then Status: ready. Keep the order and punctuation.",
+      "input": "No input.",
+      "output": "Three lines, exactly as shown.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "",
+          "output": "CODEX C\nPassenger: learner\nStatus: ready\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Your boarding pass.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 7,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "personal-pass",
+      "chapter": "first-programs",
+      "title": "A pass with your number",
+      "kind": "gold",
+      "brief": "Upgrade the boarding pass. Read a positive passenger number, then print the three-line pass using that number instead of learner.",
+      "input": "One integer from 1 to 9999.",
+      "output": "CODEX C, Passenger: N, and Status: ready on separate lines.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "42\n",
+          "output": "CODEX C\nPassenger: 42\nStatus: ready\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n",
+          "output": "CODEX C\nPassenger: 1\nStatus: ready\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "9999\n",
+          "output": "CODEX C\nPassenger: 9999\nStatus: ready\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int number;\n    if (scanf(\"%d\", &number) != 1) return 1;\n    // TODO: A pass with your number.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 10,
+      "base": "boarding-pass",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "tiny-banner",
+      "chapter": "first-programs",
+      "title": "Make a tiny banner",
+      "kind": "optional",
+      "brief": "Use text and line breaks to draw this banner. There are eight equals signs on the first and last lines.",
+      "input": "No input.",
+      "output": "The three-line banner in the example.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "",
+          "output": "========\n C MODE \n========\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Make a tiny banner.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 5,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "clockwork",
+      "chapter": "variables",
+      "title": "Clockwork",
+      "kind": "core",
+      "brief": "A timer gives a duration in seconds. Convert it into hours, minutes, and seconds. This is a duration, so hours may be larger than 23.",
+      "input": "One integer from 0 to 1000000.",
+      "output": "H h M min S sec (without zero padding).",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3661\n",
+          "output": "1 h 1 min 1 sec\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0 h 0 min 0 sec\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "86400\n",
+          "output": "24 h 0 min 0 sec\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int seconds;\n    if (scanf(\"%d\", &seconds) != 1) return 1;\n    // TODO: Clockwork.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "First find the number of complete hours.",
+        "Use division for complete units, and remainder for what is left.",
+        "After removing the complete hours, split the remaining seconds into minutes and seconds."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "weather-station",
+      "chapter": "variables",
+      "title": "Weather station",
+      "kind": "core",
+      "brief": "A sensor gives Celsius temperatures. Convert its reading into Fahrenheit using F = 1.8 × C + 32.",
+      "input": "One real number from -100 to 100.",
+      "output": "The Fahrenheit value with one decimal digit, followed by F.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "20\n",
+          "output": "68.0 F\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-40\n",
+          "output": "-40.0 F\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0\n",
+          "output": "32.0 F\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    double celsius;\n    if (scanf(\"%lf\", &celsius) != 1) return 1;\n    // TODO: Weather station.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "clockwork-days",
+      "chapter": "variables",
+      "title": "Clockwork II: long journeys",
+      "kind": "gold",
+      "brief": "Upgrade Clockwork for long journeys. Extract complete days, then print the remaining hours (0–23), minutes, and seconds.",
+      "input": "One integer from 0 to 10000000.",
+      "output": "D d H h M min S sec.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "90061\n",
+          "output": "1 d 1 h 1 min 1 sec\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "86399\n",
+          "output": "0 d 23 h 59 min 59 sec\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "172800\n",
+          "output": "2 d 0 h 0 min 0 sec\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int seconds;\n    if (scanf(\"%d\", &seconds) != 1) return 1;\n    // TODO: Clockwork II: long journeys.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "clockwork",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "cafe-bill",
+      "chapter": "variables",
+      "title": "Split the café bill",
+      "kind": "optional",
+      "brief": "Three friends order meals. Read their prices and print the average cost per person. Keep fractional values.",
+      "input": "Three real prices, each between 0 and 1000.",
+      "output": "The average with two decimal digits.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "12 18 15\n",
+          "output": "15.00\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "10 10 11\n",
+          "output": "10.33\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0 0 0\n",
+          "output": "0.00\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Split the café bill.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "lift-check",
+      "chapter": "decisions",
+      "title": "Can the lift go?",
+      "kind": "core",
+      "brief": "The lift carries up to 500 kg, including exactly 500. Read the current load and report whether it can leave.",
+      "input": "An integer load from 0 to 1000.",
+      "output": "GO when load <= 500, otherwise WAIT.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "420\n",
+          "output": "GO\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "500\n",
+          "output": "GO\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "501\n",
+          "output": "WAIT\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    int load;\n    if (scanf(\"%d\", &load) != 1) return 1;\n    // TODO: Can the lift go?.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "ticket-machine",
+      "chapter": "decisions",
+      "title": "The ticket machine",
+      "kind": "core",
+      "brief": "A museum ticket costs 0 euros for ages below 6, 5 euros for ages 6–17, and 10 euros for ages 18 and above.",
+      "input": "One integer age from 0 to 120.",
+      "output": "The price as an integer, with no currency symbol.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "6\n",
+          "output": "5\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "17\n",
+          "output": "5\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "18\n",
+          "output": "10\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: The ticket machine.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "lift-check-sensors",
+      "chapter": "decisions",
+      "title": "Can the lift go? II",
+      "kind": "gold",
+      "brief": "The lift now has two sensors: total load and number of people. It can depart only if load is at most 500 kg AND there are at most 6 people.",
+      "input": "Two integers: load (0–1000) and people (0–20).",
+      "output": "GO when both limits hold, otherwise WAIT.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "400 6\n",
+          "output": "GO\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "400 7\n",
+          "output": "WAIT\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "501 3\n",
+          "output": "WAIT\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "500 6\n",
+          "output": "GO\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Can the lift go? II.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "lift-check",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "calendar-check",
+      "chapter": "decisions",
+      "title": "A leap in time",
+      "kind": "optional",
+      "brief": "Report whether a year is a leap year. Multiples of 400 qualify; other multiples of 100 do not; otherwise multiples of 4 qualify.",
+      "input": "A year from 1 to 9999.",
+      "output": "LEAP or COMMON.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "2000\n",
+          "output": "LEAP\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1900\n",
+          "output": "COMMON\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "2024\n",
+          "output": "LEAP\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "2025\n",
+          "output": "COMMON\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A leap in time.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "countdown",
+      "chapter": "loops",
+      "title": "Launch countdown",
+      "kind": "core",
+      "brief": "Read a positive starting number. Count down to 1, one number per line, then print Lift off!.",
+      "input": "One integer from 1 to 20.",
+      "output": "The descending numbers, followed by Lift off!.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n",
+          "output": "3\n2\n1\nLift off!\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n",
+          "output": "1\nLift off!\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "5\n",
+          "output": "5\n4\n3\n2\n1\nLift off!\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Launch countdown.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "step-counter",
+      "chapter": "loops",
+      "title": "A staircase of steps",
+      "kind": "core",
+      "brief": "A staircase has n sections. Section 1 has 1 step, section 2 has 2 steps, and so on. Use a loop to calculate the total.",
+      "input": "One integer n from 0 to 1000.",
+      "output": "The total number of steps.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5\n",
+          "output": "15\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "100\n",
+          "output": "5050\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A staircase of steps.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "step-counter-even",
+      "chapter": "loops",
+      "title": "A staircase II: even sections",
+      "kind": "gold",
+      "brief": "Extend the staircase program. Add only the even-numbered sections: 2 + 4 + ... up to n. Use a loop.",
+      "input": "One integer n from 0 to 1000.",
+      "output": "The sum of even section numbers.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "7\n",
+          "output": "12\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "2\n",
+          "output": "2\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "10\n",
+          "output": "30\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A staircase II: even sections.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "step-counter",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "digit-counter",
+      "chapter": "loops",
+      "title": "How many digits?",
+      "kind": "optional",
+      "brief": "Count the digits of a nonnegative integer by repeatedly dividing by 10. Zero has one digit.",
+      "input": "An integer from 0 to 1000000000.",
+      "output": "The digit count.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4021\n",
+          "output": "4\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1000000000\n",
+          "output": "10\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: How many digits?.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "sensor-sum",
+      "chapter": "arrays",
+      "title": "Sensor readings",
+      "kind": "core",
+      "brief": "Read a collection of sensor values into an array. Calculate their sum. Values may be negative.",
+      "input": "n (1–100), then n integers from -1000 to 1000.",
+      "output": "The sum.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4\n18 21 19 22\n",
+          "output": "80\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n-7\n",
+          "output": "-7\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3\n-2 0 2\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Sensor readings.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "lost-value",
+      "chapter": "arrays",
+      "title": "Find the missing piece",
+      "kind": "core",
+      "brief": "Search an array for a target value. Print the index of its first occurrence, or -1 if it is absent.",
+      "input": "n (1–100), n integers (-1000–1000), then the target.",
+      "output": "One zero-based index, or -1.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5\n8 3 9 3 7\n3\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "3\n1 2 3\n8\n",
+          "output": "-1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1\n4\n4\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Find the missing piece.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "sensor-range",
+      "chapter": "arrays",
+      "title": "Sensor readings II: extremes",
+      "kind": "gold",
+      "brief": "Extend the sensor collection program to find the smallest and largest readings in one pass.",
+      "input": "n (1–100), then n integers from -1000 to 1000.",
+      "output": "Minimum and maximum, separated by one space.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4\n18 21 19 22\n",
+          "output": "18 22\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "3\n-5 -2 -9\n",
+          "output": "-9 -2\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1\n7\n",
+          "output": "7 7\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Sensor readings II: extremes.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "sensor-sum",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "reverse-readings",
+      "chapter": "arrays",
+      "title": "Rewind the readings",
+      "kind": "optional",
+      "brief": "Read an array and print its values in reverse order. Use one space between values and no trailing space.",
+      "input": "n (1–100), then n integers.",
+      "output": "The array in reverse.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4\n1 2 3 4\n",
+          "output": "4 3 2 1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n9\n",
+          "output": "9\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3\n-2 0 5\n",
+          "output": "5 0 -2\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Rewind the readings.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "linear-machine",
+      "chapter": "functions",
+      "title": "The function machine",
+      "kind": "core",
+      "brief": "Implement int transform(int x), returning 3*x + 2. Read x in main, call the function, and print its result.",
+      "input": "One integer from -1000 to 1000.",
+      "output": "The transformed integer.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4\n",
+          "output": "14\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "2\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "-3\n",
+          "output": "-7\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint transform(int x) {\n    // TODO: return the transformed value.\n    return 0;\n}\nint main(void) {\n    int x;\n    if (scanf(\"%d\", &x) != 1) return 1;\n    printf(\"%d\\n\", transform(x));\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "even-predicate",
+      "chapter": "functions",
+      "title": "A reusable decision",
+      "kind": "core",
+      "brief": "Implement int is_even(int n). Return 1 if n is even and 0 otherwise. Call it from main.",
+      "input": "One integer from -1000 to 1000.",
+      "output": "1 for even, 0 for odd.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "8\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-3\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0\n",
+          "output": "1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A reusable decision.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "linear-pipeline",
+      "chapter": "functions",
+      "title": "The function machine II",
+      "kind": "gold",
+      "brief": "Reuse transform(x) = 3*x + 2 twice: pass the first result into the second call. Print the final result.",
+      "input": "One integer from -1000 to 1000.",
+      "output": "transform(transform(x)).",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4\n",
+          "output": "44\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "8\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "-3\n",
+          "output": "-19\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: The function machine II.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "linear-machine",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "greatest-common",
+      "chapter": "functions",
+      "title": "Common ground",
+      "kind": "optional",
+      "brief": "Write a gcd function using Euclid’s algorithm. Repeatedly replace (a,b) with (b,a%b) until b is zero.",
+      "input": "Two positive integers from 1 to 1000000.",
+      "output": "Their greatest common divisor.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "48 18\n",
+          "output": "6\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "7 13\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "25 25\n",
+          "output": "25\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Common ground.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "pointer-boost",
+      "chapter": "pointers",
+      "title": "Follow the address",
+      "kind": "core",
+      "brief": "Read an integer, point to it with an int pointer, then add 1 through the pointer. Print the updated integer.",
+      "input": "One integer from -1000 to 1000.",
+      "output": "The updated value.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "41\n",
+          "output": "42\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-1\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0\n",
+          "output": "1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Follow the address.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "swap-values",
+      "chapter": "pointers",
+      "title": "Trading places",
+      "kind": "core",
+      "brief": "Implement void swap(int *a, int *b) using a temporary integer. Call it with the addresses of two variables and print their new values.",
+      "input": "Two integers from -1000 to 1000.",
+      "output": "The swapped values, separated by one space.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3 8\n",
+          "output": "8 3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-1 5\n",
+          "output": "5 -1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "4 4\n",
+          "output": "4 4\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Trading places.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "rotate-values",
+      "chapter": "pointers",
+      "title": "Trading places II: rotate three",
+      "kind": "gold",
+      "brief": "Extend the pointer technique. Implement rotate(int *a, int *b, int *c) so old c becomes a, old a becomes b, and old b becomes c.",
+      "input": "Three integers from -1000 to 1000.",
+      "output": "The rotated values, separated by spaces.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "1 2 3\n",
+          "output": "3 1 2\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-1 0 9\n",
+          "output": "9 -1 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "4 4 4\n",
+          "output": "4 4 4\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Trading places II: rotate three.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "swap-values",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "pointer-distance",
+      "chapter": "pointers",
+      "title": "Find the smallest address",
+      "kind": "optional",
+      "brief": "Read an array. Find a pointer to its first smallest element, then subtract the array’s starting address to obtain its index.",
+      "input": "n (1–100), then n integers from -1000 to 1000.",
+      "output": "The index of the first minimum.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4\n8 2 9 2\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n-7\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3\n3 2 1\n",
+          "output": "2\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Find the smallest address.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "word-length",
+      "chapter": "strings",
+      "title": "Measure a word",
+      "kind": "core",
+      "brief": "Calculate a word’s length without strlen. Count characters until you reach the null terminator.",
+      "input": "One ASCII word of 1–100 characters, without spaces.",
+      "output": "Its length.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "codex\n",
+          "output": "5\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "C\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "hello-world\n",
+          "output": "11\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    char word[101];\n    if (scanf(\"%100s\", word) != 1) return 1;\n    // TODO: Measure a word.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "mirror-word",
+      "chapter": "strings",
+      "title": "Mirror, mirror",
+      "kind": "core",
+      "brief": "Check if a lowercase word reads identically from left to right and right to left. Compare character pairs.",
+      "input": "One lowercase ASCII word of 1–100 characters.",
+      "output": "YES for a palindrome, NO otherwise.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "level\n",
+          "output": "YES\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "code\n",
+          "output": "NO\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "a\n",
+          "output": "YES\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Mirror, mirror.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "word-profile",
+      "chapter": "strings",
+      "title": "Measure a word II: vowels",
+      "kind": "gold",
+      "brief": "Extend the word analyser. Count its total characters and its vowels (a, e, i, o, u, y), ignoring ASCII letter case.",
+      "input": "One ASCII word of 1–100 characters.",
+      "output": "Length and vowel count, separated by one space.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "Codex\n",
+          "output": "5 2\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "RHYTHM\n",
+          "output": "6 1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "bcdf\n",
+          "output": "4 0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Measure a word II: vowels.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "word-length",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "reverse-word",
+      "chapter": "strings",
+      "title": "Turn a word around",
+      "kind": "optional",
+      "brief": "Reverse a word in place, swapping matching positions from the two ends.",
+      "input": "One ASCII word of 1–100 characters.",
+      "output": "The reversed word.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "code\n",
+          "output": "edoc\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "a\n",
+          "output": "a\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "abcde\n",
+          "output": "edcba\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Turn a word around.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "point-move",
+      "chapter": "structures",
+      "title": "Move a point",
+      "kind": "core",
+      "brief": "Represent a point with an x and y member. Read its coordinates and a translation (dx,dy), then update and print the point.",
+      "input": "Four integers x y dx dy, each from -1000 to 1000.",
+      "output": "The new x and y.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3 4 2 -1\n",
+          "output": "5 3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 0 0 0\n",
+          "output": "0 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "-2 5 2 -5\n",
+          "output": "0 0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Move a point.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+    },
+    {
+      "id": "rectangle-record",
+      "chapter": "structures",
+      "title": "A rectangle record",
+      "kind": "core",
+      "brief": "Define a Rect structure containing integer width and height. Compute its area and perimeter.",
+      "input": "Two integers width and height, each from 1 to 1000.",
+      "output": "Area then perimeter, separated by one space.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5 3\n",
+          "output": "15 16\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1 1\n",
+          "output": "1 4\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "10 2\n",
+          "output": "20 24\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A rectangle record.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+    },
+    {
+      "id": "point-route",
+      "chapter": "structures",
+      "title": "Move a point II: a route",
+      "kind": "gold",
+      "brief": "Extend your point model to follow a route. Read the starting point and n translations. Apply all translations in order.",
+      "input": "x y, then n (0–100), then n pairs dx dy. Coordinates and deltas are between -1000 and 1000.",
+      "output": "The final x and y.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "0 0\n3\n1 2\n-1 3\n4 -2\n",
+          "output": "4 3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "5 -2\n0\n",
+          "output": "5 -2\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1 1\n1\n-1 -1\n",
+          "output": "0 0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Move a point II: a route.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "point-move",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+    },
+    {
+      "id": "top-student",
+      "chapter": "structures",
+      "title": "Find the top student",
+      "kind": "optional",
+      "brief": "Store students as records with a one-word name and integer score. Print the highest-scoring student. If tied, keep the first.",
+      "input": "n (1–30), then n pairs: name (1–31 ASCII letters) and score (0–20).",
+      "output": "The winning name and score.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\nAda 17\nLin 19\nSam 18\n",
+          "output": "Lin 19\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "2\nAda 18\nLin 18\n",
+          "output": "Ada 18\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1\nKim 0\n",
+          "output": "Kim 0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Find the top student.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+    },
+    {
+      "id": "dynamic-sum",
+      "chapter": "dynamic-memory",
+      "title": "Space on demand",
+      "kind": "core",
+      "brief": "Allocate an array sized to the input count, read the values, calculate their sum, and free the allocation. Handle a failed allocation.",
+      "input": "n (1–1000), then n integers from -1000 to 1000.",
+      "output": "The sum.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4\n2 4 6 8\n",
+          "output": "20\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n-9\n",
+          "output": "-9\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3\n0 0 0\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    \n    // TODO: Space on demand.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "dynamic-copy",
+      "chapter": "dynamic-memory",
+      "title": "An independent copy",
+      "kind": "core",
+      "brief": "Allocate two arrays. Read n values into the first and copy them into the second. Increase only the copy’s first element by 1, then print both first elements. Free both arrays.",
+      "input": "n (1–1000), then n integers from -1000 to 1000.",
+      "output": "Original first value then copied first value.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n4 5 6\n",
+          "output": "4 5\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n0\n",
+          "output": "0 1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "2\n-5 2\n",
+          "output": "-5 -4\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    \n    // TODO: An independent copy.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "dynamic-append",
+      "chapter": "dynamic-memory",
+      "title": "Space on demand II: grow",
+      "kind": "gold",
+      "brief": "Extend your dynamic array by one element with realloc. Append a final value, then print the sum of the enlarged array. Use a temporary pointer and free the final allocation.",
+      "input": "n (1–1000), n integers (-1000–1000), then one more integer in the same range.",
+      "output": "The total including the appended element.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n2 4 6\n8\n",
+          "output": "20\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n-5\n5\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "2\n0 0\n7\n",
+          "output": "7\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    \n    // TODO: Space on demand II: grow.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "dynamic-sum",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "dynamic-average",
+      "chapter": "dynamic-memory",
+      "title": "A flexible average",
+      "kind": "optional",
+      "brief": "Allocate enough doubles for n readings, read them, print their average with two decimal digits, then free memory.",
+      "input": "n (1–1000), followed by n real readings in [-1000,1000].",
+      "output": "The average with two decimal digits.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n1 2 6\n",
+          "output": "3.00\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n-2.5\n",
+          "output": "-2.50\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "4\n0 0 0 0\n",
+          "output": "0.00\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    \n    // TODO: A flexible average.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "split-square",
+      "chapter": "modular",
+      "title": "Your first module",
+      "kind": "core",
+      "brief": "Move square(x) into maths.c and declare it in maths.h. main.c reads x and prints the square.",
+      "input": "One integer in [-20,20].",
+      "output": "The function result.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5\n",
+          "output": "25\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-3\n",
+          "output": "9\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",square(x));\n    return 0;\n}\n",
+        "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint square(int x);\n#endif\n",
+        "maths.c": "#include \"maths.h\"\n\n// TODO: define the declared function(s).\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "split-absolute",
+      "chapter": "modular",
+      "title": "A useful utility",
+      "kind": "core",
+      "brief": "Implement absolute(x) in maths.c with its prototype in maths.h. Keep input and output in main.c.",
+      "input": "One integer in [-20,20].",
+      "output": "The function result.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "-12\n",
+          "output": "12\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "7\n",
+          "output": "7\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",absolute(x));\n    return 0;\n}\n",
+        "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint absolute(int x);\n#endif\n",
+        "maths.c": "#include \"maths.h\"\n\n// TODO: define the declared function(s).\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "split-fourth",
+      "chapter": "modular",
+      "title": "Your first module II",
+      "kind": "gold",
+      "brief": "Extend the square module with fourth(x), which reuses square twice. Export both declarations.",
+      "input": "One integer in [-20,20].",
+      "output": "The function result.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n",
+          "output": "81\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-2\n",
+          "output": "16\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",fourth(x));\n    return 0;\n}\n",
+        "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint square(int x);\nint fourth(int x);\n#endif\n",
+        "maths.c": "#include \"maths.h\"\n\n// TODO: define the declared function(s).\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "split-square",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "split-sign",
+      "chapter": "modular",
+      "title": "The sign module",
+      "kind": "optional",
+      "brief": "Create a module returning -1 for negative values, 0 for zero, and 1 for positive values.",
+      "input": "One integer in [-20,20].",
+      "output": "The function result.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "-4\n",
+          "output": "-1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "9\n",
+          "output": "1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include \"maths.h\"\n\n\nint main(void) {\n    int x;\n    if(scanf(\"%d\",&x)!=1)return 1;\n    printf(\"%d\\n\",sign(x));\n    return 0;\n}\n",
+        "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint sign(int x);\n#endif\n",
+        "maths.c": "#include \"maths.h\"\n\n// TODO: define the declared function(s).\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "seed-step",
+      "chapter": "randomness",
+      "title": "A predictable first step",
+      "kind": "core",
+      "brief": "Implement one step of a toy random generator: next = (17*state + 43) % 100. This small generator is for understanding state, not for security or serious simulation.",
+      "input": "One integer state from 0 to 99.",
+      "output": "The next state.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "1\n",
+          "output": "60\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "43\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "99\n",
+          "output": "26\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A predictable first step.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "rand-repeat",
+      "chapter": "randomness",
+      "title": "Repeat the experiment",
+      "kind": "core",
+      "brief": "Read a seed. Call srand(seed), then rand() and save its result. Reseed with the same seed, draw again, and print SAME if the two values match.",
+      "input": "An integer seed from 0 to 10000.",
+      "output": "SAME if reseeding reproduces the first draw; otherwise DIFFERENT.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "42\n",
+          "output": "SAME\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "SAME\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "9999\n",
+          "output": "SAME\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    \n    // TODO: Repeat the experiment.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "seed-sequence",
+      "chapter": "randomness",
+      "title": "A predictable first step II",
+      "kind": "gold",
+      "brief": "Extend the toy generator to produce n states. Update the state after each step, then print it.",
+      "input": "Initial state (0–99), then n (1–20).",
+      "output": "One generated state per line.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "1 3\n",
+          "output": "60\n63\n14\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 2\n",
+          "output": "43\n74\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "99 1\n",
+          "output": "26\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A predictable first step II.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "seed-step",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "dice-range",
+      "chapter": "randomness",
+      "title": "Keep the dice in range",
+      "kind": "optional",
+      "brief": "Map a nonnegative generator value to a classroom six-sided die using remainder. This is a range-mapping exercise; it does not claim uniform randomness.",
+      "input": "An integer from 0 to 1000000.",
+      "output": "A value from 1 to 6.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "0\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "5\n",
+          "output": "6\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "6\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "100\n",
+          "output": "5\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Keep the dice in range.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "file-roundtrip",
+      "chapter": "files",
+      "title": "A note to the future",
+      "kind": "core",
+      "brief": "Read an integer, write it to value.txt, close the file, reopen it for reading, and print the recovered integer. Check both fopen calls.",
+      "input": "One integer from -1000 to 1000.",
+      "output": "The value read back from value.txt.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "42\n",
+          "output": "42\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "-9\n",
+          "output": "-9\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A note to the future.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+    },
+    {
+      "id": "file-count",
+      "chapter": "files",
+      "title": "Count the file’s characters",
+      "kind": "core",
+      "brief": "Read a word, write it into word.txt with no newline, then reopen the file and count its bytes with fgetc until EOF.",
+      "input": "One ASCII word, 1–100 characters.",
+      "output": "The character count.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "hello\n",
+          "output": "5\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "C\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "codex-c\n",
+          "output": "7\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Count the file’s characters.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+    },
+    {
+      "id": "file-roundtrip-many",
+      "chapter": "files",
+      "title": "A note II: a whole collection",
+      "kind": "gold",
+      "brief": "Extend the file round trip to store n integers in values.txt, one per line. Close and reopen the file, then compute the sum by reading it.",
+      "input": "n (1–100), then n integers from -1000 to 1000.",
+      "output": "The sum recovered from the file.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n4 5 6\n",
+          "output": "15\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\n-2\n",
+          "output": "-2\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3\n-1 0 1\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: A note II: a whole collection.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "file-roundtrip",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+    },
+    {
+      "id": "file-append",
+      "chapter": "files",
+      "title": "Add a second entry",
+      "kind": "optional",
+      "brief": "Write the first word and a newline to journal.txt in write mode. Close it, reopen in append mode, and append the second word and a newline. Finally read and display both lines.",
+      "input": "Two ASCII words, each 1–100 characters.",
+      "output": "The first word and second word on separate lines.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "hello world\n",
+          "output": "hello\nworld\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "one two\n",
+          "output": "one\ntwo\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "C C\n",
+          "output": "C\nC\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Add a second entry.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+    },
+    {
+      "id": "recursive-factorial",
+      "chapter": "recursion",
+      "title": "Down to the base case",
+      "kind": "core",
+      "brief": "Write a recursive factorial function. Define factorial(0) = 1. Each other case multiplies n by factorial(n-1).",
+      "input": "An integer n from 0 to 12.",
+      "output": "n! as an integer.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5\n",
+          "output": "120\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "12\n",
+          "output": "479001600\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Down to the base case.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "recursive-digits",
+      "chapter": "recursion",
+      "title": "Peel away a digit",
+      "kind": "core",
+      "brief": "Use recursion to sum the decimal digits of a nonnegative integer. Stop when the integer is zero.",
+      "input": "One integer from 0 to 1000000000.",
+      "output": "The sum of its digits.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4021\n",
+          "output": "7\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "999\n",
+          "output": "27\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Peel away a digit.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "factorial-series",
+      "chapter": "recursion",
+      "title": "Down to the base case II",
+      "kind": "gold",
+      "brief": "Reuse your factorial function to compute 0! + 1! + ... + n!. Use a loop for the outer sum and recursion inside factorial.",
+      "input": "One integer n from 0 to 10.",
+      "output": "The factorial sum.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n",
+          "output": "10\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "5\n",
+          "output": "154\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Down to the base case II.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "recursive-factorial",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "binary-search",
+      "chapter": "recursion",
+      "title": "Find it faster",
+      "kind": "optional",
+      "brief": "Search a strictly increasing array using binary search. Compare the middle value and discard half the remaining range each time.",
+      "input": "n (1–100), n increasing integers (-1000–1000), then a target.",
+      "output": "The target’s zero-based index, or -1.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5\n1 3 5 7 9\n7\n",
+          "output": "3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "3\n2 4 6\n5\n",
+          "output": "-1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1\n8\n8\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: Find it faster.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "stack-undo",
+      "chapter": "data-structures",
+      "title": "An undo stack",
+      "kind": "core",
+      "brief": "Implement an array-backed stack. Push all n input integers, then pop and print each value on its own line.",
+      "input": "n (0–100), then n integers.",
+      "output": "Values in last-in, first-out order. No output if n is zero.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n10 20 30\n",
+          "output": "30\n20\n10\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": ""
+        },
+        {
+          "label": "Case 3",
+          "input": "1\n7\n",
+          "output": "7\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: An undo stack.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "queue-service",
+      "chapter": "data-structures",
+      "title": "First come, first served",
+      "kind": "core",
+      "brief": "Model a queue with an array. Enqueue n ticket numbers, then dequeue and print them in arrival order. Track a head index.",
+      "input": "n (0–100), then n ticket numbers.",
+      "output": "One ticket per line, in first-in, first-out order.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n42 17 8\n",
+          "output": "42\n17\n8\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": ""
+        },
+        {
+          "label": "Case 3",
+          "input": "1\n9\n",
+          "output": "9\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: First come, first served.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "stack-commands",
+      "chapter": "data-structures",
+      "title": "An undo stack II: commands",
+      "kind": "gold",
+      "brief": "Extend the stack to process commands. push X adds X. pop removes and prints the most recent value; if empty, print EMPTY. At most 100 values can be pushed.",
+      "input": "q (1–100), then q commands, each push X or pop. X is an integer.",
+      "output": "One line for each pop command.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5\npush 3\npush 8\npop\npop\npop\n",
+          "output": "8\n3\nEMPTY\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1\npop\n",
+          "output": "EMPTY\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3\npush -1\npop\npush 9\n",
+          "output": "-1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\n\nint main(void) {\n    \n    // TODO: An undo stack II: commands.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 12,
+      "base": "stack-undo",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "linked-chain",
+      "chapter": "data-structures",
+      "title": "Build a linked chain",
+      "kind": "optional",
+      "brief": "Allocate one linked node per input value, inserting each at the head. Traverse and print one value per line, then free every node. Check allocation failures and clean up.",
+      "input": "n (0–100), then n integers.",
+      "output": "The list from head to tail, reversing the input order.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3\n1 2 3\n",
+          "output": "3\n2\n1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": ""
+        },
+        {
+          "label": "Case 3",
+          "input": "1\n4\n",
+          "output": "4\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\n\nint main(void) {\n    \n    // TODO: Build a linked chain.\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Write the steps in plain words before writing C.",
+        "Trace your variables with the example input, one statement at a time.",
+        "Check the boundary cases shown in the examples. Match the requested output exactly."
+      ],
+      "minutes": 20,
+      "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    }
+  ]
+}

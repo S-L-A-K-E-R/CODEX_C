@@ -1,6 +1,6 @@
 # Architecture and technical decisions
 
-This is the architecture selected for the local prototype. Its source files are awaiting recovery and transfer; this document alone does not make the repository executable.
+This document describes the classroom preview implementation included in this repository. See IMPLEMENTATION_STATUS.md for deployment status.
 
 ## Static application
 
@@ -10,21 +10,21 @@ Hash routes and relative asset URLs are used so direct challenge links work belo
 
 ## Module responsibilities
 
-| Intended file | Responsibility |
-|---|---|
-| src/App.tsx | Navigation, path, lessons, search and projects |
-| src/pages/Workspace.tsx | Files, panels, run/check lifecycle and feedback |
-| src/components/CodeEditor.tsx | CodeMirror setup and compiler markers |
-| src/components/ConceptLab.tsx | Explicit teaching illustrations |
-| src/pages/Profile.tsx | Profile statistics, preferences and backups |
-| src/data/content.json | Lessons, exercises and visible test cases |
-| src/data/curriculum.ts | Types, selectors and project definitions |
-| src/state/progress.ts | Schema validation, merge rules and completion |
-| src/state/store.ts | Persistence, cross-tab events and focused-time tracking |
-| src/runtime/client.ts | Worker lifecycle, stop and deadlines |
-| src/runtime/compiler.worker.ts | Asset loading and worker messages |
-| src/runtime/core.ts | Sysroot, compile/link sequence and WASI I/O |
-| src/runtime/limits.ts | Virtual-file growth/write/allocation budgets |
+| File                           | Responsibility                                          |
+| ------------------------------ | ------------------------------------------------------- |
+| src/App.tsx                    | Navigation, path, lessons, search and projects          |
+| src/pages/Workspace.tsx        | Files, panels, run/check lifecycle and feedback         |
+| src/components/CodeEditor.tsx  | CodeMirror setup and compiler markers                   |
+| src/components/ConceptLab.tsx  | Explicit teaching illustrations                         |
+| src/pages/Profile.tsx          | Profile statistics, preferences and backups             |
+| src/data/content.json          | Lessons, exercises and visible test cases               |
+| src/data/curriculum.ts         | Types, selectors and project definitions                |
+| src/state/progress.ts          | Schema validation, merge rules and completion           |
+| src/state/store.ts             | Persistence, cross-tab events and focused-time tracking |
+| src/runtime/client.ts          | Worker lifecycle, stop and deadlines                    |
+| src/runtime/compiler.worker.ts | Asset loading and worker messages                       |
+| src/runtime/core.ts            | Sysroot, compile/link sequence and WASI I/O             |
+| src/runtime/limits.ts          | Virtual-file growth/write/allocation budgets            |
 
 ## Compiler pipeline
 
@@ -40,10 +40,10 @@ The prototype downloaded assets from Runno revision:
 
 `af05728f02d907210d28587b4c32a306e79e312e`
 
-| Asset | SHA-256 |
-|---|---|
-| clang.wasm | 2a466f0e990329d3230b869d04fc20803eae96a7feb3a3f6c93e25a77b8aed1d |
-| wasm-ld.wasm | 36419ed202011765222098d7701218378b67f634d50f0a4625059ae2c9860f48 |
+| Asset           | SHA-256                                                          |
+| --------------- | ---------------------------------------------------------------- |
+| clang.wasm      | 2a466f0e990329d3230b869d04fc20803eae96a7feb3a3f6c93e25a77b8aed1d |
+| wasm-ld.wasm    | 36419ed202011765222098d7701218378b67f634d50f0a4625059ae2c9860f48 |
 | clang-fs.tar.gz | 7ed12063619882e4dfa710ab371fc91848b256f85a4075747e8bd5c167902b50 |
 
 Together the assets are approximately 53 MB before HTTP compression. Build-time retrieval verifies the digests. They should be ignored by Git and included in the static build with appropriate licence notices. Do not substitute mutable latest URLs.
@@ -83,7 +83,7 @@ Cross-tab notifications are not collaborative editing. A full release should pre
 
 ## Deployment design
 
-After source recovery, the planned workflows should:
+The workflows:
 
 1. Install from a committed dependency lockfile.
 2. Download and verify runtime assets.
@@ -93,7 +93,7 @@ After source recovery, the planned workflows should:
 
 Pull-request checks use read-only repository permissions and never deploy. The deployment job needs Pages and OIDC permissions. Do not use privileged pull_request_target workflows for untrusted code.
 
-Pages must be enabled in repository settings. Its successful job URL, not a guessed URL or local build, is the proof of publication. The workflow files themselves have not yet been transferred to this repository.
+Pages must be enabled in repository settings. Its successful job URL, not a guessed URL or local build, is the proof of publication. The workflow files are in .github/workflows/.
 
 ## Future decisions
 

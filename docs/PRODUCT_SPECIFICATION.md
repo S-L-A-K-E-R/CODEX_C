@@ -4,7 +4,7 @@
 **Owner:** SLAKER · **Audience:** C programming students and their teacher  
 **Delivery model:** Static website hosted on GitHub Pages
 
-**Document status:** Reviewable product specification. The repository currently contains documentation, not a deployable application. A local prototype was developed earlier in this work session, but its source transfer is blocked by an unavailable coding workspace. See [implementation status](IMPLEMENTATION_STATUS.md) for the exact distinction.
+**Document status:** Reviewable product specification with the classroom preview implementation. The recovered source, curriculum, tests and deployment configuration are included in this repository. See [implementation status](IMPLEMENTATION_STATUS.md) for verification and deployment status.
 
 ## 1. Purpose
 
@@ -26,37 +26,37 @@ The product is a teaching companion. It does not replace teacher feedback, turn 
 
 ## 2. Learners and teaching contexts
 
-| Context | Need | Product response |
-|---|---|---|
-| An anxious beginner | A safe first action and understandable feedback | Short introduction, scaffolded starter, example output, progressive hints |
-| A student following a class | The correct chapter or exercise immediately | Direct links, open chapters and clear core requirements |
-| A student who needs more practice | Several approaches to the same concept | Tracing, repair, completion and independent construction tasks |
-| A confident student | Greater depth without waiting for the class | Gold extensions, optional branches, advanced chapters and projects |
-| A returning student | Resume work without remembering where it was | Saved drafts, last workspace and a suggested next core task |
-| The teacher | Maintainable material and classroom visibility | Versioned content, reference solutions, validation scripts and projector-friendly preferences |
+| Context                           | Need                                            | Product response                                                                              |
+| --------------------------------- | ----------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| An anxious beginner               | A safe first action and understandable feedback | Short introduction, scaffolded starter, example output, progressive hints                     |
+| A student following a class       | The correct chapter or exercise immediately     | Direct links, open chapters and clear core requirements                                       |
+| A student who needs more practice | Several approaches to the same concept          | Tracing, repair, completion and independent construction tasks                                |
+| A confident student               | Greater depth without waiting for the class     | Gold extensions, optional branches, advanced chapters and projects                            |
+| A returning student               | Resume work without remembering where it was    | Saved drafts, last workspace and a suggested next core task                                   |
+| The teacher                       | Maintainable material and classroom visibility  | Versioned content, reference solutions, validation scripts and projector-friendly preferences |
 
 The initial writing language is English, with a future EN/FR content structure. A language preference must not change exercise IDs or lose progress. Estimated lesson/exercise durations are not shown. Focused activity time belongs only in the learner's personal history.
 
 ## 3. Scope and release boundaries
 
-“Preview” below describes the intended first application delivery and the capabilities developed in the inaccessible local prototype. It does **not** mean those application files have been committed to this repository.
+“Preview” below describes the implemented first application delivery. Later columns define the remaining product scope; they are not claims of completed features.
 
-| Capability | First classroom preview | Full classroom edition / later work |
-|---|---|---|
-| Learning path | 15 selectable chapters; recommended order; core/gold/optional nodes | Rich prerequisite metadata and class-specific paths |
-| Short courses | 15 concise lessons with runnable examples | More explanation, repair tasks, reflection and EN/FR content |
-| Exercise bank | 60 tasks: 30 core, 15 gold, 15 optional | Approximately 8–12 reviewed tasks per major chapter, adjusted to teaching need |
-| Gold challenges | Harder second part unlocked by its original task | Longer multi-part challenge sequences where useful |
-| Projects | Three briefs with four self-assessed milestones each | Submission packages, rubrics and larger modular assignments |
-| Code editor | Full-page CodeMirror workspace and core IDE conveniences | Full light/dark preferences, persisted layouts, further accessibility refinement |
-| Execution | Real Clang/WASM/WASI execution, prepared stdin, multiple files | Newer compiler evaluation, richer terminal interaction if feasible |
-| Feedback | Compiler diagnostics, visible behaviour tests and progressive hints | More diagnostic explanation and optional teacher review aids |
-| Visual explanations | Small, explicit concept simulations | More verified animations; arbitrary program tracing is a separate project |
-| Profile | Local name/colour, chapter progress, achievements and activity history | More useful breakdowns and optional comparison of imported summaries |
-| Saving | Browser-local progress and drafts | IndexedDB, tested migrations and explicit conflict copies |
-| Backup | Full JSON export/import and profile summary export | Optional user-selected local file and explicitly authorised cloud sync |
-| Hosting | Static build suitable for GitHub Pages | Offline package and safe cache-update strategy |
-| Grading | Formative feedback and self-assessment | No claim of tamper-proof grades without a separate trusted service |
+| Capability          | First classroom preview                                                | Full classroom edition / later work                                              |
+| ------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| Learning path       | 15 selectable chapters; recommended order; core/gold/optional nodes    | Rich prerequisite metadata and class-specific paths                              |
+| Short courses       | 15 concise lessons with runnable examples                              | More explanation, repair tasks, reflection and EN/FR content                     |
+| Exercise bank       | 60 tasks: 30 core, 15 gold, 15 optional                                | Approximately 8–12 reviewed tasks per major chapter, adjusted to teaching need   |
+| Gold challenges     | Harder second part unlocked by its original task                       | Longer multi-part challenge sequences where useful                               |
+| Projects            | Three briefs with four self-assessed milestones each                   | Submission packages, rubrics and larger modular assignments                      |
+| Code editor         | Full-page CodeMirror workspace and core IDE conveniences               | Full light/dark preferences, persisted layouts, further accessibility refinement |
+| Execution           | Real Clang/WASM/WASI execution, prepared stdin, multiple files         | Newer compiler evaluation, richer terminal interaction if feasible               |
+| Feedback            | Compiler diagnostics, visible behaviour tests and progressive hints    | More diagnostic explanation and optional teacher review aids                     |
+| Visual explanations | Small, explicit concept simulations                                    | More verified animations; arbitrary program tracing is a separate project        |
+| Profile             | Local name/colour, chapter progress, achievements and activity history | More useful breakdowns and optional comparison of imported summaries             |
+| Saving              | Browser-local progress and drafts                                      | IndexedDB, tested migrations and explicit conflict copies                        |
+| Backup              | Full JSON export/import and profile summary export                     | Optional user-selected local file and explicitly authorised cloud sync           |
+| Hosting             | Static build suitable for GitHub Pages                                 | Offline package and safe cache-update strategy                                   |
+| Grading             | Formative feedback and self-assessment                                 | No claim of tamper-proof grades without a separate trusted service               |
 
 ### Not part of the initial scope
 
@@ -123,23 +123,23 @@ This diagram describes a recurring teaching pattern, not a requirement to make o
 
 The initial path is organised into three broad stages. Prerequisites are teaching guidance, not hard chapter locks.
 
-| Chapter | Main concepts | Progression and practice direction |
-|---|---|---|
-| 1. First programs | main, statements, printf, basic input | Produce exact output, format several lines, personalise output from input |
-| 2. Variables and calculations | int, double, assignment, division, remainder | Unit conversion, durations, temperature and meaningful calculations |
-| 3. Decisions | comparisons, logical operators, if/else | Boundary-aware classification, validation and multi-condition rules |
-| 4. Loops | for, while, counters, accumulators, sentinels | Repetition, totals, termination conditions and nested patterns |
-| 5. Arrays | indexes, traversal, bounds, aggregates | Collections, min/max, filtering, rotation and edge cases |
-| 6. Functions | parameters, return values, decomposition | Extract a calculation, compose functions, reason about contracts |
-| 7. Pointers | addresses, dereferencing, pointer parameters | Change a caller's value, swap, distinguish a value from its address |
-| 8. Strings | char arrays, terminators, bounded input, traversal | Count, compare, transform and validate without unsafe buffer assumptions |
-| 9. Structures | records, arrays of records, typedef | Represent related data, compute statistics and organise records |
-| 10. Dynamic memory | malloc, realloc, free, ownership | Allocate checked storage, grow collections and release resources |
-| 11. Modular projects | headers, declarations, definitions, guards | Separate interface and implementation; compile several source files |
-| 12. Random generation | seeds, repeatability, ranges | Deterministic experiments and the difference between reproducibility and randomness |
-| 13. Files | text I/O, modes, EOF, errors | Read, write, append, aggregate and handle missing files |
-| 14. Recursion | base case, recursive step, call stack | Trace calls, compare iterative approaches and establish termination |
-| 15. Data structures | stacks, queues, linked representations | Implement operations, handle empty/full states and choose a representation |
+| Chapter                       | Main concepts                                      | Progression and practice direction                                                  |
+| ----------------------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------- |
+| 1. First programs             | main, statements, printf, basic input              | Produce exact output, format several lines, personalise output from input           |
+| 2. Variables and calculations | int, double, assignment, division, remainder       | Unit conversion, durations, temperature and meaningful calculations                 |
+| 3. Decisions                  | comparisons, logical operators, if/else            | Boundary-aware classification, validation and multi-condition rules                 |
+| 4. Loops                      | for, while, counters, accumulators, sentinels      | Repetition, totals, termination conditions and nested patterns                      |
+| 5. Arrays                     | indexes, traversal, bounds, aggregates             | Collections, min/max, filtering, rotation and edge cases                            |
+| 6. Functions                  | parameters, return values, decomposition           | Extract a calculation, compose functions, reason about contracts                    |
+| 7. Pointers                   | addresses, dereferencing, pointer parameters       | Change a caller's value, swap, distinguish a value from its address                 |
+| 8. Strings                    | char arrays, terminators, bounded input, traversal | Count, compare, transform and validate without unsafe buffer assumptions            |
+| 9. Structures                 | records, arrays of records, typedef                | Represent related data, compute statistics and organise records                     |
+| 10. Dynamic memory            | malloc, realloc, free, ownership                   | Allocate checked storage, grow collections and release resources                    |
+| 11. Modular projects          | headers, declarations, definitions, guards         | Separate interface and implementation; compile several source files                 |
+| 12. Random generation         | seeds, repeatability, ranges                       | Deterministic experiments and the difference between reproducibility and randomness |
+| 13. Files                     | text I/O, modes, EOF, errors                       | Read, write, append, aggregate and handle missing files                             |
+| 14. Recursion                 | base case, recursive step, call stack              | Trace calls, compare iterative approaches and establish termination                 |
+| 15. Data structures           | stacks, queues, linked representations             | Implement operations, handle empty/full states and choose a representation          |
 
 Subsequent expansion includes sorting/searching, linked lists, robust parsing, ownership discipline, complexity, testing, debugging and richer capstones. Native-only extensions such as SDL or sockets should explicitly move to a desktop environment instead of presenting unsupported browser features as available.
 
@@ -162,18 +162,18 @@ Only material the owner has rights to adapt may be republished. Institutional an
 
 ### Each exercise must provide
 
-| Element | Required standard |
-|---|---|
-| Title and goal | Describe a concrete task without a long distracting story |
-| Inputs | Exact format, permitted range and assumptions |
-| Outputs | Exact expected structure, rounding, whitespace and case rules |
-| Starter | Include main.c and helpful scaffolding without revealing the solution |
-| Examples | Show representative input/output and relevant boundaries |
-| Tests | Match the stated contract and reject plausible incorrect behaviour |
-| Hints | Three escalating nudges: approach, mechanism, diagnostic guidance |
-| Prerequisites | Concepts needed; original task for a gold extension |
-| Source | Accurate attribution or an explicit indication of new authorship |
-| Maintenance solution | Compile and pass under both native and browser toolchains |
+| Element              | Required standard                                                     |
+| -------------------- | --------------------------------------------------------------------- |
+| Title and goal       | Describe a concrete task without a long distracting story             |
+| Inputs               | Exact format, permitted range and assumptions                         |
+| Outputs              | Exact expected structure, rounding, whitespace and case rules         |
+| Starter              | Include main.c and helpful scaffolding without revealing the solution |
+| Examples             | Show representative input/output and relevant boundaries              |
+| Tests                | Match the stated contract and reject plausible incorrect behaviour    |
+| Hints                | Three escalating nudges: approach, mechanism, diagnostic guidance     |
+| Prerequisites        | Concepts needed; original task for a gold extension                   |
+| Source               | Accurate attribution or an explicit indication of new authorship      |
+| Maintenance solution | Compile and pass under both native and browser toolchains             |
 
 Use useful scenarios such as a timer, sensor report, fare calculation, student record, file journal or undo history. Avoid filling the curriculum with unrelated single-operator arithmetic tasks.
 
@@ -191,16 +191,16 @@ Public test cases are appropriate for a learning tool. They are not a secret gra
 
 ### Main areas
 
-| Area | Purpose |
-|---|---|
-| Learning path | Overview, core progress, chapter selection and next suggested action |
-| Lesson page | Focused explanation, runnable example and concept illustration |
-| Practice library | Search and filter by chapter, type and completion state |
-| Projects | Briefs, prerequisites, milestones and project workspaces |
-| Coding workspace | Code, instructions, input/output, diagnostics and tests |
-| Profile | Personal identity and meaningful progress visualisations |
-| Settings and backups | Editor preferences, export/import and storage information |
-| Playground | An open workspace without challenge grading |
+| Area                 | Purpose                                                              |
+| -------------------- | -------------------------------------------------------------------- |
+| Learning path        | Overview, core progress, chapter selection and next suggested action |
+| Lesson page          | Focused explanation, runnable example and concept illustration       |
+| Practice library     | Search and filter by chapter, type and completion state              |
+| Projects             | Briefs, prerequisites, milestones and project workspaces             |
+| Coding workspace     | Code, instructions, input/output, diagnostics and tests              |
+| Profile              | Personal identity and meaningful progress visualisations             |
+| Settings and backups | Editor preferences, export/import and storage information            |
+| Playground           | An open workspace without challenge grading                          |
 
 Routes should be direct-linkable and work under a repository subpath on GitHub Pages. Unknown links must provide a clear way back without overwriting progress.
 
@@ -222,20 +222,20 @@ On narrow screens, instructions may become an overlay with a visible close contr
 
 ## 8. Editor requirements
 
-| Feature | Behaviour |
-|---|---|
+| Feature             | Behaviour                                                                             |
+| ------------------- | ------------------------------------------------------------------------------------- |
 | Syntax highlighting | Distinguish C keywords, types, strings, numbers, comments and preprocessor directives |
-| Paired delimiters | Insert a closing parenthesis, bracket, brace or quote when appropriate |
-| Overtyping | Typing an automatically inserted closing delimiter advances past it |
-| Indentation | Preserve indentation and indent structured blocks when entering a new line |
-| Editing basics | Undo/redo, selection, line numbers, matching brackets and folding |
-| Search | Find/replace within the current file |
-| Completion | Modest keyword and snippet support; no unsupported semantic claims |
-| Diagnostics | Compiler filename/line/column markers after compilation |
-| Stale errors | Clear or invalidate markers when the relevant source changes |
-| Multiple files | Add and switch .c, .h and supported text data files |
-| Export | Download source and generated text files |
-| Accessibility | Keyboard escape instructions and named controls |
+| Paired delimiters   | Insert a closing parenthesis, bracket, brace or quote when appropriate                |
+| Overtyping          | Typing an automatically inserted closing delimiter advances past it                   |
+| Indentation         | Preserve indentation and indent structured blocks when entering a new line            |
+| Editing basics      | Undo/redo, selection, line numbers, matching brackets and folding                     |
+| Search              | Find/replace within the current file                                                  |
+| Completion          | Modest keyword and snippet support; no unsupported semantic claims                    |
+| Diagnostics         | Compiler filename/line/column markers after compilation                               |
+| Stale errors        | Clear or invalidate markers when the relevant source changes                          |
+| Multiple files      | Add and switch .c, .h and supported text data files                                   |
+| Export              | Download source and generated text files                                              |
+| Accessibility       | Keyboard escape instructions and named controls                                       |
 
 The first implementation uses CodeMirror 6. It is a code editor, not a textarea with a coloured overlay. Diagnostic highlighting after compilation must not be labelled as continuous language-server analysis.
 
@@ -265,18 +265,18 @@ The program must not receive real filesystem, process or cloud-account access. B
 
 ### Limits and failure handling
 
-| Resource | Prototype policy |
-|---|---|
-| Download/initialisation | 120-second timeout |
-| Compilation and linking | 30 seconds per phase |
-| Execution | 3 seconds per test case |
-| Program linear memory | 64 MiB maximum; 1 MiB stack reservation |
-| Captured output | 64 KiB combined stdout/stderr byte budget |
-| Execution workspace | 20 files; 200,000 source/data characters |
-| Saved file / stdin | 50,000 characters each |
-| Virtual files | 256,000-byte cumulative growth/write budgets; bounded entries/handles/opens |
-| Generated display content | 256,000 characters |
-| Full backup | 2 MB of UTF-8 JSON; separate aggregate source/input budget |
+| Resource                  | Prototype policy                                                            |
+| ------------------------- | --------------------------------------------------------------------------- |
+| Download/initialisation   | 120-second timeout                                                          |
+| Compilation and linking   | 30 seconds per phase                                                        |
+| Execution                 | 3 seconds per test case                                                     |
+| Program linear memory     | 64 MiB maximum; 1 MiB stack reservation                                     |
+| Captured output           | 64 KiB combined stdout/stderr byte budget                                   |
+| Execution workspace       | 20 files; 200,000 source/data characters                                    |
+| Saved file / stdin        | 50,000 characters each                                                      |
+| Virtual files             | 256,000-byte cumulative growth/write budgets; bounded entries/handles/opens |
+| Generated display content | 256,000 characters                                                          |
+| Full backup               | 2 MB of UTF-8 JSON; separate aggregate source/input budget                  |
 
 These are conservative teaching limits, not a formal security audit. Compiler memory, JavaScript buffers and the browser itself also consume memory. A program's WASM cap is not a cap on the entire tab.
 
@@ -379,31 +379,31 @@ The supported browser matrix must name tested browser/version/device combination
 
 ## 16. Acceptance criteria
 
-| ID | Required outcome | Evidence |
-|---|---|---|
-| PATH-01 | A new learner can find a first lesson and exercise without an account | Fresh-browser walkthrough |
-| PATH-02 | Core, gold and optional progress remain distinct | State tests and path inspection |
-| PATH-03 | Gold locks explain and link the original task | Browser test before/after core completion |
-| EDIT-01 | Exercise opens a full-page editor with collapsible panels | Desktop/narrow viewport inspection |
-| EDIT-02 | Bracket pairing, overtyping, indentation and undo work | Real typing tests |
-| EDIT-03 | Compile errors identify the relevant file and line | Deliberately invalid program |
-| RUN-01 | Every reference solution passes the declared cases | Native and actual WASM corpus checks |
-| RUN-02 | Infinite loops and output/file floods recover | Worker deadline and allocation tests |
-| RUN-03 | Multi-file linking, headers, UTF-8 I/O and virtual files work | Focused runtime regression cases |
-| SAVE-01 | Drafts and input survive reload and navigation | Browser persistence test |
-| SAVE-02 | Export/import preserves work; repeated import does not duplicate totals | Schema tests and browser round trip |
-| SAVE-03 | Corrupt/oversized/unsupported backups preserve existing work | Negative import tests |
-| PROF-01 | Profile statistics reflect actual local records | Controlled test profile |
-| PROF-02 | Background inactivity does not accumulate time | Visibility/focus tests |
-| A11Y-01 | Core flows work by keyboard and at 200% zoom | Manual accessibility checklist |
-| DEPLOY-01 | Built site works under the repository subpath | Deployed Pages smoke test |
-| CONTENT-01 | Every task has a clear contract, useful hints and reviewed sources | Teacher content review |
+| ID         | Required outcome                                                        | Evidence                                  |
+| ---------- | ----------------------------------------------------------------------- | ----------------------------------------- |
+| PATH-01    | A new learner can find a first lesson and exercise without an account   | Fresh-browser walkthrough                 |
+| PATH-02    | Core, gold and optional progress remain distinct                        | State tests and path inspection           |
+| PATH-03    | Gold locks explain and link the original task                           | Browser test before/after core completion |
+| EDIT-01    | Exercise opens a full-page editor with collapsible panels               | Desktop/narrow viewport inspection        |
+| EDIT-02    | Bracket pairing, overtyping, indentation and undo work                  | Real typing tests                         |
+| EDIT-03    | Compile errors identify the relevant file and line                      | Deliberately invalid program              |
+| RUN-01     | Every reference solution passes the declared cases                      | Native and actual WASM corpus checks      |
+| RUN-02     | Infinite loops and output/file floods recover                           | Worker deadline and allocation tests      |
+| RUN-03     | Multi-file linking, headers, UTF-8 I/O and virtual files work           | Focused runtime regression cases          |
+| SAVE-01    | Drafts and input survive reload and navigation                          | Browser persistence test                  |
+| SAVE-02    | Export/import preserves work; repeated import does not duplicate totals | Schema tests and browser round trip       |
+| SAVE-03    | Corrupt/oversized/unsupported backups preserve existing work            | Negative import tests                     |
+| PROF-01    | Profile statistics reflect actual local records                         | Controlled test profile                   |
+| PROF-02    | Background inactivity does not accumulate time                          | Visibility/focus tests                    |
+| A11Y-01    | Core flows work by keyboard and at 200% zoom                            | Manual accessibility checklist            |
+| DEPLOY-01  | Built site works under the repository subpath                           | Deployed Pages smoke test                 |
+| CONTENT-01 | Every task has a clear contract, useful hints and reviewed sources      | Teacher content review                    |
 
 See [QUALITY.md](QUALITY.md) for release evidence and the remaining browser checklist.
 
 ## 17. Delivery plan and decisions
 
-The next concrete delivery is recovery and transfer of the prototype source, followed by clean-install validation and GitHub Pages deployment. Subsequent milestones are a classroom pilot, a stronger exercise bank, persistence improvements, advanced content and optional portability features.
+The source has been recovered and validated. The next delivery gate is GitHub Pages deployment and the remaining classroom browser acceptance checks. Subsequent milestones are a classroom pilot, a stronger exercise bank, persistence improvements, advanced content and optional portability features.
 
 Teacher review should settle the visual direction, initial language strategy, core requirements for each class and the desired amount of practice in each chapter. The owner should also select licences for original software and teaching content.
 
