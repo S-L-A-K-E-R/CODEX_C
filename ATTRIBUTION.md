@@ -6,16 +6,16 @@ The source repository's README was checked on 5 November 2026. It licenses origi
 
 ## Material informing the design
 
-| Source | Role |
-|---|---|
-| SYLLABUS/C-Syllabus-v1.1.pdf | Course scope and the distinction between syllabus C23 and browser C17 |
-| EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf | Input/output, calculations, conditions and loops |
-| EXERCISES/LAB_GENERAL/02_Functions.pdf | Decomposition and functions |
-| EXERCISES/LAB_GENERAL/03_Pointers.pdf | Addresses, indirection and pointer parameters |
-| EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf | Records and structured data |
-| EXERCISES/LAB_GENERAL/05_Files.pdf | Text-file operations and error handling |
-| EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf | Advanced algorithm/data-structure direction |
-| Clock-tower homework and chess project listed in the source repository | Linked inspiration for newly written project briefs |
+| Source                                                                 | Role                                                                  |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| SYLLABUS/C-Syllabus-v1.1.pdf                                           | Course scope and the distinction between syllabus C23 and browser C17 |
+| EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf                        | Input/output, calculations, conditions and loops                      |
+| EXERCISES/LAB_GENERAL/02_Functions.pdf                                 | Decomposition and functions                                           |
+| EXERCISES/LAB_GENERAL/03_Pointers.pdf                                  | Addresses, indirection and pointer parameters                         |
+| EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf                      | Records and structured data                                           |
+| EXERCISES/LAB_GENERAL/05_Files.pdf                                     | Text-file operations and error handling                               |
+| EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf                         | Advanced algorithm/data-structure direction                           |
+| Clock-tower homework and chess project listed in the source repository | Linked inspiration for newly written project briefs                   |
 
 The design adapts teaching patterns into new short explanations, scenarios, scaffolded tasks, hints and explicit test contracts. It does not claim that all original PDFs have been migrated. No third-party or institutional archive is republished in this documentation delivery.
 

@@ -1,6 +1,6 @@
 # Verification and release checks
 
-Recorded for the initial 0.1 implementation on 5 November 2026. This is an owner-review preview. Automated success is not a completed classroom, accessibility or cross-browser certification.
+Recorded for the initial 0.1 implementation on 5–6 November 2026. This is an owner-review preview. Automated success is not a completed classroom, accessibility or cross-browser certification.
 
 ## Reproduce
 
@@ -47,18 +47,22 @@ The managed Chrome preview was exercised at `http://terminal.local:4173/`.
 - Code edits survived page reload/navigation in the same browser.
 - A gold task remained locked and linked to its original core challenge.
 - Successful completion appeared in the path progress count.
+- Brackets and quotes closed automatically; typing the closing delimiters reused the inserted characters. A newline inside a function retained indentation.
+- Completing the boarding-pass core task unlocked its harder gold extension.
+- A changed display name survived page reload; focused activity appeared in the profile and heatmap.
+- Full backup export downloaded valid schema-version-1 JSON containing the edited profile.
 - A working workspace screenshot is included in `docs/images/workspace.jpg`; its small progress count is QA activity, not seeded student data.
 
-The browser service subsequently rejected observation with a URL-policy error. No workaround was used. The remaining browser acceptance items below were therefore **not completed** in this session. The automated data and runtime checks above are separate evidence, not a substitute.
+Browser checks resumed after an earlier observation-policy interruption. The backup import picker later timed out in the automation service, and that UI flow remains unverified. The automated backup round-trip and merge tests are separate evidence, not a substitute for the remaining browser acceptance items below.
 
 ## Remaining browser acceptance before classroom rollout
 
-- Exercise delimiter auto-closing, closing-delimiter overtyping, automatic indentation, find/replace, undo/redo and keyboard escape from CodeMirror.
-- Complete the original task, confirm its gold task unlocks and verify a gold completion.
+- Exercise find/replace, undo/redo and keyboard escape from CodeMirror.
+- Verify a gold completion after unlocking it.
 - Test explicit Stop during loading, compiling and running; verify no completion is awarded.
 - Add/switch multiple source/header files, verify generated-file downloads and inspect changed-code-during-check behaviour.
-- Edit the profile, change font size, inspect the activity heatmap and confirm reload persistence.
-- Download a full backup, import the downloaded file, inspect the preview, merge twice and verify no duplicated totals.
+- Change font size and confirm reload persistence.
+- Import the downloaded backup, inspect the preview, merge twice and verify no duplicated totals.
 - Import malformed, oversized and unsupported-version files through the UI; verify the existing progress stays intact.
 - Simulate storage refusal/quota, corrupted stored state and two tabs editing the same workspace. Confirm recovery messages and preserve/export work.
 - Exercise search, all filter combinations, lesson widgets, project milestone controls and unknown routes.
@@ -67,6 +71,8 @@ The browser service subsequently rejected observation with a URL-policy error. N
 - Current Firefox, Edge and Safari on the teacher/student devices selected for support.
 
 ## Publishing acceptance
+
+On 6 November 2026, the [Deploy CODEX C workflow](https://github.com/S-L-A-K-E-R/CODEX_C/actions/runs/42075008371) succeeded after retrying the deployment job. On the [public Pages site](https://s-l-a-k-e-r.github.io/CODEX_C/), Chrome loaded the learning path, lazy-loaded the full editor, downloaded the compiler, compiled the Hello World solution, passed its test and displayed 1/30 core challenges completed. This verifies the deployed relative asset URLs and worker execution for that flow.
 
 CI validates pull requests without deploying. The deployment workflow validates again, creates `dist`, uploads the Pages artifact and deploys only after the build succeeds. Enable **Settings → Pages → GitHub Actions** first. A successful local build or a pushed workflow is not proof of a public deployment; check the actual Pages job and URL.
 
