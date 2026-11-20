@@ -351,6 +351,16 @@ function LearningPath() {
             Your pace. No streaks. Just progress.
           </span>
         </div>
+        <div className="hero-accents" aria-hidden="true">
+          <span style={{ left: "6%", top: "48%" }}>+</span>
+          <span style={{ left: "23%", top: "20%" }}>+</span>
+          <span style={{ left: "30%", top: "80%" }}>*</span>
+          <span style={{ left: "43%", top: "47%" }}>+</span>
+          <span style={{ left: "57%", top: "5%" }}>*</span>
+          <span style={{ left: "63%", top: "68%" }}>+</span>
+          <span style={{ left: "83%", top: "32%" }}>+</span>
+          <span style={{ left: "92%", top: "84%" }}>+</span>
+        </div>
         <div className="hero-illustration" aria-hidden="true">
           <div className="orbit orbit-one" />
           <div className="orbit orbit-two" />

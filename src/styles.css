@@ -320,14 +320,19 @@ details[open] > summary {
   font-weight: 500;
 }
 .brand-mark {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  place-items: center;
+  flex: none;
   width: 38px;
   height: 38px;
-  background: #b9ee7b;
-  color: #263b26;
-  border-radius: 10px;
+  color: var(--lime);
+  font:
+    bold 9px/0.65 "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  letter-spacing: 0;
+  white-space: pre;
 }
 .brand small {
   display: block;
@@ -597,6 +602,21 @@ details[open] > summary {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.hero-accents {
+  position: absolute;
+  inset: 14% 39% 14% max(27rem, 36%);
+  color: #94ae7b;
+  font: 300 21px/1 monospace;
+  pointer-events: none;
+  user-select: none;
+}
+.hero-accents span {
+  position: absolute;
+}
+.hero-accents span:nth-child(3n + 1) {
+  font-size: 0.7em;
+  opacity: 0.8;
 }
 .code-token {
   width: 149px;
@@ -2829,6 +2849,7 @@ details[open] > summary {
   .brand-mark {
     width: 33px;
     height: 33px;
+    font-size: 7.75px;
   }
   .sidebar nav a {
     font-size: 11px;
@@ -2856,6 +2877,9 @@ details[open] > summary {
   .hero-illustration {
     width: 36%;
     opacity: 0.9;
+  }
+  .hero-accents {
+    display: none;
   }
   .hero-copy {
     width: 73%;

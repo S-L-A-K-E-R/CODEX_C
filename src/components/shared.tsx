@@ -1,13 +1,20 @@
 import { useEffect, useRef, type ReactNode } from "react";
-import { X, Check, ArrowUpRight, Code2 } from "lucide-react";
+import { X, Check, ArrowUpRight } from "lucide-react";
 export const go = (route: string) => {
   location.hash = route;
 };
+const asciiC = `  ++++
+ ++  ++
+++
+++
+ ++  ++
+  ++++`;
+
 export function Brand() {
   return (
     <a className="brand" href="#path" aria-label="CODEX C home">
-      <span className="brand-mark">
-        <Code2 size={24} />
+      <span className="brand-mark" aria-hidden="true">
+        {asciiC}
       </span>
       <span>
         CODEX <b>C</b>
