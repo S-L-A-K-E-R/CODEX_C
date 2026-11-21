@@ -13,6 +13,7 @@ data.exercises.push(
   ...(JSON.parse(readFileSync("src/data/expansion-4.json", "utf8")) as Exercise[]),
   ...(JSON.parse(readFileSync("src/data/expansion-5.json", "utf8")) as Exercise[]),
   ...(JSON.parse(readFileSync("src/data/chapter-finales.json", "utf8")) as Exercise[]),
+  ...(JSON.parse(readFileSync("src/data/map-extras.json", "utf8")) as Exercise[]),
 );
 const fixtures = {
   ...JSON.parse(readFileSync("tests/fixtures/solutions.json", "utf8")),
@@ -22,6 +23,7 @@ const fixtures = {
   ...JSON.parse(readFileSync("tests/fixtures/expansion-4-solutions.json", "utf8")),
   ...JSON.parse(readFileSync("tests/fixtures/expansion-5-solutions.json", "utf8")),
   ...JSON.parse(readFileSync("tests/fixtures/chapter-finales-solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/map-extras-solutions.json", "utf8")),
 };
 test("curriculum identifiers, core path and gold dependencies are consistent", () => {
   assert.equal(
@@ -77,6 +79,7 @@ test("French offers the same lessons, exercises and input/output contracts", () 
     JSON.parse(readFileSync("src/data/expansion-4-fr.json", "utf8")),
     JSON.parse(readFileSync("src/data/expansion-5-fr.json", "utf8")),
     JSON.parse(readFileSync("src/data/chapter-finales-fr.json", "utf8")),
+    JSON.parse(readFileSync("src/data/map-extras-fr.json", "utf8")),
   );
   assert.deepEqual(
     Object.keys(fr.chapters).sort(),
