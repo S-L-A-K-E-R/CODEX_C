@@ -1,0 +1,112 @@
+{
+  "final-first-programs": {
+    "title": "La borne d'accueil",
+    "brief": "Réalise un écran d'accueil complet. Lis un numéro de jour et de salle, puis affiche les informations avec les intitulés et retours à la ligne exacts.",
+    "input": "Deux entiers : jour (0–31), salle (0–999).",
+    "output": "Les lignes CODEX C / CHECK-IN, Day: D, Room: R et Ready to code!, dans cet ordre.",
+    "hints": [
+      "Use one scanf to read both numbers.",
+      "Print each label exactly with printf.",
+      "Check spaces, capitalisation and the final newline."
+    ]
+  },
+  "final-first-programs-gold": {
+    "title": "La borne d'accueil : siège réservé",
+    "brief": "Conserve l'écran d'accueil. Lis un numéro de siège supplémentaire et ajoute la ligne Seat avant Ready to code!",
+    "input": "Trois entiers : jour, salle et siège, dans les mêmes intervalles.",
+    "output": "Les mêmes lignes, avec Seat: S juste avant Ready to code!.",
+    "hints": [
+      "Read three integers instead of two.",
+      "Keep the original output in the same order.",
+      "Insert only the new Seat: S line before the closing line."
+    ]
+  },
+  "final-variables": {
+    "title": "Le planificateur de trajet",
+    "brief": "Lis la distance, la vitesse et le tarif en centimes par kilomètre. Calcule les heures et minutes de trajet (tronquées), ainsi que le prix en centimes.",
+    "input": "Trois entiers : distance (0–1000 km), vitesse (1–200 km/h), tarif (0–100 centimes/km).",
+    "output": "travel=Hh Mm cost=Cc ; minutes = distance*60/vitesse, en division entière.",
+    "hints": [
+      "First calculate the total number of travel minutes.",
+      "Use /60 and %60 to split the time.",
+      "Multiply distance by fare to obtain cents."
+    ]
+  },
+  "final-variables-gold": {
+    "title": "Le trajet avec frais de service",
+    "brief": "Conserve le temps et le prix puis ajoute un pourcentage de frais de service, calculé en centimes avec division entière.",
+    "input": "Les trois entiers initiaux et un pourcentage de frais (0–20).",
+    "output": "travel=Hh Mm cost=Cc total=Tc ; T=C+(C*pourcentage/100) en entiers.",
+    "hints": [
+      "Keep the original time calculation.",
+      "Calculate the service charge with integer division.",
+      "Add it to cost; print both cost and total."
+    ]
+  },
+  "final-decisions": {
+    "title": "Contrôle d'accès au campus",
+    "brief": "Lis l'âge, un badge (0 ou 1) et une heure. Accès autorisé avec badge, âge ≥16 et de 08 h à 19 h inclus. Tarif 2 avant 18 ans, sinon 5.",
+    "input": "Trois entiers : âge (0–100), badge (0/1), heure (0–23).",
+    "output": "access=YES fee=F si autorisé, sinon access=NO fee=0.",
+    "hints": [
+      "Combine badge, age and opening hours with &&.",
+      "Use if/else to choose the access branch.",
+      "Select the fee only after granting access."
+    ]
+  },
+  "final-decisions-gold": {
+    "title": "Contrôle d'accès : jours et catégories",
+    "brief": "Lis aussi le jour (1=lundi à 7=dimanche). Refuse l'accès le week-end et affiche YOUTH, ADULT ou CLOSED.",
+    "input": "Quatre entiers : âge, badge, heure, jour de la semaine (1–7).",
+    "output": "Même sortie, puis category=YOUTH, ADULT ou CLOSED.",
+    "hints": [
+      "Add weekday <= 5 to the opening condition.",
+      "Keep the original fee decisions.",
+      "Use CLOSED when denied; otherwise choose the category from age."
+    ]
+  },
+  "final-loops": {
+    "title": "Le scanner de signaux",
+    "brief": "Lis N mesures sans tableau. Additionne les valeurs positives paires et compte les valeurs négatives. Zéro ne compte ni dans l'une ni dans l'autre.",
+    "input": "N (1–25), puis N entiers dans [-100,100].",
+    "output": "even_sum=S negatives=C.",
+    "hints": [
+      "Use a for loop to read N numbers one by one.",
+      "Check value > 0 and value % 2 == 0.",
+      "Increase the negative counter only when value < 0."
+    ]
+  },
+  "final-loops-gold": {
+    "title": "Scanner : plus longue série positive",
+    "brief": "Conserve les statistiques et calcule, en un seul passage, la plus longue série de valeurs strictement positives, toujours sans tableau.",
+    "input": "Identique au défi initial.",
+    "output": "even_sum=S negatives=C longest=L.",
+    "hints": [
+      "Maintain a current positive run and a maximum.",
+      "Reset current run on a nonpositive number.",
+      "Update maximum after every positive value."
+    ]
+  },
+  "final-arrays": {
+    "title": "Audit d'un tableau de capteurs",
+    "brief": "Stocke N mesures dans un tableau 1D. Trouve le minimum, le maximum et l'indice (depuis zéro) du premier maximum en cas d'égalité.",
+    "input": "N (1–20), puis N entiers de -100 à 100.",
+    "output": "min=A max=B first_max=I.",
+    "hints": [
+      "Read all values into an int array.",
+      "Initialise min/max from the first element.",
+      "Use > (not >=) when updating the maximum's index."
+    ]
+  },
+  "final-arrays-gold": {
+    "title": "Capteurs : mesures au-dessus de la moyenne",
+    "brief": "Conserve les résultats, calcule la moyenne entière (troncature vers zéro en C) et compte les valeurs strictement supérieures.",
+    "input": "Identique au défi initial.",
+    "output": "min=A max=B first_max=I above_avg=C.",
+    "hints": [
+      "Accumulate a sum while reading the array.",
+      "Divide by N using integer division.",
+      "Make another pass to count values greater than that average."
+    ]
+  }
+}
