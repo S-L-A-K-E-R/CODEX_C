@@ -1,0 +1,397 @@
+[
+  {
+    "id": "itinerary-clock",
+    "chapter": "variables",
+    "title": "The itinerary clock",
+    "kind": "optional",
+    "brief": "Read a starting hour and minute, then a duration in minutes. Print the arrival time on a 24-hour clock, wrapping after midnight.",
+    "input": "Three integers: hour (0–23), minute (0–59), duration (0–3000).",
+    "output": "arrival=HH:MM, using two digits for hour and minute.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "23 50 25\n",
+        "output": "arrival=00:15\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 0 0\n",
+        "output": "arrival=00:00\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "9 5 1450\n",
+        "output": "arrival=09:15\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Convert the departure time into total minutes.",
+      "Add the duration and take remainder modulo 1440.",
+      "Use /60, %60, and printf %02d to format HH:MM."
+    ],
+    "minutes": 15,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "itinerary-clock-gold",
+    "chapter": "variables",
+    "title": "The itinerary clock: days travelled",
+    "kind": "gold",
+    "brief": "Keep the 24-hour arrival time and also print the number of whole days elapsed since departure.",
+    "input": "Same three integers.",
+    "output": "arrival=HH:MM days=D, where D counts midnight crossings.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "23 50 25\n",
+        "output": "arrival=00:15 days=1\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 0 0\n",
+        "output": "arrival=00:00 days=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "9 5 1450\n",
+        "output": "arrival=09:15 days=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "22 0 2880\n",
+        "output": "arrival=22:00 days=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Keep the complete minute total before taking its remainder.",
+      "Whole days equal total / 1440.",
+      "Print days after the existing arrival time."
+    ],
+    "minutes": 25,
+    "base": "itinerary-clock",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "collatz-trail",
+    "chapter": "loops",
+    "title": "The Collatz trail",
+    "kind": "optional",
+    "brief": "From N, repeat: if even, divide by 2; otherwise multiply by 3 and add 1. Count how many operations are needed to reach 1. Use a loop.",
+    "input": "An integer N in [1,1000].",
+    "output": "steps=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1\n",
+        "output": "steps=0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "6\n",
+        "output": "steps=8\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "27\n",
+        "output": "steps=111\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use a while loop that stops when value == 1.",
+      "Test parity with value % 2.",
+      "Increment steps after each transformation."
+    ],
+    "minutes": 15,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "collatz-trail-gold",
+    "chapter": "loops",
+    "title": "Collatz trail: highest peak",
+    "kind": "gold",
+    "brief": "Keep the step count and also track the largest value reached during the entire Collatz sequence, including the start.",
+    "input": "Same N in [1,1000].",
+    "output": "steps=S peak=P.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1\n",
+        "output": "steps=0 peak=1\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "6\n",
+        "output": "steps=8 peak=16\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "27\n",
+        "output": "steps=111 peak=9232\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "100\n",
+        "output": "steps=25 peak=100\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Initialise peak to the starting number.",
+      "After each update, compare the new value against peak.",
+      "Print peak after the existing step count."
+    ],
+    "minutes": 25,
+    "base": "collatz-trail",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "text-tile",
+    "chapter": "loops",
+    "title": "Draw a terminal tile",
+    "kind": "optional",
+    "brief": "Read width W and height H. Use nested loops to print H lines, each with exactly W '#' characters.",
+    "input": "Two integers W and H in [1,8].",
+    "output": "Exactly H lines of W '#' characters each.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 2\n",
+        "output": "###\n###\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 4\n",
+        "output": "#\n#\n#\n#\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "5 3\n",
+        "output": "#####\n#####\n#####\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "The outer loop controls the rows.",
+      "The inner loop prints W characters on each row.",
+      "Print a newline after each row."
+    ],
+    "minutes": 15,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "text-tile-gold",
+    "chapter": "loops",
+    "title": "Terminal tile: hollow center",
+    "kind": "gold",
+    "brief": "Print the same rectangle but replace every interior character with '.', keeping '#' for the four borders.",
+    "input": "Same dimensions W and H.",
+    "output": "Exactly H lines: '#' on the border and '.' inside.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 2\n",
+        "output": "###\n###\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 4\n",
+        "output": "#\n#\n#\n#\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "5 3\n",
+        "output": "#####\n#...#\n#####\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "6 6\n",
+        "output": "######\n#....#\n#....#\n#....#\n#....#\n######\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Keep both loops and the newline.",
+      "A cell is on the border if row==0, col==0, row==H-1, or col==W-1.",
+      "Print '.' only when all four border conditions are false."
+    ],
+    "minutes": 25,
+    "base": "text-tile",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "adjacent-readings",
+    "chapter": "arrays",
+    "title": "Repeated neighbor readings",
+    "kind": "optional",
+    "brief": "Store N readings in a 1D array and count adjacent pairs containing the same value. For 5 5 5, there are two equal neighbor pairs.",
+    "input": "N (1–20), then N integers in [-100,100].",
+    "output": "pairs=P.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5\n5 5 1 1 1\n",
+        "output": "pairs=3\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1\n7\n",
+        "output": "pairs=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "4\n1 2 3 4\n",
+        "output": "pairs=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Read N values into an array.",
+      "Compare each cell i with the previous one, starting at i=1.",
+      "Increment a counter when a[i] == a[i-1]."
+    ],
+    "minutes": 15,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "adjacent-readings-gold",
+    "chapter": "arrays",
+    "title": "Repeated readings: longest streak",
+    "kind": "gold",
+    "brief": "Keep the adjacent-pair count and find the longest consecutive sequence of identical readings (at least 1).",
+    "input": "Same N readings.",
+    "output": "pairs=P streak=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5\n5 5 1 1 1\n",
+        "output": "pairs=3 streak=3\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1\n7\n",
+        "output": "pairs=0 streak=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "4\n1 2 3 4\n",
+        "output": "pairs=0 streak=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "6\n4 4 4 4 1 1\n",
+        "output": "pairs=4 streak=4\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use a current run length starting at 1.",
+      "On equality, increment the run; otherwise reset it to 1.",
+      "Keep the maximum run encountered."
+    ],
+    "minutes": 25,
+    "base": "adjacent-readings",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "case-swaps",
+    "chapter": "strings",
+    "title": "Uppercase a username",
+    "kind": "optional",
+    "brief": "Read an alphanumeric token (max 30 characters) and change all lowercase ASCII letters to uppercase without using string.h.",
+    "input": "One nonempty ASCII alphanumeric token of 1–30 characters.",
+    "output": "text=TRANSFORMED (uppercase letters).",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "Code123\n",
+        "output": "text=CODE123\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "abc\n",
+        "output": "text=ABC\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "UPPER9\n",
+        "output": "text=UPPER9\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use char text[31] and scanf(\"%30s\", text).",
+      "Walk through the string until '\\0'.",
+      "For 'a'..'z', subtract 'a' and add 'A'."
+    ],
+    "minutes": 15,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "case-swaps-gold",
+    "chapter": "strings",
+    "title": "Username: invert letter case",
+    "kind": "gold",
+    "brief": "Instead, swap the case of every ASCII letter: lowercase becomes uppercase and uppercase becomes lowercase. Leave digits unchanged.",
+    "input": "Same token.",
+    "output": "text=TRANSFORMED (letter case inverted).",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "Code123\n",
+        "output": "text=cODE123\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "abc\n",
+        "output": "text=ABC\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "UPPER9\n",
+        "output": "text=upper9\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "aAbB90\n",
+        "output": "text=AaBb90\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Complete this optional adventure.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Keep the lowercase conversion.",
+      "Also detect 'A'..'Z' and convert them to lowercase.",
+      "Use mutually exclusive if/else if cases so a converted letter is not converted again."
+    ],
+    "minutes": 25,
+    "base": "case-swaps",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  }
+]
