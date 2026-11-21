@@ -108,5 +108,115 @@
       "Divide by N using integer division.",
       "Make another pass to count values greater than that average."
     ]
+  },
+  "final-functions": {
+    "title": "Le calculateur de notes",
+    "brief": "Écris clampScore(int) et average3(int,int,int). Limite les trois notes à 0–100, calcule leur moyenne entière et affiche PASS si elle atteint 50.",
+    "input": "Trois entiers dans [-20,120].",
+    "output": "average=A result=PASS ou average=A result=FAIL.",
+    "hints": [
+      "Implement clampScore using if conditions.",
+      "Apply clampScore to every input before averaging.",
+      "Use integer division by three; compare mean with 50."
+    ]
+  },
+  "final-functions-gold": {
+    "title": "Le calculateur : médiane",
+    "brief": "Conserve moyenne et résultat, puis crée une fonction median3(int,int,int) renvoyant la médiane des trois notes corrigées.",
+    "input": "Les mêmes trois entiers.",
+    "output": "average=A result=PASS/FAIL median=M.",
+    "hints": [
+      "The three values are already clamped.",
+      "The median is the middle value after comparing three numbers.",
+      "Use a dedicated median3 function and preserve the original result."
+    ]
+  },
+  "final-pointers": {
+    "title": "L'atelier des coordonnées",
+    "brief": "Utilise des paramètres pointeurs dans swap(int*,int*) et shift(int*,int). Trie deux coordonnées, puis ajoute le même décalage aux deux.",
+    "input": "Trois entiers : coordonnées a, b, puis décalage ; chacun dans [-100,100].",
+    "output": "a=A b=B, après tri et décalage.",
+    "hints": [
+      "Define swap with two int* parameters.",
+      "Compare the variables and swap through their addresses.",
+      "Shift the ordered values by passing their addresses too."
+    ]
+  },
+  "final-pointers-gold": {
+    "title": "L'atelier : trois valeurs",
+    "brief": "Passe à trois coordonnées. Trie les trois grâce aux échanges par pointeurs, décale-les et calcule l'écart entre la plus grande et la plus petite.",
+    "input": "Quatre entiers : a, b, c, puis décalage ; chacun dans [-100,100].",
+    "output": "a=A b=B c=C span=S, après tri et décalage.",
+    "hints": [
+      "Use repeated pairwise swaps to order three values.",
+      "Shift every ordered value via shift(int*,int).",
+      "The span is c-a after sorting (it does not depend on delta)."
+    ]
+  },
+  "final-strings": {
+    "title": "Inspecteur de mot de passe",
+    "brief": "Lis un mot ASCII (lettres et chiffres), 39 caractères maximum. Sans string.h, compte sa longueur, ses voyelles (majuscules incluses) et ses chiffres.",
+    "input": "Un mot ASCII alphanumérique non vide de 1 à 39 caractères.",
+    "output": "length=L vowels=V digits=D.",
+    "hints": [
+      "Read the token with scanf(\"%39s\", text).",
+      "Walk until the null character is reached.",
+      "Use comparisons for digits and vowels in either case."
+    ]
+  },
+  "final-strings-gold": {
+    "title": "Inspecteur : caractères répétés",
+    "brief": "Conserve les statistiques et ajoute la longueur de la plus longue série consécutive de caractères identiques (sensible à la casse).",
+    "input": "Le même type de mot.",
+    "output": "length=L vowels=V digits=D run=R.",
+    "hints": [
+      "Keep a counter for repeated adjacent characters.",
+      "Reset the counter when the current character changes.",
+      "Track the maximum; a one-character word has a run of 1."
+    ]
+  },
+  "final-structures": {
+    "title": "Le répartiteur de colis",
+    "brief": "Déclare une structure Parcel (identifiant et poids). Lis N colis, conserve-les dans un tableau de structures et choisis le plus lourd ; à poids égal, le plus petit identifiant.",
+    "input": "N (1–10), puis N couples : identifiant (1–999) et poids (0–100).",
+    "output": "winner=ID weight=W.",
+    "hints": [
+      "Represent each parcel as a struct and create an array.",
+      "Remember the index of the best parcel seen so far.",
+      "Use a second comparison to break weight ties by id."
+    ]
+  },
+  "final-structures-gold": {
+    "title": "Le répartiteur : colis prioritaires",
+    "brief": "Ajoute le champ priorité à Parcel. Choisis la priorité maximale puis, en cas d'égalité, le poids le plus grand et l'identifiant le plus petit.",
+    "input": "N (1–10), puis N triplets : identifiant, poids et priorité (0–3).",
+    "output": "winner=ID weight=W priority=P.",
+    "hints": [
+      "Add the priority member to the structure.",
+      "Compare priority before comparing weight.",
+      "Use id to break the final tie consistently."
+    ]
+  },
+  "final-dynamic-memory": {
+    "title": "Le carnet de notes dynamique",
+    "brief": "Alloue N notes avec malloc, lis-les dans le tableau dynamique, calcule somme/min/max et libère la mémoire.",
+    "input": "N (1–20), puis N entiers dans [-100,100].",
+    "output": "sum=S min=A max=B.",
+    "hints": [
+      "Allocate N integers with malloc and check for NULL.",
+      "Read each value into the allocated array.",
+      "Find sum/min/max, then free exactly once."
+    ]
+  },
+  "final-dynamic-memory-gold": {
+    "title": "Carnet : redimensionnement sécurisé",
+    "brief": "Après les N premières notes, lis M notes supplémentaires en redimensionnant l'allocation par realloc ; calcule les statistiques sur N+M.",
+    "input": "N (1–20), N entiers, puis M (1–10) et M entiers ; N+M <= 30.",
+    "output": "count=N sum=S min=A max=B, où N est le total des notes.",
+    "hints": [
+      "Read M after the first N elements.",
+      "Store realloc's result in a temporary pointer and check it.",
+      "Fill new positions and compute statistics over all N+M elements."
+    ]
   }
 }
