@@ -183,13 +183,15 @@ export class CEngine {
       module,
       wasi.getImportObject(),
     );
+    const started = performance.now();
     const result = wasi.start({ module, instance });
+    const durationMs = performance.now() - started;
     append("stdout", decoders[0].decode());
     append("stderr", decoders[1].decode());
     if (result.exitCode === 134 && !stderr)
       stderr =
         "The program trapped (for example, an invalid memory access or exhausted stack).\n";
-    return { ...result, stdout, stderr };
+    return { ...result, stdout, stderr, durationMs };
   }
   async run(
     request: Pick<RunRequest, "files" | "inputs">,
