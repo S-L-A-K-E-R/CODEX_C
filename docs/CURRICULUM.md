@@ -4,7 +4,7 @@ This document defines the content direction for CODEX C. The initial content ban
 
 ## Initial content structure
 
-The 15 chapters each have a bilingual lesson, two core exercises, one optional exercise and a gold version of each exercise. The complete catalogue contains 90 challenges.
+The 15 chapters each have a bilingual lesson, three core exercises, two optional exercises and a gold version of each exercise. The catalogue contains 150 challenges.
 
 | Stage             | Chapters                                                         | Teaching emphasis                                                                 |
 | ----------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -12,7 +12,7 @@ The 15 chapters each have a bilingual lesson, two core exercises, one optional e
 | Data and memory   | Functions, pointers, strings, structures, dynamic memory         | Decompose work, represent data, understand indirection and ownership              |
 | Build and explore | Modular projects, randomness, files, recursion, data structures  | Combine concepts, define contracts, investigate tradeoffs and build larger work   |
 
-All chapters remain open for teacher-led sessions. The path recommends an order. The first core challenge opens the second and the optional branch. Each original has a gold extension.
+All chapters remain open for teacher-led sessions. The path recommends an order. The first core challenge opens the remaining core and optional branches. Each original has a gold extension.
 
 ## A progression ladder within a chapter
 
@@ -98,7 +98,7 @@ These are open projects with self-assessed milestones. A checkbox does not certi
 
 ## Content schema
 
-The prototype's authoritative lesson/exercise file is intended to be `src/data/content.json`. Projects and typed selectors are in `src/data/curriculum.ts`. Reference solutions are in `tests/fixtures/solutions.json`, separate from client imports.
+The original lesson/exercise file is `src/data/content.json`; 60 additional challenges are in `src/data/expansion-1.json` through `expansion-5.json`. Projects and typed selectors are in `src/data/curriculum.ts`. Reference solutions are in `tests/fixtures/solutions.json`, separate from client imports.
 
 An exercise record needs stable ID, chapter, kind, title, brief, exact input and output contracts, test cases, starter files including main.c, three hints, an optional gold base and source reference. Do not change an ID just because its title changes.
 

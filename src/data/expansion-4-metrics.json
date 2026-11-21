@@ -1,0 +1,42 @@
+{
+  "square-module": {
+    "sourceInstructions": 7,
+    "workUnits": 7
+  },
+  "square-module-gold": {
+    "sourceInstructions": 9,
+    "workUnits": 9
+  },
+  "lcg-checkpoint": {
+    "sourceInstructions": 9,
+    "workUnits": 21
+  },
+  "lcg-checkpoint-gold": {
+    "sourceInstructions": 12,
+    "workUnits": 24
+  },
+  "file-first-last": {
+    "sourceInstructions": 27,
+    "workUnits": 51
+  },
+  "file-first-last-gold": {
+    "sourceInstructions": 41,
+    "workUnits": 77
+  },
+  "recursive-sum": {
+    "sourceInstructions": 8,
+    "workUnits": 8
+  },
+  "recursive-sum-gold": {
+    "sourceInstructions": 11,
+    "workUnits": 11
+  },
+  "command-stack": {
+    "sourceInstructions": 16,
+    "workUnits": 28
+  },
+  "command-stack-gold": {
+    "sourceInstructions": 20,
+    "workUnits": 32
+  }
+}

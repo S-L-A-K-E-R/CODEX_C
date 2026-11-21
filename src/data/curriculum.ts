@@ -1,5 +1,15 @@
 import content from "./content.json";
 import fr from "./fr.json";
+import extra1 from "./expansion-1.json";
+import extra1fr from "./expansion-1-fr.json";
+import extra2 from "./expansion-2.json";
+import extra2fr from "./expansion-2-fr.json";
+import extra3 from "./expansion-3.json";
+import extra3fr from "./expansion-3-fr.json";
+import extra4 from "./expansion-4.json";
+import extra4fr from "./expansion-4-fr.json";
+import extra5 from "./expansion-5.json";
+import extra5fr from "./expansion-5-fr.json";
 import type { TestCase } from "../runtime/types.ts";
 export interface Chapter {
   id: string;
@@ -28,7 +38,14 @@ export interface Exercise {
   reference: string;
 }
 const chapters = content.chapters as Chapter[];
-const exercises = content.exercises as Exercise[];
+const exercises = [
+  ...(content.exercises as Exercise[]),
+  ...(extra1 as Exercise[]),
+  ...(extra2 as Exercise[]),
+  ...(extra3 as Exercise[]),
+  ...(extra4 as Exercise[]),
+  ...(extra5 as Exercise[]),
+];
 const stages = [
   "Build your foundations",
   "Understand your data",
@@ -116,7 +133,14 @@ function catalogue(
 type ExerciseText = Pick<Exercise, "title" | "brief" | "input" | "output"> & {
   hints?: string[];
 };
-const frenchExercises: Record<string, ExerciseText> = fr.exercises;
+const frenchExercises: Record<string, ExerciseText> = {
+  ...fr.exercises,
+  ...extra1fr,
+  ...extra2fr,
+  ...extra3fr,
+  ...extra4fr,
+  ...extra5fr,
+};
 export const courses = {
   en: catalogue(chapters, exercises, projects),
   fr: catalogue(

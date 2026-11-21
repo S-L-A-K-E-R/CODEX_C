@@ -1,0 +1,42 @@
+{
+  "triangular-helper": {
+    "sourceInstructions": 11,
+    "workUnits": 23
+  },
+  "triangular-helper-gold": {
+    "sourceInstructions": 17,
+    "workUnits": 41
+  },
+  "pointer-summation": {
+    "sourceInstructions": 14,
+    "workUnits": 38
+  },
+  "pointer-summation-gold": {
+    "sourceInstructions": 21,
+    "workUnits": 45
+  },
+  "palindrome-word": {
+    "sourceInstructions": 12,
+    "workUnits": 24
+  },
+  "palindrome-word-gold": {
+    "sourceInstructions": 18,
+    "workUnits": 30
+  },
+  "student-top": {
+    "sourceInstructions": 18,
+    "workUnits": 42
+  },
+  "student-top-gold": {
+    "sourceInstructions": 18,
+    "workUnits": 30
+  },
+  "heap-positives": {
+    "sourceInstructions": 17,
+    "workUnits": 29
+  },
+  "heap-positives-gold": {
+    "sourceInstructions": 33,
+    "workUnits": 69
+  }
+}

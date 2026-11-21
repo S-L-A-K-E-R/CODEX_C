@@ -1,0 +1,42 @@
+{
+  "clamp-helper": {
+    "sourceInstructions": 10,
+    "workUnits": 10
+  },
+  "clamp-helper-gold": {
+    "sourceInstructions": 11,
+    "workUnits": 11
+  },
+  "compare-swap": {
+    "sourceInstructions": 10,
+    "workUnits": 10
+  },
+  "compare-swap-gold": {
+    "sourceInstructions": 12,
+    "workUnits": 12
+  },
+  "vowel-scanner": {
+    "sourceInstructions": 12,
+    "workUnits": 24
+  },
+  "vowel-scanner-gold": {
+    "sourceInstructions": 13,
+    "workUnits": 25
+  },
+  "point-manhattan": {
+    "sourceInstructions": 7,
+    "workUnits": 7
+  },
+  "point-manhattan-gold": {
+    "sourceInstructions": 8,
+    "workUnits": 8
+  },
+  "heap-reverse": {
+    "sourceInstructions": 19,
+    "workUnits": 43
+  },
+  "heap-reverse-gold": {
+    "sourceInstructions": 34,
+    "workUnits": 70
+  }
+}

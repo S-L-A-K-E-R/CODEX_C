@@ -1,0 +1,431 @@
+[
+  {
+    "id": "square-module",
+    "chapter": "modular",
+    "title": "Your first math module",
+    "kind": "core",
+    "brief": "Build calc.h, calc.c and main.c. Declare square(int) in the header, define it once in calc.c and call it from main.",
+    "input": "One integer x in [-100,100].",
+    "output": "square=N.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4\n",
+        "output": "square=16\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-3\n",
+        "output": "square=9\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "0\n",
+        "output": "square=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n#include \"calc.h\"\nint main(void) {\n    // TODO: read and print square(x).\n    return 0;\n}\n",
+      "calc.h": "#ifndef CALC_H\n#define CALC_H\nint square(int x);\n#endif\n",
+      "calc.c": "#include \"calc.h\"\nint square(int x) {\n    // TODO: return x squared.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Put a prototype inside an include guard.",
+      "Define square in calc.c, including the header.",
+      "Compile main.c and calc.c together."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "square-module-gold",
+    "chapter": "modular",
+    "title": "Squares and cubes across files",
+    "kind": "gold",
+    "brief": "Keep square(int) and add cube(int) as a second function exported by calc.h and implemented in calc.c.",
+    "input": "One integer x in [-100,100].",
+    "output": "square=A cube=B.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4\n",
+        "output": "square=16 cube=64\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-3\n",
+        "output": "square=9 cube=-27\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "0\n",
+        "output": "square=0 cube=0\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "100\n",
+        "output": "square=10000 cube=1000000\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n#include \"calc.h\"\nint main(void) {\n    // TODO: read x and print square and cube.\n    return 0;\n}\n",
+      "calc.h": "#ifndef CALC_H\n#define CALC_H\nint square(int x);\nint cube(int x);\n#endif\n",
+      "calc.c": "#include \"calc.h\"\nint square(int x){return x*x;}\nint cube(int x){/* TODO */return 0;}\n"
+    },
+    "hints": [
+      "Expose both function prototypes in the guarded header.",
+      "Implement cube in the source file, not in the header.",
+      "Call the two exported functions from main."
+    ],
+    "minutes": 22,
+    "base": "square-module",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "lcg-checkpoint",
+    "chapter": "randomness",
+    "title": "A reproducible number stream",
+    "kind": "core",
+    "brief": "Simulate N steps of a deterministic generator: state = (state*17+11)%97. Print the final state. Do not use rand().",
+    "input": "Two integers: seed in [0,96], N in [0,30].",
+    "output": "state=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "0 0\n",
+        "output": "state=0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 1\n",
+        "output": "state=11\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "0 2\n",
+        "output": "state=4\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "5 1\n",
+        "output": "state=96\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "96 1\n",
+        "output": "state=91\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: A reproducible number stream\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Initialize state with the supplied seed.",
+      "Update state exactly N times.",
+      "Modulo 97 keeps state inside [0,96]."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://www.w3resource.com/c-programming-exercises/"
+  },
+  {
+    "id": "lcg-checkpoint-gold",
+    "chapter": "randomness",
+    "title": "Count even and odd generator states",
+    "kind": "gold",
+    "brief": "Keep the generator, and count even and odd states produced AFTER each update. The original seed is never counted.",
+    "input": "Two integers: seed in [0,96], N in [0,30].",
+    "output": "state=S even=E odd=O.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "0 0\n",
+        "output": "state=0 even=0 odd=0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 1\n",
+        "output": "state=11 even=0 odd=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "0 2\n",
+        "output": "state=4 even=1 odd=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "5 1\n",
+        "output": "state=96 even=1 odd=0\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "0 3\n",
+        "output": "state=79 even=1 odd=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Count even and odd generator states\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Preserve the original state update.",
+      "Inspect state modulo two after each update.",
+      "even + odd must equal N."
+    ],
+    "minutes": 22,
+    "base": "lcg-checkpoint",
+    "reference": "https://www.w3resource.com/c-programming-exercises/"
+  },
+  {
+    "id": "file-first-last",
+    "chapter": "files",
+    "title": "Save then inspect measurements",
+    "kind": "core",
+    "brief": "Read N integers, write them to readings.txt, close it, reopen for reading, and report the first and last saved values.",
+    "input": "N (1–10), then N integers in [-100,100].",
+    "output": "first=A last=B.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 9 1 5\n",
+        "output": "first=9 last=5\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 -7\n",
+        "output": "first=-7 last=-7\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "4 0 -1 2 0\n",
+        "output": "first=0 last=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Save then inspect measurements\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Open with mode w, check fopen, and save one number per line.",
+      "Close and reopen in mode r.",
+      "Read back to EOF, remembering first and last."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+  },
+  {
+    "id": "file-first-last-gold",
+    "chapter": "files",
+    "title": "Append measurements safely",
+    "kind": "gold",
+    "brief": "Keep the first batch in readings.txt. Append M more values with mode a, reopen and count all saved records as well as first and last.",
+    "input": "N (1–10), N integers [-100,100], M (0–10), then M integers [-100,100].",
+    "output": "first=A last=B count=C.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "2 3 4 2 5 6\n",
+        "output": "first=3 last=6 count=4\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 -7 0\n",
+        "output": "first=-7 last=-7 count=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 0 1 0 1 -9\n",
+        "output": "first=0 last=-9 count=4\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Append measurements safely\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Write and close the initial file first.",
+      "Use a new fopen with append mode to preserve existing lines.",
+      "Count all values during the final read."
+    ],
+    "minutes": 22,
+    "base": "file-first-last",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+  },
+  {
+    "id": "recursive-sum",
+    "chapter": "recursion",
+    "title": "Recursive sum to N",
+    "kind": "core",
+    "brief": "Implement int sumTo(int n) recursively for 1+...+n, with sumTo(0)=0. Use no loops in the function.",
+    "input": "One integer N in [0,1000].",
+    "output": "sum=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4\n",
+        "output": "sum=10\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "sum=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1\n",
+        "output": "sum=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "100\n",
+        "output": "sum=5050\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Recursive sum to N\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Define the n=0 base case.",
+      "Reduce n by one in each call.",
+      "Return n + sumTo(n-1)."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "recursive-sum-gold",
+    "chapter": "recursion",
+    "title": "Recursive sum of squares",
+    "kind": "gold",
+    "brief": "Keep sumTo(n) and add recursive squaresTo(n)=1²+...+n². Show both results.",
+    "input": "One integer N in [0,1000].",
+    "output": "sum=S squares=Q.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4\n",
+        "output": "sum=10 squares=30\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "sum=0 squares=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1\n",
+        "output": "sum=1 squares=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "10\n",
+        "output": "sum=55 squares=385\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "100\n",
+        "output": "sum=5050 squares=338350\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Recursive sum of squares\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use n=0 as the new base case.",
+      "The recurrence adds n*n to squaresTo(n-1).",
+      "Keep the two recursive functions separate."
+    ],
+    "minutes": 22,
+    "base": "recursive-sum",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "command-stack",
+    "chapter": "data-structures",
+    "title": "A tiny command stack",
+    "kind": "core",
+    "brief": "Simulate a stack of up to 10 integers. '+' followed by an integer pushes, '-' pops. The input guarantees no overflow or underflow.",
+    "input": "K (0–20) commands, each '+' then integer [-100,100], or '-'. Commands stay inside capacity 10.",
+    "output": "size=N top=V, with top=-1 for an empty stack.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 + 3 + 4 - + 9 + 2\n",
+        "output": "size=3 top=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "size=0 top=-1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "4 + -2 + -3 - -\n",
+        "output": "size=0 top=-1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "1 + 7\n",
+        "output": "size=1 top=7\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: A tiny command stack\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use a fixed int array and a size counter.",
+      "Push at array[size] then increase size.",
+      "Pop by decreasing size; top is array[size-1] if size > 0."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "command-stack-gold",
+    "chapter": "data-structures",
+    "title": "Stack safety under bad commands",
+    "kind": "gold",
+    "brief": "Process arbitrary push/pop commands while preserving capacity 10. Ignore a push on full or pop on empty; count all rejected operations.",
+    "input": "K (0–40) commands, each '+' then integer [-100,100], or '-'.",
+    "output": "size=N top=V rejected=R, with top=-1 if empty.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 + 3 + 4 - + 9 + 2\n",
+        "output": "size=3 top=2 rejected=0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "size=0 top=-1 rejected=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 - + 8 -\n",
+        "output": "size=0 top=-1 rejected=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "12 + 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10 + 11 + 12\n",
+        "output": "size=10 top=10 rejected=2\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "4 - - + -9 -\n",
+        "output": "size=0 top=-1 rejected=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Stack safety under bad commands\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Check full and empty conditions before mutating size.",
+      "Still read the number of a rejected push.",
+      "Keep a counter for every rejected operation."
+    ],
+    "minutes": 22,
+    "base": "command-stack",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  }
+]

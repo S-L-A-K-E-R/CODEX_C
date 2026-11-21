@@ -1,0 +1,122 @@
+{
+  "terminal-help": {
+    "title": "Aide du terminal",
+    "brief": "Affiche trois lignes en utilisant une tabulation et des guillemets échappés.",
+    "input": "Aucune entrée.",
+    "output": "Trois lignes : CODEX C, une tabulation puis Run: Ctrl+Enter, puis « Keep coding » entre guillemets."
+  },
+  "terminal-help-gold": {
+    "title": "Aide personnalisée",
+    "brief": "Conserve les trois lignes, lis un caractère et ajoute Mode: X sur la quatrième.",
+    "input": "Un caractère ASCII imprimable non blanc.",
+    "output": "Les trois lignes précédentes, puis Mode: X."
+  },
+  "terminal-receipt": {
+    "title": "Un petit ticket",
+    "brief": "Reproduis un ticket de trois lignes avec ses espaces et quantités.",
+    "input": "Aucune entrée.",
+    "output": "Trois lignes : ITEM  QTY ; PEN   02 ; BOOK  01."
+  },
+  "terminal-receipt-gold": {
+    "title": "Ticket avec quantités variables",
+    "brief": "Lis les quantités de stylos et livres ; affiche chaque quantité sur deux chiffres.",
+    "input": "Deux entiers de 0 à 99.",
+    "output": "Le même ticket avec les quantités formatées sur deux chiffres."
+  },
+  "coin-change": {
+    "title": "Euros et centimes",
+    "brief": "Sépare un montant en centimes en euros entiers et centimes restants.",
+    "input": "Un entier de 0 à 99999, en centimes.",
+    "output": "E euros C cents, avec des entiers décimaux."
+  },
+  "coin-change-gold": {
+    "title": "Rendre la monnaie",
+    "brief": "Décompose aussi les centimes restants en pièces de 50,20,10,5,2,1, avec un nombre minimal de pièces.",
+    "input": "Un entier de 0 à 99999, en centimes.",
+    "output": "E euros C cents, puis coins: A B C D E F pour les six pièces."
+  },
+  "lab-mean": {
+    "title": "Deux mesures de laboratoire",
+    "brief": "Calcule la moyenne de deux entiers en conservant la partie décimale.",
+    "input": "Deux entiers de -1000 à 1000.",
+    "output": "mean=V avec exactement deux décimales."
+  },
+  "lab-mean-gold": {
+    "title": "Mesures pondérées",
+    "brief": "Lis trois mesures et calcule une moyenne pondérée avec les poids 2,3,5 sur 10.",
+    "input": "Trois entiers de -1000 à 1000.",
+    "output": "weighted=V à deux décimales."
+  },
+  "parking-fee": {
+    "title": "Tarifs de stationnement",
+    "brief": "Facture 0 euro pour 0–30 min, 3 euros pour 31–120 min, puis 2 euros par heure supplémentaire entamée.",
+    "input": "Un entier de 0 à 600 (minutes).",
+    "output": "fee=N en euros."
+  },
+  "parking-fee-gold": {
+    "title": "Parking avec fidélité",
+    "brief": "Garde les tarifs ; si fidélité=1 retire 2 euros sans descendre sous zéro.",
+    "input": "Deux entiers : minutes (0–600), fidélité (0 ou 1).",
+    "output": "fee=N après réduction."
+  },
+  "triangle-check": {
+    "title": "Vérifier un triangle",
+    "brief": "Valide des longueurs positives avec les trois inégalités triangulaires strictes.",
+    "input": "Trois entiers de 0 à 1000.",
+    "output": "valid ou invalid sur une ligne."
+  },
+  "triangle-check-gold": {
+    "title": "Classifier un triangle",
+    "brief": "Vérifie le triangle puis classe-le : equilateral, isosceles ou scalene.",
+    "input": "Trois entiers de 0 à 1000.",
+    "output": "invalid, equilateral, isosceles ou scalene."
+  },
+  "times-table": {
+    "title": "Les cinq premiers multiples",
+    "brief": "Affiche les cinq premières multiplications du nombre donné.",
+    "input": "Un entier N de 1 à 12.",
+    "output": "Cinq lignes N x I = P, pour I de 1 à 5."
+  },
+  "times-table-gold": {
+    "title": "Table de multiplication personnalisée",
+    "brief": "Lis aussi K, affiche K lignes et la somme de tous les produits.",
+    "input": "Deux entiers : N de 1 à 12, K de 1 à 12.",
+    "output": "K lignes de multiplication puis total=S."
+  },
+  "sentinel-total": {
+    "title": "Additionner jusqu'à zéro",
+    "brief": "Lis jusqu'à 20 entiers, arrête-toi à zéro, puis affiche la somme et le nombre de valeurs non nulles.",
+    "input": "De 0 à 20 entiers de -100 à 100, suivis de 0.",
+    "output": "sum=S count=N."
+  },
+  "sentinel-total-gold": {
+    "title": "Compter les signes",
+    "brief": "Garde somme et nombre de valeurs, et compte les entiers positifs et négatifs avant zéro.",
+    "input": "De 0 à 20 entiers de -100 à 100, suivis de 0.",
+    "output": "sum=S count=N positive=P negative=M."
+  },
+  "first-threshold": {
+    "title": "Première mesure au seuil",
+    "brief": "Stocke N mesures et cherche le premier indice où la valeur est au moins T.",
+    "input": "N (1–20), N entiers [-100,100], puis T [-100,100].",
+    "output": "index=I, ou -1 si aucun résultat."
+  },
+  "first-threshold-gold": {
+    "title": "Bilan du seuil",
+    "brief": "Affiche les indices du premier et du dernier résultat et leur nombre.",
+    "input": "N (1–20), N entiers [-100,100], puis T [-100,100].",
+    "output": "first=A last=B count=C, avec -1 si aucun résultat."
+  },
+  "rotate-right": {
+    "title": "Décaler d'une case",
+    "brief": "Décale N entiers d'une case vers la droite en plaçant le dernier au début.",
+    "input": "N (1–20), puis N entiers [-100,100].",
+    "output": "Les entiers décalés sur une ligne, séparés d'un espace."
+  },
+  "rotate-right-gold": {
+    "title": "Décaler de K cases",
+    "brief": "Généralise à K décalages vers la droite, avec K éventuellement supérieur à N.",
+    "input": "N (1–20), N entiers [-100,100], puis K (0–1000).",
+    "output": "Les valeurs après K décalages, séparées d'un espace."
+  }
+}

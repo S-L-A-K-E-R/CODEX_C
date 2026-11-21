@@ -1,0 +1,42 @@
+{
+  "digits-module": {
+    "sourceInstructions": 12,
+    "workUnits": 24
+  },
+  "digits-module-gold": {
+    "sourceInstructions": 19,
+    "workUnits": 43
+  },
+  "deterministic-dice": {
+    "sourceInstructions": 10,
+    "workUnits": 22
+  },
+  "deterministic-dice-gold": {
+    "sourceInstructions": 17,
+    "workUnits": 41
+  },
+  "file-positive-count": {
+    "sourceInstructions": 24,
+    "workUnits": 48
+  },
+  "file-positive-count-gold": {
+    "sourceInstructions": 39,
+    "workUnits": 75
+  },
+  "recursive-power": {
+    "sourceInstructions": 8,
+    "workUnits": 8
+  },
+  "recursive-power-gold": {
+    "sourceInstructions": 11,
+    "workUnits": 11
+  },
+  "circular-queue": {
+    "sourceInstructions": 19,
+    "workUnits": 31
+  },
+  "circular-queue-gold": {
+    "sourceInstructions": 23,
+    "workUnits": 35
+  }
+}

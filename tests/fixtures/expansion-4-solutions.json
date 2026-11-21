@@ -1,0 +1,36 @@
+{
+  "square-module": {
+    "main.c": "#include <stdio.h>\n#include \"calc.h\"\nint main(void){int x;if(scanf(\"%d\",&x)!=1)return 1;printf(\"square=%d\\n\",square(x));return 0;}\n",
+    "calc.c": "#include \"calc.h\"\nint square(int x){return x*x;}\n",
+    "calc.h": "#ifndef CALC_H\n#define CALC_H\nint square(int x);\n#endif\n"
+  },
+  "square-module-gold": {
+    "main.c": "#include <stdio.h>\n#include \"calc.h\"\nint main(void){int x;if(scanf(\"%d\",&x)!=1)return 1;printf(\"square=%d cube=%d\\n\",square(x),cube(x));return 0;}\n",
+    "calc.c": "#include \"calc.h\"\nint square(int x){return x*x;}\nint cube(int x){return x*x*x;}\n",
+    "calc.h": "#ifndef CALC_H\n#define CALC_H\nint square(int x);\nint cube(int x);\n#endif\n"
+  },
+  "lcg-checkpoint": {
+    "main.c": "#include <stdio.h>\nint main(void){int s,n;if(scanf(\"%d %d\",&s,&n)!=2)return 1;for(int i=0;i<n;i++)s=(s*17+11)%97;printf(\"state=%d\\n\",s);return 0;}\n"
+  },
+  "lcg-checkpoint-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int s,n,e=0,o=0;if(scanf(\"%d %d\",&s,&n)!=2)return 1;for(int i=0;i<n;i++){s=(s*17+11)%97;if(s%2)e++;else o++;}printf(\"state=%d even=%d odd=%d\\n\",s,e,o);return 0;}\n"
+  },
+  "file-first-last": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,v;if(scanf(\"%d\",&n)!=1)return 1;FILE *f=fopen(\"readings.txt\",\"w\");if(!f)return 1;for(int i=0;i<n;i++){if(scanf(\"%d\",&v)!=1){fclose(f);return 1;}fprintf(f,\"%d\\n\",v);}if(fclose(f)!=0)return 1;f=fopen(\"readings.txt\",\"r\");if(!f)return 1;int first=0,last=0,count=0;while(fscanf(f,\"%d\",&v)==1){if(!count)first=v;last=v;count++;}fclose(f);printf(\"first=%d last=%d\\n\",first,last);return 0;}\n"
+  },
+  "file-first-last-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,m,v;if(scanf(\"%d\",&n)!=1)return 1;FILE *f=fopen(\"readings.txt\",\"w\");if(!f)return 1;for(int i=0;i<n;i++){if(scanf(\"%d\",&v)!=1){fclose(f);return 1;}fprintf(f,\"%d\\n\",v);}if(fclose(f)!=0)return 1;if(scanf(\"%d\",&m)!=1)return 1;f=fopen(\"readings.txt\",\"a\");if(!f)return 1;for(int i=0;i<m;i++){if(scanf(\"%d\",&v)!=1){fclose(f);return 1;}fprintf(f,\"%d\\n\",v);}if(fclose(f)!=0)return 1;f=fopen(\"readings.txt\",\"r\");if(!f)return 1;int first=0,last=0,count=0;while(fscanf(f,\"%d\",&v)==1){if(!count)first=v;last=v;count++;}fclose(f);printf(\"first=%d last=%d count=%d\\n\",first,last,count);return 0;}\n"
+  },
+  "recursive-sum": {
+    "main.c": "#include <stdio.h>\nint sumTo(int n){if(!n)return 0;return n+sumTo(n-1);}\nint main(void){int n;if(scanf(\"%d\",&n)!=1)return 1;printf(\"sum=%d\\n\",sumTo(n));return 0;}\n"
+  },
+  "recursive-sum-gold": {
+    "main.c": "#include <stdio.h>\nint sumTo(int n){if(!n)return 0;return n+sumTo(n-1);}\nint squaresTo(int n){if(!n)return 0;return n*n+squaresTo(n-1);}\nint main(void){int n;if(scanf(\"%d\",&n)!=1)return 1;printf(\"sum=%d squares=%d\\n\",sumTo(n),squaresTo(n));return 0;}\n"
+  },
+  "command-stack": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[10],size=0,x;char cmd;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++){if(scanf(\" %c\",&cmd)!=1)return 1;if(cmd=='+'){if(scanf(\"%d\",&x)!=1)return 1;a[size++]=x;}else size--;}printf(\"size=%d top=%d\\n\",size,size?a[size-1]:-1);return 0;}\n"
+  },
+  "command-stack-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[10],size=0,x,rejected=0;char cmd;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++){if(scanf(\" %c\",&cmd)!=1)return 1;if(cmd=='+'){if(scanf(\"%d\",&x)!=1)return 1;if(size==10)rejected++;else a[size++]=x;}else if(size==0)rejected++;else size--;}printf(\"size=%d top=%d rejected=%d\\n\",size,size?a[size-1]:-1,rejected);return 0;}\n"
+  }
+}

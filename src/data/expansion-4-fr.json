@@ -1,0 +1,62 @@
+{
+  "square-module": {
+    "title": "Premier module de calcul",
+    "brief": "Crée calc.h, calc.c et main.c. Déclare square(int) dans le .h, définis-la dans calc.c et appelle-la depuis main.",
+    "input": "Un entier x de -100 à 100.",
+    "output": "square=N."
+  },
+  "square-module-gold": {
+    "title": "Carrés et cubes en modules",
+    "brief": "Conserve square(int) et ajoute cube(int), déclaré dans calc.h et implémenté dans calc.c.",
+    "input": "Un entier x de -100 à 100.",
+    "output": "square=A cube=B."
+  },
+  "lcg-checkpoint": {
+    "title": "Une suite reproductible",
+    "brief": "Simule N étapes : state=(state*17+11)%97 et affiche l'état final. N'utilise pas rand().",
+    "input": "Deux entiers : graine de 0 à 96, N de 0 à 30.",
+    "output": "state=S."
+  },
+  "lcg-checkpoint-gold": {
+    "title": "Compter les états pairs et impairs",
+    "brief": "Conserve le générateur et compte les états pairs et impairs APRÈS chaque mise à jour. La graine initiale n'est pas comptée.",
+    "input": "Deux entiers : graine de 0 à 96, N de 0 à 30.",
+    "output": "state=S even=E odd=O."
+  },
+  "file-first-last": {
+    "title": "Sauvegarder puis relire des mesures",
+    "brief": "Lis N entiers, écris-les dans readings.txt, ferme et rouvre le fichier puis affiche la première et la dernière valeur.",
+    "input": "N (1–10), puis N entiers de -100 à 100.",
+    "output": "first=A last=B."
+  },
+  "file-first-last-gold": {
+    "title": "Ajouter des mesures au fichier",
+    "brief": "Conserve le premier lot dans readings.txt. Ajoute M valeurs avec le mode a, puis relis pour compter les valeurs et retrouver les extrémités.",
+    "input": "N (1–10), N entiers [-100,100], M (0–10), puis M entiers [-100,100].",
+    "output": "first=A last=B count=C."
+  },
+  "recursive-sum": {
+    "title": "Somme récursive",
+    "brief": "Implémente int sumTo(int n) récursivement pour 1+...+n, avec sumTo(0)=0. Pas de boucle dans la fonction.",
+    "input": "Un entier N de 0 à 1000.",
+    "output": "sum=S."
+  },
+  "recursive-sum-gold": {
+    "title": "Somme récursive des carrés",
+    "brief": "Conserve sumTo(n) et ajoute squaresTo(n)=1²+...+n² par récursion. Affiche les deux.",
+    "input": "Un entier N de 0 à 1000.",
+    "output": "sum=S squares=Q."
+  },
+  "command-stack": {
+    "title": "Une pile à commandes",
+    "brief": "Simule une pile de 10 entiers maximum. '+' suivi d'un entier empile, '-' dépile. Les commandes de base évitent sous/surremplissage.",
+    "input": "K (0–20) commandes : '+' suivi d'un entier [-100,100], ou '-'. Pile toujours valide.",
+    "output": "size=N top=V, avec top=-1 si la pile est vide."
+  },
+  "command-stack-gold": {
+    "title": "Sécuriser une pile",
+    "brief": "Gère toute commande sans dépasser 10 cases : ignore empiler si plein et dépiler si vide ; compte les refus.",
+    "input": "K (0–40) commandes : '+' suivi d'un entier [-100,100], ou '-'.",
+    "output": "size=N top=V rejected=R ; top=-1 si vide."
+  }
+}

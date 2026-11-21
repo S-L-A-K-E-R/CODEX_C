@@ -1,7 +1,20 @@
 import { Award, Scissors, TrendingUp } from "lucide-react";
 import { useLanguage } from "../i18n/Language.tsx";
 import { earnedMedals, type ChallengeComparison } from "../analysis/metrics.ts";
-import references from "../data/reference-metrics.json";
+import baseReferences from "../data/reference-metrics.json";
+import extra1Metrics from "../data/expansion-1-metrics.json";
+import extra2Metrics from "../data/expansion-2-metrics.json";
+import extra3Metrics from "../data/expansion-3-metrics.json";
+import extra4Metrics from "../data/expansion-4-metrics.json";
+import extra5Metrics from "../data/expansion-5-metrics.json";
+const references = {
+  ...baseReferences,
+  ...extra1Metrics,
+  ...extra2Metrics,
+  ...extra3Metrics,
+  ...extra4Metrics,
+  ...extra5Metrics,
+};
 
 export function TinyMedals({ id, stats }: { id: string; stats?: ChallengeComparison }) {
   const { t } = useLanguage();

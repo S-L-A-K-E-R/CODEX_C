@@ -1,0 +1,36 @@
+{
+  "digits-module": {
+    "main.c": "#include <stdio.h>\n#include \"digits.h\"\nint main(void){int n;if(scanf(\"%d\",&n)!=1)return 1;printf(\"sum=%d\\n\",digitSum(n));return 0;}\n",
+    "digits.h": "#ifndef DIGITS_H\n#define DIGITS_H\nint digitSum(int n);\n#endif\n",
+    "digits.c": "#include \"digits.h\"\nint digitSum(int n){int sum=0;do{sum+=n%10;n/=10;}while(n);return sum;}\n"
+  },
+  "digits-module-gold": {
+    "main.c": "#include <stdio.h>\n#include \"digits.h\"\nint main(void){int n;if(scanf(\"%d\",&n)!=1)return 1;printf(\"sum=%d digits=%d\\n\",digitSum(n),digitCount(n));return 0;}\n",
+    "digits.h": "#ifndef DIGITS_H\n#define DIGITS_H\nint digitSum(int n);\nint digitCount(int n);\n#endif\n",
+    "digits.c": "#include \"digits.h\"\nint digitSum(int n){int s=0;do{s+=n%10;n/=10;}while(n);return s;}\nint digitCount(int n){int k=0;do{k++;n/=10;}while(n);return k;}\n"
+  },
+  "deterministic-dice": {
+    "main.c": "#include <stdio.h>\nint main(void){int state,n,sum=0;if(scanf(\"%d %d\",&state,&n)!=2)return 1;for(int i=0;i<n;i++){state=(state*5+1)%97;sum+=state%6+1;}printf(\"sum=%d\\n\",sum);return 0;}\n"
+  },
+  "deterministic-dice-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int state,n,sum=0,f[6]={0};if(scanf(\"%d %d\",&state,&n)!=2)return 1;for(int i=0;i<n;i++){state=(state*5+1)%97;int roll=state%6+1;sum+=roll;f[roll-1]++;}printf(\"sum=%d\\nfaces:\",sum);for(int i=0;i<6;i++)printf(\" %d\",f[i]);putchar('\\n');return 0;}\n"
+  },
+  "file-positive-count": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,x,c=0;if(scanf(\"%d\",&n)!=1)return 1;FILE *f=fopen(\"values.txt\",\"w\");if(!f)return 1;for(int i=0;i<n;i++){if(scanf(\"%d\",&x)!=1){fclose(f);return 1;}fprintf(f,\"%d\\n\",x);}if(fclose(f)!=0)return 1;f=fopen(\"values.txt\",\"r\");if(!f)return 1;while(fscanf(f,\"%d\",&x)==1)if(x>0)c++;fclose(f);printf(\"positive=%d\\n\",c);return 0;}\n"
+  },
+  "file-positive-count-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,x,c=0,sum=0;if(scanf(\"%d\",&n)!=1)return 1;FILE *f=fopen(\"values.txt\",\"w\");if(!f)return 1;for(int i=0;i<n;i++){if(scanf(\"%d\",&x)!=1){fclose(f);return 1;}fprintf(f,\"%d\\n\",x);}if(fclose(f)!=0)return 1;f=fopen(\"values.txt\",\"r\");if(!f)return 1;FILE *g=fopen(\"filtered.txt\",\"w\");if(!g){fclose(f);return 1;}while(fscanf(f,\"%d\",&x)==1)if(x>0){fprintf(g,\"%d\\n\",x);c++;}if(fclose(f)!=0){fclose(g);return 1;}if(fclose(g)!=0)return 1;g=fopen(\"filtered.txt\",\"r\");if(!g)return 1;while(fscanf(g,\"%d\",&x)==1)sum+=x;fclose(g);printf(\"positive=%d sum=%d\\n\",c,sum);return 0;}\n"
+  },
+  "recursive-power": {
+    "main.c": "#include <stdio.h>\nint power(int x,int n){if(!n)return 1;return x*power(x,n-1);}\nint main(void){int x,n;if(scanf(\"%d %d\",&x,&n)!=2)return 1;printf(\"power=%d\\n\",power(x,n));return 0;}\n"
+  },
+  "recursive-power-gold": {
+    "main.c": "#include <stdio.h>\nint fastPower(int x,int n,int *calls){(*calls)++;if(!n)return 1;int half=fastPower(x,n/2,calls),result=half*half;return n%2?result*x:result;}\nint main(void){int x,n,calls=0;if(scanf(\"%d %d\",&x,&n)!=2)return 1;int v=fastPower(x,n,&calls);printf(\"power=%d calls=%d\\n\",v,calls);return 0;}\n"
+  },
+  "circular-queue": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[5],head=0,tail=0,size=0,x;char cmd;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++){if(scanf(\" %c\",&cmd)!=1)return 1;if(cmd=='E'){if(scanf(\"%d\",&x)!=1)return 1;a[tail]=x;tail=(tail+1)%5;size++;}else{head=(head+1)%5;size--;}}printf(\"size=%d front=%d\\n\",size,size?a[head]:-1);return 0;}\n"
+  },
+  "circular-queue-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[5],head=0,tail=0,size=0,x,rej=0;char cmd;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++){if(scanf(\" %c\",&cmd)!=1)return 1;if(cmd=='E'){if(scanf(\"%d\",&x)!=1)return 1;if(size==5)rej++;else{a[tail]=x;tail=(tail+1)%5;size++;}}else if(size==0)rej++;else{head=(head+1)%5;size--;}}printf(\"size=%d front=%d rejected=%d\\n\",size,size?a[head]:-1,rej);return 0;}\n"
+  }
+}

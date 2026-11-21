@@ -6,9 +6,21 @@ const data = JSON.parse(readFileSync("src/data/content.json", "utf8")) as {
   chapters: Chapter[];
   exercises: Exercise[];
 };
-const fixtures = JSON.parse(
-  readFileSync("tests/fixtures/solutions.json", "utf8"),
+data.exercises.push(
+  ...(JSON.parse(readFileSync("src/data/expansion-1.json", "utf8")) as Exercise[]),
+  ...(JSON.parse(readFileSync("src/data/expansion-2.json", "utf8")) as Exercise[]),
+  ...(JSON.parse(readFileSync("src/data/expansion-3.json", "utf8")) as Exercise[]),
+  ...(JSON.parse(readFileSync("src/data/expansion-4.json", "utf8")) as Exercise[]),
+  ...(JSON.parse(readFileSync("src/data/expansion-5.json", "utf8")) as Exercise[]),
 );
+const fixtures = {
+  ...JSON.parse(readFileSync("tests/fixtures/solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/expansion-1-solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/expansion-2-solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/expansion-3-solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/expansion-4-solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/expansion-5-solutions.json", "utf8")),
+};
 test("curriculum identifiers, core path and gold dependencies are consistent", () => {
   assert.equal(
     new Set(data.chapters.map((c) => c.id)).size,
@@ -22,7 +34,7 @@ test("curriculum identifiers, core path and gold dependencies are consistent", (
     assert.equal(
       data.exercises.filter((e) => e.chapter === c.id && e.kind === "core")
         .length,
-      2,
+      3,
     );
     assert.ok(c.example.includes("main("));
     assert.ok(c.lesson.length >= 3);
@@ -51,6 +63,13 @@ test("curriculum identifiers, core path and gold dependencies are consistent", (
 
 test("French offers the same lessons, exercises and input/output contracts", () => {
   const fr = JSON.parse(readFileSync("src/data/fr.json", "utf8"));
+  Object.assign(fr.exercises,
+    JSON.parse(readFileSync("src/data/expansion-1-fr.json", "utf8")),
+    JSON.parse(readFileSync("src/data/expansion-2-fr.json", "utf8")),
+    JSON.parse(readFileSync("src/data/expansion-3-fr.json", "utf8")),
+    JSON.parse(readFileSync("src/data/expansion-4-fr.json", "utf8")),
+    JSON.parse(readFileSync("src/data/expansion-5-fr.json", "utf8")),
+  );
   assert.deepEqual(
     Object.keys(fr.chapters).sort(),
     data.chapters.map((c) => c.id).sort(),

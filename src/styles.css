@@ -4154,3 +4154,27 @@ details[open] > summary {
   background: #fff1c9;
   outline-offset: 3px;
 }
+
+/* Expanded Duolingo-style trails: support any number of challenges per chapter. */
+.chapter-trail.expanded-trail {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: none;
+  grid-auto-rows: minmax(9.2rem, auto);
+  gap: .85rem .45rem;
+  padding: 1.15rem .65rem;
+}
+.chapter-trail.expanded-trail .trail-lines { display: none; }
+.chapter-trail.expanded-trail .trail-stop {
+  grid-area: auto;
+  grid-row: auto;
+  grid-column: auto;
+  margin: 0;
+  position: relative;
+  padding: .35rem .15rem;
+  align-self: start;
+}
+.chapter-trail.expanded-trail .trail-stop:nth-child(2n) { margin-top: 1.1rem; }
+.chapter-trail.expanded-trail .trail-node { min-width: 0; }
+@container (max-width: 32rem) {
+  .chapter-trail.expanded-trail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

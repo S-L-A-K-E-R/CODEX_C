@@ -420,5 +420,6 @@
   "{name} medal earned": "Médaille {name} obtenue",
   "{name} medal locked — improve your code or match the example": "Médaille {name} verrouillée : améliore ton code ou égale la solution de référence",
   "{name} medal locked — check the completed solution to evaluate it": "Médaille {name} verrouillée : vérifie de nouveau la solution terminée pour l'évaluer",
-  "Open gold": "Ouvrir le défi doré"
+  "Open gold": "Ouvrir le défi doré",
+  "{n}/{total} core": "{n}/{total} exercices principaux"
 }

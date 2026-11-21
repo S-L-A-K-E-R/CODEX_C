@@ -1,0 +1,62 @@
+{
+  "clamp-helper": {
+    "title": "Une fonction de bornage",
+    "brief": "Écris int clamp(int x,int lo,int hi) qui limite x à l'intervalle [lo,hi]. Appelle-la depuis main.",
+    "input": "Trois entiers x lo hi de -100 à 100, avec lo <= hi.",
+    "output": "clamped=N."
+  },
+  "clamp-helper-gold": {
+    "title": "Borner trois mesures",
+    "brief": "Réutilise clamp sur trois mesures avec les mêmes bornes, affiche-les et calcule leur somme.",
+    "input": "Cinq entiers lo hi x y z de -100 à 100, avec lo <= hi.",
+    "output": "values=A B C sum=S."
+  },
+  "compare-swap": {
+    "title": "Ordonner une paire par adresse",
+    "brief": "Écris compareSwap(int *a,int *b) pour mettre les deux entiers dans l'ordre croissant.",
+    "input": "Deux entiers compris entre -10000 et 10000.",
+    "output": "A B en ordre croissant."
+  },
+  "compare-swap-gold": {
+    "title": "Trier trois entiers par pointeurs",
+    "brief": "Réutilise compareSwap trois fois pour trier trois entiers sans tableau ni fonction de tri de bibliothèque.",
+    "input": "Trois entiers entre -10000 et 10000.",
+    "output": "A B C en ordre croissant."
+  },
+  "vowel-scanner": {
+    "title": "Compter les voyelles",
+    "brief": "Compte a, e, i, o, u sans distinguer la casse. La lettre y est une consonne.",
+    "input": "Un mot alphabétique ASCII de 1 à 63 caractères.",
+    "output": "vowels=N."
+  },
+  "vowel-scanner-gold": {
+    "title": "Bilan des lettres",
+    "brief": "Compte les voyelles et les consonnes séparément dans un seul parcours de la chaîne.",
+    "input": "Un mot alphabétique ASCII de 1 à 63 caractères.",
+    "output": "vowels=V consonants=C."
+  },
+  "point-manhattan": {
+    "title": "Distance de Manhattan",
+    "brief": "Représente deux points avec struct Point et calcule |x1-x2|+|y1-y2|.",
+    "input": "Quatre entiers x1 y1 x2 y2 de -100 à 100.",
+    "output": "distance=D."
+  },
+  "point-manhattan-gold": {
+    "title": "Le rectangle entre deux points",
+    "brief": "Conserve la distance et ajoute l'aire du rectangle aligné aux axes défini par les deux points.",
+    "input": "Quatre entiers x1 y1 x2 y2 de -100 à 100.",
+    "output": "distance=D area=A."
+  },
+  "heap-reverse": {
+    "title": "Inverser un tableau alloué",
+    "brief": "Alloue N entiers avec malloc, lis les valeurs, affiche-les en ordre inverse et libère la mémoire.",
+    "input": "N (1–30) et N entiers de -100 à 100.",
+    "output": "Les N entiers inversés, séparés d'un espace."
+  },
+  "heap-reverse-gold": {
+    "title": "Agrandir puis inverser",
+    "brief": "Lis N valeurs, puis M valeurs supplémentaires. Utilise realloc avec vérification avant d'inverser le tableau complet.",
+    "input": "N (1–20), N entiers de -100 à 100, M (0–20) et M autres entiers.",
+    "output": "Les N+M valeurs inversées, séparées d'un espace."
+  }
+}

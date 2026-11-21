@@ -26,3 +26,7 @@ Original application code and teaching content need an explicit owner-selected l
 - [Original repository and licensing statement](https://github.com/S-L-A-K-E-R/C_courses)
 - [Source licence file](https://github.com/S-L-A-K-E-R/C_courses/blob/main/LICENSE.md)
 - [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
+
+## Expanded challenge bank (21 November 2026)
+
+The new challenges and gold extensions are original classroom adaptations of common C programming themes. They were informed by the teacher-authored general laboratory sheets listed above and by the topic lists at [W3Schools C exercises](https://www.w3schools.com/c/c_exercises.php) and [w3resource C programming exercises](https://www.w3resource.com/c-programming-exercises/). Their problem statements and tests have been newly written; third-party solutions and problem text were not copied. File, recursion, and modular exercises were designed for this site's C17 browser runtime.

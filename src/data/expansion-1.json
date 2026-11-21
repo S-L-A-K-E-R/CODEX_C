@@ -1,0 +1,797 @@
+[
+  {
+    "id": "terminal-help",
+    "chapter": "first-programs",
+    "title": "Terminal help screen",
+    "kind": "core",
+    "brief": "Print a three-line help screen using a tab and escaped double quotes.",
+    "input": "No input.",
+    "output": "Exactly three lines: CODEX C, a tab followed by Run: Ctrl+Enter, then \"Keep coding\".",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "",
+        "output": "CODEX C\n\tRun: Ctrl+Enter\n\"Keep coding\"\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Terminal help screen\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use printf with escape sequences.",
+      "\\t creates a tab and \\n a new line.",
+      "\\\" inserts a literal double quote."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "terminal-help-gold",
+    "chapter": "first-programs",
+    "title": "A help screen with a mode",
+    "kind": "gold",
+    "brief": "Preserve the three lines, then read a character and add Mode: X on line four.",
+    "input": "One printable non-whitespace ASCII character.",
+    "output": "The original help screen followed by Mode: X.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "C\n",
+        "output": "CODEX C\n\tRun: Ctrl+Enter\n\"Keep coding\"\nMode: C\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "7\n",
+        "output": "CODEX C\n\tRun: Ctrl+Enter\n\"Keep coding\"\nMode: 7\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "z\n",
+        "output": "CODEX C\n\tRun: Ctrl+Enter\n\"Keep coding\"\nMode: z\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: A help screen with a mode\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Keep the original escaped literals.",
+      "Read one char with scanf and %c.",
+      "Use %c in the final line."
+    ],
+    "minutes": 18,
+    "base": "terminal-help",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "terminal-receipt",
+    "chapter": "first-programs",
+    "title": "Print a tiny receipt",
+    "kind": "optional",
+    "brief": "Reproduce a small three-line receipt with fixed spaces and quantities.",
+    "input": "No input.",
+    "output": "Three lines: ITEM  QTY; PEN   02; BOOK  01.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "",
+        "output": "ITEM  QTY\nPEN   02\nBOOK  01\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Print a tiny receipt\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use fixed text with printf.",
+      "There are two spaces between ITEM and QTY.",
+      "Place a newline after each row."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "terminal-receipt-gold",
+    "chapter": "first-programs",
+    "title": "Receipt with live quantities",
+    "kind": "gold",
+    "brief": "Read pen and book quantities; use leading zeros to keep both quantities two digits wide.",
+    "input": "Two integers from 0 to 99.",
+    "output": "The same three-line receipt, with the given two-digit quantities.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "2 1\n",
+        "output": "ITEM  QTY\nPEN   02\nBOOK  01\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 9\n",
+        "output": "ITEM  QTY\nPEN   00\nBOOK  09\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "99 10\n",
+        "output": "ITEM  QTY\nPEN   99\nBOOK  10\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Receipt with live quantities\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Keep the fixed labels and spacing.",
+      "Read two integers with scanf.",
+      "Use %02d to pad with zeroes."
+    ],
+    "minutes": 18,
+    "base": "terminal-receipt",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "coin-change",
+    "chapter": "variables",
+    "title": "Euros and cents",
+    "kind": "core",
+    "brief": "Split an integer amount of cents into whole euros and leftover cents.",
+    "input": "One integer between 0 and 99999, in cents.",
+    "output": "E euros C cents, using decimal integers.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "375\n",
+        "output": "3 euros 75 cents\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "0 euros 0 cents\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "100\n",
+        "output": "1 euros 0 cents\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "99999\n",
+        "output": "999 euros 99 cents\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Euros and cents\n    return 0;\n}\n"
+    },
+    "hints": [
+      "One euro contains 100 cents.",
+      "Use integer division by 100 for euros.",
+      "Use remainder modulo 100 for cents."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "coin-change-gold",
+    "chapter": "variables",
+    "title": "Make change with coins",
+    "kind": "gold",
+    "brief": "Also split the remaining cents greedily into 50,20,10,5,2,1-cent coins, minimizing coin count.",
+    "input": "One integer between 0 and 99999, in cents.",
+    "output": "E euros C cents, then coins: A B C D E F for denominations 50,20,10,5,2,1.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "375\n",
+        "output": "3 euros 75 cents\ncoins: 1 1 0 1 0 0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "0 euros 0 cents\ncoins: 0 0 0 0 0 0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "199\n",
+        "output": "1 euros 99 cents\ncoins: 1 2 0 1 2 0\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "101\n",
+        "output": "1 euros 1 cents\ncoins: 0 0 0 0 0 1\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Make change with coins\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Start with cents modulo 100.",
+      "At each denomination take quotient and remainder.",
+      "Work from largest to smallest coin."
+    ],
+    "minutes": 18,
+    "base": "coin-change",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "lab-mean",
+    "chapter": "variables",
+    "title": "Two lab measurements",
+    "kind": "optional",
+    "brief": "Calculate the mean of two integer readings, preserving fractional values.",
+    "input": "Two integers between -1000 and 1000.",
+    "output": "mean=V where V has exactly two decimal places.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "10 13\n",
+        "output": "mean=11.50\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-5 5\n",
+        "output": "mean=0.00\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "-3 -2\n",
+        "output": "mean=-2.50\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Two lab measurements\n    return 0;\n}\n"
+    },
+    "hints": [
+      "The mean is the sum divided by two.",
+      "Avoid truncating with integer division.",
+      "Use %.2f to print two decimal places."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "lab-mean-gold",
+    "chapter": "variables",
+    "title": "Weighted lab measurements",
+    "kind": "gold",
+    "brief": "Read three readings and calculate their weighted mean with weights 2,3,5 out of 10.",
+    "input": "Three integers between -1000 and 1000.",
+    "output": "weighted=V with two decimal places.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "10 20 30\n",
+        "output": "weighted=23.00\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-5 0 5\n",
+        "output": "weighted=1.50\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "7 7 7\n",
+        "output": "weighted=7.00\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "0 0 1\n",
+        "output": "weighted=0.50\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Weighted lab measurements\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Multiply each reading by its weight.",
+      "The total weight is ten.",
+      "Divide by 10.0 and use %.2f."
+    ],
+    "minutes": 18,
+    "base": "lab-mean",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "parking-fee",
+    "chapter": "decisions",
+    "title": "Parking fee tiers",
+    "kind": "core",
+    "brief": "Charge 0 euros for 0–30 minutes, 3 euros for 31–120, then 2 extra euros per started hour beyond 120.",
+    "input": "One integer from 0 to 600 (minutes).",
+    "output": "fee=N in euros.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "0\n",
+        "output": "fee=0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "30\n",
+        "output": "fee=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "31\n",
+        "output": "fee=3\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "120\n",
+        "output": "fee=3\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "121\n",
+        "output": "fee=5\n"
+      },
+      {
+        "label": "Case 6",
+        "input": "181\n",
+        "output": "fee=7\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Parking fee tiers\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Check the 30- and 120-minute boundaries.",
+      "For extra time, count started hours.",
+      "For positive x, (x+59)/60 rounds up."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "parking-fee-gold",
+    "chapter": "decisions",
+    "title": "Parking with a loyalty card",
+    "kind": "gold",
+    "brief": "Keep the tiers; if loyalty=1 subtract 2 euros, never below zero.",
+    "input": "Two integers: minutes (0–600), loyalty (0 or 1).",
+    "output": "fee=N after the loyalty reduction.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "121 1\n",
+        "output": "fee=3\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "31 1\n",
+        "output": "fee=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "30 1\n",
+        "output": "fee=0\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "181 0\n",
+        "output": "fee=7\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "600 1\n",
+        "output": "fee=17\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Parking with a loyalty card\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Calculate the ordinary price first.",
+      "Apply the reduction only if loyalty is one.",
+      "Clamp a negative fee to zero."
+    ],
+    "minutes": 18,
+    "base": "parking-fee",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "triangle-check",
+    "chapter": "decisions",
+    "title": "Can these sides form a triangle?",
+    "kind": "optional",
+    "brief": "Validate positive side lengths using all three strict triangle inequalities.",
+    "input": "Three integers from 0 to 1000.",
+    "output": "valid or invalid on one line.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 4 5\n",
+        "output": "valid\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 2 3\n",
+        "output": "invalid\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "0 4 4\n",
+        "output": "invalid\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "6 6 6\n",
+        "output": "valid\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Can these sides form a triangle?\n    return 0;\n}\n"
+    },
+    "hints": [
+      "All sides must be strictly positive.",
+      "The sum of any two must exceed the third.",
+      "Equality does not form a proper triangle."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "triangle-check-gold",
+    "chapter": "decisions",
+    "title": "Classify the triangle",
+    "kind": "gold",
+    "brief": "Preserve validity and classify triangles as equilateral, isosceles or scalene.",
+    "input": "Three integers from 0 to 1000.",
+    "output": "invalid, equilateral, isosceles or scalene.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 4 5\n",
+        "output": "scalene\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "2 2 3\n",
+        "output": "isosceles\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 3 3\n",
+        "output": "equilateral\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "0 2 2\n",
+        "output": "invalid\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "2 2 4\n",
+        "output": "invalid\n"
+      },
+      {
+        "label": "Case 6",
+        "input": "10 9 10\n",
+        "output": "isosceles\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Classify the triangle\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Validate sides before classifying.",
+      "Three equal sides are equilateral.",
+      "Two equal sides are isosceles; otherwise scalene."
+    ],
+    "minutes": 18,
+    "base": "triangle-check",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "times-table",
+    "chapter": "loops",
+    "title": "The first five multiples",
+    "kind": "core",
+    "brief": "Print the first five multiplication facts for the input number.",
+    "input": "One integer N from 1 to 12.",
+    "output": "Five lines N x I = P with I from 1 to 5.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3\n",
+        "output": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\n3 x 4 = 12\n3 x 5 = 15\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1\n",
+        "output": "1 x 1 = 1\n1 x 2 = 2\n1 x 3 = 3\n1 x 4 = 4\n1 x 5 = 5\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "12\n",
+        "output": "12 x 1 = 12\n12 x 2 = 24\n12 x 3 = 36\n12 x 4 = 48\n12 x 5 = 60\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: The first five multiples\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use a for loop from 1 through 5.",
+      "Calculate n times i on each iteration.",
+      "Print each result with a newline."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "times-table-gold",
+    "chapter": "loops",
+    "title": "Custom multiplication table",
+    "kind": "gold",
+    "brief": "Read K too, print K rows and the sum of all printed products.",
+    "input": "Two integers: N from 1 to 12, K from 1 to 12.",
+    "output": "K multiplication lines followed by total=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 3\n",
+        "output": "3 x 1 = 3\n3 x 2 = 6\n3 x 3 = 9\ntotal=18\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 1\n",
+        "output": "1 x 1 = 1\ntotal=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "2 5\n",
+        "output": "2 x 1 = 2\n2 x 2 = 4\n2 x 3 = 6\n2 x 4 = 8\n2 x 5 = 10\ntotal=30\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Custom multiplication table\n    return 0;\n}\n"
+    },
+    "hints": [
+      "K replaces the fixed limit five.",
+      "Accumulate n*i each iteration.",
+      "Print total after the loop."
+    ],
+    "minutes": 18,
+    "base": "times-table",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "sentinel-total",
+    "chapter": "loops",
+    "title": "Add until zero",
+    "kind": "optional",
+    "brief": "Read up to 20 integers, stop at sentinel zero, then report the sum and count of nonzero inputs.",
+    "input": "Zero to 20 integers from -100 to 100 followed by a terminating 0.",
+    "output": "sum=S count=N.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 -2 7 0\n",
+        "output": "sum=9 count=3\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "sum=0 count=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "-5 -5 0\n",
+        "output": "sum=-10 count=2\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "1 1 1 1 0\n",
+        "output": "sum=4 count=4\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Add until zero\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Read values in a while loop.",
+      "Do not add or count zero.",
+      "Keep sum and count accumulators."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "sentinel-total-gold",
+    "chapter": "loops",
+    "title": "Track positive and negative readings",
+    "kind": "gold",
+    "brief": "Keep the sum and count, and separately count positive and negative values before the zero sentinel.",
+    "input": "Zero to 20 integers from -100 to 100 followed by 0.",
+    "output": "sum=S count=N positive=P negative=M.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 -2 7 0\n",
+        "output": "sum=9 count=3 positive=2 negative=1\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "sum=0 count=0 positive=0 negative=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "-5 -5 0\n",
+        "output": "sum=-10 count=2 positive=0 negative=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Track positive and negative readings\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Reuse the sentinel loop.",
+      "Every nonzero value is positive or negative.",
+      "Maintain two more counters."
+    ],
+    "minutes": 18,
+    "base": "sentinel-total",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "first-threshold",
+    "chapter": "arrays",
+    "title": "First reading over a threshold",
+    "kind": "core",
+    "brief": "Store N readings and find the first zero-based index where a reading is at least T.",
+    "input": "N (1–20), N integers [-100,100], then T [-100,100].",
+    "output": "index=I, with -1 when no reading qualifies.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 3 7 2 8 5 7\n",
+        "output": "index=1\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "3 1 2 3 4\n",
+        "output": "index=-1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1 8 8\n",
+        "output": "index=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: First reading over a threshold\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Read the array before T.",
+      "Scan from the start.",
+      "Initialize the answer to -1."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://www.w3resource.com/c-programming-exercises/array/"
+  },
+  {
+    "id": "first-threshold-gold",
+    "chapter": "arrays",
+    "title": "Full threshold report",
+    "kind": "gold",
+    "brief": "Find the first and last qualifying indexes and how many readings are at least T.",
+    "input": "N (1–20), N integers [-100,100], then T [-100,100].",
+    "output": "first=A last=B count=C, with -1 indexes if none qualifies.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 3 7 2 8 5 7\n",
+        "output": "first=1 last=3 count=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "3 1 2 3 4\n",
+        "output": "first=-1 last=-1 count=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1 8 8\n",
+        "output": "first=0 last=0 count=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "4 0 0 0 0 0\n",
+        "output": "first=0 last=3 count=4\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Full threshold report\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Continue scanning after the first match.",
+      "Set first only once, update last each time.",
+      "Increment count for each qualifying reading."
+    ],
+    "minutes": 18,
+    "base": "first-threshold",
+    "reference": "https://www.w3resource.com/c-programming-exercises/array/"
+  },
+  {
+    "id": "rotate-right",
+    "chapter": "arrays",
+    "title": "Rotate readings once",
+    "kind": "optional",
+    "brief": "Rotate N integers one place to the right, moving the last value to the front.",
+    "input": "N (1–20), then N integers [-100,100].",
+    "output": "Rotated integers on one line separated by exactly one space.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 1 2 3 4\n",
+        "output": "4 1 2 3\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 9\n",
+        "output": "9\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 -1 0 1\n",
+        "output": "1 -1 0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Rotate readings once\n    return 0;\n}\n"
+    },
+    "hints": [
+      "The last input becomes first.",
+      "Then print positions 0 to N-2.",
+      "Avoid a trailing space."
+    ],
+    "minutes": 12,
+    "base": null,
+    "reference": "https://www.w3resource.com/c-programming-exercises/array/"
+  },
+  {
+    "id": "rotate-right-gold",
+    "chapter": "arrays",
+    "title": "Rotate by K steps",
+    "kind": "gold",
+    "brief": "Generalize to K right rotations, where K may exceed N.",
+    "input": "N (1–20), N integers [-100,100], then K (0–1000).",
+    "output": "K-step right-rotated sequence, single spaces.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 1 2 3 4 2\n",
+        "output": "3 4 1 2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 9 999\n",
+        "output": "9\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 -1 0 1 0\n",
+        "output": "-1 0 1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "3 10 20 30 4\n",
+        "output": "30 10 20\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Rotate by K steps\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Only K % N shifts matter.",
+      "Output position i reads (i-K+N)%N.",
+      "Keep the original printing rules."
+    ],
+    "minutes": 18,
+    "base": "rotate-right",
+    "reference": "https://www.w3resource.com/c-programming-exercises/array/"
+  }
+]

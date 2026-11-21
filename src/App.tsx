@@ -590,6 +590,7 @@ function ChapterCard({
   const p = useProgress(),
     items = byChapter(c.id),
     done = items.filter((e) => e.kind === "core" && p.completed[e.id]).length,
+    coreCount = items.filter((e) => e.kind === "core").length,
     index = chapters.indexOf(c) + 1;
   return (
     <article
@@ -597,7 +598,7 @@ function ChapterCard({
         "chapter-card " +
         (expanded ? "expanded" : "") +
         " " +
-        (done === 2 ? "chapter-done" : "")
+        (done === coreCount ? "chapter-done" : "")
       }
     >
       <button
@@ -606,13 +607,13 @@ function ChapterCard({
         onClick={onExpand}
       >
         <span className="chapter-number">
-          {done === 2 ? <Check size={20} /> : String(index).padStart(2, "0")}
+          {done === coreCount ? <Check size={20} /> : String(index).padStart(2, "0")}
         </span>
         <span className="chapter-heading">
           <b>{c.title}</b>
           <small>{c.subtitle}</small>
         </span>
-        <span className="chapter-count">{t("{n}/2 core", { n: done })}</span>
+        <span className="chapter-count">{t("{n}/{total} core", { n: done, total: coreCount })}</span>
         <ChevronDown size={18} />
       </button>
       {expanded && (

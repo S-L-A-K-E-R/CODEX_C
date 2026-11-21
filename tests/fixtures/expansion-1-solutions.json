@@ -1,0 +1,62 @@
+{
+  "terminal-help": {
+    "main.c": "#include <stdio.h>\nint main(void){printf(\"CODEX C\\n\\tRun: Ctrl+Enter\\n\\\"Keep coding\\\"\\n\");return 0;}\n"
+  },
+  "terminal-help-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){char c;if(scanf(\" %c\",&c)!=1)return 1;printf(\"CODEX C\\n\\tRun: Ctrl+Enter\\n\\\"Keep coding\\\"\\nMode: %c\\n\",c);return 0;}\n"
+  },
+  "terminal-receipt": {
+    "main.c": "#include <stdio.h>\nint main(void){printf(\"ITEM  QTY\\nPEN   02\\nBOOK  01\\n\");return 0;}\n"
+  },
+  "terminal-receipt-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int a,b;if(scanf(\"%d %d\",&a,&b)!=2)return 1;printf(\"ITEM  QTY\\nPEN   %02d\\nBOOK  %02d\\n\",a,b);return 0;}\n"
+  },
+  "coin-change": {
+    "main.c": "#include <stdio.h>\nint main(void){int x;if(scanf(\"%d\",&x)!=1)return 1;printf(\"%d euros %d cents\\n\",x/100,x%100);return 0;}\n"
+  },
+  "coin-change-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int x,r,d[6]={50,20,10,5,2,1},count[6];if(scanf(\"%d\",&x)!=1)return 1;r=x%100;for(int i=0;i<6;i++){count[i]=r/d[i];r%=d[i];}printf(\"%d euros %d cents\\ncoins:\",x/100,x%100);for(int i=0;i<6;i++)printf(\" %d\",count[i]);putchar('\\n');return 0;}\n"
+  },
+  "lab-mean": {
+    "main.c": "#include <stdio.h>\nint main(void){int a,b;if(scanf(\"%d %d\",&a,&b)!=2)return 1;printf(\"mean=%.2f\\n\",(a+b)/2.0);return 0;}\n"
+  },
+  "lab-mean-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int a,b,c;if(scanf(\"%d %d %d\",&a,&b,&c)!=3)return 1;printf(\"weighted=%.2f\\n\",(2*a+3*b+5*c)/10.0);return 0;}\n"
+  },
+  "parking-fee": {
+    "main.c": "#include <stdio.h>\nint main(void){int m,f;if(scanf(\"%d\",&m)!=1)return 1;f=m<=30?0:m<=120?3:3+2*((m-120+59)/60);printf(\"fee=%d\\n\",f);return 0;}\n"
+  },
+  "parking-fee-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int m,l,f;if(scanf(\"%d %d\",&m,&l)!=2)return 1;f=m<=30?0:m<=120?3:3+2*((m-120+59)/60);if(l)f-=2;if(f<0)f=0;printf(\"fee=%d\\n\",f);return 0;}\n"
+  },
+  "triangle-check": {
+    "main.c": "#include <stdio.h>\nint main(void){int a,b,c;if(scanf(\"%d %d %d\",&a,&b,&c)!=3)return 1;puts(a>0&&b>0&&c>0&&a+b>c&&a+c>b&&b+c>a?\"valid\":\"invalid\");return 0;}\n"
+  },
+  "triangle-check-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int a,b,c;if(scanf(\"%d %d %d\",&a,&b,&c)!=3)return 1;if(a<=0||b<=0||c<=0||a+b<=c||a+c<=b||b+c<=a)puts(\"invalid\");else if(a==b&&b==c)puts(\"equilateral\");else if(a==b||a==c||b==c)puts(\"isosceles\");else puts(\"scalene\");return 0;}\n"
+  },
+  "times-table": {
+    "main.c": "#include <stdio.h>\nint main(void){int n;if(scanf(\"%d\",&n)!=1)return 1;for(int i=1;i<=5;i++)printf(\"%d x %d = %d\\n\",n,i,n*i);return 0;}\n"
+  },
+  "times-table-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,k,s=0;if(scanf(\"%d %d\",&n,&k)!=2)return 1;for(int i=1;i<=k;i++){printf(\"%d x %d = %d\\n\",n,i,n*i);s+=n*i;}printf(\"total=%d\\n\",s);return 0;}\n"
+  },
+  "sentinel-total": {
+    "main.c": "#include <stdio.h>\nint main(void){int x,s=0,n=0;while(scanf(\"%d\",&x)==1&&x!=0){s+=x;n++;}printf(\"sum=%d count=%d\\n\",s,n);return 0;}\n"
+  },
+  "sentinel-total-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int x,s=0,n=0,p=0,m=0;while(scanf(\"%d\",&x)==1&&x!=0){s+=x;n++;if(x>0)p++;else m++;}printf(\"sum=%d count=%d positive=%d negative=%d\\n\",s,n,p,m);return 0;}\n"
+  },
+  "first-threshold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[20],t,ans=-1;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;if(scanf(\"%d\",&t)!=1)return 1;for(int i=0;i<n;i++)if(a[i]>=t){ans=i;break;}printf(\"index=%d\\n\",ans);return 0;}\n"
+  },
+  "first-threshold-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[20],t,f=-1,l=-1,c=0;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;if(scanf(\"%d\",&t)!=1)return 1;for(int i=0;i<n;i++)if(a[i]>=t){if(f==-1)f=i;l=i;c++;}printf(\"first=%d last=%d count=%d\\n\",f,l,c);return 0;}\n"
+  },
+  "rotate-right": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[20];if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;printf(\"%d\",a[n-1]);for(int i=0;i<n-1;i++)printf(\" %d\",a[i]);putchar('\\n');return 0;}\n"
+  },
+  "rotate-right-gold": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[20],k;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;if(scanf(\"%d\",&k)!=1)return 1;k%=n;for(int i=0;i<n;i++)printf(\"%s%d\",i?\" \":\"\",a[(i-k+n)%n]);putchar('\\n');return 0;}\n"
+  }
+}

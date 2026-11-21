@@ -1,0 +1,441 @@
+[
+  {
+    "id": "digits-module",
+    "chapter": "modular",
+    "title": "A digit utility module",
+    "kind": "optional",
+    "brief": "Create digits.h and digits.c with a declared/defined digitSum(int n) function. The main file should call it and print the sum of decimal digits.",
+    "input": "One nonnegative integer N from 0 to 99999.",
+    "output": "sum=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1234\n",
+        "output": "sum=10\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "sum=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "90009\n",
+        "output": "sum=18\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n#include \"digits.h\"\nint main(void){\n    // TODO: read n, call digitSum and print.\n    return 0;\n}\n",
+      "digits.h": "#ifndef DIGITS_H\n#define DIGITS_H\nint digitSum(int n);\n#endif\n",
+      "digits.c": "#include \"digits.h\"\nint digitSum(int n){\n    // TODO\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Put function prototype in a guarded digits.h.",
+      "Implement the function in digits.c.",
+      "Use %10 and /10 to process digits."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "digits-module-gold",
+    "chapter": "modular",
+    "title": "Two utilities, one header",
+    "kind": "gold",
+    "brief": "Keep digitSum and add digitCount(int n), returning the number of decimal digits (zero has one digit).",
+    "input": "One nonnegative integer N from 0 to 99999.",
+    "output": "sum=S digits=D.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1234\n",
+        "output": "sum=10 digits=4\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "sum=0 digits=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "90009\n",
+        "output": "sum=18 digits=5\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "10\n",
+        "output": "sum=1 digits=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n#include \"digits.h\"\nint main(void){\n    // TODO: read n; call both helpers.\n    return 0;\n}\n",
+      "digits.h": "#ifndef DIGITS_H\n#define DIGITS_H\nint digitSum(int n);\nint digitCount(int n);\n#endif\n",
+      "digits.c": "#include \"digits.h\"\nint digitSum(int n){int s=0;do{s+=n%10;n/=10;}while(n);return s;}\nint digitCount(int n){\n    // TODO\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Add the digitCount prototype to digits.h.",
+      "Implement digitCount in digits.c using a do/while loop.",
+      "Call both functions from main."
+    ],
+    "minutes": 22,
+    "base": "digits-module",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "deterministic-dice",
+    "chapter": "randomness",
+    "title": "Repeatable dice rolls",
+    "kind": "optional",
+    "brief": "Use generator state=(state*5+1)%97; each new state yields a roll state%6+1. Simulate N rolls and print their sum. Do not call rand().",
+    "input": "Seed in [0,96], then N in [1,20].",
+    "output": "sum=S of the simulated rolls.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "0 1\n",
+        "output": "sum=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 2\n",
+        "output": "sum=3\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "5 3\n",
+        "output": "sum=11\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "96 5\n",
+        "output": "sum=18\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Repeatable dice rolls\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Update state before computing each roll.",
+      "Roll values must be from one to six.",
+      "Accumulate rolls across N iterations."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://www.w3resource.com/c-programming-exercises/"
+  },
+  {
+    "id": "deterministic-dice-gold",
+    "chapter": "randomness",
+    "title": "Dice frequency histogram",
+    "kind": "gold",
+    "brief": "Keep the roll sum and report how many times each face 1 through 6 appeared, in order.",
+    "input": "Seed in [0,96], then N in [1,20].",
+    "output": "sum=S, then faces: A B C D E F with frequencies for faces 1–6.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "0 1\n",
+        "output": "sum=2\nfaces: 0 1 0 0 0 0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 2\n",
+        "output": "sum=3\nfaces: 1 1 0 0 0 0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "5 3\n",
+        "output": "sum=11\nfaces: 0 0 2 0 1 0\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "96 5\n",
+        "output": "sum=18\nfaces: 1 0 0 3 1 0\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "21 20\n",
+        "output": "sum=65\nfaces: 4 5 3 1 4 3\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Dice frequency histogram\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Allocate six counters initialized to zero.",
+      "Increase faces[roll-1] for each roll.",
+      "The six frequencies must sum to N."
+    ],
+    "minutes": 22,
+    "base": "deterministic-dice",
+    "reference": "https://www.w3resource.com/c-programming-exercises/"
+  },
+  {
+    "id": "file-positive-count",
+    "chapter": "files",
+    "title": "Count positive values from a file",
+    "kind": "optional",
+    "brief": "Read N integers, write each to values.txt, close and reopen the file, then count numbers strictly greater than zero.",
+    "input": "N (1–20), then N integers in [-100,100].",
+    "output": "positive=C.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 2 -1 0 7 -9\n",
+        "output": "positive=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 0\n",
+        "output": "positive=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 1 2 3\n",
+        "output": "positive=3\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Count positive values from a file\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Write one integer per line to values.txt.",
+      "Close and reopen for reading.",
+      "Count positive values while fscanf succeeds."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+  },
+  {
+    "id": "file-positive-count-gold",
+    "chapter": "files",
+    "title": "Filter readings to a second file",
+    "kind": "gold",
+    "brief": "Keep values.txt. While reading it, copy positive numbers only into filtered.txt, then reopen filtered.txt to calculate their total sum.",
+    "input": "N (1–20), then N integers in [-100,100].",
+    "output": "positive=C sum=S, where S is the sum of strictly positive values.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 2 -1 0 7 -9\n",
+        "output": "positive=2 sum=9\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 0\n",
+        "output": "positive=0 sum=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 1 2 3\n",
+        "output": "positive=3 sum=6\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "4 -1 -2 -3 -4\n",
+        "output": "positive=0 sum=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Filter readings to a second file\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Reopen values.txt after writing it.",
+      "Write positive entries to a separate file, then close both.",
+      "Read filtered.txt back to compute its sum."
+    ],
+    "minutes": 22,
+    "base": "file-positive-count",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+  },
+  {
+    "id": "recursive-power",
+    "chapter": "recursion",
+    "title": "Recursive integer power",
+    "kind": "optional",
+    "brief": "Write power(base,exponent) using recursion and the base case exponent=0. Do not call pow() from math.h.",
+    "input": "Base in [-5,5] and exponent in [0,8].",
+    "output": "power=P.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "2 5\n",
+        "output": "power=32\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 0\n",
+        "output": "power=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "-2 3\n",
+        "output": "power=-8\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "-2 4\n",
+        "output": "power=16\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "5 8\n",
+        "output": "power=390625\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Recursive integer power\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Return 1 when exponent is zero.",
+      "Return base times power(base,exponent-1).",
+      "Each recursive call must reduce exponent."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "recursive-power-gold",
+    "chapter": "recursion",
+    "title": "Fast recursive power with call count",
+    "kind": "gold",
+    "brief": "Replace linear recursion with exponentiation by squaring. Count every invocation of fastPower, including exponent=0; return both power and call count via an int* parameter.",
+    "input": "Base in [-5,5] and exponent in [0,8].",
+    "output": "power=P calls=C, where one call occurs for exponent zero and each other call recurses on exponent/2 once.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "2 5\n",
+        "output": "power=32 calls=4\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 0\n",
+        "output": "power=1 calls=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "-2 3\n",
+        "output": "power=-8 calls=3\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "-2 4\n",
+        "output": "power=16 calls=4\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "5 8\n",
+        "output": "power=390625 calls=5\n"
+      },
+      {
+        "label": "Case 6",
+        "input": "3 1\n",
+        "output": "power=3 calls=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Fast recursive power with call count\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use an int* to count function invocations.",
+      "Recurse just once on exponent/2.",
+      "Square the half result, then multiply by base if exponent is odd."
+    ],
+    "minutes": 22,
+    "base": "recursive-power",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "circular-queue",
+    "chapter": "data-structures",
+    "title": "A small circular queue",
+    "kind": "optional",
+    "brief": "Use an array of capacity 5 and head/tail indexes to process E X (enqueue) and D (dequeue) commands. All commands are valid and fit capacity.",
+    "input": "K (0–20), then K commands E followed by integer [-100,100], or D. No overflow/underflow.",
+    "output": "size=N front=V; front=-1 when empty.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 E 3 E 4 D E 7 E 2\n",
+        "output": "size=3 front=4\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "size=0 front=-1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "4 E -2 E -3 D D\n",
+        "output": "size=0 front=-1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "7 E 1 E 2 E 3 D D E 4 E 5\n",
+        "output": "size=3 front=3\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: A small circular queue\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Track head, tail and current size.",
+      "After incrementing an index, take modulo 5.",
+      "Front is at array[head] when size > 0."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "circular-queue-gold",
+    "chapter": "data-structures",
+    "title": "Queue overflow and underflow protection",
+    "kind": "gold",
+    "brief": "Use the same circular queue but accept arbitrary commands: ignore enqueues when full and dequeues when empty, and count rejections.",
+    "input": "K (0–40), then K commands E with integer [-100,100], or D.",
+    "output": "size=N front=V rejected=R; front=-1 if empty.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 E 3 E 4 D E 7 E 2\n",
+        "output": "size=3 front=4 rejected=0\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "size=0 front=-1 rejected=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 D E 8 D\n",
+        "output": "size=0 front=-1 rejected=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "7 E 1 E 2 E 3 E 4 E 5 E 6 E 7\n",
+        "output": "size=5 front=1 rejected=2\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "9 E 1 E 2 E 3 E 4 E 5 D D E 6 E 7\n",
+        "output": "size=5 front=3 rejected=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Queue overflow and underflow protection\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Reject D on an empty queue.",
+      "Reject E when size is already five, but still consume its integer.",
+      "Maintain wrapped head/tail indexes."
+    ],
+    "minutes": 22,
+    "base": "circular-queue",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  }
+]

@@ -1,0 +1,62 @@
+{
+  "digits-module": {
+    "title": "Module de chiffres",
+    "brief": "Crée digits.h et digits.c avec la fonction digitSum(int n) déclarée et définie. main l'appelle pour la somme des chiffres décimaux.",
+    "input": "Un entier positif ou nul N de 0 à 99999.",
+    "output": "sum=S."
+  },
+  "digits-module-gold": {
+    "title": "Deux utilitaires, un en-tête",
+    "brief": "Garde digitSum et ajoute digitCount(int n), nombre de chiffres décimaux (zéro possède un chiffre).",
+    "input": "Un entier positif ou nul N de 0 à 99999.",
+    "output": "sum=S digits=D."
+  },
+  "deterministic-dice": {
+    "title": "Lancers reproductibles",
+    "brief": "Utilise state=(state*5+1)%97 puis roll=state%6+1. Simule N lancers et affiche leur somme, sans rand().",
+    "input": "Graine de 0 à 96, puis N de 1 à 20.",
+    "output": "sum=S des lancers simulés."
+  },
+  "deterministic-dice-gold": {
+    "title": "Histogramme des dés",
+    "brief": "Conserve la somme et affiche la fréquence de chaque face, de 1 à 6.",
+    "input": "Graine de 0 à 96, puis N de 1 à 20.",
+    "output": "sum=S puis faces: A B C D E F pour les faces 1 à 6."
+  },
+  "file-positive-count": {
+    "title": "Compter les positifs depuis un fichier",
+    "brief": "Lis N entiers, écris-les dans values.txt, ferme et rouvre le fichier puis compte les valeurs strictement positives.",
+    "input": "N (1–20), puis N entiers [-100,100].",
+    "output": "positive=C."
+  },
+  "file-positive-count-gold": {
+    "title": "Filtrer dans un deuxième fichier",
+    "brief": "Conserve values.txt. En le relisant, copie seulement les positifs dans filtered.txt, puis rouvre filtered.txt pour calculer leur somme.",
+    "input": "N (1–20), puis N entiers [-100,100].",
+    "output": "positive=C sum=S avec la somme des valeurs strictement positives."
+  },
+  "recursive-power": {
+    "title": "Puissance entière récursive",
+    "brief": "Écris power(base,exponent) par récursion avec exponent=0 comme cas de base. N'utilise pas pow().",
+    "input": "Base dans [-5,5] et exposant dans [0,8].",
+    "output": "power=P."
+  },
+  "recursive-power-gold": {
+    "title": "Puissance récursive rapide",
+    "brief": "Utilise l'exponentiation rapide par carrés successifs. Compte chaque appel à fastPower, y compris exponent=0, via un paramètre int*.",
+    "input": "Base dans [-5,5] et exposant dans [0,8].",
+    "output": "power=P calls=C : un appel au cas exponent=0, sinon un seul appel récursif sur exponent/2."
+  },
+  "circular-queue": {
+    "title": "Une petite file circulaire",
+    "brief": "Avec un tableau de taille 5 et des indices tête/queue, gère E X (enfiler) et D (défiler). Les commandes de base sont valides.",
+    "input": "K (0–20), puis K commandes E et entier [-100,100], ou D. Pas de sous/surremplissage.",
+    "output": "size=N front=V ; front=-1 si vide."
+  },
+  "circular-queue-gold": {
+    "title": "Sécuriser la file circulaire",
+    "brief": "Garde la file mais accepte toutes les commandes : ignore l'ajout si plein et le retrait si vide, et compte les refus.",
+    "input": "K (0–40), puis K commandes E avec entier [-100,100], ou D.",
+    "output": "size=N front=V rejected=R ; front=-1 si vide."
+  }
+}

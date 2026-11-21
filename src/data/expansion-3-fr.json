@@ -1,0 +1,62 @@
+{
+  "triangular-helper": {
+    "title": "Fonction triangulaire",
+    "brief": "Implémente int triangular(int n) qui retourne 1+2+...+n ; laisse les calculs hors de main.",
+    "input": "Un entier n de 0 à 100.",
+    "output": "triangular=N."
+  },
+  "triangular-helper-gold": {
+    "title": "Deux suites, deux fonctions",
+    "brief": "Garde triangular(n) et ajoute sumSquares(n) pour 1²+2²+...+n². Affiche les deux.",
+    "input": "Un entier n de 0 à 100.",
+    "output": "triangular=A squares=B."
+  },
+  "pointer-summation": {
+    "title": "Parcourir par pointeur",
+    "brief": "Lis N entiers dans un tableau, puis additionne-les avec un pointeur int.",
+    "input": "N (1–20), puis N entiers dans [-100,100].",
+    "output": "sum=S."
+  },
+  "pointer-summation-gold": {
+    "title": "Paramètres de sortie par pointeur",
+    "brief": "Implémente summarize(const int *a,int n,int threshold,int *sum,int *above) pour la somme et le nombre de valeurs strictement au-dessus du seuil.",
+    "input": "N (1–20), N entiers [-100,100], puis un seuil [-100,100].",
+    "output": "sum=S above=C."
+  },
+  "palindrome-word": {
+    "title": "Un mot miroir",
+    "brief": "Vérifie si un mot ASCII est identique en sens inverse, en respectant la casse.",
+    "input": "Un mot de 1 à 63 lettres ASCII.",
+    "output": "YES si palindrome, sinon NO."
+  },
+  "palindrome-word-gold": {
+    "title": "Phrase palindrome, sans espaces",
+    "brief": "Lis une ligne de lettres ASCII et d'espaces. Ignore espaces et casse pour tester le palindrome.",
+    "input": "Une ligne de 1 à 127 lettres ASCII ou espaces, avec une lettre au minimum.",
+    "output": "YES si ses lettres forment un palindrome sans tenir compte de la casse ou des espaces, sinon NO."
+  },
+  "student-top": {
+    "title": "Meilleure fiche étudiante",
+    "brief": "Lis N structures Student {id,score}. Affiche l'ID de la meilleure note, en gardant le premier en cas d'égalité.",
+    "input": "N (1–15), suivi de N paires ID (1–9999) et note (0–100).",
+    "output": "top=ID."
+  },
+  "student-top-gold": {
+    "title": "Bilan de classe",
+    "brief": "Conserve le meilleur ID, puis ajoute la moyenne à deux décimales et le nombre de notes au moins égales à 50.",
+    "input": "N (1–15), suivi de N paires ID (1–9999) et note (0–100).",
+    "output": "top=ID mean=M passed=P, M sur deux décimales."
+  },
+  "heap-positives": {
+    "title": "Compter les positifs en mémoire dynamique",
+    "brief": "Alloue N entiers avec calloc, remplis-les et compte les valeurs strictement positives. Libère le tableau.",
+    "input": "N (1–30), puis N entiers de -100 à 100.",
+    "output": "positive=N."
+  },
+  "heap-positives-gold": {
+    "title": "Copier dans un tampon ajusté",
+    "brief": "Conserve le comptage. Alloue un second tampon à la taille exacte des positifs et affiche-les dans leur ordre initial.",
+    "input": "N (1–30), puis N entiers de -100 à 100.",
+    "output": "Ligne 1 positive=N ; ligne 2 values: suivie des positifs précédés d'un espace."
+  }
+}

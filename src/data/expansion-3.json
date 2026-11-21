@@ -1,0 +1,417 @@
+[
+  {
+    "id": "triangular-helper",
+    "chapter": "functions",
+    "title": "Triangular numbers as a function",
+    "kind": "optional",
+    "brief": "Implement int triangular(int n) to return 1+2+...+n; keep calculations outside main.",
+    "input": "One integer n from 0 to 100.",
+    "output": "triangular=N.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4\n",
+        "output": "triangular=10\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "triangular=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1\n",
+        "output": "triangular=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "100\n",
+        "output": "triangular=5050\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Triangular numbers as a function\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Write a function accepting n.",
+      "Use an accumulator starting at zero.",
+      "Return the accumulated sum to main."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "triangular-helper-gold",
+    "chapter": "functions",
+    "title": "Two sequences, two functions",
+    "kind": "gold",
+    "brief": "Keep triangular(n) and add sumSquares(n) for 1²+2²+...+n². Show both results.",
+    "input": "One integer n from 0 to 100.",
+    "output": "triangular=A squares=B.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4\n",
+        "output": "triangular=10 squares=30\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "triangular=0 squares=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1\n",
+        "output": "triangular=1 squares=1\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "10\n",
+        "output": "triangular=55 squares=385\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Two sequences, two functions\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Each function computes one sequence.",
+      "Inside sumSquares, accumulate i*i.",
+      "Print the two results in order."
+    ],
+    "minutes": 20,
+    "base": "triangular-helper",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "pointer-summation",
+    "chapter": "pointers",
+    "title": "Traverse with a pointer",
+    "kind": "optional",
+    "brief": "Read N integers into an array, then sum the values by advancing an int pointer.",
+    "input": "N (1–20), then N integers in [-100,100].",
+    "output": "sum=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 1 2 3 4\n",
+        "output": "sum=10\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 -8\n",
+        "output": "sum=-8\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 0 0 0\n",
+        "output": "sum=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Traverse with a pointer\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Initialize a pointer to the array's first element.",
+      "Advance until the end of the array.",
+      "Dereference the pointer to read the current value."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "pointer-summation-gold",
+    "chapter": "pointers",
+    "title": "Pointer output parameters",
+    "kind": "gold",
+    "brief": "Implement summarize(const int *a,int n,int threshold,int *sum,int *above). Compute both sum and count of readings strictly greater than threshold.",
+    "input": "N (1–20), N integers [-100,100], then a threshold [-100,100].",
+    "output": "sum=S above=C.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 1 2 3 4 2\n",
+        "output": "sum=10 above=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 -8 -8\n",
+        "output": "sum=-8 above=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 0 0 0 -1\n",
+        "output": "sum=0 above=3\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "3 9 9 9 9\n",
+        "output": "sum=27 above=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Pointer output parameters\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Initialize *sum and *above inside the helper.",
+      "Traverse with a const int pointer.",
+      "Increment above only for values > threshold."
+    ],
+    "minutes": 20,
+    "base": "pointer-summation",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "palindrome-word",
+    "chapter": "strings",
+    "title": "A mirrored word",
+    "kind": "optional",
+    "brief": "Determine whether a case-sensitive ASCII word reads the same in reverse.",
+    "input": "One nonempty ASCII-letter word of length 1–63.",
+    "output": "YES if palindrome, otherwise NO.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "level\n",
+        "output": "YES\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "Level\n",
+        "output": "NO\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "a\n",
+        "output": "YES\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "abca\n",
+        "output": "NO\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "abba\n",
+        "output": "YES\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: A mirrored word\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Find the string length.",
+      "Compare characters from the two ends.",
+      "Stop as soon as a pair differs."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://www.w3resource.com/c-programming-exercises/string/"
+  },
+  {
+    "id": "palindrome-word-gold",
+    "chapter": "strings",
+    "title": "Palindrome phrase, ignoring spaces",
+    "kind": "gold",
+    "brief": "Read one line of ASCII letters and spaces. Ignore spaces and ASCII case while testing for a palindrome.",
+    "input": "One line of 1–127 ASCII letters or spaces, with at least one letter.",
+    "output": "YES if its letters form a palindrome ignoring spaces/case, otherwise NO.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "Never odd or even\n",
+        "output": "YES\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "A b a\n",
+        "output": "YES\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "hello world\n",
+        "output": "NO\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "Z\n",
+        "output": "YES\n"
+      },
+      {
+        "label": "Case 5",
+        "input": "Ab ba\n",
+        "output": "YES\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Palindrome phrase, ignoring spaces\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Read the full line using fgets.",
+      "Scan inward using left/right indexes, skipping spaces.",
+      "Compare corresponding letters using tolower."
+    ],
+    "minutes": 20,
+    "base": "palindrome-word",
+    "reference": "https://www.w3resource.com/c-programming-exercises/string/"
+  },
+  {
+    "id": "student-top",
+    "chapter": "structures",
+    "title": "Best student record",
+    "kind": "optional",
+    "brief": "Read an array of struct Student {id,score}. Print the ID of the highest score; choose the earliest record on a tie.",
+    "input": "N (1–15) followed by N pairs of ID (1–9999) and score (0–100).",
+    "output": "top=ID.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 12 70 20 90 13 80\n",
+        "output": "top=20\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 5 0\n",
+        "output": "top=5\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 10 90 11 90 12 80\n",
+        "output": "top=10\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Best student record\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Define a struct for each student.",
+      "Track the index with greatest score.",
+      "Use >, not >=, to preserve the earliest tie."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+  },
+  {
+    "id": "student-top-gold",
+    "chapter": "structures",
+    "title": "Full class report",
+    "kind": "gold",
+    "brief": "Keep the top student's ID, add mean score with two decimals and number of scores at least 50.",
+    "input": "N (1–15) followed by N pairs of ID (1–9999) and score (0–100).",
+    "output": "top=ID mean=M passed=P, M with two decimals.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3 12 70 20 90 13 80\n",
+        "output": "top=20 mean=80.00 passed=3\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 5 0\n",
+        "output": "top=5 mean=0.00 passed=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 10 90 11 90 12 0\n",
+        "output": "top=10 mean=60.00 passed=2\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "2 1 49 2 50\n",
+        "output": "top=2 mean=49.50 passed=1\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Full class report\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Accumulate scores while reading records.",
+      "Count scores >= 50.",
+      "Divide by double to retain the decimal mean."
+    ],
+    "minutes": 20,
+    "base": "student-top",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+  },
+  {
+    "id": "heap-positives",
+    "chapter": "dynamic-memory",
+    "title": "Count positives in dynamic storage",
+    "kind": "optional",
+    "brief": "Use calloc to allocate N integers, fill them and count strictly positive values. Free the buffer.",
+    "input": "N (1–30), then N integers in [-100,100].",
+    "output": "positive=N.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 -3 0 7 2 -1\n",
+        "output": "positive=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 0\n",
+        "output": "positive=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 1 2 3\n",
+        "output": "positive=3\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Count positives in dynamic storage\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Allocate using calloc(N,sizeof(int)).",
+      "Check allocation success.",
+      "Only values > 0 count."
+    ],
+    "minutes": 14,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "heap-positives-gold",
+    "chapter": "dynamic-memory",
+    "title": "Copy positives to a tight buffer",
+    "kind": "gold",
+    "brief": "Retain the count. Allocate a second buffer sized exactly for the positive values (if any); copy and print them in input order.",
+    "input": "N (1–30), then N integers in [-100,100].",
+    "output": "First line positive=N; second line values: followed by positive values with one space before each.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5 -3 0 7 2 -1\n",
+        "output": "positive=2\nvalues: 7 2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1 0\n",
+        "output": "positive=0\nvalues:\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3 1 2 3\n",
+        "output": "positive=3\nvalues: 1 2 3\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "4 9 -2 9 0\n",
+        "output": "positive=2\nvalues: 9 9\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Copy positives to a tight buffer\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Count first, then allocate exactly that many ints.",
+      "For count=0, a second allocation is unnecessary.",
+      "Copy in order and free both allocations."
+    ],
+    "minutes": 20,
+    "base": "heap-positives",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  }
+]

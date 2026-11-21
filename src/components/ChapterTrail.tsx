@@ -24,13 +24,14 @@ export function ChapterTrail({
     course: { goldFor },
   } = useLanguage();
   const progress = useProgress();
-  const [first, second] = items.filter((e) => e.kind === "core");
-  const side = items.find((e) => e.kind === "optional")!;
+  const cores = items.filter((e) => e.kind === "core");
+  const sides = items.filter((e) => e.kind === "optional");
+  const displayed = [...cores, ...sides];
   const read = !!progress.lessons[chapter.id];
   return (
     <div className="trail-frame">
       <nav
-        className="chapter-trail"
+        className={"chapter-trail" + (displayed.length > 3 ? " expanded-trail" : "")}
         aria-label={t("Chapter path: {title}", { title: chapter.title })}
       >
         <svg
@@ -68,7 +69,7 @@ export function ChapterTrail({
             <small>{t(read ? "Lesson read" : "Quick lesson")}</small>
           </a>
         </div>
-        {[first, second, side].map((e, index) => {
+        {displayed.map((e, index) => {
           const prerequisite = lockedBy(e, items, progress);
           const done = !!progress.completed[e.id];
           const gold = goldFor(e.id)!;
@@ -103,7 +104,9 @@ export function ChapterTrail({
               key={e.id}
               className={
                 "trail-stop " +
-                ["first-stop", "second-stop", "side-stop"][index]
+                (displayed.length > 3
+                  ? "extra-stop"
+                  : ["first-stop", "second-stop", "side-stop"][index])
               }
             >
               <a

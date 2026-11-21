@@ -1,13 +1,13 @@
 # Authoring and reviewing teaching content
 
-The preview contains 15 chapters and 90 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Six exercises per chapter are a starting set, not the eventual practice volume for a full course.
+The catalogue now contains 15 chapters and 150 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Ten exercises per chapter (three core, two optional, each with a gold extension) support additional practice beyond the initial prototype.
 
 ## Files to change
 
-- Edit `src/data/content.json` for chapters and exercises.
-- Add the French lesson or exercise copy under the same ID in `src/data/fr.json`. Both languages share the code, inputs, expected output, and progression IDs.
+- Keep the original lessons and exercises in `src/data/content.json`; additional exercises are split across `src/data/expansion-1.json` through `src/data/expansion-5.json`.
+- For new exercises, put French copy under the same ID in the matching `src/data/expansion-N-fr.json` (original copy remains in `src/data/fr.json`). Both languages share the code, inputs, expected output, and progression IDs.
 - Edit `src/data/curriculum.ts` for projects and typed selectors.
-- Add a reference program for every exercise in `tests/fixtures/solutions.json`.
+- Add a reference program for every new exercise in the matching `tests/fixtures/expansion-N-solutions.json`.
 - Update source acknowledgements in `ATTRIBUTION.md` when introducing material.
 
 The student bundle intentionally contains test cases. Maintenance solutions are separate from the application imports but remain visible in this public repository.

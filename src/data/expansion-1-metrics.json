@@ -1,0 +1,82 @@
+{
+  "terminal-help": {
+    "sourceInstructions": 2,
+    "workUnits": 2
+  },
+  "terminal-help-gold": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "terminal-receipt": {
+    "sourceInstructions": 2,
+    "workUnits": 2
+  },
+  "terminal-receipt-gold": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "coin-change": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "coin-change-gold": {
+    "sourceInstructions": 16,
+    "workUnits": 40
+  },
+  "lab-mean": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "lab-mean-gold": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "parking-fee": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "parking-fee-gold": {
+    "sourceInstructions": 10,
+    "workUnits": 10
+  },
+  "triangle-check": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "triangle-check-gold": {
+    "sourceInstructions": 11,
+    "workUnits": 11
+  },
+  "times-table": {
+    "sourceInstructions": 8,
+    "workUnits": 20
+  },
+  "times-table-gold": {
+    "sourceInstructions": 10,
+    "workUnits": 22
+  },
+  "sentinel-total": {
+    "sourceInstructions": 6,
+    "workUnits": 18
+  },
+  "sentinel-total-gold": {
+    "sourceInstructions": 9,
+    "workUnits": 21
+  },
+  "first-threshold": {
+    "sourceInstructions": 18,
+    "workUnits": 42
+  },
+  "first-threshold-gold": {
+    "sourceInstructions": 20,
+    "workUnits": 44
+  },
+  "rotate-right": {
+    "sourceInstructions": 15,
+    "workUnits": 39
+  },
+  "rotate-right-gold": {
+    "sourceInstructions": 17,
+    "workUnits": 41
+  }
+}

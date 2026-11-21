@@ -1,0 +1,32 @@
+{
+  "triangular-helper": {
+    "main.c": "#include <stdio.h>\nint triangular(int n){int s=0;for(int i=1;i<=n;i++)s+=i;return s;}\nint main(void){int n;if(scanf(\"%d\",&n)!=1)return 1;printf(\"triangular=%d\\n\",triangular(n));return 0;}\n"
+  },
+  "triangular-helper-gold": {
+    "main.c": "#include <stdio.h>\nint triangular(int n){int s=0;for(int i=1;i<=n;i++)s+=i;return s;}\nint sumSquares(int n){int s=0;for(int i=1;i<=n;i++)s+=i*i;return s;}\nint main(void){int n;if(scanf(\"%d\",&n)!=1)return 1;printf(\"triangular=%d squares=%d\\n\",triangular(n),sumSquares(n));return 0;}\n"
+  },
+  "pointer-summation": {
+    "main.c": "#include <stdio.h>\nint main(void){int n,a[20],sum=0;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;for(const int *p=a;p<a+n;p++)sum+=*p;printf(\"sum=%d\\n\",sum);return 0;}\n"
+  },
+  "pointer-summation-gold": {
+    "main.c": "#include <stdio.h>\nvoid summarize(const int *a,int n,int t,int *sum,int *above){*sum=0;*above=0;for(const int *p=a;p<a+n;p++){*sum+=*p;if(*p>t)(*above)++;}}\nint main(void){int n,a[20],t,s,c;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++)if(scanf(\"%d\",&a[i])!=1)return 1;if(scanf(\"%d\",&t)!=1)return 1;summarize(a,n,t,&s,&c);printf(\"sum=%d above=%d\\n\",s,c);return 0;}\n"
+  },
+  "palindrome-word": {
+    "main.c": "#include <stdio.h>\n#include <string.h>\nint main(void){char s[64];if(scanf(\"%63s\",s)!=1)return 1;int n=(int)strlen(s),ok=1;for(int i=0;i<n/2;i++)if(s[i]!=s[n-1-i]){ok=0;break;}puts(ok?\"YES\":\"NO\");return 0;}\n"
+  },
+  "palindrome-word-gold": {
+    "main.c": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\nint main(void){char s[128];if(!fgets(s,sizeof s,stdin))return 1;int l=0,r=(int)strlen(s)-1,ok=1;while(l<r){if(s[l]==' '){l++;continue;}if(s[r]==' '||s[r]=='\\n'){r--;continue;}if(tolower((unsigned char)s[l])!=tolower((unsigned char)s[r])){ok=0;break;}l++;r--;}puts(ok?\"YES\":\"NO\");return 0;}\n"
+  },
+  "student-top": {
+    "main.c": "#include <stdio.h>\ntypedef struct{int id,score;} Student;\nint main(void){Student a[15];int n,best=0;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++)if(scanf(\"%d %d\",&a[i].id,&a[i].score)!=2)return 1;for(int i=1;i<n;i++)if(a[i].score>a[best].score)best=i;printf(\"top=%d\\n\",a[best].id);return 0;}\n"
+  },
+  "student-top-gold": {
+    "main.c": "#include <stdio.h>\ntypedef struct{int id,score;} Student;\nint main(void){Student a[15];int n,best=0,total=0,passed=0;if(scanf(\"%d\",&n)!=1)return 1;for(int i=0;i<n;i++){if(scanf(\"%d %d\",&a[i].id,&a[i].score)!=2)return 1;total+=a[i].score;if(a[i].score>=50)passed++;if(a[i].score>a[best].score)best=i;}printf(\"top=%d mean=%.2f passed=%d\\n\",a[best].id,total/(double)n,passed);return 0;}\n"
+  },
+  "heap-positives": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\nint main(void){int n,count=0;if(scanf(\"%d\",&n)!=1)return 1;int *a=calloc((size_t)n,sizeof *a);if(!a)return 1;for(int i=0;i<n;i++){if(scanf(\"%d\",&a[i])!=1){free(a);return 1;}if(a[i]>0)count++;}printf(\"positive=%d\\n\",count);free(a);return 0;}\n"
+  },
+  "heap-positives-gold": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\nint main(void){int n,c=0;if(scanf(\"%d\",&n)!=1)return 1;int *a=calloc((size_t)n,sizeof *a);if(!a)return 1;for(int i=0;i<n;i++){if(scanf(\"%d\",&a[i])!=1){free(a);return 1;}if(a[i]>0)c++;}int *b=c?malloc((size_t)c*sizeof *b):NULL;if(c&&!b){free(a);return 1;}int j=0;for(int i=0;i<n;i++)if(a[i]>0)b[j++]=a[i];printf(\"positive=%d\\nvalues:\",c);for(int i=0;i<c;i++)printf(\" %d\",b[i]);putchar('\\n');free(b);free(a);return 0;}\n"
+  }
+}
