@@ -10,6 +10,8 @@ import extra4 from "./expansion-4.json";
 import extra4fr from "./expansion-4-fr.json";
 import extra5 from "./expansion-5.json";
 import extra5fr from "./expansion-5-fr.json";
+import finales from "./chapter-finales.json";
+import finalesFr from "./chapter-finales-fr.json";
 import type { TestCase } from "../runtime/types.ts";
 export interface Chapter {
   id: string;
@@ -47,6 +49,7 @@ const exercises = [
   ...(extra3 as Exercise[]),
   ...(extra4 as Exercise[]),
   ...(extra5 as Exercise[]),
+  ...(finales as Exercise[]),
 ];
 const stages = [
   "Build your foundations",
@@ -142,6 +145,7 @@ const frenchExercises: Record<string, ExerciseText> = {
   ...extra3fr,
   ...extra4fr,
   ...extra5fr,
+  ...finalesFr,
 };
 export const courses = {
   en: catalogue(chapters, exercises, projects),
