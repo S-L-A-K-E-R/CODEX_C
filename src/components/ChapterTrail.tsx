@@ -1,64 +1,78 @@
-import {
-  BookOpen,
-  Check,
-  Code2,
-  Compass,
-  Crown,
-  LockKeyhole,
-  Star,
-} from "lucide-react";
+import type { ReactNode } from "react";
 import type { Chapter, Exercise } from "../data/curriculum.ts";
+import {
+  buildAsciiWorld,
+  type MapMarker,
+  type MapTile,
+} from "../data/asciiMap.ts";
 import { useLanguage } from "../i18n/Language.tsx";
 import { TinyMedals } from "./ChallengeMetrics.tsx";
 import { lockedBy } from "../state/path.ts";
 import { useProgress } from "../state/store.ts";
 
-type Point = { x: number; y: number };
-// Advance along a winding road. If more exercises are added later, the island
-// grows horizontally instead of stacking challenges on the same spot.
-const lessonPosition: Point = { x: 110, y: 327 };
-const corePosition = (index: number): Point => ({
-  x: index === 0 ? 316 : index === 1 ? 510 : 710 + (index - 2) * 195,
-  y: index % 2 === 0 ? 187 : 325,
-});
-const sidePosition = (index: number): Point => ({
-  x: index === 0 ? 320 : index === 1 ? 690 : 690 + (index - 1) * 240,
-  y: 494,
-});
+type MarkerState = "available" | "locked" | "complete" | "mastered";
+type MapEntry = {
+  marker: MapMarker;
+  title: string;
+  category: string;
+  state: MarkerState;
+  status: string;
+  href?: string;
+  blockedBy?: string;
+  goldId?: string;
+  goldCompleted: boolean;
+  completedId?: string;
+};
 
-function road(from: Point, to: Point) {
-  const delta = (to.x - from.x) * 0.46;
-  return "M " + from.x + " " + from.y +
-    " C " + (from.x + delta) + " " + from.y +
-    " " + (to.x - delta) + " " + to.y +
-    " " + to.x + " " + to.y;
-}
+const tileClass = (tile: MapTile) => "ascii-ink " + tile.kind;
 
-/** Deterministic text-map: no image downloads or random layout shifts. */
-function terrainFor(chapterId: string, width: number) {
-  const seed = [...chapterId].reduce((n, char) => n + char.charCodeAt(0), 0);
-  const rows: string[] = [];
-  for (let row = 0; row < 29; row++) {
-    let line = "";
-    const columns = Math.round(92 * width / 1000);
-    for (let column = 0; column < columns; column++) {
-      const x = (column - (columns - 1) / 2) / (columns / 2);
-      const y = (row - 14) / 16;
-      const contour = x * x + y * y * 1.08 +
-        Math.sin(column * 0.19 + seed) * 0.13 +
-        Math.cos(row * 0.42 + seed) * 0.11;
-      const variant = (column * 37 + row * 43 + seed) % 41;
-      line += contour > 1.09 ? "~" :
-        contour > 0.94 ? "." :
-        variant === 0 ? "Y" :
-        variant === 4 ? "T" :
-        variant === 11 ? "^" :
-        variant === 18 ? "+" :
-        variant % 7 === 0 ? "." : " ";
+/** Only one interactive text link is rendered for each [01] marker. */
+function mapTextRows(
+  tiles: MapTile[][],
+  entries: ReadonlyMap<string, MapEntry>,
+): ReactNode[] {
+  return tiles.map((row, y) => {
+    const pieces: ReactNode[] = [];
+    let x = 0;
+    while (x < row.length) {
+      const current = row[x];
+      if (current.markerKey) {
+        const entry = entries.get(current.markerKey);
+        const span = entry?.marker.token.length ?? 1;
+        if (entry) {
+          const label = [entry.title, entry.category, entry.blockedBy ?? entry.status].join(" - ");
+          const attributes = {
+            key: "m" + x,
+            className: "ascii-marker " + entry.state + " " + entry.marker.kind,
+            title: label,
+            "aria-label": label,
+          };
+          pieces.push(
+            entry.href ? (
+              <a {...attributes} href={entry.href}>{entry.marker.token}</a>
+            ) : (
+              <span {...attributes} role="img">{entry.marker.token}</span>
+            ),
+          );
+        }
+        x += span;
+        continue;
+      }
+      const kind = current.kind;
+      let glyphs = "";
+      const start = x;
+      while (x < row.length && !row[x].markerKey && row[x].kind === kind) {
+        glyphs += row[x].glyph;
+        x++;
+      }
+      pieces.push(
+        <span key={start} className={tileClass(current)} aria-hidden="true">
+          {glyphs}
+        </span>,
+      );
     }
-    rows.push(line);
-  }
-  return rows.join("\n");
+    return <span className="ascii-map-row" key={y}>{pieces}{"\n"}</span>;
+  });
 }
 
 export function ChapterTrail({
@@ -70,159 +84,119 @@ export function ChapterTrail({
 }) {
   const {
     t,
+    language,
     course: { goldFor },
   } = useLanguage();
   const progress = useProgress();
-  const regularCores = items.filter((e) => e.kind === "core" && !e.finale);
-  const finale = items.find((e) => e.finale);
-  const sides = items.filter((e) => e.kind === "optional");
-  const coreRoute = finale ? [...regularCores, finale] : regularCores;
-  const read = !!progress.lessons[chapter.id];
+  const core = items.filter((item) => item.kind === "core" && !item.finale);
+  const sides = items.filter((item) => item.kind === "optional");
+  const finale = items.find((item) => item.finale && item.kind === "core");
+  const world = buildAsciiWorld(
+    chapter.id,
+    core.map((item) => item.id),
+    sides.map((item) => item.id),
+    finale?.id,
+  );
+  const exercises = new Map(items.map((item) => [item.id, item]));
+  const entries = world.markers.map((marker): MapEntry => {
+    if (marker.kind === "lesson") {
+      const read = !!progress.lessons[chapter.id];
+      return {
+        marker,
+        title: t("A quick introduction"),
+        category: t("Quick lesson"),
+        state: read ? "complete" : "available",
+        status: t(read ? "Lesson read" : "Quick lesson"),
+        href: "#lesson/" + chapter.id,
+        goldCompleted: false,
+      };
+    }
+    const exercise = exercises.get(marker.key)!;
+    const prerequisite = lockedBy(exercise, items, progress);
+    const done = !!progress.completed[exercise.id];
+    const gold = goldFor(exercise.id);
+    const goldCompleted = !!gold && !!progress.completed[gold.id];
+    const state: MarkerState = goldCompleted ? "mastered" :
+      done ? "complete" : prerequisite ? "locked" : "available";
+    const category = t(marker.kind === "final" ? "Final challenge" :
+      marker.kind === "optional" ? "Side quest" : "Core challenge");
+    return {
+      marker,
+      title: exercise.title,
+      category,
+      state,
+      status: t({
+        mastered: "Gold earned",
+        complete: "Completed · Try gold",
+        locked: "Locked",
+        available: "Available",
+      }[state]),
+      href: prerequisite ? undefined : "#workspace/" + exercise.id,
+      blockedBy: prerequisite ? t("Unlock after {title}", { title: prerequisite.title }) : undefined,
+      goldId: done ? gold?.id : undefined,
+      goldCompleted,
+      completedId: done ? exercise.id : undefined,
+    };
+  });
+  const entriesByKey = new Map(entries.map((entry) => [entry.marker.key, entry]));
+  const mainEntries = entries.filter((entry) => entry.marker.kind !== "optional");
+  const sideEntries = entries.filter((entry) => entry.marker.kind === "optional");
+  const zoneTitle = language === "fr" ? world.titleFr : world.title;
 
-  // The main road is lesson → core challenges → crowned chapter finale.
-  const regularPositions = regularCores.map((_, i) => corePosition(i));
-  const finalePosition: Point = {
-    x: (regularPositions[regularPositions.length - 1]?.x ?? lessonPosition.x) + 175,
-    y: 327,
-  };
-  const sideStops = sides.map((_, i) => sidePosition(i));
-  const mapWidth = Math.max(1000, finalePosition.x + 115, ...sideStops.map((point) => point.x + 90));
-  const mainRoute = [
-    lessonPosition,
-    ...regularPositions,
-    ...(finale ? [finalePosition] : []),
-  ];
-  const branches = sides.map((_, index) => ({
-    from: regularPositions[Math.min(index * 2, regularPositions.length - 1)] ?? lessonPosition,
-    to: sideStops[index],
-  }));
-  const places = new Map<string, Point>();
-  regularCores.forEach((e, i) => places.set(e.id, regularPositions[i]));
-  if (finale) places.set(finale.id, finalePosition);
-  sides.forEach((e, i) => places.set(e.id, sideStops[i]));
-  const roads = mainRoute.slice(1).map((to, i) => road(mainRoute[i], to));
+  function entryList(list: MapEntry[]) {
+    return list.map((entry) => (
+      <li className={"ascii-index-entry " + entry.state} key={entry.marker.key}>
+        <span className={"ascii-index-token " + entry.state}>
+          {entry.marker.token}
+        </span>
+        <span className="ascii-index-description">
+          {entry.href
+            ? <a href={entry.href}>{entry.title}</a>
+            : <span>{entry.title}</span>}
+          <small>{entry.category} - {entry.blockedBy ?? entry.status}</small>
+          {entry.completedId && (
+            <TinyMedals id={entry.completedId} stats={progress.comparisons[entry.completedId]} />
+          )}
+        </span>
+        {entry.goldId && (
+          <a className="ascii-gold-link" href={"#workspace/" + entry.goldId}>
+            {t(entry.goldCompleted ? "Open gold" : "Try gold")}
+          </a>
+        )}
+      </li>
+    ));
+  }
 
   return (
-    <div className="trail-frame map-frame">
-      <nav
-        className="chapter-trail map-trail"
-        style={{ minWidth: Math.ceil(mapWidth * 0.835) + "px" }}
-        aria-label={t("Chapter path: {title}", { title: chapter.title })}
-      >
-        <svg
-          className="map-landscape"
-          viewBox={"0 0 " + mapWidth + " 640"}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          <g transform={"scale(" + (mapWidth / 1000) + " 1)"}>
-          <path className="map-island-shadow" d="M91 246 Q145 80 301 96 Q382 37 526 115 Q702 42 811 140 Q949 137 945 286 Q991 418 887 506 Q770 598 624 559 Q481 625 376 548 Q192 603 113 477 Q40 379 91 246Z" />
-          <path className="map-island" d="M91 232 Q145 66 301 83 Q382 24 526 102 Q702 29 811 127 Q949 124 945 273 Q991 405 887 493 Q770 585 624 546 Q481 612 376 535 Q192 590 113 464 Q40 366 91 232Z" />
-          <path className="map-ridge" d="M143 219 Q205 117 293 135 L328 159 L288 232 L209 259Z M584 141 L681 103 L763 154 L751 221 L664 214Z" />
-          <path className="map-pond" d="M460 460 Q493 422 539 450 T604 495 Q571 542 506 532 Q458 516 460 460Z" />
-          </g>
-        </svg>
-        <pre className="map-ascii" aria-hidden="true">{terrainFor(chapter.id, mapWidth)}</pre>
-        <svg
-          className="map-roads"
-          viewBox={"0 0 " + mapWidth + " 640"}
-          preserveAspectRatio="none"
-          aria-hidden="true"
-        >
-          {roads.map((path, index) => (
-            <g key={index}>
-              <path className="map-road-outline" d={path} />
-              <path className="map-road-core" d={path} />
-            </g>
-          ))}
-          {branches.map(({ from, to }, index) => (
-            <g className="map-side-road" key={index}>
-              <path className="map-road-outline" d={road(from, to)} />
-              <path className="map-road-core" d={road(from, to)} />
-            </g>
-          ))}
-        </svg>
-        <div
-          className="trail-stop map-stop lesson-stop"
-          style={{ left: lessonPosition.x / mapWidth * 100 + "%", top: lessonPosition.y / 640 * 100 + "%" }}
-        >
-          <a
-            className={"trail-node lesson " + (read ? "complete" : "available")}
-            href={"#lesson/" + chapter.id}
-          >
-            <span className="trail-disc">{read ? <Check /> : <BookOpen />}</span>
-            <b>{t("A quick introduction")}</b>
-            <small>{t(read ? "Lesson read" : "Quick lesson")}</small>
-          </a>
+    <section className="ascii-chapter">
+      <div className="ascii-map-header">
+        <span className="ascii-zone-title">{"//"} {zoneTitle}</span>
+        <span className="ascii-zone-key">
+          {t("ASCII world")} / {t("Click a marker to explore")}
+        </span>
+      </div>
+      <div className="ascii-map-scroll" role="region" aria-label={t("Chapter path: {title}", { title: chapter.title })} tabIndex={0}>
+        <nav className="ascii-world" data-biome={world.biome} aria-label={t("Chapter path: {title}", { title: chapter.title })}>
+          <pre className="ascii-map-grid">{mapTextRows(world.tiles, entriesByKey)}</pre>
+        </nav>
+      </div>
+      <div className="ascii-map-key" aria-label={t("Map legend")}>
+        <span><b>[@]</b> {t("Quick lesson")}</span>
+        <span><b>[01]</b> {t("Core challenge")}</span>
+        <span><b>[S1]</b> {t("Side quest")}</span>
+        <span><b>[F!]</b> {t("Final challenge")}</span>
+        <span className="ascii-key-mastered"><b>[**]</b> {t("Gold earned")}</span>
+      </div>
+      <div className="ascii-index">
+        <div className="ascii-index-group">
+          <h4>{t("Core path")}</h4>
+          <ol>{entryList(mainEntries)}</ol>
         </div>
-        {[...coreRoute, ...sides].map((e) => {
-          const position = places.get(e.id);
-          if (!position) return null;
-          const prerequisite = lockedBy(e, items, progress);
-          const done = !!progress.completed[e.id];
-          const gold = goldFor(e.id);
-          const mastered = !!gold && !!progress.completed[gold.id];
-          const state = mastered ? "mastered" :
-            done ? "complete" : prerequisite ? "locked" : "available";
-          const icons = {
-            mastered: e.finale ? Crown : Star,
-            complete: e.finale ? Crown : Check,
-            locked: e.finale ? Crown : LockKeyhole,
-            available: e.finale ? Crown : e.kind === "optional" ? Compass : Code2,
-          };
-          const Icon = icons[state];
-          const status = t({
-            mastered: "Gold earned",
-            complete: "Completed · Try gold",
-            locked: "Locked",
-            available: "Available",
-          }[state]);
-          const name = t(
-            e.finale ? "Final challenge" :
-              e.kind === "optional" ? "Side quest" : "Core challenge",
-          );
-          return (
-            <div
-              key={e.id}
-              className={"trail-stop map-stop " + (e.finale ? "final-stop" : e.kind === "optional" ? "side-quest-stop" : "core-stop")}
-              style={{ left: position.x / mapWidth * 100 + "%", top: position.y / 640 * 100 + "%" }}
-            >
-              <a
-                className={"trail-node " + state}
-                href={prerequisite ? undefined : "#workspace/" + e.id}
-                role={prerequisite ? "link" : undefined}
-                aria-disabled={prerequisite ? true : undefined}
-                tabIndex={prerequisite ? 0 : undefined}
-                aria-label={[
-                  e.title,
-                  name,
-                  prerequisite
-                    ? t("Unlock after {title}", { title: prerequisite.title })
-                    : status,
-                ].join(" · ")}
-                title={
-                  prerequisite
-                    ? t("Unlock after {title}", { title: prerequisite.title })
-                    : undefined
-                }
-              >
-                <span className="trail-disc-wrap">
-                  <span className="trail-disc"><Icon /></span>
-                  {done && <TinyMedals id={e.id} stats={progress.comparisons[e.id]} />}
-                </span>
-                <b>{e.title}</b>
-                <small>{name} · {status}</small>
-              </a>
-              {done && gold && (
-                <a className="trail-gold-shortcut" href={"#workspace/" + gold.id}>
-                  <Star size={12} aria-hidden="true" />
-                  {t(mastered ? "Open gold" : "Try gold")}
-                </a>
-              )}
-            </div>
-          );
-        })}
-      </nav>
-    </div>
+        <div className="ascii-index-group">
+          <h4>{t("Side quests")}</h4>
+          <ol>{entryList(sideEntries)}</ol>
+        </div>
+      </div>
+    </section>
   );
 }
