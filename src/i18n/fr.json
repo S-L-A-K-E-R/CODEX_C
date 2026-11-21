@@ -519,5 +519,8 @@
   "No experience earned in this period yet. Your first victory will appear here!": "Aucune expérience gagnée sur cette période. Ta première victoire apparaîtra ici !",
   "Select a bar to inspect a month.": "Sélectionne une barre pour consulter le détail d’un mois.",
   "1 week": "1 semaine",
-  "Select a bar to inspect a day or month.": "Sélectionne une barre pour consulter le détail d’un jour ou d’un mois."
+  "Select a bar to inspect a day or month.": "Sélectionne une barre pour consulter le détail d’un jour ou d’un mois.",
+  "Your mission in this chapter": "Ta mission dans ce chapitre",
+  "Practice {topics} through coding challenges, with optional side quests to explore further.": "Entraîne-toi avec {topics} grâce à de petits défis de programmation, puis explore les quêtes annexes si tu veux aller plus loin.",
+  "THE ADVENTURE CONTINUES": "L’AVENTURE CONTINUE"
 }

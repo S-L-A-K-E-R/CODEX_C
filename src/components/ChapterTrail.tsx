@@ -177,7 +177,15 @@ export function ChapterTrail({
   return (
     <section className="ascii-chapter" aria-label={t("Zoomed chapter region")}>
       <div className="ascii-map-header">
-        <span className="ascii-zone-title">{"//"} {t("Zoomed chapter region")} / {zoneTitle}</span>
+        <div className="ascii-chapter-intro">
+          <h3>{t("Your mission in this chapter")}</h3>
+          <p>
+            {chapter.subtitle}{" "}
+            {t("Practice {topics} through coding challenges, with optional side quests to explore further.", {
+              topics: chapter.concepts.slice(0, 3).join(", "),
+            })}
+          </p>
+        </div>
         <button type="button" className="ascii-back-to-world"
           onClick={() => document.getElementById("world-atlas")?.scrollIntoView({ behavior: "smooth", block: "start" })}>
           {"↑"} {t("Back to world map")}
@@ -187,6 +195,11 @@ export function ChapterTrail({
         aria-label={t("Chapter path: {title}", { title: chapter.title })} tabIndex={0}>
         <nav className="ascii-world chapter-zoom-world" data-biome={world.biome}
           aria-label={t("Chapter path: {title}", { title: chapter.title })}>
+          <header className="chapter-map-region-heading" style={{ width: world.width + "ch" }}>
+            <span className="chapter-map-region-eyebrow">{t("THE ADVENTURE CONTINUES")}</span>
+            <h3>{zoneTitle}</h3>
+            <span className="chapter-map-region-subtitle">{chapter.title}</span>
+          </header>
           <div className="chapter-map-board" style={{ width: world.width + "ch", height: (world.height * 18) + "px" }}>
             <pre className="ascii-map-grid" aria-hidden="true">{terrainRows(world.tiles)}</pre>
             {entries.map((entry) => <CircleMarker key={entry.marker.key} entry={entry} />)}
