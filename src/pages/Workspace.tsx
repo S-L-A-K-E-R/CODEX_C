@@ -20,10 +20,13 @@ import {
   LockKeyhole,
   Maximize2,
   Terminal,
+  Award,
   Files,
   LoaderCircle,
 } from "lucide-react";
 import { CodeEditor } from "../components/CodeEditor.tsx";
+import { ChallengeMetrics, TinyMedals } from "../components/ChallengeMetrics.tsx";
+import { analyzeSource } from "../analysis/metrics.ts";
 import { Badge, Modal, go, External, download, AsciiCMark } from "../components/shared.tsx";
 import { useLanguage, LanguageSwitch } from "../i18n/Language.tsx";
 import { ThemeSwitch } from "../theme/Theme.tsx";
@@ -35,7 +38,7 @@ import {
   useStorageIssue,
 } from "../state/store.ts";
 import { lockedBy } from "../state/path.ts";
-import { markComplete } from "../state/progress.ts";
+import { markComplete, recordComparison, now } from "../state/progress.ts";
 import { runProgram, stopProgram } from "../runtime/client.ts";
 import {
   matchesOutput,
@@ -86,7 +89,8 @@ export function Workspace({ id }: { id: string }) {
     [phase, setPhase] = useState("Ready when you are"),
     [response, setResponse] = useState<RunResponse | null>(null),
     [checks, setChecks] = useState<CheckResult[]>([]),
-    [verified, setVerified] = useState(false);
+    [verified, setVerified] = useState(false),
+    [showMetrics, setShowMetrics] = useState(false);
   const [reset, setReset] = useState(false),
     [newFile, setNewFile] = useState(false),
     [newName, setNewName] = useState("helpers.h"),
@@ -185,7 +189,10 @@ export function Workspace({ id }: { id: string }) {
       setChecks(checked);
       const passed = !result.error && checked.every((x) => x.passed);
       if (passed && unchanged) {
-        updateProgress((s) => markComplete(s, id));
+        const measured = result.results.reduce((sum, r) => sum + (r.durationMs ?? 0), 0) / Math.max(1, result.results.length);
+        const metrics = { ...analyzeSource(snapshot.files), timeMs: Math.min(180000, Math.max(0, measured)), recordedAt: now() };
+        updateProgress((s) => recordComparison(markComplete(s, id), id, metrics));
+        setShowMetrics(true);
         setVerified(true);
         setPhase("All cases passed. Nicely done.");
       } else if (passed)
@@ -291,6 +298,11 @@ export function Workspace({ id }: { id: string }) {
           <strong>{title}</strong>
         </div>
         {exercise && <Badge kind={exercise.kind} />}
+        {exercise && progress.comparisons[id] && (
+          <button className="workspace-metrics-link" onClick={() => setShowMetrics(true)} title={t("Open solution comparison")}>
+            <Award size={15}/><span>{t("Analysis")}</span><TinyMedals stats={progress.comparisons[id]}/>
+          </button>
+        )}
         <div className="workspace-actions">
           <ThemeSwitch />
           <LanguageSwitch />
@@ -908,6 +920,11 @@ export function Workspace({ id }: { id: string }) {
         </span>
         <span>{t("Esc then Tab to leave editor")}</span>
       </footer>
+      {showMetrics && exercise && progress.comparisons[id] && (
+        <Modal title={t("Challenge completed · Solution analysis")} onClose={() => setShowMetrics(false)}>
+          <ChallengeMetrics id={id} stats={progress.comparisons[id]} onClose={() => setShowMetrics(false)}/>
+        </Modal>
+      )}
       {reset && (
         <Modal
           title={t("Start this workspace again?")}
