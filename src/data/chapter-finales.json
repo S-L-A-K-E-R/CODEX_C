@@ -408,5 +408,405 @@
     "minutes": 50,
     "base": "final-arrays",
     "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "final-functions",
+    "chapter": "functions",
+    "title": "The grade calculator",
+    "kind": "core",
+    "finale": true,
+    "brief": "Create clampScore(int) and average3(int,int,int). Clamp each of three raw scores to 0–100, calculate their integer mean, and classify PASS when mean >= 50.",
+    "input": "Three integers in [-20,120].",
+    "output": "average=A result=PASS or average=A result=FAIL.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "49 51 50\n",
+        "output": "average=50 result=PASS\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-20 120 60\n",
+        "output": "average=53 result=PASS\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "0 0 100\n",
+        "output": "average=33 result=FAIL\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Implement clampScore using if conditions.",
+      "Apply clampScore to every input before averaging.",
+      "Use integer division by three; compare mean with 50."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "final-functions-gold",
+    "chapter": "functions",
+    "title": "The grade calculator: median",
+    "kind": "gold",
+    "brief": "Keep the mean and classification, but also write a reusable median3(int,int,int) function operating on the three clamped scores.",
+    "input": "Same three integers in [-20,120].",
+    "output": "average=A result=PASS/FAIL median=M.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "49 51 50\n",
+        "output": "average=50 result=PASS median=50\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-20 120 60\n",
+        "output": "average=53 result=PASS median=60\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "30 70 30\n",
+        "output": "average=43 result=FAIL median=30\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "100 10 60\n",
+        "output": "average=56 result=PASS median=60\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "The three values are already clamped.",
+      "The median is the middle value after comparing three numbers.",
+      "Use a dedicated median3 function and preserve the original result."
+    ],
+    "minutes": 50,
+    "base": "final-functions",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "final-pointers",
+    "chapter": "pointers",
+    "title": "Coordinate workshop",
+    "kind": "core",
+    "finale": true,
+    "brief": "Use pointer parameters in swap(int*,int*) and shift(int*,int). Order two coordinates from low to high, then add a delta to each.",
+    "input": "Three integers: coordinate a, coordinate b, delta; each in [-100,100].",
+    "output": "a=A b=B after ordering then shifting.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "9 2 3\n",
+        "output": "a=5 b=12\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-4 -4 10\n",
+        "output": "a=6 b=6\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "8 -8 -2\n",
+        "output": "a=-10 b=6\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Define swap with two int* parameters.",
+      "Compare the variables and swap through their addresses.",
+      "Shift the ordered values by passing their addresses too."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "final-pointers-gold",
+    "chapter": "pointers",
+    "title": "Coordinate workshop: three values",
+    "kind": "gold",
+    "brief": "Extend the workshop to three coordinates. Order all three through pointer-based swaps and shift all three. Print the span between highest and lowest.",
+    "input": "Four integers: coordinates a,b,c and delta, each in [-100,100].",
+    "output": "a=A b=B c=C span=S after ordering then shifting.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "9 2 4 3\n",
+        "output": "a=5 b=7 c=12 span=7\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "-4 -4 -4 10\n",
+        "output": "a=6 b=6 c=6 span=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "8 -8 0 -2\n",
+        "output": "a=-10 b=-2 c=6 span=16\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "100 99 98 -100\n",
+        "output": "a=-2 b=-1 c=0 span=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use repeated pairwise swaps to order three values.",
+      "Shift every ordered value via shift(int*,int).",
+      "The span is c-a after sorting (it does not depend on delta)."
+    ],
+    "minutes": 50,
+    "base": "final-pointers",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "final-strings",
+    "chapter": "strings",
+    "title": "The password inspector",
+    "kind": "core",
+    "finale": true,
+    "brief": "Read one ASCII token (letters and digits), at most 39 characters. Without string.h, count its length, its vowels (A/E/I/O/U, any case), and its digits.",
+    "input": "One nonempty ASCII alphanumeric token of length 1–39.",
+    "output": "length=L vowels=V digits=D.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "Code2026\n",
+        "output": "length=8 vowels=2 digits=4\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "AEIOU\n",
+        "output": "length=5 vowels=5 digits=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "x\n",
+        "output": "length=1 vowels=0 digits=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Read the token with scanf(\"%39s\", text).",
+      "Walk until the null character is reached.",
+      "Use comparisons for digits and vowels in either case."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "final-strings-gold",
+    "chapter": "strings",
+    "title": "Password inspector: repeated characters",
+    "kind": "gold",
+    "brief": "Keep the inspection and add the length of the longest consecutive run of identical characters (case-sensitive).",
+    "input": "Same token, length 1–39.",
+    "output": "length=L vowels=V digits=D run=R.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "AAAbbb77\n",
+        "output": "length=8 vowels=3 digits=2 run=3\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "aAaA\n",
+        "output": "length=4 vowels=4 digits=0 run=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1111122\n",
+        "output": "length=7 vowels=0 digits=7 run=5\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "Code2026\n",
+        "output": "length=8 vowels=2 digits=4 run=1\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Keep a counter for repeated adjacent characters.",
+      "Reset the counter when the current character changes.",
+      "Track the maximum; a one-character word has a run of 1."
+    ],
+    "minutes": 50,
+    "base": "final-strings",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "final-structures",
+    "chapter": "structures",
+    "title": "The parcel dispatcher",
+    "kind": "core",
+    "finale": true,
+    "brief": "Declare a Parcel structure with id and weight. Read N parcels; choose the heaviest, breaking ties by smallest id. Store the records in an array of structures.",
+    "input": "N (1–10), then N pairs: positive id (1–999), weight (0–100).",
+    "output": "winner=ID weight=W.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3\n5 12\n2 19\n9 19\n",
+        "output": "winner=2 weight=19\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1\n17 0\n",
+        "output": "winner=17 weight=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "4\n4 8\n1 8\n2 7\n3 0\n",
+        "output": "winner=1 weight=8\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Represent each parcel as a struct and create an array.",
+      "Remember the index of the best parcel seen so far.",
+      "Use a second comparison to break weight ties by id."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+  },
+  {
+    "id": "final-structures-gold",
+    "chapter": "structures",
+    "title": "Parcel dispatcher: priority delivery",
+    "kind": "gold",
+    "brief": "Extend Parcel with a priority field. Choose the parcel with highest priority; break ties by highest weight, then smallest id.",
+    "input": "N (1–10), then N triples: id (1–999), weight (0–100), priority (0–3).",
+    "output": "winner=ID weight=W priority=P.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3\n5 12 1\n2 19 0\n9 19 2\n",
+        "output": "winner=9 weight=19 priority=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "3\n5 12 1\n2 19 1\n9 19 1\n",
+        "output": "winner=2 weight=19 priority=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "3\n9 5 3\n1 5 3\n7 9 2\n",
+        "output": "winner=1 weight=5 priority=3\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "1\n17 0 0\n",
+        "output": "winner=17 weight=0 priority=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Add the priority member to the structure.",
+      "Compare priority before comparing weight.",
+      "Use id to break the final tie consistently."
+    ],
+    "minutes": 50,
+    "base": "final-structures",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+  },
+  {
+    "id": "final-dynamic-memory",
+    "chapter": "dynamic-memory",
+    "title": "The growing gradebook",
+    "kind": "core",
+    "finale": true,
+    "brief": "Allocate space for N grades using malloc, read the values into dynamic storage, compute sum/min/max, and release the allocation.",
+    "input": "N (1–20), followed by N integers in [-100,100].",
+    "output": "sum=S min=A max=B.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4\n2 -1 5 0\n",
+        "output": "sum=6 min=-1 max=5\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1\n-9\n",
+        "output": "sum=-9 min=-9 max=-9\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "5\n0 0 0 0 0\n",
+        "output": "sum=0 min=0 max=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Allocate N integers with malloc and check for NULL.",
+      "Read each value into the allocated array.",
+      "Find sum/min/max, then free exactly once."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "final-dynamic-memory-gold",
+    "chapter": "dynamic-memory",
+    "title": "Gradebook: resize safely",
+    "kind": "gold",
+    "brief": "After reading the first N grades, read M more and resize the same allocation using realloc. Compute the statistics over all N+M values.",
+    "input": "N (1–20), N integers, then M (1–10) and M more integers. Total N+M <= 30.",
+    "output": "count=N sum=S min=A max=B, with N equal to total number of grades.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "3\n2 -1 5\n2\n0 9\n",
+        "output": "count=5 sum=15 min=-1 max=9\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "1\n-9\n1\n-10\n",
+        "output": "count=2 sum=-19 min=-10 max=-9\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "2\n0 0\n3\n5 5 -1\n",
+        "output": "count=5 sum=9 min=-1 max=5\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "4\n1 2 3 4\n1\n100\n",
+        "output": "count=5 sum=110 min=1 max=100\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Read M after the first N elements.",
+      "Store realloc's result in a temporary pointer and check it.",
+      "Fill new positions and compute statistics over all N+M elements."
+    ],
+    "minutes": 50,
+    "base": "final-dynamic-memory",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
   }
 ]
