@@ -2,7 +2,7 @@
   "itinerary-clock": {
     "title": "L'horloge de l'itinéraire",
     "brief": "Lis une heure et une minute de départ, puis une durée en minutes. Calcule et affiche l'heure d'arrivée sur 24 h, en revenant à zéro après minuit.",
-    "input": "Three integers: hour (0–23), minute (0–59), duration (0–3000).",
+    "input": "Trois entiers : heure (0–23), minute (0–59), durée (0–3000).",
     "output": "arrival=HH:MM, sur deux chiffres pour heure et minute.",
     "hints": [
       "Convert the departure time into total minutes.",
@@ -24,7 +24,7 @@
   "collatz-trail": {
     "title": "Le chemin de Collatz",
     "brief": "À partir de N, répète : s'il est pair, divise par 2 ; sinon, multiplie par 3 et ajoute 1. Compte les étapes jusqu'à 1 avec une boucle.",
-    "input": "An integer N in [1,1000].",
+    "input": "Un entier N de 1 à 1000.",
     "output": "steps=S.",
     "hints": [
       "Use a while loop that stops when value == 1.",
@@ -46,7 +46,7 @@
   "text-tile": {
     "title": "Dessiner une tuile",
     "brief": "Lis une largeur W et une hauteur H. Avec deux boucles imbriquées, affiche H lignes de W caractères '#'.",
-    "input": "Two integers W and H in [1,8].",
+    "input": "Deux entiers W et H entre 1 et 8.",
     "output": "Exactement H lignes de W caractères '#'.",
     "hints": [
       "The outer loop controls the rows.",
@@ -68,7 +68,7 @@
   "adjacent-readings": {
     "title": "Capteurs voisins identiques",
     "brief": "Stocke N mesures dans un tableau 1D et compte les paires de voisins égaux. Pour 5 5 5, on trouve deux paires égales.",
-    "input": "N (1–20), then N integers in [-100,100].",
+    "input": "N (1–20), puis N entiers de -100 à 100.",
     "output": "pairs=P.",
     "hints": [
       "Read N values into an array.",
@@ -90,7 +90,7 @@
   "case-swaps": {
     "title": "Mettre un pseudo en majuscules",
     "brief": "Lis un mot alphanumérique (30 caractères maximum) et transforme toutes les lettres ASCII minuscules en majuscules sans string.h.",
-    "input": "One nonempty ASCII alphanumeric token of 1–30 characters.",
+    "input": "Un mot ASCII alphanumérique non vide de 1 à 30 caractères.",
     "output": "text=TRANSFORMED (lettres en majuscules).",
     "hints": [
       "Use char text[31] and scanf(\"%30s\", text).",
