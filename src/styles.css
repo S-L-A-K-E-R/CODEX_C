@@ -4178,3 +4178,154 @@ details[open] > summary {
 @container (max-width: 32rem) {
   .chapter-trail.expanded-trail { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+
+/* Top-down chapter islands. The roads are SVG paths aligned with percentage-positioned
+   stops; ASCII terrain is decorative, with no downloaded art or pointer interception. */
+.map-frame {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  border-radius: 0.95rem;
+}
+.chapter-trail.map-trail {
+  --trail-paper: color-mix(in srgb, #f9f4dc 88%, var(--accent-light));
+  --disc: 3.75rem;
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  min-width: 835px;
+  height: 610px;
+  padding: 0;
+  isolation: isolate;
+  overflow: hidden;
+  border: 2px solid color-mix(in srgb, var(--accent-main) 24%, #89a3a1);
+  background: #d9e8e5;
+  background-image: radial-gradient(ellipse at 20% 80%, #bfd5dc 0%, transparent 60%),
+    radial-gradient(ellipse at 86% 18%, #dce9eb 0%, transparent 55%);
+}
+.map-landscape,
+.map-ascii,
+.map-roads {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.map-landscape,
+.map-roads { overflow: hidden; }
+.map-island-shadow { fill: #9d9a6c; stroke: #858d7d; stroke-width: 10; }
+.map-island { fill: #c5d6a0; stroke: #9fae72; stroke-width: 8; }
+.map-ridge { fill: #a8bc86; stroke: #92a96d; stroke-width: 4; opacity: .6; }
+.map-pond { fill: #a6ced3; stroke: #8cb8c1; stroke-width: 8; }
+.map-ascii {
+  margin: 0;
+  padding-top: 10px;
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: clamp(10px, 0.85vw, 13px);
+  line-height: 20px;
+  letter-spacing: 0.1em;
+  text-align: center;
+  white-space: pre;
+  color: #4e7652;
+  opacity: .36;
+  user-select: none;
+  z-index: 1;
+}
+.map-roads { z-index: 2; }
+.map-road-outline,
+.map-road-core {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+.map-road-outline { stroke: #9d8b58; stroke-width: 17; }
+.map-road-core { stroke: #f6e4a9; stroke-width: 10; stroke-dasharray: 1 0; }
+.map-side-road .map-road-outline { stroke: #aaa27d; stroke-width: 11; }
+.map-side-road .map-road-core { stroke: #eee5bd; stroke-width: 6; stroke-dasharray: 3 9; }
+.chapter-trail.map-trail .trail-stop.map-stop {
+  position: absolute;
+  z-index: 3;
+  width: 158px;
+  margin: 0;
+  padding: 0;
+  transform: translate(-50%, -30%);
+  text-align: center;
+}
+.chapter-trail.map-trail .trail-node {
+  padding: 0;
+  width: 100%;
+  max-width: 100%;
+  filter: drop-shadow(0 2px 0 #283a2512);
+}
+.chapter-trail.map-trail .trail-node b,
+.chapter-trail.map-trail .trail-node small {
+  background: var(--trail-paper);
+  border-radius: 0.35rem;
+  padding: 2px 5px;
+  box-decoration-break: clone;
+  max-width: 100%;
+}
+.chapter-trail.map-trail .trail-node b { font-size: .93rem; line-height: 1.16; }
+.chapter-trail.map-trail .trail-node small { font-size: .73rem; }
+.chapter-trail.map-trail .trail-disc {
+  box-shadow: 0 4px 0 var(--accent-dark), 0 0 0 5px var(--trail-paper);
+}
+.chapter-trail.map-trail .trail-node.complete .trail-disc {
+  box-shadow: 0 4px 0 #195d32, 0 0 0 5px var(--trail-paper);
+}
+.chapter-trail.map-trail .trail-node.locked .trail-disc {
+  box-shadow: 0 4px 0 #a5afa6, 0 0 0 5px var(--trail-paper);
+}
+.chapter-trail.map-trail .trail-node.mastered .trail-disc {
+  box-shadow: 0 4px 0 #a97c13, 0 0 0 5px var(--trail-paper);
+}
+.chapter-trail.map-trail .trail-node .tiny-medals { background: var(--trail-paper); }
+.chapter-trail.map-trail .trail-gold-shortcut {
+  background: var(--trail-paper);
+  font-size: .73rem;
+}
+.chapter-trail.map-trail .final-stop { width: 180px; }
+.chapter-trail.map-trail .final-stop .trail-disc {
+  width: 4.5rem;
+  height: 4.5rem;
+  border-width: 3px;
+  background: #f3cc6e;
+  color: #765012;
+  border-color: #a47823;
+  box-shadow: 0 5px 0 #a47823, 0 0 0 7px var(--trail-paper);
+}
+.chapter-trail.map-trail .final-stop .trail-disc svg { width: 2rem; height: 2rem; }
+.chapter-trail.map-trail .final-stop .trail-node.complete .trail-disc {
+  color: #fff9db;
+  background: #278147;
+  border-color: #216d3d;
+  box-shadow: 0 5px 0 #195d32, 0 0 0 7px var(--trail-paper);
+}
+.chapter-trail.map-trail .final-stop .trail-node.mastered .trail-disc {
+  background: #ffdb70;
+  border-color: #b3851a;
+  color: #664808;
+  box-shadow: 0 5px 0 #a97c13, 0 0 0 7px var(--trail-paper);
+}
+.chapter-trail.map-trail .final-stop .trail-node.locked .trail-disc {
+  color: #6a6d61;
+  background: #dde0d7;
+  border-color: #9da69b;
+  box-shadow: 0 5px 0 #a5afa6, 0 0 0 7px var(--trail-paper);
+}
+.chapter-trail.map-trail .final-stop b {
+  border: 1px solid #b99b53;
+}
+@container (max-width: 32rem) {
+  .chapter-trail.map-trail {
+    min-width: 835px;
+    height: 610px;
+  }
+  .chapter-trail.map-trail .trail-stop.map-stop {
+    padding: 0;
+    margin: 0;
+  }
+}
