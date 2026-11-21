@@ -27,6 +27,8 @@ export interface Exercise {
   chapter: string;
   title: string;
   kind: "core" | "gold" | "optional";
+  /** The cumulative, crowned boss exercise at the end of a chapter. */
+  finale?: boolean;
   brief: string;
   input: string;
   output: string;
