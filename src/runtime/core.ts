@@ -1,6 +1,6 @@
 import { WASI, type WASIFS } from "@runno/wasi";
 import { gunzipSync } from "fflate";
-import type { ProgramResult, RunRequest, RunResponse } from "./types.ts";
+import type { DownloadProgress, ProgramResult, RunRequest, RunResponse } from "./types.ts";
 import { limitVirtualFiles } from "./limits.ts";
 
 export const OUTPUT_LIMIT = 64 * 1024;
@@ -15,7 +15,10 @@ const textFile = (path: string, content: string) => ({
   mode: "string" as const,
   timestamps,
 });
-export type AssetLoader = (name: string) => Promise<Uint8Array>;
+export type AssetLoader = (
+  name: string,
+  onProgress?: (loadedBytes: number, totalBytes?: number) => void,
+) => Promise<Uint8Array>;
 
 // The upstream sysroot is a regular POSIX tar. Reject paths outside the virtual sysroot.
 export function unpackSysroot(compressed: Uint8Array): WASIFS {
@@ -74,17 +77,44 @@ export class CEngine {
   constructor(load: AssetLoader) {
     this.load = load;
   }
-  async prepare(progress: (phase: string) => void) {
+  async prepare(
+    progress: (phase: string) => void,
+    onDownload: (progress: DownloadProgress) => void = () => {},
+  ) {
     if (!this.assets) {
       progress("Loading C compiler · first download is about 53 MB");
+      const names = ["clang.wasm", "wasm-ld.wasm", "clang-fs.tar.gz"];
+      const received = new Map<string, number>();
+      const sizes = new Map<string, number>();
+      let lastReport = 0;
+      const report = (name: string, loaded: number, total?: number) => {
+        received.set(name, loaded);
+        if (total !== undefined && total > 0) sizes.set(name, total);
+        // Avoid sending hundreds of React updates per second on fast networks.
+        const now = performance.now();
+        if (now - lastReport < 100 && loaded !== total) return;
+        lastReport = now;
+        const allKnown = names.every((asset) => sizes.has(asset));
+        onDownload({
+          loadedBytes: [...received.values()].reduce((a, b) => a + b, 0),
+          ...(allKnown
+            ? { totalBytes: [...sizes.values()].reduce((a, b) => a + b, 0) }
+            : {}),
+        });
+      };
       this.assets = Promise.all(
-        ["clang.wasm", "wasm-ld.wasm", "clang-fs.tar.gz"].map(this.load),
+        names.map((name) =>
+          this.load(name, (loaded, total) => report(name, loaded, total)),
+        ),
       )
-        .then(async ([c, l, f]) => ({
-          clang: await WebAssembly.compile(c as Uint8Array<ArrayBuffer>),
-          linker: await WebAssembly.compile(l as Uint8Array<ArrayBuffer>),
-          fs: unpackSysroot(f),
-        }))
+        .then(async ([c, l, f]) => {
+          progress("Preparing C compiler");
+          return {
+            clang: await WebAssembly.compile(c as Uint8Array<ArrayBuffer>),
+            linker: await WebAssembly.compile(l as Uint8Array<ArrayBuffer>),
+            fs: unpackSysroot(f),
+          };
+        })
         .catch((error) => {
           this.assets = undefined;
           throw error;
@@ -196,6 +226,7 @@ export class CEngine {
   async run(
     request: Pick<RunRequest, "files" | "inputs">,
     progress: (phase: string) => void = () => {},
+    onDownload: (progress: DownloadProgress) => void = () => {},
   ): Promise<RunResponse> {
     if (!Object.hasOwn(request.files, "main.c"))
       throw new Error("The workspace needs a main.c file.");
@@ -204,7 +235,7 @@ export class CEngine {
       Object.values(request.files).reduce((n, x) => n + x.length, 0) > 200_000
     )
       throw new Error("Workspace is too large (20 files / 200 KB).");
-    const assets = await this.prepare(progress);
+    const assets = await this.prepare(progress, onDownload);
     let fs: WASIFS = structuredClone(assets.fs),
       diagnostics = "";
     for (const [name, content] of Object.entries(request.files)) {
