@@ -4623,9 +4623,10 @@ details[open] > summary {
 }
 .chapter-map-node[href] { cursor: pointer; }
 .chapter-map-node[href]:hover .chapter-map-disc, .chapter-map-node[href]:focus-visible .chapter-map-disc {
-  transform: translateY(-3px) scale(1.06);
+  /* Keep the selection ring concentric and within the disc at every zoom level. */
+  transform: translateY(-2px);
   outline: 2px solid var(--disc-border);
-  outline-offset: 3px;
+  outline-offset: -5px;
 }
 .chapter-map-node.locked {
   --disc-bg: #e2e6e2;
