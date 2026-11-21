@@ -184,7 +184,9 @@ export function ChapterTrail({
               <a
                 className={"trail-node " + state}
                 href={prerequisite ? undefined : "#workspace/" + e.id}
+                role={prerequisite ? "link" : undefined}
                 aria-disabled={prerequisite ? true : undefined}
+                tabIndex={prerequisite ? 0 : undefined}
                 aria-label={[
                   e.title,
                   name,
