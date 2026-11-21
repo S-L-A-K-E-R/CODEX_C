@@ -421,5 +421,7 @@
   "{name} medal locked — improve your code or match the example": "Médaille {name} verrouillée : améliore ton code ou égale la solution de référence",
   "{name} medal locked — check the completed solution to evaluate it": "Médaille {name} verrouillée : vérifie de nouveau la solution terminée pour l'évaluer",
   "Open gold": "Ouvrir le défi doré",
-  "{n}/{total} core": "{n}/{total} exercices principaux"
+  "{n}/{total} core": "{n}/{total} exercices principaux",
+  "Final challenge": "Défi final",
+  "Start in any chapter. The first core opens the road and side quests; finish all three regular cores to unlock the crowned finale.": "Tu peux commencer par n’importe quel chapitre. Le premier défi principal ouvre le chemin et les quêtes annexes ; termine les trois défis principaux habituels pour débloquer le défi final couronné."
 }
