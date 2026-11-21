@@ -9,7 +9,9 @@ export function lockedBy(
 ): Exercise | undefined {
   if (progress.completed[exercise.id]) return;
   const prerequisite =
-    exercise.kind === "gold"
+    exercise.finale && exercise.kind === "core"
+      ? chapter.find((e) => e.kind === "core" && !e.finale && !progress.completed[e.id])
+      : exercise.kind === "gold"
       ? chapter.find((e) => e.id === exercise.base)
       : chapter.find((e) => e.kind === "core");
   if (
