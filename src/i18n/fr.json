@@ -103,7 +103,7 @@
   "All chapters": "Tous les chapitres",
   "Filter by status": "Filtrer par progression",
   "Any progress": "Toutes les progressions",
-  "To explore": "À explorer",
+  "To explore": "À découvrir",
   "All challenges": "Tous les défis",
   "Side quests": "Quêtes annexes",
   "{n} results": "{n} résultats",
@@ -426,5 +426,13 @@
   "Start in any chapter. The first core opens the road and side quests; finish all three regular cores to unlock the crowned finale.": "Tu peux commencer par n’importe quel chapitre. Le premier défi principal ouvre le chemin et les quêtes annexes ; termine les trois défis principaux habituels pour débloquer le défi final couronné.",
   "ASCII world": "Monde ASCII",
   "Click a marker to explore": "Clique sur un repère pour explorer",
-  "Map legend": "Légende de la carte"
+  "Map legend": "Légende de la carte",
+  "15 regions, one C adventure": "15 régions, une aventure en C",
+  "Explore the world": "Explorer le monde",
+  "Choose a region on the world map to zoom into its chapter and challenges.": "Choisis une région sur la carte du monde pour découvrir son chapitre et ses défis.",
+  "World map, 15 chapters": "Carte du monde, 15 chapitres",
+  "Choose a chapter region": "Choisir une région du chapitre",
+  "World regions": "Régions du monde",
+  "Zoomed chapter region": "Région du chapitre agrandie",
+  "Back to world map": "Retour à la carte du monde"
 }
