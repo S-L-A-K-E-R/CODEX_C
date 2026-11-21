@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import type { Chapter, Exercise } from "../data/curriculum.ts";
 import { useLanguage } from "../i18n/Language.tsx";
+import { TinyMedals } from "./ChallengeMetrics.tsx";
 import { lockedBy } from "../state/path.ts";
 import { useProgress } from "../state/store.ts";
 
@@ -135,6 +136,7 @@ export function ChapterTrail({
                 <small>
                   {name} · {status}
                 </small>
+                {done && <TinyMedals stats={progress.comparisons[e.id]}/>}
               </a>
             </div>
           );

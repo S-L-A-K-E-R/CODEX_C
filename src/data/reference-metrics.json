@@ -1,0 +1,362 @@
+{
+  "hello-world": {
+    "sourceInstructions": 2,
+    "workUnits": 2
+  },
+  "boarding-pass": {
+    "sourceInstructions": 2,
+    "workUnits": 2
+  },
+  "personal-pass": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "tiny-banner": {
+    "sourceInstructions": 2,
+    "workUnits": 2
+  },
+  "clockwork": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "weather-station": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "clockwork-days": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "cafe-bill": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "lift-check": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "ticket-machine": {
+    "sourceInstructions": 9,
+    "workUnits": 9
+  },
+  "lift-check-sensors": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "calendar-check": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "countdown": {
+    "sourceInstructions": 7,
+    "workUnits": 18
+  },
+  "step-counter": {
+    "sourceInstructions": 7,
+    "workUnits": 18
+  },
+  "step-counter-even": {
+    "sourceInstructions": 7,
+    "workUnits": 18
+  },
+  "digit-counter": {
+    "sourceInstructions": 10,
+    "workUnits": 43
+  },
+  "sensor-sum": {
+    "sourceInstructions": 9,
+    "workUnits": 42
+  },
+  "lost-value": {
+    "sourceInstructions": 14,
+    "workUnits": 47
+  },
+  "sensor-range": {
+    "sourceInstructions": 15,
+    "workUnits": 81
+  },
+  "reverse-readings": {
+    "sourceInstructions": 9,
+    "workUnits": 31
+  },
+  "linear-machine": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "even-predicate": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "linear-pipeline": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "greatest-common": {
+    "sourceInstructions": 10,
+    "workUnits": 43
+  },
+  "pointer-boost": {
+    "sourceInstructions": 7,
+    "workUnits": 7
+  },
+  "swap-values": {
+    "sourceInstructions": 9,
+    "workUnits": 9
+  },
+  "rotate-values": {
+    "sourceInstructions": 10,
+    "workUnits": 10
+  },
+  "pointer-distance": {
+    "sourceInstructions": 12,
+    "workUnits": 34
+  },
+  "word-length": {
+    "sourceInstructions": 8,
+    "workUnits": 19
+  },
+  "mirror-word": {
+    "sourceInstructions": 11,
+    "workUnits": 33
+  },
+  "word-profile": {
+    "sourceInstructions": 13,
+    "workUnits": 79
+  },
+  "reverse-word": {
+    "sourceInstructions": 12,
+    "workUnits": 56
+  },
+  "point-move": {
+    "sourceInstructions": 10,
+    "workUnits": 10
+  },
+  "rectangle-record": {
+    "sourceInstructions": 7,
+    "workUnits": 7
+  },
+  "point-route": {
+    "sourceInstructions": 13,
+    "workUnits": 57
+  },
+  "top-student": {
+    "sourceInstructions": 14,
+    "workUnits": 58
+  },
+  "dynamic-sum": {
+    "sourceInstructions": 14,
+    "workUnits": 58
+  },
+  "dynamic-copy": {
+    "sourceInstructions": 19,
+    "workUnits": 74
+  },
+  "dynamic-append": {
+    "sourceInstructions": 24,
+    "workUnits": 57
+  },
+  "dynamic-average": {
+    "sourceInstructions": 15,
+    "workUnits": 59
+  },
+  "split-square": {
+    "sourceInstructions": 7,
+    "workUnits": 7
+  },
+  "split-absolute": {
+    "sourceInstructions": 7,
+    "workUnits": 7
+  },
+  "split-fourth": {
+    "sourceInstructions": 9,
+    "workUnits": 9
+  },
+  "split-sign": {
+    "sourceInstructions": 7,
+    "workUnits": 7
+  },
+  "seed-step": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "rand-repeat": {
+    "sourceInstructions": 9,
+    "workUnits": 9
+  },
+  "seed-sequence": {
+    "sourceInstructions": 7,
+    "workUnits": 29
+  },
+  "dice-range": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "file-roundtrip": {
+    "sourceInstructions": 17,
+    "workUnits": 17
+  },
+  "file-count": {
+    "sourceInstructions": 17,
+    "workUnits": 28
+  },
+  "file-roundtrip-many": {
+    "sourceInstructions": 20,
+    "workUnits": 75
+  },
+  "file-append": {
+    "sourceInstructions": 20,
+    "workUnits": 31
+  },
+  "recursive-factorial": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "recursive-digits": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "factorial-series": {
+    "sourceInstructions": 8,
+    "workUnits": 19
+  },
+  "binary-search": {
+    "sourceInstructions": 19,
+    "workUnits": 107
+  },
+  "stack-undo": {
+    "sourceInstructions": 10,
+    "workUnits": 54
+  },
+  "queue-service": {
+    "sourceInstructions": 9,
+    "workUnits": 31
+  },
+  "stack-commands": {
+    "sourceInstructions": 16,
+    "workUnits": 126
+  },
+  "linked-chain": {
+    "sourceInstructions": 26,
+    "workUnits": 180
+  },
+  "hello-guests": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "banner-badge": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "weather-change": {
+    "sourceInstructions": 5,
+    "workUnits": 5
+  },
+  "cafe-cents": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "ticket-pair": {
+    "sourceInstructions": 9,
+    "workUnits": 9
+  },
+  "february-date": {
+    "sourceInstructions": 6,
+    "workUnits": 6
+  },
+  "countdown-stride": {
+    "sourceInstructions": 7,
+    "workUnits": 18
+  },
+  "digit-frequency": {
+    "sourceInstructions": 11,
+    "workUnits": 55
+  },
+  "target-span": {
+    "sourceInstructions": 18,
+    "workUnits": 95
+  },
+  "reverse-window": {
+    "sourceInstructions": 16,
+    "workUnits": 71
+  },
+  "even-streak": {
+    "sourceInstructions": 13,
+    "workUnits": 79
+  },
+  "reduce-fraction": {
+    "sourceInstructions": 11,
+    "workUnits": 44
+  },
+  "bounded-boost": {
+    "sourceInstructions": 10,
+    "workUnits": 10
+  },
+  "minimum-distance": {
+    "sourceInstructions": 14,
+    "workUnits": 69
+  },
+  "mirror-sign": {
+    "sourceInstructions": 13,
+    "workUnits": 68
+  },
+  "reverse-label": {
+    "sourceInstructions": 16,
+    "workUnits": 82
+  },
+  "rectangle-overlap": {
+    "sourceInstructions": 13,
+    "workUnits": 13
+  },
+  "honour-roll": {
+    "sourceInstructions": 17,
+    "workUnits": 72
+  },
+  "copy-slice": {
+    "sourceInstructions": 30,
+    "workUnits": 107
+  },
+  "weighted-readings": {
+    "sourceInstructions": 21,
+    "workUnits": 76
+  },
+  "distance-module": {
+    "sourceInstructions": 9,
+    "workUnits": 9
+  },
+  "sign-changes": {
+    "sourceInstructions": 20,
+    "workUnits": 97
+  },
+  "replay-checkpoint": {
+    "sourceInstructions": 11,
+    "workUnits": 55
+  },
+  "dice-histogram": {
+    "sourceInstructions": 12,
+    "workUnits": 61
+  },
+  "file-word-count": {
+    "sourceInstructions": 22,
+    "workUnits": 66
+  },
+  "journal-tail": {
+    "sourceInstructions": 23,
+    "workUnits": 144
+  },
+  "digit-root": {
+    "sourceInstructions": 11,
+    "workUnits": 33
+  },
+  "binary-bounds": {
+    "sourceInstructions": 20,
+    "workUnits": 75
+  },
+  "queue-window": {
+    "sourceInstructions": 22,
+    "workUnits": 209
+  },
+  "unlink-matches": {
+    "sourceInstructions": 38,
+    "workUnits": 247
+  }
+}

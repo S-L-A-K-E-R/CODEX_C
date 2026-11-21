@@ -7,6 +7,7 @@ export interface ProgramResult {
   stdout: string;
   stderr: string;
   exitCode: number;
+  durationMs?: number;
   files: Record<string, string>;
 }
 export interface CheckResult extends ProgramResult {

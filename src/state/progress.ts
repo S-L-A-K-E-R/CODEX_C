@@ -1,3 +1,4 @@
+import type { ChallengeComparison, MetricSample } from "../analysis/metrics.ts";
 export const SCHEMA_VERSION = 1;
 export const STORAGE_KEY = "codex-c:progress:v1";
 export interface Draft {
@@ -11,6 +12,7 @@ export interface Progress {
   completed: Record<string, string>;
   lessons: Record<string, string>;
   attempts: Record<string, number>;
+  comparisons: Record<string, ChallengeComparison>;
   drafts: Record<string, Draft>;
   activity: Record<string, number>;
   milestones: Record<string, string>;
@@ -26,6 +28,7 @@ export function freshProgress(): Progress {
     completed: {},
     lessons: {},
     attempts: {},
+    comparisons: {},
     drafts: {},
     activity: {},
     milestones: {},
@@ -36,6 +39,12 @@ export function freshProgress(): Progress {
 }
 const record = (value: unknown): value is Record<string, unknown> =>
   !!value && typeof value === "object" && !Array.isArray(value);
+const sampleIsSafe = (s: unknown): s is MetricSample =>
+  record(s) &&
+  typeof s.timeMs === "number" && Number.isFinite(s.timeMs) && s.timeMs >= 0 && s.timeMs <= 180000 &&
+  Number.isInteger(s.workUnits) && (s.workUnits as number) >= 0 && (s.workUnits as number) <= 100000000 &&
+  Number.isInteger(s.sourceInstructions) && (s.sourceInstructions as number) >= 0 && (s.sourceInstructions as number) <= 100000 &&
+  dateIsSafe(s.recordedAt);
 const keyIsSafe = (key: string) =>
   /^[a-z0-9][a-z0-9:-]{0,99}$/.test(key) &&
   !["constructor", "prototype"].includes(key);
@@ -126,6 +135,25 @@ export function validateProgress(value: unknown): Progress {
       updatedAt: draft.updatedAt,
     };
   }
+  // Version 1 backups predating this feature did not contain comparisons.
+  if (value.comparisons !== undefined) {
+    if (!record(value.comparisons) || Object.keys(value.comparisons).length > 500)
+      throw new Error("Invalid challenge comparisons in backup.");
+    for (const [id, item] of Object.entries(value.comparisons)) {
+      if (!keyIsSafe(id) || !record(item) || !sampleIsSafe(item.first) || !sampleIsSafe(item.latest) ||
+          !Number.isInteger(item.checks) || (item.checks as number) < 1 || (item.checks as number) > 1000000 ||
+          typeof item.fastest !== "number" || !Number.isFinite(item.fastest) || item.fastest < 0 || item.fastest > 180000 ||
+          !Number.isInteger(item.leastWork) || (item.leastWork as number) < 0 || (item.leastWork as number) > 100000000 ||
+          !Number.isInteger(item.shortest) || (item.shortest as number) < 0 || (item.shortest as number) > 100000)
+        throw new Error("Invalid challenge comparison entry.");
+      result.comparisons[id] = {
+        first: { timeMs: item.first.timeMs, workUnits: item.first.workUnits, sourceInstructions: item.first.sourceInstructions, recordedAt: item.first.recordedAt },
+        latest: { timeMs: item.latest.timeMs, workUnits: item.latest.workUnits, sourceInstructions: item.latest.sourceInstructions, recordedAt: item.latest.recordedAt },
+        fastest: item.fastest as number, leastWork: item.leastWork as number,
+        shortest: item.shortest as number, checks: item.checks as number,
+      };
+    }
+  }
   if (total > 1_500_000)
     throw new Error("Backup contains too much source text (limit 1.5 MB).");
   if (
@@ -174,6 +202,7 @@ export function mergeProgress(a: Progress, b: Progress): Progress {
     lessons: { ...a.lessons },
     milestones: { ...a.milestones },
     attempts: { ...a.attempts },
+    comparisons: { ...a.comparisons },
     activity: { ...a.activity },
     drafts: { ...a.drafts },
     profile: a.profile.updatedAt > b.profile.updatedAt ? a.profile : b.profile,
@@ -190,7 +219,33 @@ export function mergeProgress(a: Progress, b: Progress): Progress {
   for (const [id, draft] of Object.entries(b.drafts))
     if (!out.drafts[id] || draft.updatedAt > out.drafts[id].updatedAt)
       out.drafts[id] = draft;
+  for (const [id, stats] of Object.entries(b.comparisons)) {
+    const previous = out.comparisons[id];
+    out.comparisons[id] = previous ? {
+      first: previous.first.recordedAt <= stats.first.recordedAt ? previous.first : stats.first,
+      latest: previous.latest.recordedAt >= stats.latest.recordedAt ? previous.latest : stats.latest,
+      fastest: Math.min(previous.fastest, stats.fastest),
+      leastWork: Math.min(previous.leastWork, stats.leastWork),
+      shortest: Math.min(previous.shortest, stats.shortest),
+      checks: Math.max(previous.checks, stats.checks),
+    } : stats;
+  }
   return out;
+}
+export function recordComparison(state: Progress, id: string, sample: MetricSample): Progress {
+  const previous = state.comparisons[id];
+  const stats: ChallengeComparison = previous ? {
+    ...previous,
+    latest: sample,
+    fastest: Math.min(previous.fastest, sample.timeMs),
+    leastWork: Math.min(previous.leastWork, sample.workUnits),
+    shortest: Math.min(previous.shortest, sample.sourceInstructions),
+    checks: Math.min(1000000, previous.checks + 1),
+  } : {
+    first: sample, latest: sample, fastest: sample.timeMs,
+    leastWork: sample.workUnits, shortest: sample.sourceInstructions, checks: 1,
+  };
+  return { ...state, comparisons: { ...state.comparisons, [id]: stats }, updatedAt: now() };
 }
 export function markComplete(state: Progress, id: string): Progress {
   return state.completed[id]
