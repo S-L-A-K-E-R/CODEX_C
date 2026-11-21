@@ -6,17 +6,15 @@ import { setTimeout as sleep } from "node:timers/promises";
 const PORT = 4173;
 const base = "http://127.0.0.1:" + PORT + "/";
 const server = spawn("npm", ["run", "preview", "--", "--host", "127.0.0.1", "--port", String(PORT), "--strictPort"], {
-  stdio: ["ignore", "pipe", "pipe"],
+  stdio: "ignore",
+  detached: true,
 });
-let serverOutput = "";
-server.stdout.on("data", (chunk) => { serverOutput += String(chunk); });
-server.stderr.on("data", (chunk) => { serverOutput += String(chunk); });
 const binary = [process.env.CHROME_BIN, "google-chrome", "chromium", "chromium-browser"]
   .filter(Boolean)
   .find((name) => spawnSync(name, ["--version"], { encoding: "utf8", timeout: 5000 }).status === 0);
 
 if (!binary) {
-  server.kill();
+  process.kill(-server.pid, "SIGTERM");
   throw new Error("Chromium/Chrome is required for the browser smoke test.");
 }
 
@@ -41,7 +39,7 @@ try {
     } catch { /* preview not ready */ }
     await sleep(250);
   }
-  if (!ready) throw new Error("Preview not ready: " + serverOutput);
+  if (!ready) throw new Error("Preview did not start on port " + PORT);
 
   for (const [route, expected] of [
     ["#path", "STARTER MEADOW"],
@@ -59,5 +57,5 @@ try {
     console.log("PASS browser render " + route + ": " + expected);
   }
 } finally {
-  server.kill();
+  try { process.kill(-server.pid, "SIGTERM"); } catch { /* already exited */ }
 }
