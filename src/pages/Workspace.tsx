@@ -300,7 +300,7 @@ export function Workspace({ id }: { id: string }) {
         {exercise && <Badge kind={exercise.kind} />}
         {exercise && progress.comparisons[id] && (
           <button className="workspace-metrics-link" onClick={() => setShowMetrics(true)} title={t("Open solution comparison")}>
-            <Award size={15}/><span>{t("Analysis")}</span><TinyMedals stats={progress.comparisons[id]}/>
+            <Award size={15}/><span>{t("Analysis")}</span><TinyMedals id={id} stats={progress.comparisons[id]}/>
           </button>
         )}
         <div className="workspace-actions">
