@@ -2,6 +2,7 @@ import { WASI, type WASIFS } from "@runno/wasi";
 import { gunzipSync } from "fflate";
 import type { DownloadProgress, ProgramResult, RunRequest, RunResponse } from "./types.ts";
 import { limitVirtualFiles } from "./limits.ts";
+import { COMPILER_ASSET_BYTES, COMPILER_TOTAL_BYTES } from "./assets.ts";
 
 export const OUTPUT_LIMIT = 64 * 1024;
 const timestamps = {
@@ -82,24 +83,20 @@ export class CEngine {
     onDownload: (progress: DownloadProgress) => void = () => {},
   ) {
     if (!this.assets) {
-      progress("Loading C compiler · first download is about 53 MB");
-      const names = ["clang.wasm", "wasm-ld.wasm", "clang-fs.tar.gz"];
+      progress("Checking cached C compiler");
+      const names = Object.keys(COMPILER_ASSET_BYTES);
       const received = new Map<string, number>();
-      const sizes = new Map<string, number>();
       let lastReport = 0;
-      const report = (name: string, loaded: number, total?: number) => {
-        received.set(name, loaded);
-        if (total !== undefined && total > 0) sizes.set(name, total);
-        // Avoid sending hundreds of React updates per second on fast networks.
+      const report = (name: string, loaded: number) => {
+        received.set(name, Math.min(loaded, COMPILER_ASSET_BYTES[name as keyof typeof COMPILER_ASSET_BYTES]));
+        // The fixed total is known even when servers omit Content-Length.
+        // Count actual streamed bytes, not elapsed time or estimated progress.
         const now = performance.now();
-        if (now - lastReport < 100 && loaded !== total) return;
+        if (now - lastReport < 100 && loaded < COMPILER_ASSET_BYTES[name as keyof typeof COMPILER_ASSET_BYTES]) return;
         lastReport = now;
-        const allKnown = names.every((asset) => sizes.has(asset));
         onDownload({
           loadedBytes: [...received.values()].reduce((a, b) => a + b, 0),
-          ...(allKnown
-            ? { totalBytes: [...sizes.values()].reduce((a, b) => a + b, 0) }
-            : {}),
+          totalBytes: COMPILER_TOTAL_BYTES,
         });
       };
       this.assets = Promise.all(

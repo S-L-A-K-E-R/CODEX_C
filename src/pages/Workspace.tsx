@@ -224,40 +224,26 @@ export function Workspace({ id }: { id: string }) {
     ([name, content]) => files[name] !== content,
   );
   const downloadPercent =
-    download?.totalBytes && download.totalBytes >= download.loadedBytes
+    download?.totalBytes
       ? Math.min(100, Math.floor((100 * download.loadedBytes) / download.totalBytes))
-      : null;
+      : 0;
+  const filledCells = Math.floor((downloadPercent / 100) * 28);
   // Shown in Console and Test results, whichever tab started the run.
   const downloadBar =
     busy && phase.startsWith("Loading C compiler") ? (
       <div className="compiler-download">
         <div className="compiler-download-meta">
           <span>{t("Compiler download")}</span>
-          <strong>
-            {downloadPercent === null
-              ? t("Downloading…")
-              : `${downloadPercent}%`}
-          </strong>
+          <strong>{downloadPercent}%</strong>
         </div>
-        <div
-          className={
-            "compiler-progress-track" +
-            (downloadPercent === null ? " indeterminate" : "")
-          }
+        <pre
+          className="compiler-progress-ascii"
           role="progressbar"
           aria-label={t("Compiler download")}
           aria-valuemin={0}
           aria-valuemax={100}
-          aria-valuenow={downloadPercent ?? undefined}
-        >
-          <span
-            style={
-              downloadPercent === null
-                ? undefined
-                : { width: `${downloadPercent}%` }
-            }
-          />
-        </div>
+          aria-valuenow={downloadPercent}
+        >{`[${"#".repeat(filledCells)}${".".repeat(28 - filledCells)}] ${downloadPercent}%`}</pre>
         {download && (
           <small>
             {download.totalBytes

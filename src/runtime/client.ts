@@ -12,9 +12,10 @@ export function runProgram(
   onPhase: (text: string) => void,
   onDownload: (progress: DownloadProgress) => void = () => {},
 ): Promise<RunResponse> {
-  stopProgram();
-  // A dedicated worker makes stop and timeouts reliable even for while(1) {}.
-  worker = new Worker(new URL("./compiler.worker.ts", import.meta.url), {
+  // Reuse the prepared compiler for successive runs in the same workspace.
+  // A stop or timeout still kills its worker, including any while(1) {}.
+  if (cancelPending) stopProgram();
+  worker ??= new Worker(new URL("./compiler.worker.ts", import.meta.url), {
     type: "module",
   });
   const current = worker;
@@ -24,14 +25,18 @@ export function runProgram(
       "Compiler download timed out. Check your connection and try again.";
     let downloadDeadline: ReturnType<typeof setTimeout> | undefined;
     let timer: ReturnType<typeof setTimeout>;
-    const finish = (value: RunResponse) => {
+    const finish = (value: RunResponse, keepWorker = false) => {
       if (settled) return;
       settled = true;
       clearTimeout(timer);
       clearTimeout(downloadDeadline);
       cancelPending = undefined;
-      current.terminate();
-      if (worker === current) worker = undefined;
+      current.onmessage = null;
+      current.onerror = null;
+      if (!keepWorker) {
+        current.terminate();
+        if (worker === current) worker = undefined;
+      }
       resolve(value);
     };
     const failDownload = () =>
@@ -79,7 +84,7 @@ export function runProgram(
         onDownload(data.download);
         if (downloadDeadline) resetTimer(150_000, downloadError);
       }
-      if (data.done) finish(data);
+      if (data.done) finish(data, true);
     };
     current.onerror = (event) =>
       finish({
