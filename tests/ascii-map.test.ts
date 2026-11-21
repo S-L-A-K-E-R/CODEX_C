@@ -9,7 +9,8 @@ const finaleFile = JSON.parse(readFileSync("src/data/chapter-finales.json", "utf
 const expansions = [1, 2, 3, 4, 5].flatMap((index) =>
   JSON.parse(readFileSync("src/data/expansion-" + index + ".json", "utf8")),
 );
-const exercises = [...curriculum.exercises, ...expansions, ...finaleFile];
+const mapExtras = JSON.parse(readFileSync("src/data/map-extras.json", "utf8"));
+const exercises = [...curriculum.exercises, ...expansions, ...finaleFile, ...mapExtras];
 
 test("every chapter has distinct, legible, printable ASCII world artwork", () => {
   const chapters = curriculum.chapters.map((chapter: { id: string }) => chapter.id);
