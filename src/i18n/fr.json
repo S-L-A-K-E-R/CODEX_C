@@ -373,5 +373,12 @@
   "Lesson read": "Leçon lue",
   "Locked": "Verrouillé",
   "Available": "Disponible",
-  "Open {title}": "Ouvrir « {title} »"
+  "Open {title}": "Ouvrir « {title} »",
+  "Gold earned": "Or obtenu",
+  "Completed · Try gold": "Terminé · Viser l’or",
+  "Try gold": "Viser l’or",
+  "Original: {title}": "Défi d’origine : {title}",
+  "Gold: {title}": "Défi en or : {title}",
+  "Revisit challenge": "Revoir le défi",
+  "Select a green circle for its harder second part. Pass it to turn the circle gold.": "Sélectionne un cercle vert pour essayer la seconde partie. Réussis-la pour que le cercle devienne doré."
 }

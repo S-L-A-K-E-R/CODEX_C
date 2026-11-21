@@ -18,7 +18,10 @@ export function ChapterTrail({
   chapter: Chapter;
   items: Exercise[];
 }) {
-  const { t } = useLanguage();
+  const {
+    t,
+    course: { goldFor },
+  } = useLanguage();
   const progress = useProgress();
   const [first, second] = items.filter((e) => e.kind === "core");
   const side = items.find((e) => e.kind === "optional")!;
@@ -67,25 +70,33 @@ export function ChapterTrail({
         {[first, second, side].map((e, index) => {
           const prerequisite = lockedBy(e, items, progress);
           const done = !!progress.completed[e.id];
-          const state = done
-            ? "complete"
-            : prerequisite
-              ? "locked"
-              : "available";
-          const Icon = done
-            ? Check
-            : prerequisite
-              ? LockKeyhole
-              : e.kind === "optional"
-                ? Compass
-                : Code2;
+          const gold = goldFor(e.id)!;
+          const mastered = !!progress.completed[gold.id];
+          const state = mastered
+            ? "mastered"
+            : done
+              ? "complete"
+              : prerequisite
+                ? "locked"
+                : "available";
+          const icons = {
+            mastered: Star,
+            complete: Check,
+            locked: LockKeyhole,
+            available: e.kind === "optional" ? Compass : Code2,
+          };
+          const Icon = icons[state];
           const status = t(
-            done ? "Completed" : prerequisite ? "Locked" : "Available",
+            {
+              mastered: "Gold earned",
+              complete: "Completed · Try gold",
+              locked: "Locked",
+              available: "Available",
+            }[state],
           );
           const name = t(
             e.kind === "optional" ? "Side quest" : "Core challenge",
           );
-          const gold = items.find((item) => item.base === e.id);
           return (
             <div
               key={e.id}
@@ -96,7 +107,11 @@ export function ChapterTrail({
             >
               <a
                 className={"trail-node " + state}
-                href={prerequisite ? undefined : "#workspace/" + e.id}
+                href={
+                  prerequisite
+                    ? undefined
+                    : "#workspace/" + (done ? gold.id : e.id)
+                }
                 role={prerequisite ? "link" : undefined}
                 aria-disabled={prerequisite ? true : undefined}
                 tabIndex={prerequisite ? 0 : undefined}
@@ -121,12 +136,6 @@ export function ChapterTrail({
                   {name} · {status}
                 </small>
               </a>
-              {done && gold && (
-                <a className="trail-gold-link" href={"#workspace/" + gold.id}>
-                  <Star size={14} />
-                  {t("Gold challenge")}
-                </a>
-              )}
             </div>
           );
         })}

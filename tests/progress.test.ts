@@ -110,7 +110,10 @@ test("backup size is measured in UTF-8 bytes, matching the import file limit", (
 });
 
 test("chapter branches share prerequisites and preserve existing classroom work", () => {
-  const [first, second, gold, side] = chapter;
+  const [first, second] = chapter.filter((e) => e.kind === "core");
+  const side = chapter.find((e) => e.kind === "optional")!;
+  const gold = chapter.find((e) => e.base === second.id)!;
+  const sideGold = chapter.find((e) => e.base === side.id)!;
   const p = freshProgress();
   assert.equal(lockedBy(first, chapter, p), undefined);
   assert.equal(lockedBy(second, chapter, p), first);
@@ -128,6 +131,11 @@ test("chapter branches share prerequisites and preserve existing classroom work"
   assert.equal(lockedBy(second, chapter, completed), undefined);
   assert.equal(lockedBy(side, chapter, completed), undefined);
   assert.equal(lockedBy(gold, chapter, completed), second);
+  assert.equal(lockedBy(sideGold, chapter, completed), side);
+  assert.equal(
+    lockedBy(sideGold, chapter, markComplete(completed, side.id)),
+    undefined,
+  );
   assert.equal(
     lockedBy(gold, chapter, markComplete(completed, second.id)),
     undefined,

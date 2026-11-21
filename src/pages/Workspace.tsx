@@ -4,6 +4,7 @@ import {
   Play,
   Square,
   CheckCheck,
+  Star,
   BookOpen,
   Lightbulb,
   FileCode2,
@@ -44,7 +45,7 @@ import {
 export function Workspace({ id }: { id: string }) {
   const {
     t,
-    course: { getExercise, getChapter, projects, byChapter },
+    course: { getExercise, getChapter, projects, byChapter, goldFor },
   } = useLanguage();
   const exercise = getExercise(id),
     chapter = getChapter(exercise?.chapter || id.replace("example:", ""));
@@ -64,7 +65,10 @@ export function Workspace({ id }: { id: string }) {
       '#include <stdio.h>\n\nint main(void) {\n    printf("Make something small.\\n");\n    return 0;\n}\n',
   };
   const [files, setFiles] = useState<Record<string, string>>(() => ({
-    ...(readProgress().drafts[id]?.files || starter),
+    ...(readProgress().drafts[id]?.files ??
+      (exercise?.base
+        ? { ...starter, ...readProgress().drafts[exercise.base]?.files }
+        : starter)),
   }));
   const [input, setInput] = useState(
     () => readProgress().drafts[id]?.input ?? exercise?.tests[0]?.input ?? "",
@@ -199,6 +203,8 @@ export function Workspace({ id }: { id: string }) {
             : `Program stopped · exit code ${result.results[0]?.exitCode ?? "?"}`),
       );
   }
+  const original = exercise?.base ? getExercise(exercise.base) : undefined;
+  const gold = exercise && progress.completed[id] ? goldFor(id) : undefined;
   const currentResult = response?.results[0];
   const generated = Object.entries(currentResult?.files || {}).filter(
     ([name, content]) => files[name] !== content,
@@ -378,6 +384,21 @@ export function Workspace({ id }: { id: string }) {
                           : t("ROOM TO EXPERIMENT")}
                     </div>
                     <h1>{title}</h1>
+                    {original && (
+                      <a
+                        className="tier-link"
+                        href={"#workspace/" + original.id}
+                      >
+                        <BookOpen size={15} />
+                        {t("Original: {title}", { title: original.title })}
+                      </a>
+                    )}
+                    {gold && (
+                      <a className="tier-link" href={"#workspace/" + gold.id}>
+                        <Star size={15} />
+                        {t("Gold: {title}", { title: gold.title })}
+                      </a>
+                    )}
                     <p>
                       {exercise?.brief ||
                         project?.description ||
@@ -798,7 +819,13 @@ export function Workspace({ id }: { id: string }) {
                       <div className="completion-banner">
                         <CheckCheck size={18} />
                         <div>
-                          <b>{t("One more thing you can do.")}</b>
+                          <b>
+                            {t(
+                              exercise?.kind === "gold"
+                                ? "Gold earned"
+                                : "One more thing you can do.",
+                            )}
+                          </b>
                           <span>
                             {exercise?.kind === "core"
                               ? t(
@@ -809,6 +836,11 @@ export function Workspace({ id }: { id: string }) {
                                 )}
                           </span>
                         </div>
+                        {gold && (
+                          <button onClick={() => go("workspace/" + gold.id)}>
+                            {t("Try gold")}
+                          </button>
+                        )}
                         <button onClick={() => go(path)}>
                           {t("Back to path →")}
                         </button>

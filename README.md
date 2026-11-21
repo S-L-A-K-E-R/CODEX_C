@@ -19,7 +19,7 @@ CODEX C combines a guided learning path with short lessons, runnable examples, c
 
 - French and English lessons, challenges and workspace controls. Use the flag in the top bar to switch while working.
 - 15 short lessons with complete runnable examples.
-- 60 challenges: 30 core, 15 gold second parts, and 15 optional exercises.
+- 90 challenges: 30 core exercises, 15 optional exercises, and a gold second part for each of the 45 originals.
 - A selectable path, searchable exercise library, and three milestone-based projects.
 - Full-page CodeMirror editor with highlighting, paired brackets/quotes, indentation, search, folding, undo/redo, and compiler diagnostics.
 - Real C17 compilation with Clang, a WebAssembly linker, and WASI execution in a worker.
@@ -58,7 +58,7 @@ The build uses relative asset URLs and hash routes, so it works under the reposi
 
 ## Teaching notes
 
-Give students a direct chapter or challenge link. Every chapter has a circular path. Its first core challenge unlocks its second core challenge and optional branch. Students can start in any chapter. Gold challenges unlock when their original task is completed. Failed attempts and hints never remove progress.
+Give students a direct chapter or challenge link. Every chapter has a circular path. Its first core challenge unlocks its second core challenge and optional branch. Students can start in any chapter. Select a green circle to start its gold version. Passing its checks turns the same circle gold. The original and gold workspaces keep separate drafts. Failed attempts and hints never remove progress.
 
 Program input is entered **before** running. Output tests are visible and compare behaviour; they do not prove use of a particular algorithm or establish understanding. Review code when a pointer, recursion, complexity, ownership, or style requirement matters.
 

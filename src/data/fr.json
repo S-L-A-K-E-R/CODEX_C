@@ -676,6 +676,336 @@
       "brief": "Alloue un maillon pour chaque entier et insère-le en tête. Parcours la liste pour afficher une valeur par ligne, puis libère tous les maillons. En cas d’échec d’allocation, libère aussi les maillons déjà créés.",
       "input": "n (0 à 100), puis n entiers.",
       "output": "La liste de la tête à la fin, dans l’ordre inverse de la saisie."
+    },
+    "hello-guests": {
+      "title": "Deux invités à saluer",
+      "brief": "Ton programme accueille maintenant deux personnes. Lis leurs initiales et salue chacune sur sa propre ligne, dans l’ordre d’arrivée.",
+      "input": "Deux lettres ASCII séparées par un espace ou un retour à la ligne. Conserve leur casse.",
+      "output": "Deux lignes au format Hello, X! où X représente l’initiale correspondante.",
+      "hints": [
+        "Une initiale tient dans un char.",
+        "Une espace avant %c demande à scanf de sauter les blancs.",
+        "Essaie deux initiales identiques. Il faut quand même deux lignes."
+      ]
+    },
+    "banner-badge": {
+      "title": "Une bannière numérotée",
+      "brief": "Transforme la bannière en badge de chapitre. Garde les huit signes égal des bordures et affiche le numéro sur deux chiffres au centre. Ajoute un zéro devant si nécessaire.",
+      "input": "Un numéro de chapitre de 0 à 99.",
+      "output": "Trois lignes comme dans l’exemple. La ligne centrale suit le format = C:NN =.",
+      "hints": [
+        "Seule la ligne centrale dépend de la saisie.",
+        "Dans %2d, la largeur réserve deux positions.",
+        "Utilise %02d pour remplir une position libre avec un zéro."
+      ]
+    },
+    "weather-change": {
+      "title": "La météo évolue",
+      "brief": "Lis les températures du matin et du soir en degrés Celsius. Affiche la température du soir en Fahrenheit, puis sa variation en degrés Fahrenheit entre le matin et le soir.",
+      "input": "Deux entiers de -100 à 100, matin puis soir.",
+      "output": "La température du soir et la variation (soir moins matin), séparées par une espace, avec une décimale. Une hausse s’écrit sans signe plus.",
+      "hints": [
+        "Convertis les deux températures avec la même formule.",
+        "Soustrais la valeur du matin de celle du soir.",
+        "Une variation de zéro degré Celsius vaut également zéro degré Fahrenheit."
+      ]
+    },
+    "cafe-cents": {
+      "title": "Partager au centime près",
+      "brief": "Partage le prix des trois repas en centimes entiers. Donne d’abord la même somme à chacun. Distribue ensuite les centimes restants un par un en commençant par le premier ami.",
+      "input": "Trois prix entiers entre 0 et 10 000 centimes chacun.",
+      "output": "Trois parts entières dans l’ordre des amis, séparées par des espaces. Leur somme doit être égale à l’addition.",
+      "hints": [
+        "Travaille uniquement en centimes entiers.",
+        "Divise le total par 3 et garde le reste.",
+        "Si le reste vaut 2, les deux premiers amis reçoivent chacun un centime supplémentaire."
+      ]
+    },
+    "ticket-pair": {
+      "title": "Deux visiteurs, une réduction",
+      "brief": "Calcule le prix de deux billets avec le tarif d’origine : gratuit avant 6 ans, 5 euros de 6 à 17 ans, 10 euros dès 18 ans. Retire 2 euros du total uniquement si chaque visiteur paie son billet.",
+      "input": "Deux âges entiers de 0 à 120.",
+      "output": "Le prix total entier après réduction.",
+      "hints": [
+        "Détermine le tarif de chaque visiteur séparément.",
+        "Les deux tarifs doivent être strictement positifs pour la réduction.",
+        "Teste les âges 5, 6, 17 et 18."
+      ]
+    },
+    "february-date": {
+      "title": "Ce jour existe-t-il en février ?",
+      "brief": "Utilise ta règle des années bissextiles pour valider un jour de février. Février a 28 jours en année commune et 29 en année bissextile. Le premier jour porte le numéro 1.",
+      "input": "Une année (1 à 9999) puis un jour (0 à 31), entiers.",
+      "output": "VALID si le jour existe en février, sinon INVALID.",
+      "hints": [
+        "Commence par déterminer si l’année est bissextile.",
+        "Utilise ce résultat pour obtenir le dernier jour.",
+        "Vérifie la borne inférieure même si l’année est bissextile."
+      ]
+    },
+    "countdown-stride": {
+      "title": "Compte à rebours par bonds",
+      "brief": "L’horloge avance par bonds. Pars de n, affiche le compte tant qu’il est positif et retire le pas après chaque affichage. Lance la fusée dès que le compte atteint ou dépasse zéro en descendant.",
+      "input": "Deux entiers de 1 à 20 : le départ n et le pas.",
+      "output": "Un compte strictement positif par ligne, puis Lift off! sur sa propre ligne.",
+      "hints": [
+        "Garde le départ et le pas dans deux variables.",
+        "Retire le pas après l’affichage.",
+        "Teste un pas plus grand que la valeur de départ."
+      ]
+    },
+    "digit-frequency": {
+      "title": "Compter un chiffre précis",
+      "brief": "Parcours les chiffres décimaux de l’entier et compte uniquement les occurrences du chiffre demandé. Zéro s’écrit avec un seul chiffre 0.",
+      "input": "Un entier de 0 à 1 000 000 000 et un chiffre de 0 à 9.",
+      "output": "Le nombre d’occurrences du chiffre.",
+      "hints": [
+        "Le reste modulo 10 donne le dernier chiffre.",
+        "Retire ce chiffre par division entière.",
+        "Examine au moins un chiffre, même pour zéro."
+      ]
+    },
+    "target-span": {
+      "title": "Toutes les occurrences",
+      "brief": "Poursuis la recherche après la première correspondance. Indique le premier indice, le dernier indice et le nombre d’occurrences de la cible.",
+      "input": "n (1 à 100), n entiers, puis une cible. Les valeurs sont comprises entre -1000 et 1000.",
+      "output": "Trois entiers séparés par des espaces. Si la cible est absente, affiche -1 -1 0.",
+      "hints": [
+        "Initialise les deux indices à -1.",
+        "Mémorise le premier indice uniquement à la première occurrence.",
+        "Chaque correspondance actualise le dernier indice et le compteur."
+      ]
+    },
+    "reverse-window": {
+      "title": "Rebobiner un intervalle",
+      "brief": "Inverse uniquement les relevés situés entre deux indices inclus. Affiche tout le tableau en conservant les éléments extérieurs à leur place.",
+      "input": "n (1 à 100), n entiers de -1000 à 1000, puis left et right (0 <= left <= right < n).",
+      "output": "Le tableau final sur une ligne avec une espace entre les valeurs.",
+      "hints": [
+        "Pars des deux extrémités de l’intervalle.",
+        "Échange les valeurs et rapproche les indices.",
+        "Quand les indices se rejoignent, la valeur centrale reste en place."
+      ]
+    },
+    "even-streak": {
+      "title": "La plus longue série paire",
+      "brief": "Réutilise is_even pour trouver la plus longue suite de valeurs paires consécutives. Une valeur impaire termine la série en cours.",
+      "input": "n (0 à 100), puis n entiers entre -1000 et 1000.",
+      "output": "La longueur de la plus longue série paire, ou 0 si aucune valeur n’est paire.",
+      "hints": [
+        "Garde la longueur courante et la meilleure longueur.",
+        "Un impair remet uniquement la longueur courante à zéro.",
+        "La meilleure série peut aller jusqu’à la dernière valeur."
+      ]
+    },
+    "reduce-fraction": {
+      "title": "Une fraction irréductible",
+      "brief": "Utilise ta fonction de PGCD pour réduire une fraction. Garde le signe dans le numérateur et écris zéro sous la forme 0/1.",
+      "input": "Deux entiers : le numérateur (de -1 000 000 à 1 000 000) et le dénominateur strictement positif (jusqu’à 1 000 000).",
+      "output": "La fraction réduite au format numérateur/dénominateur, sans espaces.",
+      "hints": [
+        "Cherche un diviseur positif commun aux deux nombres.",
+        "Calcule le PGCD avec la valeur absolue du numérateur.",
+        "Divise les deux valeurs d’origine par le même PGCD."
+      ]
+    },
+    "bounded-boost": {
+      "title": "Une hausse plafonnée",
+      "brief": "Écris boost(int *value, int amount, int ceiling). Augmente la valeur pointée autant que possible sans dépasser le plafond. Renvoie la partie inutilisée de amount.",
+      "input": "Trois entiers entre 0 et 1000 : valeur initiale, hausse, plafond. La valeur initiale ne dépasse pas le plafond.",
+      "output": "La valeur mise à jour puis la hausse inutilisée, séparées par une espace.",
+      "hints": [
+        "Calcule la place disponible à partir de la valeur pointée.",
+        "Ajoute la plus petite valeur entre la hausse et la place disponible.",
+        "Dans main, lis la valeur modifiée après l’appel."
+      ]
+    },
+    "minimum-distance": {
+      "title": "La distance entre les minima",
+      "brief": "Mémorise des pointeurs vers la première et la dernière occurrence du minimum. Soustrais les pointeurs pour déterminer son premier indice et la distance entre ses occurrences extrêmes.",
+      "input": "n (1 à 100), puis n entiers de -1000 à 1000.",
+      "output": "L’indice du premier minimum et la distance en éléments. Un minimum unique donne une distance nulle.",
+      "hints": [
+        "Initialise les deux pointeurs sur le premier élément.",
+        "Une valeur strictement inférieure remplace les deux pointeurs.",
+        "Une valeur égale déplace seulement le pointeur de fin."
+      ]
+    },
+    "mirror-sign": {
+      "title": "Un palindrome sur une enseigne",
+      "brief": "Vérifie si le texte d’une enseigne est un palindrome. Ignore les traits d’union et compare les lettres ASCII sans distinguer majuscules et minuscules.",
+      "input": "Une chaîne de 1 à 100 lettres ASCII et traits d’union contenant au moins une lettre.",
+      "output": "YES si les lettres restantes forment un palindrome, sinon NO.",
+      "hints": [
+        "Construis un deuxième tableau qui contient seulement les lettres.",
+        "Range toutes ces lettres dans la même casse.",
+        "Essaie une enseigne avec des traits d’union aux deux extrémités."
+      ]
+    },
+    "reverse-label": {
+      "title": "Inverser les deux champs",
+      "brief": "Une étiquette contient deux champs séparés par le signe deux-points. Inverse chaque champ sur place en laissant le séparateur à sa position initiale. Un champ peut être vide.",
+      "input": "Une chaîne de 1 à 100 caractères contenant des lettres ASCII et exactement un signe deux-points.",
+      "output": "L’étiquette transformée sur une ligne.",
+      "hints": [
+        "Repère d’abord le séparateur.",
+        "Réutilise une fonction qui inverse un intervalle inclusif.",
+        "Un intervalle vide ne demande aucun échange."
+      ]
+    },
+    "rectangle-overlap": {
+      "title": "L’intersection de deux rectangles",
+      "brief": "Ajoute le coin inférieur gauche à la structure du rectangle. Calcule l’aire commune à deux rectangles dont les côtés sont parallèles aux axes. Deux bords qui se touchent donnent une aire nulle.",
+      "input": "Deux fiches x y largeur hauteur. Coordonnées entre -100 et 100 et dimensions entre 1 et 100.",
+      "output": "L’aire entière de l’intersection.",
+      "hints": [
+        "Cherche l’intersection des deux intervalles horizontaux.",
+        "Fais de même sur l’axe vertical.",
+        "Si une longueur commune est nulle ou négative, l’aire vaut zéro."
+      ]
+    },
+    "honour-roll": {
+      "title": "Une première place partagée",
+      "brief": "Retiens tous les élèves qui partagent la meilleure note. Affiche leurs noms dans l’ordre du registre.",
+      "input": "n (1 à 30), puis n couples : un nom de 1 à 31 lettres ASCII et une note entière de 0 à 20.",
+      "output": "Un nom gagnant par ligne, sans les notes.",
+      "hints": [
+        "Conserve toutes les fiches après la lecture.",
+        "Trouve la meilleure note lors d’un premier parcours.",
+        "Parcours à nouveau les fiches et affiche chaque nom qui a cette note."
+      ]
+    },
+    "copy-slice": {
+      "title": "Copier une tranche",
+      "brief": "Alloue le tableau d’origine, puis une copie indépendante de la tranche [left,right). Ajoute le décalage à chaque valeur de la copie. Affiche la somme du tableau d’origine et celle de la copie modifiée, puis libère les deux tableaux.",
+      "input": "n (1 à 100), n entiers, puis left right offset avec 0 <= left < right <= n. Valeurs et décalage entre -1000 et 1000.",
+      "output": "Deux sommes entières séparées par une espace.",
+      "hints": [
+        "La copie contient right moins left éléments.",
+        "L’indice 0 de la copie correspond à left dans l’original.",
+        "Additionne l’original après modification de la copie pour vérifier leur indépendance."
+      ]
+    },
+    "weighted-readings": {
+      "title": "Des relevés pondérés",
+      "brief": "Alloue un tableau de n couples valeur/poids. Calcule la moyenne pondérée en divisant la somme des produits valeur × poids par la somme des poids. Traite le cas où cette somme est nulle et libère le tableau.",
+      "input": "n (1 à 100), puis n couples entiers : valeur (de -1000 à 1000) et poids (de 0 à 100).",
+      "output": "La moyenne avec deux décimales ou EMPTY si tous les poids sont nuls.",
+      "hints": [
+        "Range chaque valeur avec son poids.",
+        "Garde la somme pondérée et le total des poids séparément.",
+        "Vérifie le dénominateur avant la division."
+      ]
+    },
+    "distance-module": {
+      "title": "Un module de distance",
+      "brief": "Ajoute distance(a,b) dans maths.h et maths.c. Elle calcule la distance entre deux positions en réutilisant ta fonction absolute. Garde les entrées et les sorties dans main.c.",
+      "input": "Deux positions entières de -1000 à 1000.",
+      "output": "La distance positive ou nulle entre les positions.",
+      "hints": [
+        "Déclare les deux fonctions dans l’en-tête.",
+        "La différence entre les deux positions peut être négative.",
+        "Fais appeler absolute par distance sur cette différence."
+      ]
+    },
+    "sign-changes": {
+      "title": "Compter les changements de signe",
+      "brief": "Ajoute sign_changes à ton module de signe. Ignore les zéros, puis compte les transitions entre positif et négatif dans la suite restante. Réutilise sign dans le module.",
+      "input": "n (0 à 100), puis n entiers de -1000 à 1000.",
+      "output": "Le nombre de changements de signe.",
+      "hints": [
+        "Garde le dernier signe non nul.",
+        "La première valeur non nulle donne le signe de départ.",
+        "Un zéro ne compte pas comme changement et ne remplace pas le signe précédent."
+      ]
+    },
+    "replay-checkpoint": {
+      "title": "Rejouer jusqu’au point de contrôle",
+      "brief": "Repars de la graine enregistrée. Pour obtenir la même suite partout, utilise state = (17 * state + 43) % 100. Cherche le premier tirage égal au point de contrôle. La graine initiale ne compte pas comme tirage.",
+      "input": "La graine (0 à 99), le nombre maximal de tirages (0 à 100), puis l’état recherché (0 à 99).",
+      "output": "Le numéro du premier tirage correspondant à partir de 1, ou -1 si la limite est atteinte.",
+      "hints": [
+        "Initialise l’état avec la graine fournie.",
+        "Mets l’état à jour avant la comparaison.",
+        "Arrête-toi à la première correspondance, même si la suite se répète."
+      ]
+    },
+    "dice-histogram": {
+      "title": "Le dé en six compteurs",
+      "brief": "Transforme chaque valeur du générateur en face avec 1 + valeur % 6, puis compte les apparitions de chaque face. Inclus les faces jamais obtenues.",
+      "input": "n (0 à 100), puis n entiers de 0 à 1 000 000.",
+      "output": "Six compteurs dans l’ordre des faces de 1 à 6, séparés par des espaces.",
+      "hints": [
+        "Initialise les six compteurs à zéro.",
+        "Le reste fournit déjà un indice de tableau à partir de zéro.",
+        "Affiche les six compteurs même sans tirage."
+      ]
+    },
+    "file-word-count": {
+      "title": "Une ligne entière à relire",
+      "brief": "Enregistre une ligne dans word.txt sans son retour à la ligne final. Rouvre le fichier et compte ses octets (espaces compris) et ses mots. Un mot est une suite maximale de lettres.",
+      "input": "Une ligne de 0 à 100 lettres ASCII et espaces. Les espaces initiaux, finaux et répétés sont autorisés.",
+      "output": "Le nombre d’octets et le nombre de mots, séparés par une espace.",
+      "hints": [
+        "Utilise fgets pour conserver tous les espaces.",
+        "Relis le fichier octet par octet après l’avoir rouvert.",
+        "Compte un mot quand une lettre débute le fichier ou suit une espace."
+      ]
+    },
+    "journal-tail": {
+      "title": "Les dernières lignes du journal",
+      "brief": "Écris la première entrée dans journal.txt et ferme le fichier. Ajoute les autres entrées à la suite. Rouvre le journal en lecture et affiche ses k dernières entrées. Si k dépasse sa longueur, affiche-les toutes.",
+      "input": "n (1 à 30), k (0 à 30), puis n mots de 1 à 31 lettres ASCII.",
+      "output": "Une entrée retenue par ligne dans l’ordre du fichier. Pour k = 0, n’affiche rien.",
+      "hints": [
+        "Utilise le mode écriture pour la première entrée puis le mode ajout.",
+        "Le premier indice retenu est le plus grand entre 0 et n-k.",
+        "Relis le fichier depuis le début en sautant les entrées précédentes."
+      ]
+    },
+    "digit-root": {
+      "title": "Réduire jusqu’à un seul chiffre",
+      "brief": "Réutilise ta fonction récursive de somme des chiffres. Applique-la plusieurs fois jusqu’à obtenir un seul chiffre et compte le nombre de sommes complètes effectuées.",
+      "input": "Un entier de 0 à 1 000 000 000.",
+      "output": "Le chiffre final et le nombre de tours, séparés par une espace. Une entrée à un seul chiffre demande zéro tour.",
+      "hints": [
+        "Une somme complète des chiffres compte pour un tour.",
+        "Utilise la récursivité à l’intérieur de chaque somme.",
+        "Ne commence plus de tour une fois la valeur inférieure à 10."
+      ]
+    },
+    "binary-bounds": {
+      "title": "Trouver les deux bornes",
+      "brief": "Le tableau trié peut maintenant contenir des doublons. Effectue deux recherches dichotomiques pour retrouver le premier et le dernier indice de la cible sans parcourir toutes ses occurrences.",
+      "input": "n (1 à 100), n entiers en ordre croissant au sens large entre -1000 et 1000, puis une cible du même intervalle.",
+      "output": "Le premier et le dernier indice à partir de 0, ou -1 -1 si la cible est absente.",
+      "hints": [
+        "Cherche la première position dont la valeur est supérieure ou égale à la cible.",
+        "Cherche ensuite la première position dont la valeur est strictement supérieure.",
+        "Vérifie que la première position contient bien la cible avant d’afficher."
+      ]
+    },
+    "queue-window": {
+      "title": "Cinq places au guichet",
+      "brief": "Transforme la file en tampon circulaire de cinq places. join X ajoute un ticket sans rien afficher ou affiche FULL si la file est pleine. serve retire et affiche le plus ancien ticket ou affiche EMPTY si la file est vide.",
+      "input": "q (1 à 100), puis q commandes join X ou serve. Les numéros de ticket vont de 1 à 999.",
+      "output": "Une ligne par serve ou par join refusé, dans l’ordre des commandes.",
+      "hints": [
+        "Garde un indice de tête et un nombre de tickets.",
+        "La prochaine case libre est (tête + nombre) % 5.",
+        "Un ajout refusé doit laisser la file intacte."
+      ]
+    },
+    "unlink-matches": {
+      "title": "Retirer les maillons correspondants",
+      "brief": "Construis la liste en insérant en tête. Détache et libère tous les maillons égaux à la cible, y compris plusieurs maillons successifs en tête. Parcours et libère ensuite la liste restante.",
+      "input": "n (0 à 100), n valeurs, puis une cible. Les valeurs et la cible sont comprises entre -1000 et 1000.",
+      "output": "Les valeurs restantes de la tête vers la fin, une par ligne. Affiche EMPTY si la liste est vide.",
+      "hints": [
+        "Supprimer la tête peut modifier le pointeur de tête lui-même.",
+        "Conserve le lien vers le suivant avant de libérer un maillon.",
+        "Teste une liste entièrement constituée de la valeur à retirer."
+      ]
     }
   },
   "defaultHints": [

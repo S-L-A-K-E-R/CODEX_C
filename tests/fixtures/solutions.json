@@ -186,5 +186,99 @@
   },
   "linked-chain": {
     "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node{int value;struct Node *next;} Node;\nvoid clear(Node *p){while(p){Node *next=p->next;free(p);p=next;}}\nint main(void) {\n    int n,x;Node *head=NULL;\n    if(scanf(\"%d\",&n)!=1 || n<0 || n>100)return 1;\n    for(int i=0;i<n;i++){if(scanf(\"%d\",&x)!=1){clear(head);return 1;}Node *p=malloc(sizeof *p);if(!p){clear(head);return 1;}p->value=x;p->next=head;head=p;}\n    for(Node *p=head;p;p=p->next)printf(\"%d\\n\",p->value);\n    clear(head);\n    return 0;\n}\n"
+  },
+  "hello-guests": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    char first, second;\n    if (scanf(\" %c %c\", &first, &second) != 2) return 1;\n    printf(\"Hello, %c!\\nHello, %c!\\n\", first, second);\n    return 0;\n}\n"
+  },
+  "banner-badge": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int chapter;\n    if (scanf(\"%d\", &chapter) != 1) return 1;\n    printf(\"========\\n= C:%02d =\\n========\\n\", chapter);\n    return 0;\n}\n"
+  },
+  "weather-change": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int morning, evening;\n    if (scanf(\"%d %d\", &morning, &evening) != 2) return 1;\n    printf(\"%.1f %.1f\\n\", 1.8 * evening + 32, 1.8 * (evening - morning));\n    return 0;\n}\n"
+  },
+  "cafe-cents": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int a, b, c;\n    if (scanf(\"%d %d %d\", &a, &b, &c) != 3) return 1;\n    int total = a + b + c;\n    printf(\"%d %d %d\\n\", (total + 2) / 3, (total + 1) / 3, total / 3);\n    return 0;\n}\n"
+  },
+  "ticket-pair": {
+    "main.c": "#include <stdio.h>\n\nint fare(int age) {\n    if (age < 6) return 0;\n    return age < 18 ? 5 : 10;\n}\n\nint main(void) {\n    int first, second;\n    if (scanf(\"%d %d\", &first, &second) != 2) return 1;\n    int a = fare(first), b = fare(second);\n    printf(\"%d\\n\", a + b - (a && b ? 2 : 0));\n    return 0;\n}\n"
+  },
+  "february-date": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int year, day;\n    if (scanf(\"%d %d\", &year, &day) != 2) return 1;\n    int leap = year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);\n    puts(day >= 1 && day <= 28 + leap ? \"VALID\" : \"INVALID\");\n    return 0;\n}\n"
+  },
+  "countdown-stride": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int start, stride;\n    if (scanf(\"%d %d\", &start, &stride) != 2) return 1;\n    for (int n = start; n > 0; n -= stride) printf(\"%d\\n\", n);\n    puts(\"Lift off!\");\n    return 0;\n}\n"
+  },
+  "digit-frequency": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int number, digit, matches = 0;\n    if (scanf(\"%d %d\", &number, &digit) != 2) return 1;\n    do {\n        if (number % 10 == digit) matches++;\n        number /= 10;\n    } while (number);\n    printf(\"%d\\n\", matches);\n    return 0;\n}\n"
+  },
+  "target-span": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int n, values[100], target;\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) if (scanf(\"%d\", &values[i]) != 1) return 1;\n    if (scanf(\"%d\", &target) != 1) return 1;\n    int first = -1, last = -1, count = 0;\n    for (int i = 0; i < n; i++) {\n        if (values[i] != target) continue;\n        if (count == 0) first = i;\n        last = i;\n        count++;\n    }\n    printf(\"%d %d %d\\n\", first, last, count);\n    return 0;\n}\n"
+  },
+  "reverse-window": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int n, values[100], left, right;\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) if (scanf(\"%d\", &values[i]) != 1) return 1;\n    if (scanf(\"%d %d\", &left, &right) != 2) return 1;\n    while (left < right) {\n        int saved = values[left];\n        values[left++] = values[right];\n        values[right--] = saved;\n    }\n    for (int i = 0; i < n; i++) printf(\"%s%d\", i ? \" \" : \"\", values[i]);\n    putchar('\\n');\n    return 0;\n}\n"
+  },
+  "even-streak": {
+    "main.c": "#include <stdio.h>\n\nint is_even(int value) { return value % 2 == 0; }\n\nint main(void) {\n    int n, current = 0, best = 0;\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) {\n        int value;\n        if (scanf(\"%d\", &value) != 1) return 1;\n        current = is_even(value) ? current + 1 : 0;\n        if (current > best) best = current;\n    }\n    printf(\"%d\\n\", best);\n    return 0;\n}\n"
+  },
+  "reduce-fraction": {
+    "main.c": "#include <stdio.h>\n\nint gcd(int a, int b) {\n    while (b != 0) {\n        int next = a % b;\n        a = b;\n        b = next;\n    }\n    return a;\n}\n\nint main(void) {\n    int n, d;\n    if (scanf(\"%d %d\", &n, &d) != 2) return 1;\n    int divisor = gcd(n < 0 ? -n : n, d);\n    printf(\"%d/%d\\n\", n / divisor, d / divisor);\n    return 0;\n}\n"
+  },
+  "bounded-boost": {
+    "main.c": "#include <stdio.h>\n\nint boost(int *value, int amount, int ceiling) {\n    int room = ceiling - *value;\n    int used = amount < room ? amount : room;\n    *value += used;\n    return amount - used;\n}\n\nint main(void) {\n    int value, amount, ceiling;\n    if (scanf(\"%d %d %d\", &value, &amount, &ceiling) != 3) return 1;\n    int unused = boost(&value, amount, ceiling);\n    printf(\"%d %d\\n\", value, unused);\n    return 0;\n}\n"
+  },
+  "minimum-distance": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int n, values[100];\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) if (scanf(\"%d\", &values[i]) != 1) return 1;\n    int *first = values, *last = values;\n    for (int *p = values + 1; p < values + n; p++) {\n        if (*p < *first) first = last = p;\n        else if (*p == *first) last = p;\n    }\n    printf(\"%td %td\\n\", first - values, last - first);\n    return 0;\n}\n"
+  },
+  "mirror-sign": {
+    "main.c": "#include <stdio.h>\n#include <ctype.h>\n\nint main(void) {\n    char sign[101], letters[101];\n    if (scanf(\"%100s\", sign) != 1) return 1;\n    int n = 0;\n    for (int i = 0; sign[i]; i++) {\n        if (sign[i] != '-') letters[n++] = (char)tolower((unsigned char)sign[i]);\n    }\n    for (int i = 0; i < n / 2; i++) {\n        if (letters[i] != letters[n - 1 - i]) { puts(\"NO\"); return 0; }\n    }\n    puts(\"YES\");\n    return 0;\n}\n"
+  },
+  "reverse-label": {
+    "main.c": "#include <stdio.h>\n\nvoid reverse(char *text, int left, int right) {\n    while (left < right) {\n        char old = text[left];\n        text[left++] = text[right];\n        text[right--] = old;\n    }\n}\n\nint main(void) {\n    char label[101];\n    if (scanf(\"%100s\", label) != 1) return 1;\n    int colon = 0, length = 0;\n    while (label[length]) {\n        if (label[length] == ':') colon = length;\n        length++;\n    }\n    reverse(label, 0, colon - 1);\n    reverse(label, colon + 1, length - 1);\n    puts(label);\n    return 0;\n}\n"
+  },
+  "rectangle-overlap": {
+    "main.c": "#include <stdio.h>\n\ntypedef struct { int x, y, w, h; } Rect;\nint min(int a, int b) { return a < b ? a : b; }\nint max(int a, int b) { return a > b ? a : b; }\n\nint main(void) {\n    Rect a, b;\n    if (scanf(\"%d%d%d%d\", &a.x, &a.y, &a.w, &a.h) != 4) return 1;\n    if (scanf(\"%d%d%d%d\", &b.x, &b.y, &b.w, &b.h) != 4) return 1;\n    int w = min(a.x + a.w, b.x + b.w) - max(a.x, b.x);\n    int h = min(a.y + a.h, b.y + b.h) - max(a.y, b.y);\n    printf(\"%d\\n\", w > 0 && h > 0 ? w * h : 0);\n    return 0;\n}\n"
+  },
+  "honour-roll": {
+    "main.c": "#include <stdio.h>\n\ntypedef struct { char name[32]; int score; } Student;\n\nint main(void) {\n    int n;\n    Student students[30];\n    if (scanf(\"%d\", &n) != 1) return 1;\n    int best = -1;\n    for (int i = 0; i < n; i++) {\n        if (scanf(\"%31s%d\", students[i].name, &students[i].score) != 2) return 1;\n        if (students[i].score > best) best = students[i].score;\n    }\n    for (int i = 0; i < n; i++) if (students[i].score == best) puts(students[i].name);\n    return 0;\n}\n"
+  },
+  "copy-slice": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    int n, left, right, offset;\n    if (scanf(\"%d\", &n) != 1) return 1;\n    int *original = malloc((size_t)n * sizeof *original);\n    if (!original) return 1;\n    for (int i = 0; i < n; i++) {\n        if (scanf(\"%d\", &original[i]) != 1) { free(original); return 1; }\n    }\n    if (scanf(\"%d%d%d\", &left, &right, &offset) != 3) { free(original); return 1; }\n    int length = right - left;\n    int *copy = malloc((size_t)length * sizeof *copy);\n    if (!copy) { free(original); return 1; }\n    for (int i = 0; i < length; i++) copy[i] = original[left + i];\n    int slice_sum = 0, original_sum = 0;\n    for (int i = 0; i < length; i++) {\n        copy[i] += offset;\n        slice_sum += copy[i];\n    }\n    for (int i = 0; i < n; i++) original_sum += original[i];\n    printf(\"%d %d\\n\", original_sum, slice_sum);\n    free(copy);\n    free(original);\n    return 0;\n}\n"
+  },
+  "weighted-readings": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct { int value, weight; } Reading;\n\nint main(void) {\n    int n;\n    if (scanf(\"%d\", &n) != 1) return 1;\n    Reading *readings = malloc((size_t)n * sizeof *readings);\n    if (!readings) return 1;\n    for (int i = 0; i < n; i++) {\n        if (scanf(\"%d%d\", &readings[i].value, &readings[i].weight) != 2) { free(readings); return 1; }\n    }\n    int total = 0, weight = 0;\n    for (int i = 0; i < n; i++) {\n        total += readings[i].value * readings[i].weight;\n        weight += readings[i].weight;\n    }\n    if (weight) printf(\"%.2f\\n\", (double)total / weight);\n    else puts(\"EMPTY\");\n    free(readings);\n    return 0;\n}\n"
+  },
+  "distance-module": {
+    "main.c": "#include \"maths.h\"\n#include <stdio.h>\n\nint main(void) {\n    int a, b;\n    if (scanf(\"%d%d\", &a, &b) != 2) return 1;\n    printf(\"%d\\n\", distance(a, b));\n    return 0;\n}\n",
+    "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint absolute(int x);\nint distance(int a, int b);\n#endif\n",
+    "maths.c": "#include \"maths.h\"\n\nint absolute(int x) { return x < 0 ? -x : x; }\nint distance(int a, int b) { return absolute(a - b); }\n"
+  },
+  "sign-changes": {
+    "main.c": "#include \"maths.h\"\n#include <stdio.h>\n\nint main(void) {\n    int n, values[100];\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) if (scanf(\"%d\", &values[i]) != 1) return 1;\n    printf(\"%d\\n\", sign_changes(values, n));\n    return 0;\n}\n",
+    "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint sign(int x);\nint sign_changes(const int values[], int n);\n#endif\n",
+    "maths.c": "#include \"maths.h\"\n\nint sign(int x) { return (x > 0) - (x < 0); }\nint sign_changes(const int values[], int n) {\n    int previous = 0, changes = 0;\n    for (int i = 0; i < n; i++) {\n        int current = sign(values[i]);\n        if (!current) continue;\n        if (previous && previous != current) changes++;\n        previous = current;\n    }\n    return changes;\n}\n"
+  },
+  "replay-checkpoint": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int state, limit, target;\n    if (scanf(\"%d%d%d\", &state, &limit, &target) != 3) return 1;\n    int result = -1;\n    for (int draw = 1; draw <= limit; draw++) {\n        state = (17 * state + 43) % 100;\n        if (state == target) { result = draw; break; }\n    }\n    printf(\"%d\\n\", result);\n    return 0;\n}\n"
+  },
+  "dice-histogram": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int n, count[6] = {0};\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) {\n        int raw;\n        if (scanf(\"%d\", &raw) != 1) return 1;\n        count[raw % 6]++;\n    }\n    for (int i = 0; i < 6; i++) printf(\"%s%d\", i ? \" \" : \"\", count[i]);\n    putchar('\\n');\n    return 0;\n}\n"
+  },
+  "file-word-count": {
+    "main.c": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    char line[102];\n    if (!fgets(line, sizeof line, stdin)) return 1;\n    line[strcspn(line, \"\\n\")] = '\\0';\n    FILE *file = fopen(\"word.txt\", \"w\");\n    if (!file) return 1;\n    fputs(line, file);\n    if (fclose(file) != 0) return 1;\n    file = fopen(\"word.txt\", \"r\");\n    if (!file) return 1;\n    int bytes = 0, words = 0, in_word = 0, ch;\n    while ((ch = fgetc(file)) != EOF) {\n        bytes++;\n        if (ch != ' ' && !in_word) words++;\n        in_word = ch != ' ';\n    }\n    fclose(file);\n    printf(\"%d %d\\n\", bytes, words);\n    return 0;\n}\n"
+  },
+  "journal-tail": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int n, k;\n    char word[32];\n    if (scanf(\"%d%d\", &n, &k) != 2) return 1;\n    for (int i = 0; i < n; i++) {\n        if (scanf(\"%31s\", word) != 1) return 1;\n        FILE *out = fopen(\"journal.txt\", i == 0 ? \"w\" : \"a\");\n        if (!out) return 1;\n        fprintf(out, \"%s\\n\", word);\n        if (fclose(out) != 0) return 1;\n    }\n    FILE *in = fopen(\"journal.txt\", \"r\");\n    if (!in) return 1;\n    int i = 0;\n    while (fscanf(in, \"%31s\", word) == 1) {\n        if (i >= n - k) puts(word);\n        i++;\n    }\n    fclose(in);\n    return 0;\n}\n"
+  },
+  "digit-root": {
+    "main.c": "#include <stdio.h>\n\nint digit_sum(int n) {\n    if (n < 10) return n;\n    return n % 10 + digit_sum(n / 10);\n}\n\nint main(void) {\n    int value, rounds = 0;\n    if (scanf(\"%d\", &value) != 1) return 1;\n    while (value >= 10) {\n        value = digit_sum(value);\n        rounds++;\n    }\n    printf(\"%d %d\\n\", value, rounds);\n    return 0;\n}\n"
+  },
+  "binary-bounds": {
+    "main.c": "#include <stdio.h>\n\nint bound(const int values[], int n, int target, int strict) {\n    int low = 0, high = n;\n    while (low < high) {\n        int mid = low + (high - low) / 2;\n        if (values[mid] < target || (strict && values[mid] == target)) low = mid + 1;\n        else high = mid;\n    }\n    return low;\n}\n\nint main(void) {\n    int n, values[100], target;\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) if (scanf(\"%d\", &values[i]) != 1) return 1;\n    if (scanf(\"%d\", &target) != 1) return 1;\n    int first = bound(values, n, target, 0);\n    if (first == n || values[first] != target) puts(\"-1 -1\");\n    else printf(\"%d %d\\n\", first, bound(values, n, target, 1) - 1);\n    return 0;\n}\n"
+  },
+  "queue-window": {
+    "main.c": "#include <stdio.h>\n\nint main(void) {\n    int q, buffer[5], head = 0, count = 0;\n    if (scanf(\"%d\", &q) != 1) return 1;\n    for (int i = 0; i < q; i++) {\n        char command[6];\n        if (scanf(\"%5s\", command) != 1) return 1;\n        if (command[0] == 'j') {\n            int ticket;\n            if (scanf(\"%d\", &ticket) != 1) return 1;\n            if (count == 5) { puts(\"FULL\"); continue; }\n            buffer[(head + count) % 5] = ticket;\n            count++;\n        } else if (count == 0) {\n            puts(\"EMPTY\");\n        } else {\n            printf(\"%d\\n\", buffer[head]);\n            head = (head + 1) % 5;\n            count--;\n        }\n    }\n    return 0;\n}\n"
+  },
+  "unlink-matches": {
+    "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\ntypedef struct Node { int value; struct Node *next; } Node;\nvoid release(Node *p) {\n    while (p) {\n        Node *next = p->next;\n        free(p);\n        p = next;\n    }\n}\n\nint main(void) {\n    int n, target;\n    Node *head = NULL;\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++) {\n        int value;\n        if (scanf(\"%d\", &value) != 1) { release(head); return 1; }\n        Node *node = malloc(sizeof *node);\n        if (!node) { release(head); return 1; }\n        *node = (Node){value, head};\n        head = node;\n    }\n    if (scanf(\"%d\", &target) != 1) { release(head); return 1; }\n    Node **link = &head;\n    while (*link) {\n        Node *node = *link;\n        if (node->value == target) {\n            *link = node->next;\n            free(node);\n        } else {\n            link = &node->next;\n        }\n    }\n    if (!head) puts(\"EMPTY\");\n    for (Node *p = head; p; p = p->next) printf(\"%d\\n\", p->value);\n    release(head);\n    return 0;\n}\n"
   }
 }

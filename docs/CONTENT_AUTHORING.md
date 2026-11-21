@@ -1,10 +1,11 @@
 # Authoring and reviewing teaching content
 
-The preview contains 15 chapters and 60 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Four exercises per chapter are a starting set, not the eventual practice volume for a full course.
+The preview contains 15 chapters and 90 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Six exercises per chapter are a starting set, not the eventual practice volume for a full course.
 
 ## Files to change
 
 - Edit `src/data/content.json` for chapters and exercises.
+- Add the French lesson or exercise copy under the same ID in `src/data/fr.json`. Both languages share the code, inputs, expected output, and progression IDs.
 - Edit `src/data/curriculum.ts` for projects and typed selectors.
 - Add a reference program for every exercise in `tests/fixtures/solutions.json`.
 - Update source acknowledgements in `ATTRIBUTION.md` when introducing material.
@@ -17,24 +18,24 @@ Each chapter has a stable `id`, title, subtitle, learning stage, concepts, three
 
 Illustrations must say what they model. A pointer illustration with fixed symbolic addresses is a conceptual model, not a claim to inspect the student's actual WASM memory. Correctness comes before animation. Respect reduced-motion preferences.
 
-The course sequence is a recommendation. Students can open later chapters directly for teacher-led sessions. Gold tasks alone require their original core task.
+The course sequence is a recommendation. Students can open later chapters directly for teacher-led sessions. Within a chapter, its first core exercise unlocks the second core exercise and the optional exercise. Each original unlocks its own gold extension.
 
 ## Exercise contract
 
-| Field            | Rule                                                                      |
-| ---------------- | ------------------------------------------------------------------------- |
-| `id`             | Stable lowercase identifier; changing it breaks progress continuity       |
-| `chapter`        | Existing chapter ID                                                       |
-| `kind`           | `core`, `gold` or `optional`                                              |
-| `title`, `brief` | A concrete scenario and unambiguous task                                  |
-| `input`          | Exact format, valid ranges and assumptions                                |
-| `output`         | Exact required format and important rounding/whitespace rules             |
-| `tests`          | Labelled input/output cases, including relevant boundaries                |
-| `starter`        | File map including `main.c`; scaffolding without the answer               |
-| `hints`          | Three escalating hints: approach, mechanism, diagnostic guidance          |
-| `base`           | For gold, the original core challenge in the same chapter; otherwise null |
-| `reference`      | Relevant original source or explanation                                   |
-| `minutes`        | Legacy authoring metadata; not displayed or used for progression          |
+| Field            | Rule                                                                                  |
+| ---------------- | ------------------------------------------------------------------------------------- |
+| `id`             | Stable lowercase identifier; changing it breaks progress continuity                   |
+| `chapter`        | Existing chapter ID                                                                   |
+| `kind`           | `core`, `gold` or `optional`                                                          |
+| `title`, `brief` | A concrete scenario and unambiguous task                                              |
+| `input`          | Exact format, valid ranges and assumptions                                            |
+| `output`         | Exact required format and important rounding/whitespace rules                         |
+| `tests`          | Labelled input/output cases, including relevant boundaries                            |
+| `starter`        | File map including `main.c`; scaffolding without the answer                           |
+| `hints`          | Three escalating hints: approach, mechanism, diagnostic guidance                      |
+| `base`           | For gold, the original core or optional challenge in the same chapter; otherwise null |
+| `reference`      | Relevant original source or explanation                                               |
+| `minutes`        | Legacy authoring metadata; not displayed or used for progression                      |
 
 Do not award gold for repeating the same task with a larger constant. Extend the original reasoning: handle a boundary, add an operation, generalise an algorithm or revise a representation. Optional tasks must remain optional for core progress.
 

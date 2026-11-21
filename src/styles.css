@@ -3795,13 +3795,28 @@ details[open] > summary {
   outline: 3px solid #465f9c;
   outline-offset: 4px;
 }
-.trail-gold-link {
+.trail-node.mastered .trail-disc {
+  background: #ffdb70;
+  border-color: #b3851a;
+  color: #664808;
+  box-shadow:
+    0 4px 0 #a97c13,
+    0 0 0 5px var(--trail-paper);
+}
+.trail-node.mastered .trail-disc svg {
+  fill: #fff4c4;
+}
+.tier-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  color: #805b12;
-  font-size: 0.85rem;
+  gap: 0.4rem;
+  margin-block: 0.65rem 0.2rem;
+  color: #eacb82;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
 }
+
 @container (max-width: 32rem) {
   .chapter-trail {
     --trail-row: 9.4rem;

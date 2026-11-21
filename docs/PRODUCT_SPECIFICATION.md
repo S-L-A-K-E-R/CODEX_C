@@ -35,7 +35,7 @@ The product is a teaching companion. It does not replace teacher feedback, turn 
 | A returning student               | Resume work without remembering where it was    | Saved drafts, last workspace and a suggested next core task                                   |
 | The teacher                       | Maintainable material and classroom visibility  | Versioned content, reference solutions, validation scripts and projector-friendly preferences |
 
-The initial writing language is English, with a future EN/FR content structure. A language preference must not change exercise IDs or lose progress. Estimated lesson/exercise durations are not shown. Focused activity time belongs only in the learner's personal history.
+Students can switch between English and French from the navigation bar or workspace. Both languages use the same exercise IDs, grading examples, drafts, and completion records. Estimated lesson/exercise durations are not shown. Focused activity time belongs only in the learner's personal history.
 
 ## 3. Scope and release boundaries
 
@@ -45,7 +45,7 @@ The initial writing language is English, with a future EN/FR content structure. 
 | ------------------- | ---------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | Learning path       | 15 selectable chapters; recommended order; core/gold/optional nodes    | Rich prerequisite metadata and class-specific paths                              |
 | Short courses       | 15 concise lessons with runnable examples                              | More explanation, repair tasks, reflection and EN/FR content                     |
-| Exercise bank       | 60 tasks: 30 core, 15 gold, 15 optional                                | Approximately 8–12 reviewed tasks per major chapter, adjusted to teaching need   |
+| Exercise bank       | 90 tasks: 30 core, 45 gold, 15 optional                                | Approximately 8–12 reviewed tasks per major chapter, adjusted to teaching need   |
 | Gold challenges     | Harder second part unlocked by its original task                       | Longer multi-part challenge sequences where useful                               |
 | Projects            | Three briefs with four self-assessed milestones each                   | Submission packages, rubrics and larger modular assignments                      |
 | Code editor         | Full-page CodeMirror workspace and core IDE conveniences               | Full light/dark preferences, persisted layouts, further accessibility refinement |
@@ -91,7 +91,7 @@ The full curriculum should include these modes where they support understanding.
 
 **Optional exercises** provide repetition, an alternative application or an interesting branch. They never block the core path.
 
-All chapters remain accessible for classroom use and confident learners. A gold task alone requires its original core task. The interface should explain the prerequisite and provide a direct link, not merely display a lock.
+All chapters remain accessible for classroom use and confident learners. Within each chapter, the first core task opens the second core task and the side quest. Each original unlocks its own gold task. The interface should explain the prerequisite and provide a direct link, not merely display a lock.
 
 ```mermaid
 flowchart TD

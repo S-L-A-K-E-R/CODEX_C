@@ -486,6 +486,85 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
     },
     {
+      "id": "hello-guests",
+      "chapter": "first-programs",
+      "title": "Hello to both of you",
+      "kind": "gold",
+      "brief": "The greeting now has two guests. Read their initials, then greet each guest on a separate line, in arrival order. Keep the punctuation from the original greeting.",
+      "input": "Two ASCII letters separated by whitespace. Preserve their case.",
+      "output": "Two lines in the form Hello, X! where X is the corresponding initial.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "A B\n",
+          "output": "Hello, A!\nHello, B!\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "m\nZ\n",
+          "output": "Hello, m!\nHello, Z!\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "Q Q\n",
+          "output": "Hello, Q!\nHello, Q!\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Each initial fits in a char.",
+        "A space before %c tells scanf to skip whitespace.",
+        "Try giving the same initial twice. You still need two lines."
+      ],
+      "minutes": 10,
+      "base": "hello-world",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "banner-badge",
+      "chapter": "first-programs",
+      "title": "A numbered banner",
+      "kind": "gold",
+      "brief": "Turn the fixed banner into a chapter badge. Keep the eight equals signs on both borders. In the middle, print the chapter number in two digits, adding a leading zero if needed.",
+      "input": "One chapter number from 0 to 99.",
+      "output": "Three lines as shown. The middle line has the form = C:NN =.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "7\n",
+          "output": "========\n= C:07 =\n========\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "========\n= C:00 =\n========\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "10\n",
+          "output": "========\n= C:10 =\n========\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "99\n",
+          "output": "========\n= C:99 =\n========\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Only the middle line depends on the input.",
+        "The width in %2d reserves two positions.",
+        "Use %02d to fill an unused position with a zero."
+      ],
+      "minutes": 10,
+      "base": "tiny-banner",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
       "id": "clockwork",
       "chapter": "variables",
       "title": "Clockwork",
@@ -631,6 +710,90 @@
       ],
       "minutes": 12,
       "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "weather-change",
+      "chapter": "variables",
+      "title": "A changing forecast",
+      "kind": "gold",
+      "brief": "Read the morning and evening temperatures in Celsius. Report the evening temperature in Fahrenheit and the change since morning in Fahrenheit degrees (evening minus morning).",
+      "input": "Two integer Celsius readings from -100 to 100, morning first.",
+      "output": "Evening temperature and signed change separated by one space, each with one decimal. Omit the plus sign for a rise.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "10 20\n",
+          "output": "68.0 18.0\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 -10\n",
+          "output": "14.0 -18.0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "-40 -40\n",
+          "output": "-40.0 0.0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "-100 100\n",
+          "output": "212.0 360.0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Convert each temperature with the same formula.",
+        "Subtract the morning reading from the evening reading.",
+        "A change of zero Celsius degrees must also be zero Fahrenheit degrees."
+      ],
+      "minutes": 17,
+      "base": "weather-station",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "cafe-cents",
+      "chapter": "variables",
+      "title": "Every cent accounted for",
+      "kind": "gold",
+      "brief": "Split the three meal prices exactly in cents. Give each friend the same whole-cent share first, then give one extra cent to each of the first friends until the remainder is gone.",
+      "input": "Three integer prices, each from 0 to 10000 cents.",
+      "output": "Three integer shares in friend order, separated by spaces. Their sum must equal the bill.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "100 100 101\n",
+          "output": "101 100 100\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 1 1\n",
+          "output": "1 1 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0 0 0\n",
+          "output": "0 0 0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "700 100 100\n",
+          "output": "300 300 300\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Work entirely with integer cents.",
+        "Divide the total by 3 and keep the remainder.",
+        "A remainder of 2 gives one extra cent to the first two friends."
+      ],
+      "minutes": 17,
+      "base": "cafe-bill",
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
     },
     {
@@ -797,6 +960,100 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
     },
     {
+      "id": "ticket-pair",
+      "chapter": "decisions",
+      "title": "Two visitors, one discount",
+      "kind": "gold",
+      "brief": "Price two museum tickets with the original age bands (under 6 free, 6–17 costs 5, 18 and over costs 10). Take 2 euros off the combined total only if both visitors pay for a ticket.",
+      "input": "Two integer ages, each from 0 to 120.",
+      "output": "The final total as an integer.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "17 18\n",
+          "output": "13\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "5 6\n",
+          "output": "5\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0 5\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "18 120\n",
+          "output": "18\n"
+        },
+        {
+          "label": "Case 5",
+          "input": "6 17\n",
+          "output": "8\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Determine each visitor’s fare separately.",
+        "Both fares must be greater than zero for the discount.",
+        "Test ages 5, 6, 17 and 18."
+      ],
+      "minutes": 17,
+      "base": "ticket-machine",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "february-date",
+      "chapter": "decisions",
+      "title": "Does February have that day?",
+      "kind": "gold",
+      "brief": "Use your leap-year rule to validate a day in February. A common year has 28 days in February, a leap year has 29. A day must start at 1.",
+      "input": "Year (1–9999) followed by day (0–31), both integers.",
+      "output": "VALID if February contains the day, otherwise INVALID.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "2000 29\n",
+          "output": "VALID\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1900 29\n",
+          "output": "INVALID\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "2024 0\n",
+          "output": "INVALID\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "2023 28\n",
+          "output": "VALID\n"
+        },
+        {
+          "label": "Case 5",
+          "input": "2024 30\n",
+          "output": "INVALID\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "First decide whether the year is leap.",
+        "Use that result to choose the last day.",
+        "Check the lower bound even when the year is leap."
+      ],
+      "minutes": 17,
+      "base": "calendar-check",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
       "id": "countdown",
       "chapter": "loops",
       "title": "Launch countdown",
@@ -950,6 +1207,95 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
     },
     {
+      "id": "countdown-stride",
+      "chapter": "loops",
+      "title": "Countdown in jumps",
+      "kind": "gold",
+      "brief": "The launch clock now ticks in jumps. Start at n, print the current positive count, then subtract the stride. Launch as soon as the count reaches zero or becomes negative.",
+      "input": "Two integers n and stride, each from 1 to 20.",
+      "output": "One positive count per line, then Lift off! on its own line.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "7 3\n",
+          "output": "7\n4\n1\nLift off!\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "6 3\n",
+          "output": "6\n3\nLift off!\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1 20\n",
+          "output": "1\nLift off!\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "3 1\n",
+          "output": "3\n2\n1\nLift off!\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Keep the start and the stride in different variables.",
+        "Subtract the stride after printing.",
+        "Try a stride larger than the starting count."
+      ],
+      "minutes": 17,
+      "base": "countdown",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "digit-frequency",
+      "chapter": "loops",
+      "title": "Count a particular digit",
+      "kind": "gold",
+      "brief": "Look through the decimal digits of a number and count only the occurrences of a requested digit. Treat zero as the one-digit number 0.",
+      "input": "A number from 0 to 1000000000 and a digit from 0 to 9.",
+      "output": "The number of matching digits.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "10020 0\n",
+          "output": "3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 0\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0 7\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "123 9\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 5",
+          "input": "7777 7\n",
+          "output": "4\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "The last digit is the remainder modulo 10.",
+        "Remove that digit using integer division.",
+        "Inspect at least one digit even for zero."
+      ],
+      "minutes": 17,
+      "base": "digit-counter",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
       "id": "sensor-sum",
       "chapter": "arrays",
       "title": "Sensor readings",
@@ -1095,6 +1441,80 @@
       ],
       "minutes": 12,
       "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "target-span",
+      "chapter": "arrays",
+      "title": "All sightings of the target",
+      "kind": "gold",
+      "brief": "Keep searching after the first match. Report the first index, the last index, and the number of occurrences of the target.",
+      "input": "n (1–100), n integers and one target. All values are in [-1000,1000].",
+      "output": "Three integers separated by spaces. If absent, print -1 -1 0.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "6 4 7 4 4 2 4 4\n",
+          "output": "0 5 4\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1 -8 -8\n",
+          "output": "0 0 1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3 1 2 3 9\n",
+          "output": "-1 -1 0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Initialise both indexes to -1.",
+        "Set the first index only on the very first match.",
+        "Every match updates the last index and the count."
+      ],
+      "minutes": 17,
+      "base": "lost-value",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "reverse-window",
+      "chapter": "arrays",
+      "title": "Rewind just one interval",
+      "kind": "gold",
+      "brief": "Reverse only the readings between two inclusive indexes. Print the entire array with the readings outside that interval in their original positions.",
+      "input": "n (1–100), n integers in [-1000,1000], then left and right (0 <= left <= right < n).",
+      "output": "The final array on one line with a single space between values.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5 9 2 3 4 8 1 3\n",
+          "output": "9 4 3 2 8\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1 42 0 0\n",
+          "output": "42\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "4 1 2 3 4 0 3\n",
+          "output": "4 3 2 1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Start with two indexes inside the interval.",
+        "Swap their values and move them toward each other.",
+        "When the two indexes meet, the middle value stays in place."
+      ],
+      "minutes": 17,
+      "base": "reverse-readings",
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
     },
     {
@@ -1246,6 +1666,90 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
     },
     {
+      "id": "even-streak",
+      "chapter": "functions",
+      "title": "The longest even streak",
+      "kind": "gold",
+      "brief": "Reuse is_even to find the longest uninterrupted run of even values. An odd value ends the current run.",
+      "input": "n (0–100), followed by n integers from -1000 to 1000.",
+      "output": "The length of the longest even run, or 0 if there are no even values.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "8 2 4 3 6 8 10 1 2\n",
+          "output": "3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3 -3 1 9\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "4 1 -2 0 6\n",
+          "output": "3\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Keep both a current length and a best length.",
+        "An odd value resets only the current length.",
+        "Remember a run can finish on the last input."
+      ],
+      "minutes": 17,
+      "base": "even-predicate",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "reduce-fraction",
+      "chapter": "functions",
+      "title": "Common ground for fractions",
+      "kind": "gold",
+      "brief": "Use your gcd function to reduce a fraction to lowest terms. Keep the sign in the numerator and write zero as 0/1.",
+      "input": "Two integers: numerator (-1000000 to 1000000) and positive denominator (1–1000000).",
+      "output": "The reduced fraction as numerator/denominator, without spaces.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "42 56\n",
+          "output": "3/4\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-18 12\n",
+          "output": "-3/2\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0 25\n",
+          "output": "0/1\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "7 13\n",
+          "output": "7/13\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Find a positive divisor common to both numbers.",
+        "Calculate gcd using the magnitude of the numerator.",
+        "Divide both original numbers by the same gcd."
+      ],
+      "minutes": 17,
+      "base": "greatest-common",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
       "id": "pointer-boost",
       "chapter": "pointers",
       "title": "Follow the address",
@@ -1391,6 +1895,90 @@
       ],
       "minutes": 12,
       "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "bounded-boost",
+      "chapter": "pointers",
+      "title": "A boost with a ceiling",
+      "kind": "gold",
+      "brief": "Write boost(int *value, int amount, int ceiling). Add as much of amount as fits without exceeding ceiling through the pointer. Return the unused amount.",
+      "input": "Three integers: initial value, amount, ceiling. All are in [0,1000] and initial value <= ceiling.",
+      "output": "The updated value and the unused amount, separated by a space.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "8 5 10\n",
+          "output": "10 3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "2 4 10\n",
+          "output": "6 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "10 5 10\n",
+          "output": "10 5\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "0 0 0\n",
+          "output": "0 0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Compute room from the original pointed-to value.",
+        "Add the smaller of amount and room.",
+        "Read the updated value in main after the function call."
+      ],
+      "minutes": 17,
+      "base": "pointer-boost",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "minimum-distance",
+      "chapter": "pointers",
+      "title": "How far apart are the minima?",
+      "kind": "gold",
+      "brief": "Track pointers to the first and last occurrences of the smallest value in an array. Subtract pointers to report its first index and the distance between these occurrences.",
+      "input": "n (1–100), followed by n integers from -1000 to 1000.",
+      "output": "The first minimum’s zero-based index and the distance in elements. A unique minimum gives distance 0.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "6 4 1 4 1 1 2\n",
+          "output": "1 3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1 -4\n",
+          "output": "0 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "5 2 2 -1 4 -1\n",
+          "output": "2 2\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "3 5 4 3\n",
+          "output": "2 0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Start both pointers at the first element.",
+        "A strictly smaller value replaces both pointers.",
+        "An equal value moves only the last pointer."
+      ],
+      "minutes": 17,
+      "base": "pointer-distance",
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
     },
     {
@@ -1542,6 +2130,90 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
     },
     {
+      "id": "mirror-sign",
+      "chapter": "strings",
+      "title": "A palindrome on a sign",
+      "kind": "gold",
+      "brief": "Check a sign for a palindrome. Ignore hyphens and compare ASCII letters without regard to case.",
+      "input": "One token of 1–100 ASCII letters and hyphens, containing at least one letter.",
+      "output": "YES if the remaining letters form a palindrome, otherwise NO.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "Ka-yAk\n",
+          "output": "YES\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "-Ab-C-\n",
+          "output": "NO\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "--X--\n",
+          "output": "YES\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "a-B-ba\n",
+          "output": "YES\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <ctype.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Make a second buffer containing only letters.",
+        "Use the same case for every stored letter.",
+        "Test a sign with hyphens at both ends."
+      ],
+      "minutes": 17,
+      "base": "mirror-word",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "reverse-label",
+      "chapter": "strings",
+      "title": "Reverse either side of the label",
+      "kind": "gold",
+      "brief": "A label has two fields separated by a colon. Reverse the characters of each field in place while leaving the colon at its original position. Either field may be empty.",
+      "input": "One token of 1–100 characters containing ASCII letters and exactly one colon.",
+      "output": "The transformed label on one line.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "cod:ex\n",
+          "output": "doc:xe\n"
+        },
+        {
+          "label": "Case 2",
+          "input": ":abc\n",
+          "output": ":cba\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "abc:\n",
+          "output": "cba:\n"
+        },
+        {
+          "label": "Case 4",
+          "input": ":\n",
+          "output": ":\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Locate the separator first.",
+        "Reuse one helper that reverses an inclusive range.",
+        "Empty ranges should perform no swaps."
+      ],
+      "minutes": 17,
+      "base": "reverse-word",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
       "id": "point-move",
       "chapter": "structures",
       "title": "Move a point",
@@ -1690,6 +2362,85 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
     },
     {
+      "id": "rectangle-overlap",
+      "chapter": "structures",
+      "title": "Where two rectangles meet",
+      "kind": "gold",
+      "brief": "Add the lower-left corner to your rectangle record. Calculate the overlap area of two rectangles whose sides are parallel to the axes. Touching edges have area zero.",
+      "input": "Two records x y width height. Coordinates are in [-100,100] and dimensions in [1,100].",
+      "output": "The integer overlap area.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "0 0 4 3\n2 1 5 5\n",
+          "output": "4\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 0 2 2\n2 0 2 2\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "-3 -3 6 6\n-1 -1 2 2\n",
+          "output": "4\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "0 0 1 1\n3 3 1 1\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Find where the horizontal intervals intersect.",
+        "Repeat on the vertical axis.",
+        "If either overlap length is nonpositive, the area is zero."
+      ],
+      "minutes": 17,
+      "base": "rectangle-record",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+    },
+    {
+      "id": "honour-roll",
+      "chapter": "structures",
+      "title": "A shared first place",
+      "kind": "gold",
+      "brief": "Keep every student tied for the highest score. Print the winners’ names in the same order as the register.",
+      "input": "n (1–30), then n pairs: a name (1–31 ASCII letters) and an integer score (0–20).",
+      "output": "One winning name per line. Omit the scores.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4 Ada 17 Lin 19 Zo 15 Mei 19\n",
+          "output": "Lin\nMei\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1 Eve 0\n",
+          "output": "Eve\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3 C 10 B 10 A 10\n",
+          "output": "C\nB\nA\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Store the records until all scores have been read.",
+        "Find the highest score in a first pass.",
+        "In a second pass print every record with that score."
+      ],
+      "minutes": 17,
+      "base": "top-student",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/04_Functions-Structures.pdf"
+    },
+    {
       "id": "dynamic-sum",
       "chapter": "dynamic-memory",
       "title": "Space on demand",
@@ -1835,6 +2586,85 @@
       ],
       "minutes": 12,
       "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "copy-slice",
+      "chapter": "dynamic-memory",
+      "title": "An independent slice",
+      "kind": "gold",
+      "brief": "Allocate an original array and a separate copy of the half-open slice [left,right). Add a given offset to each copied value. Print the original array’s sum and the modified slice’s sum, then free both arrays.",
+      "input": "n (1–100), n integers, then left right offset with 0 <= left < right <= n. Values and offset are in [-1000,1000].",
+      "output": "Two integer sums separated by a space.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4 3 5 7 9 1 3 10\n",
+          "output": "24 32\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "1 -2 0 1 -3\n",
+          "output": "-2 -5\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3 1 2 3 0 3 0\n",
+          "output": "6 6\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "The copy contains right minus left elements.",
+        "Index 0 in the copy corresponds to left in the original.",
+        "Sum the original after modifying the copy to check independence."
+      ],
+      "minutes": 17,
+      "base": "dynamic-copy",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+    },
+    {
+      "id": "weighted-readings",
+      "chapter": "dynamic-memory",
+      "title": "Not every reading counts equally",
+      "kind": "gold",
+      "brief": "Allocate space for n reading/weight pairs. Compute the weighted mean: sum(value × weight) divided by the sum of weights. Handle a zero total weight, and free the allocation.",
+      "input": "n (1–100), then n integer pairs: value (-1000 to 1000) and weight (0–100).",
+      "output": "The mean with two digits after the decimal point, or EMPTY if all weights are zero.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "3 10 1 20 2 100 0\n",
+          "output": "16.67\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "2 4 0 9 0\n",
+          "output": "EMPTY\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "2 -4 2 2 1\n",
+          "output": "-2.00\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "1 0 3\n",
+          "output": "0.00\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Store value and weight together.",
+        "Keep a weighted sum and a separate total weight.",
+        "Check the denominator before dividing."
+      ],
+      "minutes": 17,
+      "base": "dynamic-average",
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
     },
     {
@@ -1994,6 +2824,94 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
     },
     {
+      "id": "distance-module",
+      "chapter": "modular",
+      "title": "A distance utility",
+      "kind": "gold",
+      "brief": "Extend maths.h and maths.c with distance(a,b), which returns the distance between two positions using your absolute function. Let main.c handle input and output.",
+      "input": "Two integer positions, each in [-1000,1000].",
+      "output": "Their nonnegative distance.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "-4 9\n",
+          "output": "13\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "8 8\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "12 -1\n",
+          "output": "13\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "-1000 1000\n",
+          "output": "2000\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include \"maths.h\"\n#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint absolute(int x);\nint distance(int a, int b);\n#endif\n",
+        "maths.c": "#include \"maths.h\"\n\n// TODO\n"
+      },
+      "hints": [
+        "Declare both functions in the header.",
+        "The difference between the positions may be negative.",
+        "Let distance call absolute on that difference."
+      ],
+      "minutes": 17,
+      "base": "split-absolute",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "sign-changes",
+      "chapter": "modular",
+      "title": "Count the changes of sign",
+      "kind": "gold",
+      "brief": "Export sign_changes from your sign module. Ignore zero values and count transitions between positive and negative values in the remaining sequence. Call your sign function from the module.",
+      "input": "n (0–100), followed by n integers from -1000 to 1000.",
+      "output": "The number of changes of sign.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "7 -1 0 3 5 0 -2 4\n",
+          "output": "3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3 0 0 0\n",
+          "output": "0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "3 1 0 1\n",
+          "output": "0\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include \"maths.h\"\n#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n",
+        "maths.h": "#ifndef MATHS_H\n#define MATHS_H\nint sign(int x);\nint sign_changes(const int values[], int n);\n#endif\n",
+        "maths.c": "#include \"maths.h\"\n\n// TODO\n"
+      },
+      "hints": [
+        "Keep the last nonzero sign.",
+        "The first nonzero value establishes a starting sign.",
+        "Zero must neither count as a change nor replace the previous sign."
+      ],
+      "minutes": 17,
+      "base": "split-sign",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
       "id": "seed-step",
       "chapter": "randomness",
       "title": "A predictable first step",
@@ -2147,6 +3065,90 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
     },
     {
+      "id": "replay-checkpoint",
+      "chapter": "randomness",
+      "title": "Replay to a checkpoint",
+      "kind": "gold",
+      "brief": "Replay an experiment from its saved seed. For portable results use state = (17 * state + 43) % 100 instead of rand(). Find the first draw equal to the checkpoint. The starting seed is not a draw.",
+      "input": "Seed (0–99), maximum number of draws (0–100), then a checkpoint (0–99).",
+      "output": "The first matching draw number, starting at 1, or -1 if there is no match within the limit.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "0 4 74\n",
+          "output": "2\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 1 43\n",
+          "output": "1\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "7 0 7\n",
+          "output": "-1\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "1 1 1\n",
+          "output": "-1\n"
+        },
+        {
+          "label": "Case 5",
+          "input": "0 30 43\n",
+          "output": "1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Reinitialise the state from the supplied seed.",
+        "Update the state before comparing it with the checkpoint.",
+        "Stop at the first match, even if the sequence later repeats."
+      ],
+      "minutes": 17,
+      "base": "rand-repeat",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
+      "id": "dice-histogram",
+      "chapter": "randomness",
+      "title": "A tally for the die",
+      "kind": "gold",
+      "brief": "Map each generator value to 1 + value % 6 as before, then count how often every face appears. Include faces that never appear.",
+      "input": "n (0–100), then n nonnegative integers up to 1000000.",
+      "output": "Six counts in face order (1 through 6), separated by single spaces.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "5 0 6 5 11 1\n",
+          "output": "2 1 0 0 0 2\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0\n",
+          "output": "0 0 0 0 0 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "6 0 1 2 3 4 5\n",
+          "output": "1 1 1 1 1 1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Initialise all six counters to zero.",
+        "The remainder is already a zero-based array index.",
+        "Print six counters even when no draws were provided."
+      ],
+      "minutes": 17,
+      "base": "dice-range",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+    },
+    {
       "id": "file-roundtrip",
       "chapter": "files",
       "title": "A note to the future",
@@ -2292,6 +3294,90 @@
       ],
       "minutes": 12,
       "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+    },
+    {
+      "id": "file-word-count",
+      "chapter": "files",
+      "title": "A line instead of a word",
+      "kind": "gold",
+      "brief": "Save one entire line to word.txt without its terminating newline. Reopen the file and count both its bytes (including spaces) and its words. A word is a maximal run of letters.",
+      "input": "One line of 0–100 ASCII letters and spaces. Leading, trailing and repeated spaces are allowed.",
+      "output": "Byte count and word count, separated by one space.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "  C  is fun \n",
+          "output": "12 3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "\n",
+          "output": "0 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "   \n",
+          "output": "3 0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "Hello\n",
+          "output": "5 1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <string.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Use fgets so leading and repeated spaces survive.",
+        "Read one byte at a time from the reopened file.",
+        "Count a word when a letter follows a space or starts the file."
+      ],
+      "minutes": 17,
+      "base": "file-count",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+    },
+    {
+      "id": "journal-tail",
+      "chapter": "files",
+      "title": "The end of the journal",
+      "kind": "gold",
+      "brief": "Write the first entry to journal.txt, close it, then append the remaining entries in order. Reopen the journal for reading and display only the last k entries. If k exceeds its length, show them all.",
+      "input": "n (1–30), k (0–30), then n words of 1–31 ASCII letters.",
+      "output": "One selected entry per line in file order. For k = 0, produce no output.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "4 2 sun moon star sky\n",
+          "output": "star\nsky\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "2 0 a b\n",
+          "output": ""
+        },
+        {
+          "label": "Case 3",
+          "input": "1 5 solo\n",
+          "output": "solo\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "3 3 red blue gold\n",
+          "output": "red\nblue\ngold\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Use write mode once and append mode for the remaining entries.",
+        "The first selected zero-based index is the larger of 0 and n-k.",
+        "Read the reopened file from the beginning, skipping earlier entries."
+      ],
+      "minutes": 17,
+      "base": "file-append",
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
     },
     {
@@ -2443,6 +3529,100 @@
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
     },
     {
+      "id": "digit-root",
+      "chapter": "recursion",
+      "title": "Peel digits until one remains",
+      "kind": "gold",
+      "brief": "Reuse your recursive digit-sum function. Apply it repeatedly until the result is a single digit. Count how many complete digit sums you needed.",
+      "input": "One integer from 0 to 1000000000.",
+      "output": "The final digit and number of rounds, separated by a space. A single-digit input takes zero rounds.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "9876\n",
+          "output": "3 2\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "9\n",
+          "output": "9 0\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "0\n",
+          "output": "0 0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "999999999\n",
+          "output": "9 2\n"
+        },
+        {
+          "label": "Case 5",
+          "input": "1000000000\n",
+          "output": "1 1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "One complete digit sum is one round.",
+        "Use recursion to sum the digits in each round.",
+        "Do not start another round once the value is below 10."
+      ],
+      "minutes": 17,
+      "base": "recursive-digits",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
+      "id": "binary-bounds",
+      "chapter": "recursion",
+      "title": "Find both boundaries",
+      "kind": "gold",
+      "brief": "The sorted array may now contain duplicates. Use two binary searches to find the first and last indexes of the target without scanning its run.",
+      "input": "n (1–100), n nondecreasing integers from -1000 to 1000, then a target in the same range.",
+      "output": "The first and last zero-based indexes, or -1 -1 if absent.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "6 1 2 2 2 4 8 2\n",
+          "output": "1 3\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "3 5 5 5 5\n",
+          "output": "0 2\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1 -3 -3\n",
+          "output": "0 0\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "3 1 4 7 9\n",
+          "output": "-1 -1\n"
+        },
+        {
+          "label": "Case 5",
+          "input": "3 1 4 7 2\n",
+          "output": "-1 -1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Find the first position whose value is at least the target.",
+        "Then find the first position whose value is strictly greater.",
+        "Check that the first position actually holds the target before printing."
+      ],
+      "minutes": 17,
+      "base": "binary-search",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+    },
+    {
       "id": "stack-undo",
       "chapter": "data-structures",
       "title": "An undo stack",
@@ -2588,6 +3768,90 @@
       ],
       "minutes": 20,
       "base": null,
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "queue-window",
+      "chapter": "data-structures",
+      "title": "Five places at the counter",
+      "kind": "gold",
+      "brief": "Turn your queue into a five-place circular buffer. join X adds a ticket silently, or prints FULL if all places are occupied. serve removes and prints the oldest ticket, or prints EMPTY if nobody is waiting.",
+      "input": "q (1–100), followed by q commands join X or serve. Ticket numbers are integers from 1 to 999.",
+      "output": "One line per serve or rejected join, in command order.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "6\njoin 8\njoin 2\nserve\njoin 9\nserve\nserve\n",
+          "output": "8\n2\n9\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "2\nserve\nserve\n",
+          "output": "EMPTY\nEMPTY\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "1\njoin 7\n",
+          "output": ""
+        },
+        {
+          "label": "Case 4",
+          "input": "13\njoin 1\njoin 2\njoin 3\njoin 4\njoin 5\njoin 99\nserve\njoin 6\nserve\nserve\nserve\nserve\nserve\n",
+          "output": "FULL\n1\n2\n3\n4\n5\n6\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Keep a head index and a count.",
+        "The next free slot is (head + count) % 5.",
+        "A rejected join must leave the queue untouched."
+      ],
+      "minutes": 17,
+      "base": "queue-service",
+      "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+    },
+    {
+      "id": "unlink-matches",
+      "chapter": "data-structures",
+      "title": "Remove matching links",
+      "kind": "gold",
+      "brief": "Build the chain by inserting each value at its head. Then unlink and free every node matching a target, including consecutive matches at the head. Traverse the surviving chain and free it.",
+      "input": "n (0–100), n values and one target, all values and target in [-1000,1000].",
+      "output": "Surviving values from head to tail, one per line. If none survive, print EMPTY.",
+      "tests": [
+        {
+          "label": "Example",
+          "input": "6 4 1 4 2 4 4 4\n",
+          "output": "2\n1\n"
+        },
+        {
+          "label": "Case 2",
+          "input": "0 9\n",
+          "output": "EMPTY\n"
+        },
+        {
+          "label": "Case 3",
+          "input": "3 7 7 7 7\n",
+          "output": "EMPTY\n"
+        },
+        {
+          "label": "Case 4",
+          "input": "3 1 2 3 8\n",
+          "output": "3\n2\n1\n"
+        }
+      ],
+      "starter": {
+        "main.c": "#include <stdio.h>\n#include <stdlib.h>\n\nint main(void) {\n    // TODO\n    return 0;\n}\n"
+      },
+      "hints": [
+        "Removing the head can change the head pointer itself.",
+        "Remember the next link before freeing a node.",
+        "Check your logic on a list made entirely of matches."
+      ],
+      "minutes": 25,
+      "base": "linked-chain",
       "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
     }
   ]

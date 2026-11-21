@@ -70,7 +70,7 @@ function useRoute() {
 export default function App() {
   const {
     t,
-    course: { getExercise, getChapter, projects, exercises },
+    course: { getExercise, getChapter, projects, exercises, coreTotal },
   } = useLanguage();
   const route = useRoute(),
     page = route.startsWith("path/") ? "path" : route,
@@ -174,10 +174,10 @@ export default function App() {
           <div className="sidebar-progress">
             <div>
               <span>{t("Your core path")}</span>
-              <b>{Math.round((core / 30) * 100)}%</b>
+              <b>{Math.round((core / coreTotal) * 100)}%</b>
             </div>
             <ProgressBar
-              value={(core / 30) * 100}
+              value={(core / coreTotal) * 100}
               label={t("Core learning path")}
             />
           </div>
@@ -305,11 +305,23 @@ export default function App() {
 function LearningPath({ chapterId }: { chapterId: string }) {
   const {
     t,
-    course: { chapters, exercises, stages, getChapter, getExercise, byChapter },
+    course: {
+      chapters,
+      exercises,
+      stages,
+      getChapter,
+      getExercise,
+      byChapter,
+      coreTotal,
+      goldTotal,
+    },
   } = useLanguage();
   const p = useProgress(),
     next =
       exercises.find((e) => e.kind === "core" && !p.completed[e.id]) ||
+      exercises.find(
+        (e) => !p.completed[e.id] && !lockedBy(e, byChapter(e.chapter), p),
+      ) ||
       exercises[0];
   const initialChapter = getChapter(chapterId) || getChapter(next.chapter)!;
   const [stage, setStage] = useState(initialChapter.stage),
@@ -398,12 +410,12 @@ function LearningPath({ chapterId }: { chapterId: string }) {
           <p>
             <strong>
               {done}
-              <em> / 30</em>
+              <em> / {coreTotal}</em>
             </strong>
             <span>{t("Core challenges")}</span>
           </p>
           <ProgressBar
-            value={(done / 30) * 100}
+            value={(done / coreTotal) * 100}
             label={t("Completed core challenges")}
           />
         </div>
@@ -414,7 +426,7 @@ function LearningPath({ chapterId }: { chapterId: string }) {
           <p>
             <strong>
               {gold}
-              <em> / 15</em>
+              <em> / {goldTotal}</em>
             </strong>
             <span>{t("Gold challenges")}</span>
           </p>
@@ -496,14 +508,18 @@ function LearningPath({ chapterId }: { chapterId: string }) {
               <Terminal size={30} />
               <span>01</span>
             </div>
-            <Badge kind="core" />
+            <Badge kind={next.kind} />
             <h3>{next.title}</h3>
             <p>{next.brief}</p>
             <button
               className="btn primary"
               onClick={() => go("workspace/" + next.id)}
             >
-              {done ? t("Next small win") : t("Try your first challenge")}
+              {p.completed[next.id]
+                ? t("Revisit challenge")
+                : done
+                  ? t("Next small win")
+                  : t("Try your first challenge")}
               <ArrowRight size={16} />
             </button>
           </section>
@@ -524,7 +540,11 @@ function LearningPath({ chapterId }: { chapterId: string }) {
               </span>
               <p>
                 <b>{t("Go for gold")}</b>
-                <small>{t("Same idea. A new, harder twist.")}</small>
+                <small>
+                  {t(
+                    "Select a green circle for its harder second part. Pass it to turn the circle gold.",
+                  )}
+                </small>
               </p>
             </div>
             <div>

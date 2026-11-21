@@ -4,7 +4,7 @@ This document defines the content direction for CODEX C. The initial content ban
 
 ## Initial content structure
 
-The prototype was built around 15 chapters, each with a short lesson, two core exercises, one gold extension and one optional task: 60 exercises in total. This establishes a complete technical and pedagogical format, but four exercises are not the final practice volume for a major chapter.
+The 15 chapters each have a bilingual lesson, two core exercises, one optional exercise and a gold version of each exercise. The complete catalogue contains 90 challenges.
 
 | Stage             | Chapters                                                         | Teaching emphasis                                                                 |
 | ----------------- | ---------------------------------------------------------------- | --------------------------------------------------------------------------------- |
@@ -12,7 +12,7 @@ The prototype was built around 15 chapters, each with a short lesson, two core e
 | Data and memory   | Functions, pointers, strings, structures, dynamic memory         | Decompose work, represent data, understand indirection and ownership              |
 | Build and explore | Modular projects, randomness, files, recursion, data structures  | Combine concepts, define contracts, investigate tradeoffs and build larger work   |
 
-All chapters remain open for teacher-led sessions. The path recommends an order. Gold tasks require their original core task; optional work does not gate the core path.
+All chapters remain open for teacher-led sessions. The path recommends an order. The first core challenge opens the second and the optional branch. Each original has a gold extension.
 
 ## A progression ladder within a chapter
 
@@ -102,7 +102,7 @@ The prototype's authoritative lesson/exercise file is intended to be `src/data/c
 
 An exercise record needs stable ID, chapter, kind, title, brief, exact input and output contracts, test cases, starter files including main.c, three hints, an optional gold base and source reference. Do not change an ID just because its title changes.
 
-Every gold base must identify a core task in the same chapter. Every exercise must have a maintenance solution. Every lesson example must compile and run in the browser toolchain.
+Every gold base must identify a core or optional task in the same chapter. Every exercise must have a maintenance solution. Every lesson example must compile and run in the browser toolchain.
 
 ## Test design
 

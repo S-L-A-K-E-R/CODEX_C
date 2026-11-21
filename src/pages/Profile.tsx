@@ -41,7 +41,7 @@ export const timeLabel = (seconds: number) =>
 export function Profile() {
   const {
     t,
-    course: { chapters, exercises, byChapter },
+    course: { chapters, exercises, byChapter, goldTotal, coreTotal },
   } = useLanguage();
   const p = useProgress(),
     [edit, setEdit] = useState(false),
@@ -161,8 +161,16 @@ export function Profile() {
       </section>
       <div className="stats-grid four">
         {[
-          { icon: Check, value: `${core} / 30`, label: "Core challenges" },
-          { icon: Star, value: `${gold} / 15`, label: "Gold challenges" },
+          {
+            icon: Check,
+            value: `${core} / ${coreTotal}`,
+            label: "Core challenges",
+          },
+          {
+            icon: Star,
+            value: `${gold} / ${goldTotal}`,
+            label: "Gold challenges",
+          },
           {
             icon: Clock3,
             value: timeLabel(minutes),
@@ -170,7 +178,7 @@ export function Profile() {
           },
           {
             icon: BookOpen,
-            value: `${Object.keys(p.lessons).filter((id) => chapters.some((c) => c.id === id)).length} / 15`,
+            value: `${Object.keys(p.lessons).filter((id) => chapters.some((c) => c.id === id)).length} / ${chapters.length}`,
             label: "Lessons read",
           },
         ].map((s) => (

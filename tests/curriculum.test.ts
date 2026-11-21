@@ -33,9 +33,18 @@ test("curriculum identifiers, core path and gold dependencies are consistent", (
     assert.ok(e.starter["main.c"]);
     assert.ok(fixtures[e.id]);
     assert.equal(e.hints.length, 3);
+    if (e.kind !== "gold") {
+      const extensions = data.exercises.filter((part) => part.base === e.id);
+      assert.equal(
+        extensions.length,
+        1,
+        e.id + " needs exactly one gold version",
+      );
+      assert.ok(extensions[0].tests.length > 1);
+    }
     if (e.kind === "gold") {
       const base = data.exercises.find((b) => b.id === e.base);
-      assert.ok(base && base.kind === "core" && base.chapter === e.chapter);
+      assert.ok(base && base.kind !== "gold" && base.chapter === e.chapter);
     }
   }
 });
