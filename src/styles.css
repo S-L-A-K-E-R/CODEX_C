@@ -4401,7 +4401,7 @@ details[open] > summary {
 }
 
 
-/* Two-scale learning world: a printable ASCII overworld plus circular chapter zoom stops. */
+/* Chapter selector and the circular challenge maps. */
 .world-overview {
   border: 1px solid #cfdec5;
   border-radius: 15px;
@@ -4457,75 +4457,11 @@ details[open] > summary {
   border-color: #b3851a;
 }
 .chapter-map-key-disc.locked { background: #dce2dd; border-color: #a1aba5; }
-.world-overview-scroll {
-  overflow: auto hidden;
-  max-width: 100%;
-  border: 1px solid #bdd4c3;
-  border-radius: 11px;
-  background: #e4f0e7;
-  scrollbar-width: thin;
-  scrollbar-color: #9fbb9e transparent;
-}
-.world-overview-scroll:focus-visible { outline: 3px solid var(--accent-main); outline-offset: 3px; }
-.world-overview-canvas {
-  box-sizing: border-box;
-  padding: 17px 20px;
-  min-width: 100%;
-  width: max-content;
-  background: #e9f3eb;
-}
-.world-atlas-grid {
-  margin: 0;
-  padding: 0;
-  white-space: pre;
-  overflow-wrap: normal;
-  word-break: normal;
-  font: 700 12px/16px "Cascadia Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
-  font-variant-ligatures: none;
-  letter-spacing: 0;
-  text-align: left;
-}
-.world-atlas-tile { white-space: pre; }
-.world-atlas-tile.water { color: #77aabe; }
-.world-atlas-tile.shore { color: #bcbb83; }
-.world-atlas-tile.grass { color: #88ae77; }
-.world-atlas-tile.trees { color: #4f8c5f; }
-.world-atlas-tile.stone { color: #929c91; }
-.world-atlas-tile.mountains { color: #847f86; }
-.world-atlas-tile.sand { color: #c9a86f; }
-.world-atlas-tile.buildings { color: #aa8d70; }
-.world-atlas-tile.road { color: #ac8b58; font-weight: 900; }
-.world-atlas-tile.biome-fortress, .world-atlas-tile.biome-cave { color: #818c81; }
-.world-atlas-marker {
-  position: relative;
-  z-index: 1;
-  border-radius: 3px;
-  background: #d8edc7;
-  color: #28663b;
-  outline: 1px solid #699361;
-  font: inherit;
-  text-decoration: none;
-  white-space: pre;
-}
-.world-atlas-marker.in-progress { background: #b3df7a; color: #235c33; }
-.world-atlas-marker.complete { background: #277d43; color: #fff; outline-color: #195d32; }
-.world-atlas-marker.mastered { background: #f9d66e; color: #745015; outline-color: #ba8d30; }
-.world-atlas-marker.selected {
-  outline: 2px solid #324d36;
-  outline-offset: 1px;
-  box-shadow: 0 0 0 3px #fff9;
-}
-.world-atlas-marker:hover, .world-atlas-marker:focus-visible {
-  background: #ffe4a0;
-  color: #503d19;
-  outline: 3px solid #97702d;
-  outline-offset: 2px;
-}
 .world-region-index {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 8px;
-  margin-top: 14px;
+  margin-top: 0;
 }
 .world-region-link {
   display: flex;
@@ -4683,8 +4619,6 @@ details[open] > summary {
   .world-overview { padding: 14px; margin-top: 16px; }
   .world-overview-heading h2 { font-size: 21px; }
   .world-region-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .world-overview-canvas { padding: 12px; }
-  .world-atlas-grid { font-size: 11px; line-height: 15px; }
   .chapter-zoom-world { padding: 22px 20px 14px; }
   .chapter-map-board { font-size: 13px; line-height: 18px; }
 }

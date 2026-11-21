@@ -49,7 +49,8 @@ try {
     const html = render(base + route);
     if (!html.includes('class="app-shell"') ||
         !html.includes('class="world-overview"') ||
-        !html.includes('class="world-atlas-grid"') ||
+        !html.includes('class="world-region-index"') ||
+        html.includes('class="world-atlas-grid"') ||
         !html.includes('class="ascii-map-grid"') ||
         !html.includes('class="chapter-map-node ') ||
         !html.includes(expected) ||

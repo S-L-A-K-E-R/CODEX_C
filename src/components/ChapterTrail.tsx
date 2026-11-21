@@ -188,7 +188,7 @@ export function ChapterTrail({
         </div>
         <button type="button" className="ascii-back-to-world"
           onClick={() => document.getElementById("world-atlas")?.scrollIntoView({ behavior: "smooth", block: "start" })}>
-          {"↑"} {t("Back to world map")}
+          {"↑"} {t("Back to chapters")}
         </button>
       </div>
       <div className="ascii-map-scroll chapter-map-scroll" role="region"

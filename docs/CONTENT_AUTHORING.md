@@ -21,17 +21,17 @@ Illustrations must say what they model. A pointer illustration with fixed symbol
 The course sequence is a recommendation. Students can open later chapters directly for teacher-led sessions. Within a chapter, its first core exercise unlocks the remaining regular core exercises and optional side quests. The crowned cumulative finale unlocks only when all three regular core exercises have been completed; side quests do not gate it. Each original unlocks its own gold extension.
 
 
-## The 15 ASCII worlds
+## Chapter index and the 15 ASCII chapter maps
 
-The learning path has **two map scales**. `src/data/worldAtlas.ts` builds a connected, printable-ASCII overworld whose 15 colored regions link to individual chapter deep links (`#path/<chapter-id>`). `src/components/WorldOverview.tsx` displays this large atlas above the progress section. Clicking a region selects the corresponding stage, expands its chapter and scrolls to it.
+The learning path displays a compact chapter index in `src/components/WorldOverview.tsx`. It links to all 15 chapters, shows each chapter's core progress and gold completion, and allows learners to jump directly to a chapter via `#path/<chapter-id>`. The former large ASCII overworld is no longer shown.
 
-`src/data/chapterMaps.ts` contains 15 **different handcrafted, printable-ASCII** scenes, along with per-chapter `cores`, `sides`, `sideOrigins`, and `turns` arrays. `src/data/asciiMap.ts` builds the character terrain and walking roads; `src/components/ChapterTrail.tsx` shows a zoomed-in map with **color-coded circular challenge markers over the ASCII background**, followed by a compact accessible text index. No SVG or image background is required. Both map scales share the light palette in `src/styles.css`.
+`src/data/chapterMaps.ts` contains 15 **different handcrafted, printable-ASCII** chapter scenes, along with per-chapter `cores`, `sides`, `sideOrigins`, and `turns` arrays. `src/data/asciiMap.ts` builds the terrain and walking roads; `src/components/ChapterTrail.tsx` shows each chapter's map with **color-coded circular challenge markers over the ASCII background**, followed by a compact accessible text index.
 
-* The atlas uses `[01]`–`[15]` to select chapters. In the zoomed map, a **pale green circle** is available, **gray** is locked, **dark green** is complete, and **gold** means the corresponding gold extension has been passed. The crowned finale has its own circle and remains locked until all regular core challenges are completed.
-* The road is drawn from lesson through all regular core challenges to the finale. Optional side branches connect to the core stops specified in `sideOrigins`; they are **not** prerequisites for the finale.
-* `cores`, `sides` and `turns` can have different configurations by chapter. Adding an optional exercise in a chapter shows a new side marker automatically, with a fallback position for new extras until the map layout is hand-tuned.
-* Keep marker coordinates at least one row below the top border and away from other markers. The separate `tests/ascii-map.test.ts` verifies map uniqueness, ASCII-only artwork, connected markers and variable chapter sizes.
-* `tests/world-atlas.test.ts` validates all 15 regions and their route; the headless-browser smoke test checks both scales on several chapters.
+* In the chapter map, a **pale green circle** is available, **gray** is locked, **dark green** is complete, and **gold** means the corresponding gold extension has been passed. The crowned finale has its own circle and remains locked until all regular core challenges are completed.
+* The road is drawn from the lesson through all regular core challenges to the finale. Optional side branches connect to the core stops specified in `sideOrigins`; they are **not** prerequisites for the finale.
+* `cores`, `sides` and `turns` can have different configurations by chapter. Adding an optional exercise in a chapter shows a new side marker automatically, with a fallback position until the layout is hand-tuned.
+* Keep marker coordinates at least one row below the top border and away from other markers. `tests/ascii-map.test.ts` verifies map uniqueness, ASCII-only artwork, connected markers and variable chapter sizes. `tests/world-atlas.test.ts` still covers the now-unused overworld generator as a legacy test.
+* The headless-browser smoke test verifies the chapter index and the chapter-specific map, not the old overworld.
 * Keep all exercise IDs stable when moving nodes: existing progress, drafts and completed gold challenges are tied to these IDs, not map coordinates.
 
 ## Exercise contract
