@@ -366,5 +366,12 @@
   "Could not load {name}. Check your connection, then try again.": "Chargement de {name} impossible. Vérifie ta connexion, puis réessaie.",
   "Invalid {field} in backup.": "La rubrique « {field} » de la sauvegarde est invalide.",
   "Invalid {field} entry.": "Une entrée de la rubrique « {field} » est invalide.",
-  "C code editor: {name}": "Éditeur de code C : {name}"
+  "C code editor: {name}": "Éditeur de code C : {name}",
+  "Start in any chapter. Its first core challenge opens the next challenge and the side quest.": "Commence dans le chapitre de ton choix. Son premier défi principal débloque le défi suivant et la quête annexe.",
+  "Complete {title} to unlock this challenge.": "Termine « {title} » pour débloquer ce défi.",
+  "Chapter path: {title}": "Parcours du chapitre : {title}",
+  "Lesson read": "Leçon lue",
+  "Locked": "Verrouillé",
+  "Available": "Disponible",
+  "Open {title}": "Ouvrir « {title} »"
 }

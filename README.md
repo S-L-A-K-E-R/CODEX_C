@@ -58,7 +58,7 @@ The build uses relative asset URLs and hash routes, so it works under the reposi
 
 ## Teaching notes
 
-Give students a direct chapter or challenge link. The path recommends an order, but chapters remain open for classroom use. Gold challenges unlock when their original task is completed. Failed attempts and hints never remove progress.
+Give students a direct chapter or challenge link. Every chapter has a circular path. Its first core challenge unlocks its second core challenge and optional branch. Students can start in any chapter. Gold challenges unlock when their original task is completed. Failed attempts and hints never remove progress.
 
 Program input is entered **before** running. Output tests are visible and compare behaviour; they do not prove use of a particular algorithm or establish understanding. Review code when a pointer, recursion, complexity, ownership, or style requirement matters.
 

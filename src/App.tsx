@@ -6,7 +6,6 @@ import {
   Check,
   ChevronDown,
   ChevronRight,
-  Circle,
   Clock3,
   Code2,
   Compass,
@@ -28,7 +27,9 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import type { Chapter, Exercise } from "./data/curriculum.ts";
+import type { Chapter } from "./data/curriculum.ts";
+import { ChapterTrail } from "./components/ChapterTrail.tsx";
+import { lockedBy } from "./state/path.ts";
 import { useLanguage, LanguageSwitch } from "./i18n/Language.tsx";
 import { useProgress, updateProgress, useStorageIssue } from "./state/store.ts";
 import { now } from "./state/progress.ts";
@@ -72,6 +73,7 @@ export default function App() {
     course: { getExercise, getChapter, projects, exercises },
   } = useLanguage();
   const route = useRoute(),
+    page = route.startsWith("path/") ? "path" : route,
     p = useProgress(),
     issue = useStorageIssue(),
     [mobileNav, setMobileNav] = useState(false);
@@ -82,14 +84,14 @@ export default function App() {
     document.title =
       "CODEX C · " +
       t(
-        nav.find((n) => n.route === route)?.label ||
+        nav.find((n) => n.route === page)?.label ||
           (route.startsWith("workspace")
             ? "Workspace"
             : route.startsWith("lesson")
               ? "Quick lesson"
               : "Your learning space"),
       );
-  }, [route, t]);
+  }, [route, page, t]);
   if (route.startsWith("workspace/")) {
     const id = route.slice(10);
     if (
@@ -146,12 +148,12 @@ export default function App() {
               key={n.route}
               href={"#" + n.route}
               className={
-                route === n.route ||
+                page === n.route ||
                 (route.startsWith("lesson/") && n.route === "path")
                   ? "active"
                   : ""
               }
-              aria-current={route === n.route ? "page" : undefined}
+              aria-current={page === n.route ? "page" : undefined}
             >
               <n.icon size={19} />
               {t(n.label)}
@@ -221,7 +223,7 @@ export default function App() {
             <ChevronRight size={14} />
             <b>
               {t(
-                nav.find((n) => n.route === route)?.label ||
+                nav.find((n) => n.route === page)?.label ||
                   (route.startsWith("lesson/")
                     ? "Quick lesson"
                     : route === "settings"
@@ -262,8 +264,8 @@ export default function App() {
           </div>
         )}
         <main id="main-content" tabIndex={-1}>
-          {route === "path" ? (
-            <LearningPath />
+          {page === "path" ? (
+            <LearningPath key={route} chapterId={route.slice(5)} />
           ) : route === "practice" ? (
             <Practice />
           ) : route === "projects" ? (
@@ -300,17 +302,18 @@ export default function App() {
     </div>
   );
 }
-function LearningPath() {
+function LearningPath({ chapterId }: { chapterId: string }) {
   const {
     t,
-    course: { chapters, exercises, stages, getChapter, getExercise },
+    course: { chapters, exercises, stages, getChapter, getExercise, byChapter },
   } = useLanguage();
   const p = useProgress(),
     next =
       exercises.find((e) => e.kind === "core" && !p.completed[e.id]) ||
       exercises[0];
-  const [stage, setStage] = useState(getChapter(next.chapter)?.stage || 0),
-    [expanded, setExpanded] = useState(next.chapter);
+  const initialChapter = getChapter(chapterId) || getChapter(next.chapter)!;
+  const [stage, setStage] = useState(initialChapter.stage),
+    [expanded, setExpanded] = useState(initialChapter.id);
   const done = exercises.filter(
       (e) => e.kind === "core" && p.completed[e.id],
     ).length,
@@ -345,7 +348,7 @@ function LearningPath() {
                   ? "workspace/" +
                       (resume &&
                       !p.completed[resume.id] &&
-                      (!resume.base || p.completed[resume.base])
+                      !lockedBy(resume, byChapter(resume.chapter), p)
                         ? resume.id
                         : next.id)
                   : "lesson/" + next.chapter,
@@ -478,7 +481,7 @@ function LearningPath() {
             <Compass size={20} />
             <p>
               {t(
-                "Already comfortable here? Every chapter is open to explore. Gold challenges unlock after their original part.",
+                "Start in any chapter. Its first core challenge opens the next challenge and the side quest.",
               )}
             </p>
           </div>
@@ -597,92 +600,10 @@ function ChapterCard({
               <span key={x}>{x}</span>
             ))}
           </div>
-          <div className="learning-nodes">
-            <a
-              className={
-                "learning-node lesson-node " +
-                (p.lessons[c.id] ? "complete" : "")
-              }
-              href={"#lesson/" + c.id}
-            >
-              <span className="node-dot">
-                {p.lessons[c.id] ? <Check size={16} /> : <BookOpen size={17} />}
-              </span>
-              <div>
-                <b>{t("A quick introduction")}</b>
-                <span>{t("Read, experiment, understand")}</span>
-              </div>
-              <ArrowUpRight size={16} />
-            </a>
-            {items
-              .filter((e) => e.kind === "core")
-              .map((e) => (
-                <ExerciseNode key={e.id} exercise={e} />
-              ))}
-            <div className="branch-nodes">
-              {items
-                .filter((e) => e.kind !== "core")
-                .map((e) => (
-                  <ExerciseNode key={e.id} exercise={e} />
-                ))}
-            </div>
-          </div>
+          <ChapterTrail chapter={c} items={items} />
         </div>
       )}
     </article>
-  );
-}
-function ExerciseNode({ exercise: e }: { exercise: Exercise }) {
-  const {
-    t,
-    course: { getExercise },
-  } = useLanguage();
-  const p = useProgress(),
-    done = !!p.completed[e.id],
-    locked = !!e.base && !p.completed[e.base];
-  return (
-    <a
-      href={"#workspace/" + e.id}
-      className={
-        "learning-node " +
-        e.kind +
-        " " +
-        (done ? "complete" : "") +
-        " " +
-        (locked ? "locked" : "")
-      }
-    >
-      <span className="node-dot">
-        {done ? (
-          <Check size={16} />
-        ) : locked ? (
-          <LockKeyhole size={15} />
-        ) : e.kind === "gold" ? (
-          <Star size={16} />
-        ) : e.kind === "optional" ? (
-          <Compass size={16} />
-        ) : (
-          <Code2 size={16} />
-        )}
-      </span>
-      <div>
-        <b>{e.title}</b>
-        <span>
-          {done
-            ? t("Completed")
-            : locked
-              ? t("Unlock after {title}", {
-                  title: getExercise(e.base!)!.title,
-                })
-              : e.kind === "gold"
-                ? t("A harder second part")
-                : e.kind === "optional"
-                  ? t("Optional exploration")
-                  : t("Core challenge")}
-        </span>
-      </div>
-      {done ? <Check size={15} /> : <ChevronRight size={15} />}
-    </a>
   );
 }
 function Lesson({ chapter: c }: { chapter: Chapter }) {
@@ -694,7 +615,7 @@ function Lesson({ chapter: c }: { chapter: Chapter }) {
     first = byChapter(c.id)[0];
   return (
     <div className="page lesson-page">
-      <a className="back-link" href="#path">
+      <a className="back-link" href={"#path/" + c.id}>
         {t("← Back to your path")}
       </a>
       <div className="eyebrow">
@@ -827,7 +748,7 @@ function LightBulbIcon() {
 function Practice() {
   const {
     t,
-    course: { exercises, chapters, getChapter },
+    course: { exercises, chapters, getChapter, byChapter },
   } = useLanguage();
   const [search, setSearch] = useState(""),
     [chapter, setChapter] = useState("all"),
@@ -904,37 +825,44 @@ function Practice() {
             key={value}
             onClick={() => setKind(value)}
           >
-            {t(label)}
+            {label}
           </button>
         ))}
         <span>{t("{n} results", { n: results.length })}</span>
       </div>
       <div className="exercise-grid">
-        {results.map((e) => (
-          <a
-            href={"#workspace/" + e.id}
-            key={e.id}
-            className={"exercise-card " + e.kind}
-          >
-            <div>
-              <Badge kind={e.kind} />
-              {p.completed[e.id] ? (
-                <Done text={t("Done")} />
-              ) : e.base && !p.completed[e.base] ? (
-                <LockKeyhole size={16} />
-              ) : (
-                <ArrowUpRight size={18} />
-              )}
-            </div>
-            <small className="eyebrow">{getChapter(e.chapter)?.title}</small>
-            <h2>{e.title}</h2>
-            <p>{e.brief}</p>
-            <footer>
-              {e.base ? t("Part II · A new twist") : t("Open challenge")}
-              <ArrowRight size={14} />
-            </footer>
-          </a>
-        ))}
+        {results.map((e) => {
+          const prerequisite = lockedBy(e, byChapter(e.chapter), p);
+          return (
+            <a
+              href={"#workspace/" + e.id}
+              key={e.id}
+              className={"exercise-card " + e.kind}
+            >
+              <div>
+                <Badge kind={e.kind} />
+                {p.completed[e.id] ? (
+                  <Done text={t("Done")} />
+                ) : prerequisite ? (
+                  <LockKeyhole size={16} />
+                ) : (
+                  <ArrowUpRight size={18} />
+                )}
+              </div>
+              <small className="eyebrow">{getChapter(e.chapter)?.title}</small>
+              <h2>{e.title}</h2>
+              <p>{e.brief}</p>
+              <footer>
+                {prerequisite
+                  ? t("Unlock after {title}", { title: prerequisite.title })
+                  : e.base
+                    ? t("Part II · A new twist")
+                    : t("Open challenge")}
+                <ArrowRight size={14} />
+              </footer>
+            </a>
+          );
+        })}
       </div>
       {!results.length && (
         <div className="empty-state">

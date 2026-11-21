@@ -32,6 +32,7 @@ import {
   useProgress,
   useStorageIssue,
 } from "../state/store.ts";
+import { lockedBy } from "../state/path.ts";
 import { markComplete } from "../state/progress.ts";
 import { runProgram, stopProgram } from "../runtime/client.ts";
 import {
@@ -43,7 +44,7 @@ import {
 export function Workspace({ id }: { id: string }) {
   const {
     t,
-    course: { getExercise, getChapter, projects },
+    course: { getExercise, getChapter, projects, byChapter },
   } = useLanguage();
   const exercise = getExercise(id),
     chapter = getChapter(exercise?.chapter || id.replace("example:", ""));
@@ -126,7 +127,9 @@ export function Workspace({ id }: { id: string }) {
     if (response?.diagnostics)
       setResponse((r) => (r ? { ...r, diagnostics: "" } : r));
   }
-  const locked = !!exercise?.base && !progress.completed[exercise.base];
+  const locked =
+    exercise && lockedBy(exercise, byChapter(exercise.chapter), progress);
+  const path = chapter ? "path/" + chapter.id : "path";
   async function run(check = false) {
     if (runRef.current || locked) return;
     runRef.current = true;
@@ -236,20 +239,20 @@ export function Workspace({ id }: { id: string }) {
       <main className="locked-page">
         <LanguageSwitch />
         <LockKeyhole size={40} />
-        <Badge kind="gold" />
+        <Badge kind={exercise!.kind} />
         <h1>{title}</h1>
         <p>
-          {t("Complete {title} to unlock this harder second part.", {
-            title: getExercise(exercise!.base!)!.title,
+          {t("Complete {title} to unlock this challenge.", {
+            title: locked.title,
           })}
         </p>
         <button
           className="btn primary"
-          onClick={() => go("workspace/" + exercise!.base)}
+          onClick={() => go("workspace/" + locked.id)}
         >
-          {t("Open the original challenge")}
+          {t("Open {title}", { title: locked.title })}
         </button>
-        <button className="btn quiet" onClick={() => go("path")}>
+        <button className="btn quiet" onClick={() => go(path)}>
           {t("Back to learning path")}
         </button>
       </main>
@@ -260,7 +263,7 @@ export function Workspace({ id }: { id: string }) {
         <button
           className="icon-btn"
           aria-label={t("Back to learning path")}
-          onClick={() => go("path")}
+          onClick={() => go(path)}
         >
           <ArrowLeft size={20} />
         </button>
@@ -806,7 +809,7 @@ export function Workspace({ id }: { id: string }) {
                                 )}
                           </span>
                         </div>
-                        <button onClick={() => go("path")}>
+                        <button onClick={() => go(path)}>
                           {t("Back to path →")}
                         </button>
                       </div>

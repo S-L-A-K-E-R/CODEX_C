@@ -922,106 +922,8 @@ details[open] > summary {
 .concept-tags a:hover {
   background: #e4edd8;
 }
-.learning-nodes {
-  padding: 15px 0 0 0;
-}
-.learning-node {
-  position: relative;
-  display: flex;
-  gap: 13px;
-  align-items: center;
-  min-height: 57px;
-  font-size: 11px;
-  border-radius: 7px;
-  padding: 7px 5px 7px 0;
-}
-.learning-node > svg {
-  margin-left: auto;
-  color: #97a38a;
-}
-.learning-node:hover {
-  background: #f7faef;
-}
-.learning-node > div {
-  min-width: 0;
-}
-.learning-node b {
-  font-size: 11px;
-  font-weight: 600;
-  display: block;
-  overflow-wrap: anywhere;
-}
-.learning-node > div > span {
-  display: block;
-  font-size: 9px;
-  color: #88937a;
-  margin-top: 3px;
-  line-height: 1.5;
-}
-.node-dot {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background: #f2f6ec;
-  border: 1px solid #d5e1c7;
-  color: #728f51;
-  width: 32px;
-  height: 32px;
-  flex-shrink: 0;
-  z-index: 1;
-}
-.learning-node:before {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 15px;
-  width: 1px;
-  background: #dce7d1;
-}
 .lesson-node:before {
   top: 50%;
-}
-.learning-node.complete .node-dot {
-  background: #b5db90;
-  color: #365921;
-  border-color: #abd17e;
-}
-.branch-nodes {
-  margin-left: 15px;
-  border-left: 1px solid #dce7d1;
-  padding: 4px 0 0 23px;
-  display: flex;
-  flex-direction: column;
-}
-.branch-nodes .learning-node:before {
-  height: 1px;
-  width: 23px;
-  left: -23px;
-  top: 50%;
-}
-.branch-nodes .node-dot {
-  border-radius: 8px;
-  height: 28px;
-  width: 28px;
-}
-.learning-node.gold .node-dot {
-  background: #fcf5e4;
-  border-color: #ecdfb7;
-  color: #b39b61;
-}
-.learning-node.optional .node-dot {
-  background: #f0ecf7;
-  border-color: #e0d7ed;
-  color: #9782ab;
-}
-.learning-node.locked b {
-  color: #839077;
-}
-.learning-node.locked .node-dot {
-  opacity: 0.75;
 }
 .path-next {
   display: flex;
@@ -2711,13 +2613,7 @@ details[open] > summary {
   .chapter-heading b {
     font-size: 15px;
   }
-  .learning-node b {
-    font-size: 13px;
-  }
   .chapter-heading small,
-  .learning-node > div > span {
-    font-size: 11px;
-  }
   .stage-tabs button {
     font-size: 12px;
   }
@@ -3500,16 +3396,6 @@ details[open] > summary {
   font-size: 11px;
   color: #708163;
 }
-.learning-node b {
-  font-size: 13px;
-}
-.learning-node > div > span {
-  font-size: 11px;
-  color: #6f805f;
-}
-.learning-node.locked b {
-  color: #6d7a60;
-}
 .concept-tags span,
 .concept-tags a {
   font-size: 10px;
@@ -3640,9 +3526,6 @@ details[open] > summary {
   .chapter-heading b {
     font-size: 14px;
   }
-  .learning-node b {
-    font-size: 12px;
-  }
   .hero-copy .eyebrow {
     font-size: 8px;
   }
@@ -3668,9 +3551,6 @@ details[open] > summary {
   }
   .chapter-count {
     font-size: 9px;
-  }
-  .learning-node > div > span {
-    font-size: 10px;
   }
   .hero-copy p {
     font-size: 12px;
@@ -3778,5 +3658,201 @@ details[open] > summary {
   }
   .workspace-header .language-switch > svg {
     display: none;
+  }
+}
+
+.trail-frame {
+  container-type: inline-size;
+  margin-top: 1.25rem;
+}
+.chapter-trail {
+  --trail-paper: #fafcf7;
+  --trail-row: 9rem;
+  --disc: 3.6rem;
+  background: var(--trail-paper);
+  border: 1px solid #e4eadf;
+  border-radius: 0.85rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(var(--trail-row), auto));
+  padding-block: 1rem 0.5rem;
+  position: relative;
+  isolation: isolate;
+}
+.trail-lines {
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  top: calc(1rem + var(--disc) / 2);
+  left: 0;
+  width: 100%;
+  height: var(--trail-row);
+  overflow: visible;
+  fill: none;
+  stroke: #a6b99b;
+  stroke-linecap: round;
+}
+.trail-lines path {
+  vector-effect: non-scaling-stroke;
+  stroke-width: 2.5;
+}
+.side-track {
+  stroke-dasharray: 4 5;
+}
+.trail-lines.narrow {
+  display: none;
+}
+.trail-stop {
+  min-width: 0;
+  text-align: center;
+  align-self: start;
+}
+.lesson-stop,
+.first-stop {
+  grid-row: 1 / 3;
+  margin-top: calc(var(--trail-row) / 2);
+}
+.lesson-stop {
+  grid-column: 1;
+}
+.first-stop {
+  grid-column: 2;
+}
+.second-stop {
+  grid-area: 1 / 3;
+}
+.side-stop {
+  grid-area: 2 / 3;
+}
+.trail-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  border-radius: 0.6rem;
+  text-align: center;
+}
+.trail-node b,
+.trail-node small {
+  background: var(--trail-paper);
+  padding-inline: 0.35rem;
+  overflow-wrap: anywhere;
+}
+.trail-node b {
+  font-size: 1rem;
+  line-height: 1.2;
+  margin-top: 0.6rem;
+}
+.trail-node small {
+  font-size: 0.84rem;
+  line-height: 1.3;
+  color: #4e604d;
+  margin-top: 0.2rem;
+}
+.trail-disc {
+  width: var(--disc);
+  height: var(--disc);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 2px solid #6e9b41;
+  background: #c9ee91;
+  box-shadow:
+    0 4px 0 #71964b,
+    0 0 0 5px var(--trail-paper);
+  color: #30491b;
+}
+.trail-node.lesson.available .trail-disc {
+  color: #496435;
+  background: #eff6e6;
+}
+.trail-node.complete .trail-disc {
+  color: white;
+  background: #278147;
+  border-color: #216d3d;
+  box-shadow:
+    0 4px 0 #195d32,
+    0 0 0 5px var(--trail-paper);
+}
+.trail-node.locked {
+  color: #58605b;
+  cursor: default;
+}
+.trail-node.locked .trail-disc {
+  background: #e2e6e2;
+  color: #626c65;
+  border-color: #aab3aa;
+  box-shadow:
+    0 4px 0 #a5afa6,
+    0 0 0 5px var(--trail-paper);
+}
+.trail-node[href]:hover .trail-disc {
+  transform: translateY(-2px);
+}
+.trail-node:focus-visible {
+  outline: 3px solid #465f9c;
+  outline-offset: 4px;
+}
+.trail-gold-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: #805b12;
+  font-size: 0.85rem;
+}
+@container (max-width: 32rem) {
+  .chapter-trail {
+    --trail-row: 9.4rem;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .trail-lines.wide {
+    display: none;
+  }
+  .trail-lines.narrow {
+    display: block;
+  }
+  .lesson-stop,
+  .first-stop {
+    grid-row: 1;
+    margin-top: 0;
+  }
+  .second-stop {
+    grid-area: 2 / 1;
+  }
+  .side-stop {
+    grid-area: 2 / 2;
+  }
+  .trail-node {
+    padding-inline: 0.35rem;
+  }
+}
+
+@media (max-width: 720px) {
+  .path-main,
+  .breadcrumbs {
+    min-width: 0;
+  }
+  .stage-tabs button {
+    min-width: 0;
+    white-space: normal;
+    text-align: start;
+  }
+  .breadcrumbs b {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .topbar-right {
+    flex-shrink: 0;
+  }
+}
+@media (max-width: 490px) {
+  .breadcrumbs > span,
+  .breadcrumbs > svg {
+    display: none;
+  }
+  .topbar {
+    gap: 0.5rem;
   }
 }

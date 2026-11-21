@@ -1,4 +1,11 @@
 import test from "node:test";
+import { readFileSync } from "node:fs";
+import { lockedBy } from "../src/state/path.ts";
+import type { Exercise } from "../src/data/curriculum.ts";
+const chapter = (
+  JSON.parse(readFileSync("src/data/content.json", "utf8"))
+    .exercises as Exercise[]
+).filter((e) => e.chapter === "first-programs");
 import assert from "node:assert/strict";
 import {
   freshProgress,
@@ -100,4 +107,29 @@ test("backup size is measured in UTF-8 bytes, matching the import file limit", (
   const text = JSON.stringify(p);
   assert.ok(text.length < 2_000_000);
   assert.throws(() => parseBackup(text), /smaller than 2 MB/);
+});
+
+test("chapter branches share prerequisites and preserve existing classroom work", () => {
+  const [first, second, gold, side] = chapter;
+  const p = freshProgress();
+  assert.equal(lockedBy(first, chapter, p), undefined);
+  assert.equal(lockedBy(second, chapter, p), first);
+  assert.equal(lockedBy(side, chapter, p), first);
+  assert.equal(lockedBy(gold, chapter, p), second);
+  p.attempts[side.id] = 1;
+  assert.equal(lockedBy(side, chapter, p), undefined);
+  p.drafts[second.id] = {
+    files: { "main.c": "old work" },
+    input: "",
+    updatedAt: p.updatedAt,
+  };
+  assert.equal(lockedBy(second, chapter, p), undefined);
+  const completed = markComplete(freshProgress(), first.id);
+  assert.equal(lockedBy(second, chapter, completed), undefined);
+  assert.equal(lockedBy(side, chapter, completed), undefined);
+  assert.equal(lockedBy(gold, chapter, completed), second);
+  assert.equal(
+    lockedBy(gold, chapter, markComplete(completed, second.id)),
+    undefined,
+  );
 });
