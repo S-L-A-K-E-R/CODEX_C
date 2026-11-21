@@ -141,3 +141,23 @@ test("chapter branches share prerequisites and preserve existing classroom work"
     undefined,
   );
 });
+
+test("a crowned finale requires every regular core, but no side quests", () => {
+  const finale = (JSON.parse(readFileSync("src/data/chapter-finales.json", "utf8")) as Exercise[])
+    .find((e) => e.chapter === "first-programs" && e.finale)!;
+  const gold = (JSON.parse(readFileSync("src/data/chapter-finales.json", "utf8")) as Exercise[])
+    .find((e) => e.base === finale.id)!;
+  const items = [...chapter, finale, gold];
+  const cores = chapter.filter((e) => e.kind === "core");
+  const p = freshProgress();
+  assert.equal(lockedBy(finale, items, p)?.id, cores[0].id);
+  for (const core of cores.slice(0, -1)) p.completed[core.id] = p.updatedAt;
+  assert.equal(lockedBy(finale, items, p)?.id, cores[cores.length - 1].id);
+  p.drafts[finale.id] = { files: { "main.c": "// In progress" }, input: "", updatedAt: p.updatedAt };
+  assert.equal(lockedBy(finale, items, p)?.id, cores[cores.length - 1].id);
+  p.completed[cores[cores.length - 1].id] = p.updatedAt;
+  assert.equal(lockedBy(finale, items, p), undefined);
+  assert.equal(lockedBy(gold, items, p), finale);
+  p.completed[finale.id] = p.updatedAt;
+  assert.equal(lockedBy(gold, items, p), undefined);
+});
