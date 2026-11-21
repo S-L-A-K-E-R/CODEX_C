@@ -12,6 +12,7 @@ const exercises = [
   ...JSON.parse(readFileSync("src/data/expansion-4.json", "utf8")),
   ...JSON.parse(readFileSync("src/data/expansion-5.json", "utf8")),
   ...JSON.parse(readFileSync("src/data/chapter-finales.json", "utf8")),
+  ...JSON.parse(readFileSync("src/data/map-extras.json", "utf8")),
 ];
 const solutions = {
   ...JSON.parse(readFileSync("tests/fixtures/solutions.json", "utf8")),
@@ -21,6 +22,7 @@ const solutions = {
   ...JSON.parse(readFileSync("tests/fixtures/expansion-4-solutions.json", "utf8")),
   ...JSON.parse(readFileSync("tests/fixtures/expansion-5-solutions.json", "utf8")),
   ...JSON.parse(readFileSync("tests/fixtures/chapter-finales-solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/map-extras-solutions.json", "utf8")),
 };
 let count = 0;
 for (const exercise of exercises) {
