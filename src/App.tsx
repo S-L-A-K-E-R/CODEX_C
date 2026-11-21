@@ -31,6 +31,7 @@ import type { Chapter } from "./data/curriculum.ts";
 import { ChapterTrail } from "./components/ChapterTrail.tsx";
 import { lockedBy } from "./state/path.ts";
 import { useLanguage, LanguageSwitch } from "./i18n/Language.tsx";
+import { ThemeSwitch } from "./theme/Theme.tsx";
 import { useProgress, updateProgress, useStorageIssue } from "./state/store.ts";
 import { now } from "./state/progress.ts";
 import { Profile, Settings, timeLabel } from "./pages/Profile.tsx";
@@ -233,6 +234,7 @@ export default function App() {
             </b>
           </div>
           <div className="topbar-right">
+            <ThemeSwitch />
             <LanguageSwitch />
             <span className="local-pill">
               <span />

@@ -380,5 +380,17 @@
   "Original: {title}": "Défi d’origine : {title}",
   "Gold: {title}": "Défi en or : {title}",
   "Revisit challenge": "Revoir le défi",
-  "Select a green circle for its harder second part. Pass it to turn the circle gold.": "Sélectionne un cercle vert pour essayer la seconde partie. Réussis-la pour que le cercle devienne doré."
+  "Select a green circle for its harder second part. Pass it to turn the circle gold.": "Sélectionne un cercle vert pour essayer la seconde partie. Réussis-la pour que le cercle devienne doré.",
+  "Website accent color": "Couleur d’accentuation du site",
+  "Appearance": "Apparence",
+  "Pick a color for CODEX C. It applies across the website and is saved in this browser.": "Choisis une couleur pour CODEX C. Elle s’applique à tout le site et est enregistrée dans ce navigateur.",
+  "Blue": "Bleu",
+  "Green": "Vert",
+  "Yellow": "Jaune",
+  "Orange": "Orange",
+  "Red": "Rouge",
+  "Pink": "Rose",
+  "Purple": "Violet",
+  "Maroon": "Bordeaux",
+  "Gray": "Gris"
 }

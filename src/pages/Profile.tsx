@@ -12,6 +12,7 @@ import {
   HardDrive,
   Code2,
   Leaf,
+  Palette,
 } from "lucide-react";
 import {
   useProgress,
@@ -27,6 +28,7 @@ import {
   type Progress,
 } from "../state/progress.ts";
 import { useLanguage } from "../i18n/Language.tsx";
+import { ThemePalette } from "../theme/Theme.tsx";
 import {
   Modal,
   download,
@@ -457,6 +459,14 @@ export function Settings() {
             )}
           </p>
         </div>
+      </section>
+      <section className="panel">
+        <div className="settings-icon">
+          <Palette size={22} />
+        </div>
+        <h2>{t("Appearance")}</h2>
+        <p>{t("Pick a color for CODEX C. It applies across the website and is saved in this browser.")}</p>
+        <ThemePalette />
       </section>
       <section className="panel">
         <div className="settings-icon">

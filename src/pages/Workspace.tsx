@@ -26,6 +26,7 @@ import {
 import { CodeEditor } from "../components/CodeEditor.tsx";
 import { Badge, Modal, go, External, download, AsciiCMark } from "../components/shared.tsx";
 import { useLanguage, LanguageSwitch } from "../i18n/Language.tsx";
+import { ThemeSwitch } from "../theme/Theme.tsx";
 import {
   readProgress,
   saveDraft,
@@ -243,6 +244,7 @@ export function Workspace({ id }: { id: string }) {
   if (locked)
     return (
       <main className="locked-page">
+        <ThemeSwitch />
         <LanguageSwitch />
         <LockKeyhole size={40} />
         <Badge kind={exercise!.kind} />
@@ -290,6 +292,7 @@ export function Workspace({ id }: { id: string }) {
         </div>
         {exercise && <Badge kind={exercise.kind} />}
         <div className="workspace-actions">
+          <ThemeSwitch />
           <LanguageSwitch />
           <button
             className="btn icon-mobile"
