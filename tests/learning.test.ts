@@ -47,6 +47,6 @@ test("completions remain visible across year boundaries", () => {
     core: "2025-12-15T12:00:00Z",
     gold: "2026-01-20T12:00:00Z",
   }, exercises, "12m", "en", new Date(2026, 10, 21, 12));
-  assert.equal(history[1].exercises, 1); // December 2025
-  assert.equal(history[2].xp, 150); // January 2026
+  assert.equal(history[0].exercises, 1); // December 2025
+  assert.equal(history[1].xp, 150); // January 2026
 });
