@@ -12,6 +12,8 @@ import extra5 from "./expansion-5.json";
 import extra5fr from "./expansion-5-fr.json";
 import finales from "./chapter-finales.json";
 import finalesFr from "./chapter-finales-fr.json";
+import mapExtras from "./map-extras.json";
+import mapExtrasFr from "./map-extras-fr.json";
 import type { TestCase } from "../runtime/types.ts";
 export interface Chapter {
   id: string;
@@ -50,6 +52,7 @@ const exercises = [
   ...(extra4 as Exercise[]),
   ...(extra5 as Exercise[]),
   ...(finales as Exercise[]),
+  ...(mapExtras as Exercise[]),
 ];
 const stages = [
   "Build your foundations",
@@ -146,6 +149,7 @@ const frenchExercises: Record<string, ExerciseText> = {
   ...extra4fr,
   ...extra5fr,
   ...finalesFr,
+  ...mapExtrasFr,
 };
 export const courses = {
   en: catalogue(chapters, exercises, projects),
