@@ -23,6 +23,7 @@ export function lockedBy(
   // An original opened before chapter prerequisites existed can still be resumed.
   if (
     exercise.kind !== "gold" &&
+    !exercise.finale &&
     (progress.drafts[exercise.id] || progress.attempts[exercise.id])
   )
     return;
