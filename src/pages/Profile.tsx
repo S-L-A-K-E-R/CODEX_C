@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Award,
   BookOpen,
   Clock3,
   Download,
@@ -11,7 +10,6 @@ import {
   Upload,
   HardDrive,
   Code2,
-  Leaf,
   Palette,
 } from "lucide-react";
 import {
@@ -29,6 +27,8 @@ import {
 } from "../state/progress.ts";
 import { useLanguage } from "../i18n/Language.tsx";
 import { ThemePalette } from "../theme/Theme.tsx";
+import { ProfileActivity } from "../components/ProfileActivity.tsx";
+import { ProfileAchievements } from "../components/ProfileAchievements.tsx";
 import {
   Modal,
   download,
@@ -57,46 +57,6 @@ export function Profile() {
     ).length;
   const complete = exercises.filter((e) => p.completed[e.id]).length,
     minutes = Object.values(p.activity).reduce((a, b) => a + b, 0);
-  const days = Array.from({ length: 91 }, (_, i) => {
-    const d = new Date();
-    d.setHours(12, 0, 0, 0);
-    d.setDate(d.getDate() - 90 + i);
-    return localDay(d);
-  });
-  const badges = [
-    {
-      name: "First small win",
-      description: "Complete your first challenge",
-      earned: complete >= 1,
-      icon: Leaf,
-    },
-    {
-      name: "Solid foundations",
-      description: "Finish the first five core chapters",
-      earned: exercises
-        .filter(
-          (e) =>
-            e.kind === "core" &&
-            chapters.find((c) => c.id === e.chapter)?.stage === 0,
-        )
-        .every((e) => p.completed[e.id]),
-      icon: BookOpen,
-    },
-    {
-      name: "Golden thinking",
-      description: "Complete a gold challenge",
-      earned: gold > 0,
-      icon: Star,
-    },
-    {
-      name: "Curious by nature",
-      description: "Complete three side quests",
-      earned:
-        exercises.filter((e) => e.kind === "optional" && p.completed[e.id])
-          .length >= 3,
-      icon: Award,
-    },
-  ];
   return (
     <div className="page profile-page">
       <div className="page-heading">
@@ -191,113 +151,39 @@ export function Profile() {
           </div>
         ))}
       </div>
-      <section className="panel heatmap-panel">
+
+      <ProfileActivity />
+      <section className="panel profile-skills">
         <div className="section-top">
           <div>
-            <h2>{t("A little history of your learning")}</h2>
-            <p>
-              {t("The last 13 weeks. No streaks to keep. No days to make up.")}
-            </p>
+            <h2>{t("Skills taking shape")}</h2>
+            <p>{t("Core challenges completed in each chapter.")}</p>
           </div>
-          <span className="pill">
-            {t("{n} active days", {
-              n: days.filter((day) => (p.activity[day] || 0) >= 60).length,
-            })}
-          </span>
         </div>
-        <div
-          className="heatmap"
-          role="img"
-          aria-label={t(
-            "Activity in the last 91 days: {n} days with at least one minute of focused learning.",
-            { n: days.filter((d) => (p.activity[d] || 0) >= 60).length },
-          )}
-        >
-          <div className="heatmap-days">
-            <span>{t("13 weeks ago")}</span>
-            <span>{t("Today")}</span>
-          </div>
-          <div className="heatmap-cells">
-            {days.map((day) => {
-              const n = p.activity[day] || 0;
-              return (
-                <div
-                  key={day}
-                  tabIndex={0}
-                  aria-label={`${day}: ${timeLabel(n)}`}
-                  title={t("{day} · {time} focused", {
-                    day,
-                    time: timeLabel(n),
-                  })}
-                  className={
-                    "heat-cell level-" +
-                    (n >= 1800 ? 4 : n >= 600 ? 3 : n >= 60 ? 2 : n > 0 ? 1 : 0)
-                  }
+        <div className="skill-bars">
+          {chapters.map((chapter) => {
+            const chapterCores = byChapter(chapter.id).filter(
+              (exercise) => exercise.kind === "core",
+            );
+            const done = chapterCores.filter(
+              (exercise) => p.completed[exercise.id],
+            ).length;
+            return (
+              <div key={chapter.id}>
+                <span>
+                  {chapter.title}
+                  <b>{done}/{chapterCores.length}</b>
+                </span>
+                <ProgressBar
+                  value={chapterCores.length ? (done / chapterCores.length) * 100 : 0}
+                  label={chapter.title}
                 />
-              );
-            })}
-          </div>
-          <div className="heatmap-legend">
-            <small>{t("Less")}</small>
-            {[0, 1, 2, 3, 4].map((n) => (
-              <span key={n} className={"heat-cell level-" + n} />
-            ))}
-            <small>{t("More")}</small>
-          </div>
-        </div>
-        <p className="small muted">
-          {t(
-            "Time counts while this tab is visible, focused, and you have interacted in the last minute. It is an estimate, not a measure of ability.",
-          )}
-        </p>
-      </section>
-      <div className="profile-columns">
-        <section className="panel">
-          <h2>{t("Skills taking shape")}</h2>
-          <p>{t("Core challenges completed in each chapter.")}</p>
-          <div className="skill-bars">
-            {chapters.map((c) => {
-              const done = byChapter(c.id).filter(
-                (e) => e.kind === "core" && p.completed[e.id],
-              ).length;
-              return (
-                <div key={c.id}>
-                  <span>
-                    {c.title}
-                    <b>{done}/2</b>
-                  </span>
-                  <ProgressBar value={(done / 2) * 100} label={c.title} />
-                </div>
-              );
-            })}
-          </div>
-        </section>
-        <section className="panel">
-          <h2>{t("Small milestones")}</h2>
-          <p>{t("Recognition for exploring, not for showing up every day.")}</p>
-          <div className="badge-grid">
-            {badges.map((b) => (
-              <div
-                className={"achievement " + (b.earned ? "earned" : "")}
-                key={t(b.name)}
-              >
-                <b.icon size={25} />
-                <b>{t(b.name)}</b>
-                <small>{t(b.description)}</small>
-                <span>{b.earned ? t("Earned") : t("To discover")}</span>
               </div>
-            ))}
-          </div>
-          <div className="privacy-note">
-            <ShieldCheck size={20} />
-            <p>
-              {t(
-                "This profile lives in your browser. Share your exported summary yourself if you want to compare experiences with a classmate.",
-              )}
-            </p>
-          </div>
-        </section>
-      </div>
+            );
+          })}
+        </div>
+      </section>
+      <ProfileAchievements />
       {edit && (
         <Modal
           title={t("Make this space yours")}
