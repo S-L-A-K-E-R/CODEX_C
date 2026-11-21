@@ -42,6 +42,7 @@ import { markComplete, recordComparison, now } from "../state/progress.ts";
 import { runProgram, stopProgram } from "../runtime/client.ts";
 import {
   matchesOutput,
+  type DownloadProgress,
   type RunResponse,
   type CheckResult,
 } from "../runtime/types.ts";
@@ -87,6 +88,7 @@ export function Workspace({ id }: { id: string }) {
     [hintCount, setHintCount] = useState(0);
   const [busy, setBusy] = useState(false),
     [phase, setPhase] = useState("Ready when you are"),
+    [download, setDownload] = useState<DownloadProgress | null>(null),
     [response, setResponse] = useState<RunResponse | null>(null),
     [checks, setChecks] = useState<CheckResult[]>([]),
     [verified, setVerified] = useState(false),
@@ -146,6 +148,7 @@ export function Workspace({ id }: { id: string }) {
     setConsoleOpen(true);
     setOutputTab(check ? "checks" : "output");
     setChecks([]);
+    setDownload(null);
     setResponse(null);
     setVerified(false);
     setPhase("Preparing your program");
@@ -162,6 +165,9 @@ export function Workspace({ id }: { id: string }) {
       check && exercise ? exercise.tests.map((t) => t.input) : [snapshot.input],
       (text) => {
         if (alive.current) setPhase(text);
+      },
+      (value) => {
+        if (alive.current) setDownload(value);
       },
     );
     if (!alive.current) return;
@@ -217,6 +223,55 @@ export function Workspace({ id }: { id: string }) {
   const generated = Object.entries(currentResult?.files || {}).filter(
     ([name, content]) => files[name] !== content,
   );
+  const downloadPercent =
+    download?.totalBytes && download.totalBytes >= download.loadedBytes
+      ? Math.min(100, Math.floor((100 * download.loadedBytes) / download.totalBytes))
+      : null;
+  // Shown in Console and Test results, whichever tab started the run.
+  const downloadBar =
+    busy && phase.startsWith("Loading C compiler") ? (
+      <div className="compiler-download">
+        <div className="compiler-download-meta">
+          <span>{t("Compiler download")}</span>
+          <strong>
+            {downloadPercent === null
+              ? t("Downloading…")
+              : `${downloadPercent}%`}
+          </strong>
+        </div>
+        <div
+          className={
+            "compiler-progress-track" +
+            (downloadPercent === null ? " indeterminate" : "")
+          }
+          role="progressbar"
+          aria-label={t("Compiler download")}
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={downloadPercent ?? undefined}
+        >
+          <span
+            style={
+              downloadPercent === null
+                ? undefined
+                : { width: `${downloadPercent}%` }
+            }
+          />
+        </div>
+        {download && (
+          <small>
+            {download.totalBytes
+              ? t("{downloaded} / {total} MB downloaded", {
+                  downloaded: (download.loadedBytes / 1048576).toFixed(1),
+                  total: (download.totalBytes / 1048576).toFixed(1),
+                })
+              : t("{downloaded} MB downloaded", {
+                  downloaded: (download.loadedBytes / 1048576).toFixed(1),
+                })}
+          </small>
+        )}
+      </div>
+    ) : null;
   function addFile() {
     if (Object.keys(files).length >= 20) {
       setFileError("A workspace can contain up to 20 files.");
@@ -790,6 +845,7 @@ export function Workspace({ id }: { id: string }) {
                         {t(phase)}
                       </div>
                     ) : null}
+                    {downloadBar}
                     {response?.error && (
                       <p className="error-text">{t(response.error)}</p>
                     )}
@@ -874,6 +930,7 @@ export function Workspace({ id }: { id: string }) {
                         {t(phase)}
                       </div>
                     ) : null}
+                    {downloadBar}
                     {response?.error && (
                       <p className="error-text">{t(response.error)}</p>
                     )}
