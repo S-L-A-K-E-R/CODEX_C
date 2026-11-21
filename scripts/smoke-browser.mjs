@@ -48,9 +48,12 @@ try {
   ]) {
     const html = render(base + route);
     if (!html.includes('class="app-shell"') ||
+        !html.includes('class="world-overview"') ||
+        !html.includes('class="world-atlas-grid"') ||
         !html.includes('class="ascii-map-grid"') ||
+        !html.includes('class="chapter-map-node ') ||
         !html.includes(expected) ||
-        !html.includes("[F!]")) {
+        !html.includes("FINAL")) {
       throw new Error("Browser loaded a blank or incomplete page for " + route +
         "; expected " + expected + ". DOM excerpt: " + html.slice(0, 1800));
     }
