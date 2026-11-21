@@ -1,13 +1,13 @@
 # Authoring and reviewing teaching content
 
-The catalogue now contains 15 chapters and 150 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Ten exercises per chapter (three core, two optional, each with a gold extension) support additional practice beyond the initial prototype.
+The catalogue now contains 15 chapters and 180 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Twelve exercises per chapter (three regular core, one cumulative finale, two optional, each with a gold extension) support additional practice beyond the initial prototype.
 
 ## Files to change
 
-- Keep the original lessons and exercises in `src/data/content.json`; additional exercises are split across `src/data/expansion-1.json` through `src/data/expansion-5.json`.
-- For new exercises, put French copy under the same ID in the matching `src/data/expansion-N-fr.json` (original copy remains in `src/data/fr.json`). Both languages share the code, inputs, expected output, and progression IDs.
+- Keep the original lessons and exercises in `src/data/content.json`; additional exercises are split across `src/data/expansion-1.json` through `src/data/expansion-5.json`, plus `src/data/chapter-finales.json`.
+- For new exercises, put French copy under the same ID in the matching `src/data/expansion-N-fr.json` (chapter finales use `src/data/chapter-finales-fr.json`; original copy remains in `src/data/fr.json`). Both languages share the code, inputs, expected output, and progression IDs.
 - Edit `src/data/curriculum.ts` for projects and typed selectors.
-- Add a reference program for every new exercise in the matching `tests/fixtures/expansion-N-solutions.json`.
+- Add a reference program for every new exercise in the matching `tests/fixtures/expansion-N-solutions.json` (for finales, use `tests/fixtures/chapter-finales-solutions.json`).
 - Update source acknowledgements in `ATTRIBUTION.md` when introducing material.
 
 The student bundle intentionally contains test cases. Maintenance solutions are separate from the application imports but remain visible in this public repository.
@@ -18,7 +18,7 @@ Each chapter has a stable `id`, title, subtitle, learning stage, concepts, three
 
 Illustrations must say what they model. A pointer illustration with fixed symbolic addresses is a conceptual model, not a claim to inspect the student's actual WASM memory. Correctness comes before animation. Respect reduced-motion preferences.
 
-The course sequence is a recommendation. Students can open later chapters directly for teacher-led sessions. Within a chapter, its first core exercise unlocks the second core exercise and the optional exercise. Each original unlocks its own gold extension.
+The course sequence is a recommendation. Students can open later chapters directly for teacher-led sessions. Within a chapter, its first core exercise unlocks the remaining regular core exercises and optional side quests. The crowned cumulative finale unlocks only when all three regular core exercises have been completed; side quests do not gate it. Each original unlocks its own gold extension.
 
 ## Exercise contract
 
@@ -26,6 +26,7 @@ The course sequence is a recommendation. Students can open later chapters direct
 | ---------------- | ------------------------------------------------------------------------------------- |
 | `id`             | Stable lowercase identifier; changing it breaks progress continuity                   |
 | `chapter`        | Existing chapter ID                                                                   |
+| `finale`         | Set to `true` only for the chapter's crowned cumulative core exercise                    |
 | `kind`           | `core`, `gold` or `optional`                                                          |
 | `title`, `brief` | A concrete scenario and unambiguous task                                              |
 | `input`          | Exact format, valid ranges and assumptions                                            |
