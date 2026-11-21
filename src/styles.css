@@ -2494,6 +2494,60 @@ details[open] > summary {
 .spin {
   animation: spin 1.4s linear infinite;
 }
+.compiler-download {
+  max-width: 520px;
+  margin: 10px 0 17px;
+  font-family: inherit;
+}
+.compiler-download-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 9px;
+  color: #a9bfc4;
+  font-size: 11px;
+}
+.compiler-download-meta strong {
+  color: hsl(var(--theme-hue) 55% 72%);
+  font-size: 12px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.compiler-progress-track {
+  height: 9px;
+  overflow: hidden;
+  border: 1px solid #3a5059;
+  border-radius: 99px;
+  background: #26383e;
+}
+.compiler-progress-track > span {
+  display: block;
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: hsl(var(--theme-hue) 62% 65%);
+  transition: width 0.15s ease-out;
+}
+.compiler-progress-track.indeterminate > span {
+  width: 35%;
+  animation: compiler-progress-slide 1.6s ease-in-out infinite;
+}
+.compiler-download > small {
+  display: block;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #97aeb3;
+  font-variant-numeric: tabular-nums;
+}
+@keyframes compiler-progress-slide {
+  from { transform: translateX(-110%); }
+  to { transform: translateX(300%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .compiler-progress-track > span { transition: none; }
+  .compiler-progress-track.indeterminate > span { animation: none; width: 100%; opacity: 0.4; }
+}
 .check-result {
   border-bottom: 1px solid hsl(var(--theme-hue) 19% 21%);
 }
