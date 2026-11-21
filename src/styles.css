@@ -4102,3 +4102,55 @@ details[open] > summary {
 .workspace-metrics-link{border:1px solid color-mix(in srgb,var(--accent-light) 45%,transparent);border-radius:8px;background:transparent;color:inherit;display:flex;align-items:center;gap:6px;padding:5px 8px;font-size:11px;}
 .workspace-metrics-link:hover{background:color-mix(in srgb,var(--accent-light) 15%,transparent);}
 @media(max-width:700px){.workspace-metrics-link>span:not(.tiny-medals){display:none;}.metrics-bar-line{grid-template-columns:85px minmax(40px,1fr) 45px;font-size:10px;gap:5px;}}
+
+
+/* Two compact collectible achievement slots attached to completed challenge nodes. */
+.trail-disc-wrap {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  width: var(--disc);
+  height: var(--disc);
+}
+.trail-disc-wrap > .trail-disc { width: 100%; height: 100%; }
+.trail-disc-wrap > .tiny-medals {
+  position: absolute;
+  left: 50%;
+  bottom: -9px;
+  transform: translateX(-50%);
+  z-index: 1;
+  white-space: nowrap;
+  padding: 1px 3px;
+  background: var(--trail-paper);
+  border-radius: 999px;
+  box-shadow: 0 1px 3px #0002;
+}
+.trail-node:has(.tiny-medals) b { margin-top: 1rem; }
+.tiny-medal.locked {
+  background: #dce0de;
+  color: #7a8582;
+  border-color: #aeb8b4;
+  box-shadow: none;
+  opacity: .72;
+}
+.tiny-medal.earned {
+  box-shadow: 0 1px 3px #0003, inset 0 1px 1px #fff9;
+}
+.trail-gold-shortcut {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 5px;
+  font-size: .78rem;
+  color: #8c6518;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb,#b28822 40%,transparent);
+  background: var(--trail-paper);
+}
+.trail-gold-shortcut:hover,
+.trail-gold-shortcut:focus-visible {
+  background: #fff1c9;
+  outline-offset: 3px;
+}
