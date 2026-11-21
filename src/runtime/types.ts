@@ -16,6 +16,11 @@ export interface CheckResult extends ProgramResult {
   expected: string;
   passed: boolean;
 }
+export interface DownloadProgress {
+  loadedBytes: number;
+  // Total is only reported when every asset has a measurable size.
+  totalBytes?: number;
+}
 export interface RunRequest {
   files: Record<string, string>;
   inputs: string[];
