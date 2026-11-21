@@ -14,17 +14,17 @@ import { lockedBy } from "../state/path.ts";
 import { useProgress } from "../state/store.ts";
 
 type Point = { x: number; y: number };
-const mainPositions: Point[] = [
-  { x: 110, y: 327 },
-  { x: 316, y: 187 },
-  { x: 510, y: 325 },
-  { x: 710, y: 189 },
-  { x: 885, y: 327 },
-];
-const sidePositions: Point[] = [
-  { x: 320, y: 494 },
-  { x: 690, y: 493 },
-];
+// Advance along a winding road. If more exercises are added later, the island
+// grows horizontally instead of stacking challenges on the same spot.
+const lessonPosition: Point = { x: 110, y: 327 };
+const corePosition = (index: number): Point => ({
+  x: index === 0 ? 316 : index === 1 ? 510 : 710 + (index - 2) * 195,
+  y: index % 2 === 0 ? 187 : 325,
+});
+const sidePosition = (index: number): Point => ({
+  x: index === 0 ? 320 : index === 1 ? 690 : 690 + (index - 1) * 240,
+  y: 494,
+});
 
 function road(from: Point, to: Point) {
   const delta = (to.x - from.x) * 0.46;
@@ -35,22 +35,23 @@ function road(from: Point, to: Point) {
 }
 
 /** Deterministic text-map: no image downloads or random layout shifts. */
-function terrainFor(chapterId: string) {
+function terrainFor(chapterId: string, width: number) {
   const seed = [...chapterId].reduce((n, char) => n + char.charCodeAt(0), 0);
   const rows: string[] = [];
   for (let row = 0; row < 29; row++) {
     let line = "";
-    for (let column = 0; column < 92; column++) {
-      const x = (column - 45) / 47;
+    const columns = Math.round(92 * width / 1000);
+    for (let column = 0; column < columns; column++) {
+      const x = (column - (columns - 1) / 2) / (columns / 2);
       const y = (row - 14) / 16;
       const contour = x * x + y * y * 1.08 +
         Math.sin(column * 0.19 + seed) * 0.13 +
         Math.cos(row * 0.42 + seed) * 0.11;
       const variant = (column * 37 + row * 43 + seed) % 41;
-      line += contour > 1.09 ? "≈" :
-        contour > 0.94 ? "·" :
-        variant === 0 ? "♣" :
-        variant === 4 ? "♠" :
+      line += contour > 1.09 ? "~" :
+        contour > 0.94 ? "." :
+        variant === 0 ? "Y" :
+        variant === 4 ? "T" :
         variant === 11 ? "^" :
         variant === 18 ? "+" :
         variant % 7 === 0 ? "." : " ";
@@ -79,47 +80,52 @@ export function ChapterTrail({
   const read = !!progress.lessons[chapter.id];
 
   // The main road is lesson → core challenges → crowned chapter finale.
-  const lessonPosition = mainPositions[0];
-  const regularPositions = regularCores.map((_, i) =>
-    mainPositions[Math.min(i + 1, 3)],
-  );
-  const finalePosition = mainPositions[4];
+  const regularPositions = regularCores.map((_, i) => corePosition(i));
+  const finalePosition: Point = {
+    x: (regularPositions[regularPositions.length - 1]?.x ?? lessonPosition.x) + 175,
+    y: 327,
+  };
+  const sideStops = sides.map((_, i) => sidePosition(i));
+  const mapWidth = Math.max(1000, finalePosition.x + 115, ...sideStops.map((point) => point.x + 90));
   const mainRoute = [
     lessonPosition,
     ...regularPositions,
     ...(finale ? [finalePosition] : []),
   ];
   const branches = sides.map((_, index) => ({
-    from: regularPositions[Math.min(index === 0 ? 0 : 2, regularPositions.length - 1)] ?? lessonPosition,
-    to: sidePositions[index % sidePositions.length],
+    from: regularPositions[Math.min(index * 2, regularPositions.length - 1)] ?? lessonPosition,
+    to: sideStops[index],
   }));
   const places = new Map<string, Point>();
   regularCores.forEach((e, i) => places.set(e.id, regularPositions[i]));
   if (finale) places.set(finale.id, finalePosition);
-  sides.forEach((e, i) => places.set(e.id, sidePositions[i % sidePositions.length]));
+  sides.forEach((e, i) => places.set(e.id, sideStops[i]));
   const roads = mainRoute.slice(1).map((to, i) => road(mainRoute[i], to));
 
   return (
     <div className="trail-frame map-frame">
       <nav
         className="chapter-trail map-trail"
+        style={{ minWidth: Math.ceil(mapWidth * 0.835) + "px" }}
         aria-label={t("Chapter path: {title}", { title: chapter.title })}
       >
         <svg
           className="map-landscape"
-          viewBox="0 0 1000 640"
+          viewBox={"0 0 " + mapWidth + " 640"}
           preserveAspectRatio="none"
           aria-hidden="true"
         >
+          <g transform={"scale(" + (mapWidth / 1000) + " 1)"}>
           <path className="map-island-shadow" d="M91 246 Q145 80 301 96 Q382 37 526 115 Q702 42 811 140 Q949 137 945 286 Q991 418 887 506 Q770 598 624 559 Q481 625 376 548 Q192 603 113 477 Q40 379 91 246Z" />
           <path className="map-island" d="M91 232 Q145 66 301 83 Q382 24 526 102 Q702 29 811 127 Q949 124 945 273 Q991 405 887 493 Q770 585 624 546 Q481 612 376 535 Q192 590 113 464 Q40 366 91 232Z" />
           <path className="map-ridge" d="M143 219 Q205 117 293 135 L328 159 L288 232 L209 259Z M584 141 L681 103 L763 154 L751 221 L664 214Z" />
           <path className="map-pond" d="M460 460 Q493 422 539 450 T604 495 Q571 542 506 532 Q458 516 460 460Z" />
+          </g>
         </svg>
-        <pre className="map-ascii" aria-hidden="true">{terrainFor(chapter.id)}</pre>
+        <pre className="map-ascii" aria-hidden="true">{terrainFor(chapter.id, mapWidth)}</pre>
         <svg
           className="map-roads"
-          viewBox="0 0 1000 640"
+          viewBox={"0 0 " + mapWidth + " 640"}
           preserveAspectRatio="none"
           aria-hidden="true"
         >
@@ -138,7 +144,7 @@ export function ChapterTrail({
         </svg>
         <div
           className="trail-stop map-stop lesson-stop"
-          style={{ left: lessonPosition.x / 10 + "%", top: lessonPosition.y / 640 * 100 + "%" }}
+          style={{ left: lessonPosition.x / mapWidth * 100 + "%", top: lessonPosition.y / 640 * 100 + "%" }}
         >
           <a
             className={"trail-node lesson " + (read ? "complete" : "available")}
@@ -179,7 +185,7 @@ export function ChapterTrail({
             <div
               key={e.id}
               className={"trail-stop map-stop " + (e.finale ? "final-stop" : e.kind === "optional" ? "side-quest-stop" : "core-stop")}
-              style={{ left: position.x / 10 + "%", top: position.y / 640 * 100 + "%" }}
+              style={{ left: position.x / mapWidth * 100 + "%", top: position.y / 640 * 100 + "%" }}
             >
               <a
                 className={"trail-node " + state}
