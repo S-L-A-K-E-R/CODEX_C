@@ -4356,3 +4356,294 @@ details[open] > summary {
   .ascii-map-grid { font-size: 12px; }
   .ascii-index-entry { padding: .6rem; }
 }
+
+
+/* Two-scale learning world: a printable ASCII overworld plus circular chapter zoom stops. */
+.world-overview {
+  border: 1px solid #cfdec5;
+  border-radius: 15px;
+  background: #fcfdf8;
+  padding: 22px;
+  margin: 23px 0 25px;
+  scroll-margin-top: 16px;
+}
+.world-overview-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  margin-bottom: 14px;
+}
+.world-overview-heading h2 {
+  margin-top: 5px;
+  font-size: 24px;
+  color: #243c2e;
+}
+.world-overview-heading p {
+  margin-top: 5px;
+  color: #65786b;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.world-overview-legend {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #607263;
+}
+.world-legend-dot, .chapter-map-key-disc {
+  display: inline-block;
+  flex: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid #588c43;
+  background: #a9da85;
+  vertical-align: middle;
+}
+.world-legend-dot.complete, .chapter-map-key-disc.complete {
+  background: #278147;
+  border-color: #195d32;
+}
+.world-legend-dot.mastered, .chapter-map-key-disc.mastered {
+  background: #ffdb70;
+  border-color: #b3851a;
+}
+.chapter-map-key-disc.locked { background: #dce2dd; border-color: #a1aba5; }
+.world-overview-scroll {
+  overflow: auto hidden;
+  max-width: 100%;
+  border: 1px solid #bdd4c3;
+  border-radius: 11px;
+  background: #e4f0e7;
+  scrollbar-width: thin;
+  scrollbar-color: #9fbb9e transparent;
+}
+.world-overview-scroll:focus-visible { outline: 3px solid var(--accent-main); outline-offset: 3px; }
+.world-overview-canvas {
+  box-sizing: border-box;
+  padding: 17px 20px;
+  min-width: 100%;
+  width: max-content;
+  background: #e9f3eb;
+}
+.world-atlas-grid {
+  margin: 0;
+  padding: 0;
+  white-space: pre;
+  overflow-wrap: normal;
+  word-break: normal;
+  font: 700 12px/16px "Cascadia Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  font-variant-ligatures: none;
+  letter-spacing: 0;
+  text-align: left;
+}
+.world-atlas-tile { white-space: pre; }
+.world-atlas-tile.water { color: #77aabe; }
+.world-atlas-tile.shore { color: #bcbb83; }
+.world-atlas-tile.grass { color: #88ae77; }
+.world-atlas-tile.trees { color: #4f8c5f; }
+.world-atlas-tile.stone { color: #929c91; }
+.world-atlas-tile.mountains { color: #847f86; }
+.world-atlas-tile.sand { color: #c9a86f; }
+.world-atlas-tile.buildings { color: #aa8d70; }
+.world-atlas-tile.road { color: #ac8b58; font-weight: 900; }
+.world-atlas-tile.biome-fortress, .world-atlas-tile.biome-cave { color: #818c81; }
+.world-atlas-marker {
+  position: relative;
+  z-index: 1;
+  border-radius: 3px;
+  background: #d8edc7;
+  color: #28663b;
+  outline: 1px solid #699361;
+  font: inherit;
+  text-decoration: none;
+  white-space: pre;
+}
+.world-atlas-marker.in-progress { background: #b3df7a; color: #235c33; }
+.world-atlas-marker.complete { background: #277d43; color: #fff; outline-color: #195d32; }
+.world-atlas-marker.mastered { background: #f9d66e; color: #745015; outline-color: #ba8d30; }
+.world-atlas-marker.selected {
+  outline: 2px solid #324d36;
+  outline-offset: 1px;
+  box-shadow: 0 0 0 3px #fff9;
+}
+.world-atlas-marker:hover, .world-atlas-marker:focus-visible {
+  background: #ffe4a0;
+  color: #503d19;
+  outline: 3px solid #97702d;
+  outline-offset: 2px;
+}
+.world-region-index {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 14px;
+}
+.world-region-link {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  min-width: 0;
+  border: 1px solid #d7e2d6;
+  border-radius: 8px;
+  padding: 8px 9px;
+  background: #f8fbf3;
+  text-decoration: none;
+  font-size: 11px;
+  color: #344c3d;
+}
+.world-region-link:hover, .world-region-link:focus-visible {
+  background: #edf7e5;
+  outline: 2px solid var(--accent-main);
+  outline-offset: 1px;
+}
+.world-region-link.selected { border-color: #688f63; background: #ebf3df; }
+.world-region-number {
+  font: 800 12px ui-monospace, Consolas, monospace;
+  color: #287845;
+}
+.world-region-link.mastered .world-region-number { color: #a87c28; }
+.world-region-label { flex: 1 1 auto; min-width: 0; line-height: 1.25; overflow-wrap: anywhere; font-weight: 600; }
+.world-region-link small { flex: none; color: #708172; font-variant-numeric: tabular-nums; }
+
+/* The zoom is still 100% ASCII terrain and routes; only its game-piece nodes
+   use CSS circles. One character is one ch, and every ASCII row is 18px high. */
+.chapter-map-scroll {
+  border-color: #bfd4b0;
+}
+.chapter-zoom-world {
+  width: max-content;
+  min-width: 100%;
+  padding: 24px 20px 16px;
+}
+.chapter-map-board {
+  position: relative;
+  box-sizing: content-box;
+  font: 600 13px/18px "Cascadia Mono", "Cascadia Code", Consolas, "Liberation Mono", monospace;
+  letter-spacing: 0;
+  font-variant-ligatures: none;
+}
+.chapter-map-board .ascii-map-grid {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  overflow: visible;
+  white-space: pre;
+  font: inherit;
+  line-height: 18px;
+  letter-spacing: 0;
+}
+.chapter-map-node {
+  --disc-bg: #97d466;
+  --disc-border: #498d37;
+  --disc-shadow: #34732b;
+  --disc-ink: #183c18;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 4px;
+  position: absolute;
+  z-index: 3;
+  width: 76px;
+  transform: translate(-50%, -42%);
+  color: var(--disc-ink);
+  text-align: center;
+  text-decoration: none;
+}
+.chapter-map-node .chapter-map-disc {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  border: 3px solid var(--disc-border);
+  border-radius: 50%;
+  background: var(--disc-bg);
+  color: var(--disc-ink);
+  box-shadow: 0 4px 0 var(--disc-shadow), 0 0 0 4px #f8f9ed;
+  transition: transform 120ms ease;
+}
+.chapter-map-node .chapter-map-disc-label {
+  font: 800 10px/15px ui-monospace, Consolas, monospace;
+  padding: 1px 4px;
+  color: var(--disc-ink);
+  border-radius: 4px;
+  background: #f9faee;
+  border: 1px solid #d8e2cd;
+  white-space: nowrap;
+}
+.chapter-map-node[href] { cursor: pointer; }
+.chapter-map-node[href]:hover .chapter-map-disc, .chapter-map-node[href]:focus-visible .chapter-map-disc {
+  transform: translateY(-3px) scale(1.06);
+  outline: 2px solid var(--disc-border);
+  outline-offset: 3px;
+}
+.chapter-map-node.locked {
+  --disc-bg: #e2e6e2;
+  --disc-border: #abb4ac;
+  --disc-shadow: #a2aaa1;
+  --disc-ink: #727e75;
+  cursor: not-allowed;
+}
+.chapter-map-node.complete {
+  --disc-bg: #278147;
+  --disc-border: #1f6f3e;
+  --disc-shadow: #185d34;
+  --disc-ink: #fff;
+}
+.chapter-map-node.mastered {
+  --disc-bg: #ffda71;
+  --disc-border: #b68b29;
+  --disc-shadow: #9d771f;
+  --disc-ink: #64480d;
+}
+.chapter-map-node.final.available {
+  --disc-bg: #ffd779;
+  --disc-border: #b18a36;
+  --disc-shadow: #93702b;
+  --disc-ink: #584213;
+}
+.chapter-map-node.final .chapter-map-disc {
+  width: 61px;
+  height: 61px;
+  border-width: 4px;
+}
+.chapter-map-node:focus-visible { outline: none; }
+.ascii-back-to-world {
+  border: 1px solid #cad9c0;
+  border-radius: 6px;
+  padding: 5px 9px;
+  background: #f5f9ef;
+  color: #49604b;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.ascii-back-to-world:hover, .ascii-back-to-world:focus-visible {
+  background: #e5f1df;
+  outline: 2px solid var(--accent-main);
+}
+.ascii-map-key .chapter-map-key-disc { width: 14px; height: 14px; }
+.ascii-map-key svg { color: #a87d26; }
+.chapter-card { scroll-margin-top: 18px; }
+@media (max-width: 1040px) {
+  .world-region-index { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 650px) {
+  .world-overview { padding: 14px; margin-top: 16px; }
+  .world-overview-heading h2 { font-size: 21px; }
+  .world-region-index { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .world-overview-canvas { padding: 12px; }
+  .world-atlas-grid { font-size: 11px; line-height: 15px; }
+  .chapter-zoom-world { padding: 22px 20px 14px; }
+  .chapter-map-board { font-size: 13px; line-height: 18px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .chapter-map-node .chapter-map-disc { transition: none; }
+}
