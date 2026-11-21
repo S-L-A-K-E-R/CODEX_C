@@ -12,6 +12,7 @@ data.exercises.push(
   ...(JSON.parse(readFileSync("src/data/expansion-3.json", "utf8")) as Exercise[]),
   ...(JSON.parse(readFileSync("src/data/expansion-4.json", "utf8")) as Exercise[]),
   ...(JSON.parse(readFileSync("src/data/expansion-5.json", "utf8")) as Exercise[]),
+  ...(JSON.parse(readFileSync("src/data/chapter-finales.json", "utf8")) as Exercise[]),
 );
 const fixtures = {
   ...JSON.parse(readFileSync("tests/fixtures/solutions.json", "utf8")),
@@ -20,6 +21,7 @@ const fixtures = {
   ...JSON.parse(readFileSync("tests/fixtures/expansion-3-solutions.json", "utf8")),
   ...JSON.parse(readFileSync("tests/fixtures/expansion-4-solutions.json", "utf8")),
   ...JSON.parse(readFileSync("tests/fixtures/expansion-5-solutions.json", "utf8")),
+  ...JSON.parse(readFileSync("tests/fixtures/chapter-finales-solutions.json", "utf8")),
 };
 test("curriculum identifiers, core path and gold dependencies are consistent", () => {
   assert.equal(
@@ -34,7 +36,12 @@ test("curriculum identifiers, core path and gold dependencies are consistent", (
     assert.equal(
       data.exercises.filter((e) => e.chapter === c.id && e.kind === "core")
         .length,
-      3,
+      4,
+    );
+    assert.equal(
+      data.exercises.filter((e) => e.chapter === c.id && e.finale).length,
+      1,
+      c.id + " must have exactly one finale",
     );
     assert.ok(c.example.includes("main("));
     assert.ok(c.lesson.length >= 3);
@@ -69,6 +76,7 @@ test("French offers the same lessons, exercises and input/output contracts", () 
     JSON.parse(readFileSync("src/data/expansion-3-fr.json", "utf8")),
     JSON.parse(readFileSync("src/data/expansion-4-fr.json", "utf8")),
     JSON.parse(readFileSync("src/data/expansion-5-fr.json", "utf8")),
+    JSON.parse(readFileSync("src/data/chapter-finales-fr.json", "utf8")),
   );
   assert.deepEqual(
     Object.keys(fr.chapters).sort(),
