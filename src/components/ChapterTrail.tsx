@@ -111,7 +111,7 @@ export function ChapterTrail({
                 href={
                   prerequisite
                     ? undefined
-                    : "#workspace/" + (done ? gold.id : e.id)
+                    : "#workspace/" + e.id
                 }
                 role={prerequisite ? "link" : undefined}
                 aria-disabled={prerequisite ? true : undefined}
@@ -129,15 +129,23 @@ export function ChapterTrail({
                     : undefined
                 }
               >
-                <span className="trail-disc">
-                  <Icon />
+                <span className="trail-disc-wrap">
+                  <span className="trail-disc">
+                    <Icon />
+                  </span>
+                  {done && <TinyMedals id={e.id} stats={progress.comparisons[e.id]} />}
                 </span>
                 <b>{e.title}</b>
                 <small>
                   {name} · {status}
                 </small>
-                {done && <TinyMedals stats={progress.comparisons[e.id]}/>}
               </a>
+              {done && gold && (
+                <a className="trail-gold-shortcut" href={"#workspace/" + gold.id}>
+                  <Star size={12} aria-hidden="true" />
+                  {t(mastered ? "Open gold" : "Try gold")}
+                </a>
+              )}
             </div>
           );
         })}
