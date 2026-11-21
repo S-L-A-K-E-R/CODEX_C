@@ -1,0 +1,32 @@
+{
+  "itinerary-clock": {
+    "main.c": "#include <stdio.h>\n#define GOLD 0\nint main(void) {\n    int h, m, d;\n    if (scanf(\"%d %d %d\", &h, &m, &d) != 3) return 1;\n    int total = h * 60 + m + d;\n    int clockMinutes = total % 1440;\n    printf(\"arrival=%02d:%02d\", clockMinutes / 60, clockMinutes % 60);\n#if GOLD\n    printf(\" days=%d\", total / 1440);\n#endif\n    printf(\"\\n\");\n    return 0;\n}\n"
+  },
+  "itinerary-clock-gold": {
+    "main.c": "#include <stdio.h>\n#define GOLD 1\nint main(void) {\n    int h, m, d;\n    if (scanf(\"%d %d %d\", &h, &m, &d) != 3) return 1;\n    int total = h * 60 + m + d;\n    int clockMinutes = total % 1440;\n    printf(\"arrival=%02d:%02d\", clockMinutes / 60, clockMinutes % 60);\n#if GOLD\n    printf(\" days=%d\", total / 1440);\n#endif\n    printf(\"\\n\");\n    return 0;\n}\n"
+  },
+  "collatz-trail": {
+    "main.c": "#include <stdio.h>\n#define GOLD 0\nint main(void) {\n    long long n, peak;\n    int steps = 0;\n    if (scanf(\"%lld\", &n) != 1) return 1;\n    peak = n;\n    while (n != 1) {\n        n = n % 2 == 0 ? n / 2 : 3 * n + 1;\n        steps++;\n        if (n > peak) peak = n;\n    }\n    printf(\"steps=%d\", steps);\n#if GOLD\n    printf(\" peak=%lld\", peak);\n#endif\n    printf(\"\\n\");\n    return 0;\n}\n"
+  },
+  "collatz-trail-gold": {
+    "main.c": "#include <stdio.h>\n#define GOLD 1\nint main(void) {\n    long long n, peak;\n    int steps = 0;\n    if (scanf(\"%lld\", &n) != 1) return 1;\n    peak = n;\n    while (n != 1) {\n        n = n % 2 == 0 ? n / 2 : 3 * n + 1;\n        steps++;\n        if (n > peak) peak = n;\n    }\n    printf(\"steps=%d\", steps);\n#if GOLD\n    printf(\" peak=%lld\", peak);\n#endif\n    printf(\"\\n\");\n    return 0;\n}\n"
+  },
+  "text-tile": {
+    "main.c": "#include <stdio.h>\n#define GOLD 0\nint main(void) {\n    int width, height;\n    if (scanf(\"%d %d\", &width, &height) != 2) return 1;\n    for (int y = 0; y < height; y++) {\n        for (int x = 0; x < width; x++) {\n#if GOLD\n            putchar(y == 0 || x == 0 || y == height-1 || x == width-1 ? '#' : '.');\n#else\n            putchar('#');\n#endif\n        }\n        putchar('\\n');\n    }\n    return 0;\n}\n"
+  },
+  "text-tile-gold": {
+    "main.c": "#include <stdio.h>\n#define GOLD 1\nint main(void) {\n    int width, height;\n    if (scanf(\"%d %d\", &width, &height) != 2) return 1;\n    for (int y = 0; y < height; y++) {\n        for (int x = 0; x < width; x++) {\n#if GOLD\n            putchar(y == 0 || x == 0 || y == height-1 || x == width-1 ? '#' : '.');\n#else\n            putchar('#');\n#endif\n        }\n        putchar('\\n');\n    }\n    return 0;\n}\n"
+  },
+  "adjacent-readings": {
+    "main.c": "#include <stdio.h>\n#define GOLD 0\nint main(void) {\n    int n, values[20];\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++)\n        if (scanf(\"%d\", &values[i]) != 1) return 1;\n    int pairs = 0;\n#if GOLD\n    int longest = 1, streak = 1;\n#endif\n    for (int i = 1; i < n; i++) {\n        if (values[i] == values[i-1]) {\n            pairs++;\n#if GOLD\n            streak++;\n#endif\n        }\n#if GOLD\n        else streak = 1;\n        if (streak > longest) longest = streak;\n#endif\n    }\n    printf(\"pairs=%d\", pairs);\n#if GOLD\n    printf(\" streak=%d\", longest);\n#endif\n    printf(\"\\n\");\n    return 0;\n}\n"
+  },
+  "adjacent-readings-gold": {
+    "main.c": "#include <stdio.h>\n#define GOLD 1\nint main(void) {\n    int n, values[20];\n    if (scanf(\"%d\", &n) != 1) return 1;\n    for (int i = 0; i < n; i++)\n        if (scanf(\"%d\", &values[i]) != 1) return 1;\n    int pairs = 0;\n#if GOLD\n    int longest = 1, streak = 1;\n#endif\n    for (int i = 1; i < n; i++) {\n        if (values[i] == values[i-1]) {\n            pairs++;\n#if GOLD\n            streak++;\n#endif\n        }\n#if GOLD\n        else streak = 1;\n        if (streak > longest) longest = streak;\n#endif\n    }\n    printf(\"pairs=%d\", pairs);\n#if GOLD\n    printf(\" streak=%d\", longest);\n#endif\n    printf(\"\\n\");\n    return 0;\n}\n"
+  },
+  "case-swaps": {
+    "main.c": "#include <stdio.h>\n#define GOLD 0\nint main(void) {\n    char text[31];\n    if (scanf(\"%30s\", text) != 1) return 1;\n    for (int i = 0; text[i] != '\\0'; i++) {\n        if (text[i] >= 'a' && text[i] <= 'z')\n            text[i] = (char)(text[i] - 'a' + 'A');\n#if GOLD\n        else if (text[i] >= 'A' && text[i] <= 'Z')\n            text[i] = (char)(text[i] - 'A' + 'a');\n#endif\n    }\n    printf(\"text=%s\\n\", text);\n    return 0;\n}\n"
+  },
+  "case-swaps-gold": {
+    "main.c": "#include <stdio.h>\n#define GOLD 1\nint main(void) {\n    char text[31];\n    if (scanf(\"%30s\", text) != 1) return 1;\n    for (int i = 0; text[i] != '\\0'; i++) {\n        if (text[i] >= 'a' && text[i] <= 'z')\n            text[i] = (char)(text[i] - 'a' + 'A');\n#if GOLD\n        else if (text[i] >= 'A' && text[i] <= 'Z')\n            text[i] = (char)(text[i] - 'A' + 'a');\n#endif\n    }\n    printf(\"text=%s\\n\", text);\n    return 0;\n}\n"
+  }
+}
