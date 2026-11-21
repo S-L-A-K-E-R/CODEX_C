@@ -495,7 +495,7 @@ function LearningPath({ chapterId }: { chapterId: string }) {
             <Compass size={20} />
             <p>
               {t(
-                "Start in any chapter. Its first core challenge opens the next challenge and the side quest.",
+                "Start in any chapter. The first core opens the road and side quests; finish all three regular cores to unlock the crowned finale.",
               )}
             </p>
           </div>
