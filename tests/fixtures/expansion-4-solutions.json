@@ -13,7 +13,7 @@
     "main.c": "#include <stdio.h>\nint main(void){int s,n;if(scanf(\"%d %d\",&s,&n)!=2)return 1;for(int i=0;i<n;i++)s=(s*17+11)%97;printf(\"state=%d\\n\",s);return 0;}\n"
   },
   "lcg-checkpoint-gold": {
-    "main.c": "#include <stdio.h>\nint main(void){int s,n,e=0,o=0;if(scanf(\"%d %d\",&s,&n)!=2)return 1;for(int i=0;i<n;i++){s=(s*17+11)%97;if(s%2)e++;else o++;}printf(\"state=%d even=%d odd=%d\\n\",s,e,o);return 0;}\n"
+    "main.c": "#include <stdio.h>\nint main(void){int s,n,e=0,o=0;if(scanf(\"%d %d\",&s,&n)!=2)return 1;for(int i=0;i<n;i++){s=(s*17+11)%97;if(s%2)o++;else e++;}printf(\"state=%d even=%d odd=%d\\n\",s,e,o);return 0;}\n"
   },
   "file-first-last": {
     "main.c": "#include <stdio.h>\nint main(void){int n,v;if(scanf(\"%d\",&n)!=1)return 1;FILE *f=fopen(\"readings.txt\",\"w\");if(!f)return 1;for(int i=0;i<n;i++){if(scanf(\"%d\",&v)!=1){fclose(f);return 1;}fprintf(f,\"%d\\n\",v);}if(fclose(f)!=0)return 1;f=fopen(\"readings.txt\",\"r\");if(!f)return 1;int first=0,last=0,count=0;while(fscanf(f,\"%d\",&v)==1){if(!count)first=v;last=v;count++;}fclose(f);printf(\"first=%d last=%d\\n\",first,last);return 0;}\n"
