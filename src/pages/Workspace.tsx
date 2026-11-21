@@ -27,7 +27,7 @@ import {
 import { CodeEditor } from "../components/CodeEditor.tsx";
 import { ChallengeMetrics, TinyMedals } from "../components/ChallengeMetrics.tsx";
 import { analyzeSource } from "../analysis/metrics.ts";
-import { Badge, Modal, go, External, download, AsciiCMark } from "../components/shared.tsx";
+import { Badge, Modal, go, External, download as downloadFile, AsciiCMark } from "../components/shared.tsx";
 import { useLanguage, LanguageSwitch } from "../i18n/Language.tsx";
 import { ThemeSwitch } from "../theme/Theme.tsx";
 import {
@@ -674,7 +674,7 @@ export function Workspace({ id }: { id: string }) {
                 className="icon-btn"
                 aria-label={t("Download current file")}
                 onClick={() =>
-                  download(filename, files[filename], "text/plain")
+                  downloadFile(filename, files[filename], "text/plain")
                 }
               >
                 <Download size={16} />
@@ -820,7 +820,7 @@ export function Workspace({ id }: { id: string }) {
                               className="text-button"
                               onClick={(e) => {
                                 e.preventDefault();
-                                download(name, text, "text/plain");
+                                downloadFile(name, text, "text/plain");
                               }}
                             >
                               {t("Download")}
