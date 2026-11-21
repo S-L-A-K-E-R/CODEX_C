@@ -28,17 +28,8 @@ import {
   UserRound,
   X,
 } from "lucide-react";
-import {
-  chapters,
-  exercises,
-  byChapter,
-  stages,
-  getChapter,
-  getExercise,
-  projects,
-  type Chapter,
-  type Exercise,
-} from "./data/curriculum.ts";
+import type { Chapter, Exercise } from "./data/curriculum.ts";
+import { useLanguage, LanguageSwitch } from "./i18n/Language.tsx";
 import { useProgress, updateProgress, useStorageIssue } from "./state/store.ts";
 import { now } from "./state/progress.ts";
 import { Profile, Settings, timeLabel } from "./pages/Profile.tsx";
@@ -76,21 +67,29 @@ function useRoute() {
   return route;
 }
 export default function App() {
+  const {
+    t,
+    course: { getExercise, getChapter, projects, exercises },
+  } = useLanguage();
   const route = useRoute(),
     p = useProgress(),
     issue = useStorageIssue(),
     [mobileNav, setMobileNav] = useState(false);
   useEffect(() => {
     setMobileNav(false);
+  }, [route]);
+  useEffect(() => {
     document.title =
       "CODEX C · " +
-      (nav.find((n) => n.route === route)?.label ||
-        (route.startsWith("workspace")
-          ? "Workspace"
-          : route.startsWith("lesson")
-            ? "Quick lesson"
-            : "Your learning space"));
-  }, [route]);
+      t(
+        nav.find((n) => n.route === route)?.label ||
+          (route.startsWith("workspace")
+            ? "Workspace"
+            : route.startsWith("lesson")
+              ? "Quick lesson"
+              : "Your learning space"),
+      );
+  }, [route, t]);
   if (route.startsWith("workspace/")) {
     const id = route.slice(10);
     if (
@@ -104,7 +103,7 @@ export default function App() {
           fallback={
             <div className="locked-page">
               <Code2 size={40} />
-              <p>Opening your workspace…</p>
+              <p>{t("Opening your workspace…")}</p>
             </div>
           }
         >
@@ -125,23 +124,23 @@ export default function App() {
           document.getElementById("main-content")?.focus();
         }}
       >
-        Skip to content
+        {t("Skip to content")}
       </a>
       <aside className={"sidebar " + (mobileNav ? "mobile-open" : "")}>
         <div className="sidebar-brand">
           <Brand />
           <button
             className="icon-btn mobile-only"
-            aria-label="Close navigation"
+            aria-label={t("Close navigation")}
             onClick={() => setMobileNav(false)}
           >
             <X size={19} />
           </button>
         </div>
         <div className="course-label">
-          THE C LEARNING SPACE <span>01</span>
+          {t("THE C LEARNING SPACE")} <span>01</span>
         </div>
-        <nav aria-label="Main navigation">
+        <nav aria-label={t("Main navigation")}>
           {nav.map((n) => (
             <a
               key={n.route}
@@ -155,27 +154,30 @@ export default function App() {
               aria-current={route === n.route ? "page" : undefined}
             >
               <n.icon size={19} />
-              {n.label}
+              {t(n.label)}
               {n.route === "path" && <span className="nav-dot" />}
             </a>
           ))}
         </nav>
         <div className="sidebar-lab">
-          <span className="eyebrow">GOT AN IDEA?</span>
+          <span className="eyebrow">{t("GOT AN IDEA?")}</span>
           <Terminal size={25} />
-          <b>Make a little mess.</b>
-          <p>A blank canvas for your next “what if?”.</p>
+          <b>{t("Make a little mess.")}</b>
+          <p>{t("A blank canvas for your next “what if?”.")}</p>
           <a href="#workspace/playground">
-            Open playground <ArrowUpRight size={15} />
+            {t("Open playground")} <ArrowUpRight size={15} />
           </a>
         </div>
         <div className="sidebar-bottom">
           <div className="sidebar-progress">
             <div>
-              <span>Your core path</span>
+              <span>{t("Your core path")}</span>
               <b>{Math.round((core / 30) * 100)}%</b>
             </div>
-            <ProgressBar value={(core / 30) * 100} label="Core learning path" />
+            <ProgressBar
+              value={(core / 30) * 100}
+              label={t("Core learning path")}
+            />
           </div>
           <a
             className={
@@ -184,7 +186,7 @@ export default function App() {
             href="#settings"
           >
             <SettingsIcon size={18} />
-            Settings & backups
+            {t("Settings & backups")}
           </a>
           <a className="sidebar-profile" href="#profile">
             <div className="avatar" style={{ background: p.profile.accent }}>
@@ -192,7 +194,7 @@ export default function App() {
             </div>
             <div>
               <b>{p.profile.name}</b>
-              <small>C explorer</small>
+              <small>{t("C explorer")}</small>
             </div>
             <ChevronRight size={16} />
           </a>
@@ -201,7 +203,7 @@ export default function App() {
       {mobileNav && (
         <button
           className="nav-backdrop"
-          aria-label="Close navigation"
+          aria-label={t("Close navigation")}
           onClick={() => setMobileNav(false)}
         />
       )}
@@ -210,26 +212,29 @@ export default function App() {
           <div className="breadcrumbs">
             <button
               className="icon-btn mobile-only"
-              aria-label="Open navigation"
+              aria-label={t("Open navigation")}
               onClick={() => setMobileNav(true)}
             >
               <Menu size={20} />
             </button>
-            <span>Workspace</span>
+            <span>{t("Workspace")}</span>
             <ChevronRight size={14} />
             <b>
-              {nav.find((n) => n.route === route)?.label ||
-                (route.startsWith("lesson/")
-                  ? "Quick lesson"
-                  : route === "settings"
-                    ? "Settings"
-                    : "Explore")}
+              {t(
+                nav.find((n) => n.route === route)?.label ||
+                  (route.startsWith("lesson/")
+                    ? "Quick lesson"
+                    : route === "settings"
+                      ? "Settings"
+                      : "Explore"),
+              )}
             </b>
           </div>
           <div className="topbar-right">
+            <LanguageSwitch />
             <span className="local-pill">
               <span />
-              Your progress stays with you
+              {t("Your progress stays with you")}
             </span>
             <a
               className="repository-link"
@@ -243,7 +248,7 @@ export default function App() {
             <a
               className="topbar-profile"
               href="#profile"
-              aria-label="Open your profile"
+              aria-label={t("Open your profile")}
             >
               <span className="avatar" style={{ background: p.profile.accent }}>
                 {p.profile.name.slice(0, 2).toUpperCase()}
@@ -253,7 +258,7 @@ export default function App() {
         </header>
         {issue && (
           <div role="alert" className="storage-warning">
-            {issue} <a href="#settings">Open backups →</a>
+            {t(issue)} <a href="#settings">{t("Open backups →")}</a>
           </div>
         )}
         <main id="main-content" tabIndex={-1}>
@@ -271,24 +276,24 @@ export default function App() {
             <Lesson chapter={getChapter(route.slice(7))!} />
           ) : (
             <div className="page">
-              <h1>Let’s get you back on the path.</h1>
-              <p>This page could not be found. Your progress is safe.</p>
+              <h1>{t("Let’s get you back on the path.")}</h1>
+              <p>{t("This page could not be found. Your progress is safe.")}</p>
               <a href="#path" className="btn primary">
-                Learning path
+                {t("Learning path")}
               </a>
             </div>
           )}
         </main>
         <footer className="site-footer">
           <span>
-            CODEX C <b>·</b> A little practice. A lot of possibility.
+            CODEX C <b>·</b> {t("A little practice. A lot of possibility.")}
           </span>
           <a
             href="https://github.com/S-L-A-K-E-R/C_courses"
             target="_blank"
             rel="noreferrer"
           >
-            Course materials by SLAKER <ArrowUpRight size={13} />
+            {t("Course materials by SLAKER")} <ArrowUpRight size={13} />
           </a>
         </footer>
       </div>
@@ -296,6 +301,10 @@ export default function App() {
   );
 }
 function LearningPath() {
+  const {
+    t,
+    course: { chapters, exercises, stages, getChapter, getExercise },
+  } = useLanguage();
   const p = useProgress(),
     next =
       exercises.find((e) => e.kind === "core" && !p.completed[e.id]) ||
@@ -316,16 +325,17 @@ function LearningPath() {
         <div className="hero-copy">
           <div className="eyebrow">
             <span className="tiny-dot" />
-            YOUR JOURNEY INTO C
+            {t("YOUR JOURNEY INTO C")}
           </div>
           <h1>
-            Small steps.
+            {t("Small steps.")}
             <br />
-            Real programs.
+            {t("Real programs.")}
           </h1>
           <p>
-            Understand a concept. Try an idea. Make it work.
-            <br />A path from your first line to your own projects.
+            {t("Understand a concept. Try an idea. Make it work.")}
+            <br />
+            {t("A path from your first line to your own projects.")}
           </p>
           <button
             className="btn dark"
@@ -343,12 +353,12 @@ function LearningPath() {
             }
           >
             {done || Object.keys(p.drafts).length
-              ? "Continue your journey"
-              : "Let’s write your first line"}
+              ? t("Continue your journey")
+              : t("Let’s write your first line")}
             <ArrowRight size={17} />
           </button>
           <span className="hero-footnote">
-            Your pace. No streaks. Just progress.
+            {t("Your pace. No streaks. Just progress.")}
           </span>
         </div>
         <div className="hero-accents" aria-hidden="true">
@@ -368,11 +378,11 @@ function LearningPath() {
           <span className="floating-symbol symbol-two">{"*"}</span>
           <div className="code-token">
             <Code2 size={64} strokeWidth={1.35} />
-            <small>HELLO, POSSIBILITY.</small>
+            <small>{t("HELLO, POSSIBILITY.")}</small>
           </div>
           <div className="floating-chip">
             <span />
-            Build. Run. Understand.
+            {t("Build. Run. Understand.")}
           </div>
           <div className="hero-spark">+</div>
         </div>
@@ -387,11 +397,11 @@ function LearningPath() {
               {done}
               <em> / 30</em>
             </strong>
-            <span>Core challenges</span>
+            <span>{t("Core challenges")}</span>
           </p>
           <ProgressBar
             value={(done / 30) * 100}
-            label="Completed core challenges"
+            label={t("Completed core challenges")}
           />
         </div>
         <div>
@@ -403,7 +413,7 @@ function LearningPath() {
               {gold}
               <em> / 15</em>
             </strong>
-            <span>Gold challenges</span>
+            <span>{t("Gold challenges")}</span>
           </p>
         </div>
         <div>
@@ -412,9 +422,9 @@ function LearningPath() {
           </div>
           <p>
             <strong>{timeLabel(time)}</strong>
-            <span>Focused learning</span>
+            <span>{t("Focused learning")}</span>
           </p>
-          <a href="#profile" aria-label="View your learning profile">
+          <a href="#profile" aria-label={t("View your learning profile")}>
             <ArrowUpRight size={20} />
           </a>
         </div>
@@ -423,12 +433,17 @@ function LearningPath() {
         <section className="path-main">
           <div className="section-top">
             <div>
-              <div className="eyebrow">ONE CHAPTER AT A TIME</div>
-              <h2>Your learning path</h2>
+              <div className="eyebrow">{t("ONE CHAPTER AT A TIME")}</div>
+              <h2>{t("Your learning path")}</h2>
             </div>
-            <span className="small muted">15 chapters · 60 challenges</span>
+            <span className="small muted">
+              {t("{chapters} chapters · {exercises} challenges", {
+                chapters: chapters.length,
+                exercises: exercises.length,
+              })}
+            </span>
           </div>
-          <div className="stage-tabs" aria-label="Learning stages">
+          <div className="stage-tabs" aria-label={t("Learning stages")}>
             {stages.map((s, i) => (
               <button
                 key={s}
@@ -440,10 +455,10 @@ function LearningPath() {
               >
                 <span>0{i + 1}</span>
                 {i === 0
-                  ? "Foundations"
+                  ? t("Foundations")
                   : i === 1
-                    ? "Data & memory"
-                    : "Build & explore"}
+                    ? t("Data & memory")
+                    : t("Build & explore")}
               </button>
             ))}
           </div>
@@ -462,15 +477,17 @@ function LearningPath() {
           <div className="path-next">
             <Compass size={20} />
             <p>
-              Already comfortable here? Every chapter is open to explore. Gold
-              challenges unlock after their original part.
+              {t(
+                "Already comfortable here? Every chapter is open to explore. Gold challenges unlock after their original part.",
+              )}
             </p>
           </div>
         </section>
         <aside className="path-rail">
           <section className="next-card">
             <div className="eyebrow">
-              <Leaf size={14} />A GOOD PLACE TO START
+              <Leaf size={14} />
+              {t("A GOOD PLACE TO START")}
             </div>
             <div className="next-card-icon">
               <Terminal size={30} />
@@ -483,19 +500,19 @@ function LearningPath() {
               className="btn primary"
               onClick={() => go("workspace/" + next.id)}
             >
-              {done ? "Next small win" : "Try your first challenge"}
+              {done ? t("Next small win") : t("Try your first challenge")}
               <ArrowRight size={16} />
             </button>
           </section>
           <section className="path-guide">
-            <h3>A path with room to wander.</h3>
+            <h3>{t("A path with room to wander.")}</h3>
             <div>
               <span className="legend-icon core">
                 <Check size={13} />
               </span>
               <p>
-                <b>Core path</b>
-                <small>The essentials, one step at a time.</small>
+                <b>{t("Core path")}</b>
+                <small>{t("The essentials, one step at a time.")}</small>
               </p>
             </div>
             <div>
@@ -503,8 +520,8 @@ function LearningPath() {
                 <Star size={13} />
               </span>
               <p>
-                <b>Go for gold</b>
-                <small>Same idea. A new, harder twist.</small>
+                <b>{t("Go for gold")}</b>
+                <small>{t("Same idea. A new, harder twist.")}</small>
               </p>
             </div>
             <div>
@@ -512,18 +529,18 @@ function LearningPath() {
                 <Compass size={13} />
               </span>
               <p>
-                <b>Take a side quest</b>
-                <small>Extra practice when you want it.</small>
+                <b>{t("Take a side quest")}</b>
+                <small>{t("Extra practice when you want it.")}</small>
               </p>
             </div>
           </section>
           <div className="local-note">
             <ShieldCheck size={20} />
             <p>
-              Yours to keep.
+              {t("Yours to keep.")}
               <small>
-                Your work saves in this browser.{" "}
-                <a href="#settings">Back it up anytime.</a>
+                {t("Your work saves in this browser.")}{" "}
+                <a href="#settings">{t("Back it up anytime.")}</a>
               </small>
             </p>
           </div>
@@ -541,6 +558,10 @@ function ChapterCard({
   expanded: boolean;
   onExpand: () => void;
 }) {
+  const {
+    t,
+    course: { chapters, byChapter },
+  } = useLanguage();
   const p = useProgress(),
     items = byChapter(c.id),
     done = items.filter((e) => e.kind === "core" && p.completed[e.id]).length,
@@ -566,7 +587,7 @@ function ChapterCard({
           <b>{c.title}</b>
           <small>{c.subtitle}</small>
         </span>
-        <span className="chapter-count">{done}/2 core</span>
+        <span className="chapter-count">{t("{n}/2 core", { n: done })}</span>
         <ChevronDown size={18} />
       </button>
       {expanded && (
@@ -588,8 +609,8 @@ function ChapterCard({
                 {p.lessons[c.id] ? <Check size={16} /> : <BookOpen size={17} />}
               </span>
               <div>
-                <b>A quick introduction</b>
-                <span>Read, experiment, understand</span>
+                <b>{t("A quick introduction")}</b>
+                <span>{t("Read, experiment, understand")}</span>
               </div>
               <ArrowUpRight size={16} />
             </a>
@@ -612,6 +633,10 @@ function ChapterCard({
   );
 }
 function ExerciseNode({ exercise: e }: { exercise: Exercise }) {
+  const {
+    t,
+    course: { getExercise },
+  } = useLanguage();
   const p = useProgress(),
     done = !!p.completed[e.id],
     locked = !!e.base && !p.completed[e.base];
@@ -644,14 +669,16 @@ function ExerciseNode({ exercise: e }: { exercise: Exercise }) {
         <b>{e.title}</b>
         <span>
           {done
-            ? "Completed"
+            ? t("Completed")
             : locked
-              ? "Unlock after " + getExercise(e.base!)?.title
+              ? t("Unlock after {title}", {
+                  title: getExercise(e.base!)!.title,
+                })
               : e.kind === "gold"
-                ? "A harder second part"
+                ? t("A harder second part")
                 : e.kind === "optional"
-                  ? "Optional exploration"
-                  : "Core challenge"}
+                  ? t("Optional exploration")
+                  : t("Core challenge")}
         </span>
       </div>
       {done ? <Check size={15} /> : <ChevronRight size={15} />}
@@ -659,16 +686,21 @@ function ExerciseNode({ exercise: e }: { exercise: Exercise }) {
   );
 }
 function Lesson({ chapter: c }: { chapter: Chapter }) {
+  const {
+    t,
+    course: { chapters, byChapter },
+  } = useLanguage();
   const p = useProgress(),
     first = byChapter(c.id)[0];
   return (
     <div className="page lesson-page">
       <a className="back-link" href="#path">
-        ← Back to your path
+        {t("← Back to your path")}
       </a>
       <div className="eyebrow">
-        CHAPTER {String(chapters.indexOf(c) + 1).padStart(2, "0")} · THE QUICK
-        INTRODUCTION
+        {t("CHAPTER {n} · THE QUICK INTRODUCTION", {
+          n: String(chapters.indexOf(c) + 1).padStart(2, "0"),
+        })}
       </div>
       <div className="page-heading">
         <div>
@@ -681,7 +713,7 @@ function Lesson({ chapter: c }: { chapter: Chapter }) {
           <div className="learning-objectives">
             <GraduationCap size={23} />
             <div>
-              <b>By the end, you’ll be able to work with…</b>
+              <b>{t("By the end, you’ll be able to work with…")}</b>
               <div className="concept-tags">
                 {c.concepts.map((x) => (
                   <span key={x}>{x}</span>
@@ -701,31 +733,35 @@ function Lesson({ chapter: c }: { chapter: Chapter }) {
           <section className="runnable-example">
             <div>
               <span>
-                <FileIcon />A complete example
+                <FileIcon />
+                {t("A complete example")}
               </span>
               <button
                 className="btn"
                 onClick={() => go("workspace/example:" + c.id)}
               >
                 <Play size={14} />
-                Try this code
+                {t("Try this code")}
               </button>
             </div>
             <pre>{c.example}</pre>
           </section>
           <div className="lesson-ref">
             <External href={c.reference}>
-              Explore the related course sheet
+              {t("Explore the related course sheet")}
             </External>
             <small>
-              Original course materials by SLAKER. This lesson is an adaptation
-              with new examples.
+              {t(
+                "Original course materials by SLAKER. This lesson is an adaptation with new examples.",
+              )}
             </small>
           </div>
           <div className="lesson-complete">
             <div>
-              <b>Ready to make something?</b>
-              <p>You can always keep the lesson open beside your code.</p>
+              <b>{t("Ready to make something?")}</b>
+              <p>
+                {t("You can always keep the lesson open beside your code.")}
+              </p>
             </div>
             <button
               className="btn primary"
@@ -738,8 +774,8 @@ function Lesson({ chapter: c }: { chapter: Chapter }) {
               }}
             >
               {p.lessons[c.id]
-                ? "Continue to practice"
-                : "Mark as read & practise"}
+                ? t("Continue to practice")
+                : t("Mark as read & practise")}
               <ArrowRight size={16} />
             </button>
           </div>
@@ -751,19 +787,19 @@ function Lesson({ chapter: c }: { chapter: Chapter }) {
             <ConceptLab kind={c.widget} />
           ) : (
             <section className="concept-lab">
-              <div className="eyebrow">PREDICT. RUN. EXPLAIN.</div>
-              <h3>Make the example yours.</h3>
+              <div className="eyebrow">{t("PREDICT. RUN. EXPLAIN.")}</div>
+              <h3>{t("Make the example yours.")}</h3>
               <ol>
-                <li>Predict its output before running it.</li>
-                <li>Open the example in the workspace.</li>
-                <li>Change one value or one instruction.</li>
-                <li>Explain what changed in the result.</li>
+                <li>{t("Predict its output before running it.")}</li>
+                <li>{t("Open the example in the workspace.")}</li>
+                <li>{t("Change one value or one instruction.")}</li>
+                <li>{t("Explain what changed in the result.")}</li>
               </ol>
               <button
                 className="btn dark"
                 onClick={() => go("workspace/example:" + c.id)}
               >
-                Open the experiment
+                {t("Open the experiment")}
                 <ArrowRight size={16} />
               </button>
             </section>
@@ -771,9 +807,9 @@ function Lesson({ chapter: c }: { chapter: Chapter }) {
           <div className="local-note">
             <LightBulbIcon />
             <p>
-              Small is a good start.
+              {t("Small is a good start.")}
               <small>
-                You do not need to memorise everything before trying it.
+                {t("You do not need to memorise everything before trying it.")}
               </small>
             </p>
           </div>
@@ -789,6 +825,10 @@ function LightBulbIcon() {
   return <Sparkles size={20} />;
 }
 function Practice() {
+  const {
+    t,
+    course: { exercises, chapters, getChapter },
+  } = useLanguage();
   const [search, setSearch] = useState(""),
     [chapter, setChapter] = useState("all"),
     [kind, setKind] = useState("all"),
@@ -808,31 +848,34 @@ function Practice() {
     <div className="page">
       <div className="page-heading">
         <div>
-          <div className="eyebrow">ROOM TO GET BETTER</div>
-          <h1>Find your next small challenge.</h1>
+          <div className="eyebrow">{t("ROOM TO GET BETTER")}</div>
+          <h1>{t("Find your next small challenge.")}</h1>
           <p>
-            A focused exercise, a gold challenge, or a little detour. Take your
-            pick.
+            {t(
+              "A focused exercise, a gold challenge, or a little detour. Take your pick.",
+            )}
           </p>
         </div>
-        <span className="pill">60 places to start</span>
+        <span className="pill">
+          {t("{n} challenges to explore", { n: exercises.length })}
+        </span>
       </div>
       <div className="practice-filters">
         <label className="search-box">
           <Search size={18} />
           <input
-            aria-label="Search challenges"
-            placeholder="Search challenges, skills, ideas…"
+            aria-label={t("Search challenges")}
+            placeholder={t("Search challenges, skills, ideas…")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </label>
         <select
-          aria-label="Filter by chapter"
+          aria-label={t("Filter by chapter")}
           value={chapter}
           onChange={(e) => setChapter(e.target.value)}
         >
-          <option value="all">All chapters</option>
+          <option value="all">{t("All chapters")}</option>
           {chapters.map((c) => (
             <option key={c.id} value={c.id}>
               {c.title}
@@ -840,31 +883,31 @@ function Practice() {
           ))}
         </select>
         <select
-          aria-label="Filter by status"
+          aria-label={t("Filter by status")}
           value={status}
           onChange={(e) => setStatus(e.target.value)}
         >
-          <option value="all">Any progress</option>
-          <option value="open">To explore</option>
-          <option value="completed">Completed</option>
+          <option value="all">{t("Any progress")}</option>
+          <option value="open">{t("To explore")}</option>
+          <option value="completed">{t("Completed")}</option>
         </select>
       </div>
       <div className="filter-tabs">
         {[
-          ["all", "All challenges"],
-          ["core", "Core path"],
-          ["gold", "Gold challenges"],
-          ["optional", "Side quests"],
+          ["all", t("All challenges")],
+          ["core", t("Core path")],
+          ["gold", t("Gold challenges")],
+          ["optional", t("Side quests")],
         ].map(([value, label]) => (
           <button
             className={kind === value ? "active" : ""}
             key={value}
             onClick={() => setKind(value)}
           >
-            {label}
+            {t(label)}
           </button>
         ))}
-        <span>{results.length} results</span>
+        <span>{t("{n} results", { n: results.length })}</span>
       </div>
       <div className="exercise-grid">
         {results.map((e) => (
@@ -876,7 +919,7 @@ function Practice() {
             <div>
               <Badge kind={e.kind} />
               {p.completed[e.id] ? (
-                <Done text="Done" />
+                <Done text={t("Done")} />
               ) : e.base && !p.completed[e.base] ? (
                 <LockKeyhole size={16} />
               ) : (
@@ -887,7 +930,7 @@ function Practice() {
             <h2>{e.title}</h2>
             <p>{e.brief}</p>
             <footer>
-              {e.base ? "Part II · A new twist" : "Open challenge"}
+              {e.base ? t("Part II · A new twist") : t("Open challenge")}
               <ArrowRight size={14} />
             </footer>
           </a>
@@ -896,8 +939,8 @@ function Practice() {
       {!results.length && (
         <div className="empty-state">
           <Search size={32} />
-          <h2>No challenges match just yet.</h2>
-          <p>Try a broader search or clear your filters.</p>
+          <h2>{t("No challenges match just yet.")}</h2>
+          <p>{t("Try a broader search or clear your filters.")}</p>
           <button
             className="btn"
             onClick={() => {
@@ -907,7 +950,7 @@ function Practice() {
               setStatus("all");
             }}
           >
-            Clear filters
+            {t("Clear filters")}
           </button>
         </div>
       )}
@@ -915,16 +958,21 @@ function Practice() {
   );
 }
 function Projects() {
+  const {
+    t,
+    course: { projects, getChapter },
+  } = useLanguage();
   const p = useProgress();
   return (
     <div className="page">
       <div className="page-heading">
         <div>
-          <div className="eyebrow">PUT THE PIECES TOGETHER</div>
-          <h1>Build something that feels yours.</h1>
+          <div className="eyebrow">{t("PUT THE PIECES TOGETHER")}</div>
+          <h1>{t("Build something that feels yours.")}</h1>
           <p>
-            Open projects with clear milestones. Take them one feature at a
-            time.
+            {t(
+              "Open projects with clear milestones. Take them one feature at a time.",
+            )}
           </p>
         </div>
         <FolderCode size={35} />
@@ -940,7 +988,10 @@ function Projects() {
               ) : (
                 <Trophy size={76} strokeWidth={1} />
               )}
-              <span>PROJECT 0{i + 1}</span>
+              <span>
+                {t("PROJECT 0")}
+                {i + 1}
+              </span>
             </div>
             <div className="project-detail">
               <div className="eyebrow">{project.tag}</div>
@@ -954,11 +1005,11 @@ function Projects() {
                 ))}
               </div>
               <details>
-                <summary>View the four milestones</summary>
+                <summary>{t("View the four milestones")}</summary>
                 <p className="small muted">
-                  Self-assessment: mark a milestone after you can demonstrate
-                  and explain it. Project milestones do not award challenge
-                  completion.
+                  {t(
+                    "Self-assessment: mark a milestone after you can demonstrate and explain it. Project milestones do not award challenge completion.",
+                  )}
                 </p>
                 {project.deliverables.map((d, n) => {
                   const key = project.id + ":" + n;
@@ -981,7 +1032,7 @@ function Projects() {
                   );
                 })}
                 <External href={project.source}>
-                  Original inspiration in the course repository
+                  {t("Original inspiration in the course repository")}
                 </External>
               </details>
               <div className="project-bottom">
@@ -989,7 +1040,7 @@ function Projects() {
                   className="btn dark"
                   onClick={() => go("workspace/project:" + project.id)}
                 >
-                  Open project
+                  {t("Open project")}
                   <ArrowRight size={16} />
                 </button>
                 <span>
@@ -998,7 +1049,7 @@ function Projects() {
                       (_, n) => p.milestones[project.id + ":" + n],
                     ).length
                   }
-                  /4 milestones
+                  {t("/4 milestones")}
                 </span>
               </div>
             </div>
@@ -1008,9 +1059,9 @@ function Projects() {
       <div className="info-note">
         <Compass size={22} />
         <p>
-          Next horizons: sorting visualisations, circular queues, a text
-          adventure, and native C projects with SDL or sockets. These need their
-          own lessons and review before joining the path.
+          {t(
+            "Next horizons: sorting visualisations, circular queues, a text adventure, and native C projects with SDL or sockets. These need their own lessons and review before joining the path.",
+          )}
         </p>
       </div>
     </div>

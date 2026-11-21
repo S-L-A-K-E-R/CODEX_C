@@ -1,5 +1,6 @@
 import { useEffect, useRef, type ReactNode } from "react";
 import { X, Check, ArrowUpRight } from "lucide-react";
+import { useLanguage } from "../i18n/Language.tsx";
 export const go = (route: string) => {
   location.hash = route;
 };
@@ -11,14 +12,15 @@ const asciiC = `  ++++
   ++++`;
 
 export function Brand() {
+  const { t } = useLanguage();
   return (
-    <a className="brand" href="#path" aria-label="CODEX C home">
+    <a className="brand" href="#path" aria-label={t("CODEX C home")}>
       <span className="brand-mark" aria-hidden="true">
         {asciiC}
       </span>
       <span>
         CODEX <b>C</b>
-        <small>LEARN BY MAKING</small>
+        <small>{t("LEARN BY MAKING")}</small>
       </span>
     </a>
   );
@@ -38,14 +40,15 @@ export function External({
   );
 }
 export function Badge({ kind }: { kind: string }) {
+  const { t } = useLanguage();
   return (
     <span className={"badge " + kind}>
       {kind === "core"
-        ? "Core path"
+        ? t("Core path")
         : kind === "gold"
-          ? "Gold challenge"
+          ? t("Gold challenge")
           : kind === "optional"
-            ? "Side quest"
+            ? t("Side quest")
             : kind}
     </span>
   );
@@ -79,6 +82,7 @@ export function Modal({
   children: ReactNode;
   onClose: () => void;
 }) {
+  const { t } = useLanguage();
   const ref = useRef<HTMLDialogElement>(null);
   useEffect(() => {
     ref.current?.showModal();
@@ -100,7 +104,7 @@ export function Modal({
         <h2>{title}</h2>
         <button
           className="icon-btn"
-          aria-label="Close dialog"
+          aria-label={t("Close dialog")}
           onClick={onClose}
         >
           <X size={20} />
@@ -123,10 +127,11 @@ export function download(
   setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 export function Done({ text = "Completed" }: { text?: string }) {
+  const { t } = useLanguage();
   return (
     <span className="done">
       <Check size={14} />
-      {text}
+      {t(text)}
     </span>
   );
 }

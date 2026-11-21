@@ -1,0 +1,721 @@
+{
+  "chapters": {
+    "first-programs": {
+      "title": "Tes premiers programmes",
+      "subtitle": "De la page blanche au premier affichage.",
+      "concepts": ["main", "printf", "scanf"],
+      "lesson": [
+        [
+          "Un premier programme",
+          "Un programme C commence dans main. Les instructions entre ses accolades s’exécutent dans l’ordre. La plupart se terminent par un point-virgule. Avec return 0, tu indiques que le programme s’est terminé correctement."
+        ],
+        [
+          "Afficher un message",
+          "Inclus stdio.h pour utiliser printf. Place le texte entre guillemets doubles. Dans une chaîne, la séquence \\n provoque un retour à la ligne. Respecte les majuscules et les minuscules."
+        ],
+        [
+          "Lire une valeur",
+          "scanf(\"%d\", &value) lit un entier et le place dans une variable déjà déclarée. Le symbole & donne son adresse. Vérifie la valeur renvoyée par scanf avant d’utiliser la saisie. Dans cet atelier, entre toutes les données avant de cliquer sur Exécuter."
+        ]
+      ]
+    },
+    "variables": {
+      "title": "Variables et calculs",
+      "subtitle": "Transforme des données du quotidien en résultats utiles.",
+      "concepts": ["int", "double", "division", "reste"],
+      "lesson": [
+        [
+          "Nommer une valeur",
+          "Déclare un int pour un entier ou un double pour une valeur décimale. Initialise chaque variable avant de la lire. L’affectation (=) remplace la valeur stockée."
+        ],
+        [
+          "Choisir une opération",
+          "Pour des entiers positifs ou nuls, / donne le quotient entier et % le reste. Ainsi, 125 / 60 vaut 2 et 125 % 60 vaut 5. Pour obtenir un résultat décimal, utilise au moins un opérande flottant, par exemple 3.0."
+        ],
+        [
+          "Mettre le résultat en forme",
+          "printf(\"%d\", count) affiche un int. printf(\"%.2f\", value) affiche un double avec deux chiffres après le point décimal. Pour lire un double avec scanf, utilise %lf."
+        ]
+      ]
+    },
+    "decisions": {
+      "title": "Prendre des décisions",
+      "subtitle": "Apprends à un programme à choisir la suite.",
+      "concepts": ["if", "else", "comparaisons", "opérateurs logiques"],
+      "lesson": [
+        [
+          "Poser une question fermée",
+          "Une comparaison comme score >= 10 vaut 0 (faux) ou 1 (vrai). if exécute son bloc si la condition est non nulle. else traite l’autre cas. Pour comparer deux valeurs, utilise ==."
+        ],
+        [
+          "Vérifier les limites",
+          "Pour tester un seuil, essaie une valeur juste en dessous, une valeur égale et une valeur juste au-dessus. Ordonne les conditions else if de façon à couvrir chaque intervalle."
+        ],
+        [
+          "Combiner les conditions",
+          "Avec &&, les deux conditions doivent être vraies. Avec ||, une seule suffit. ! inverse le résultat logique. Le C évalue la partie droite uniquement si elle peut encore changer le résultat."
+        ]
+      ]
+    },
+    "loops": {
+      "title": "Boucles et répétitions",
+      "subtitle": "Fais travailler plusieurs fois la même instruction.",
+      "concepts": ["for", "while", "accumulateurs", "bornes de boucle"],
+      "lesson": [
+        [
+          "Organiser la répétition",
+          "Une boucle for initialise ses variables, teste sa condition avant chaque tour et effectue une mise à jour après chaque tour. for (int i = 0; i < n; i++) parcourt les n indices de 0 à n-1."
+        ],
+        [
+          "Construire un résultat",
+          "Un accumulateur conserve une valeur d’un tour à l’autre. Initialise une somme à 0 ou un produit à 1, puis mets cette valeur à jour pour chaque élément traité."
+        ],
+        [
+          "Savoir s’arrêter",
+          "Une boucle while se répète tant que sa condition est non nulle. Vérifie qu’une valeur évolue vers la condition d’arrêt. Si ta boucle tourne indéfiniment, le bouton Arrêter interrompt le programme."
+        ]
+      ]
+    },
+    "arrays": {
+      "title": "Tableaux et collections",
+      "subtitle": "Traite toute une série de valeurs.",
+      "concepts": ["indices", "bornes", "parcours", "recherche"],
+      "lesson": [
+        [
+          "Associer un indice à chaque valeur",
+          "int values[5] réserve cinq entiers, aux indices 0 à 4. Le C ne vérifie pas automatiquement ces bornes. Un accès hors du tableau entraîne un comportement indéfini."
+        ],
+        [
+          "Parcourir une collection",
+          "Distingue la capacité du tableau du nombre d’éléments utilisés. Pour traiter ces éléments, parcours les indices de 0 jusqu’au nombre d’éléments exclu."
+        ],
+        [
+          "Chercher une valeur",
+          "Une recherche linéaire visite les éléments jusqu’à la première occurrence de la cible. Renvoie son indice à partir de 0, ou -1 en cas d’absence. Pour chercher un maximum, pars d’un élément du tableau."
+        ]
+      ]
+    },
+    "functions": {
+      "title": "Fonctions et décomposition",
+      "subtitle": "Donne un nom à une tâche pour pouvoir la réutiliser.",
+      "concepts": ["paramètres", "valeurs de retour", "portée", "prototypes"],
+      "lesson": [
+        [
+          "Nommer une opération",
+          "Une fonction possède un nom, des paramètres et un type de retour. int twice(int x) reçoit une copie de x et renvoie un entier. Chaque appel dispose de ses propres variables locales."
+        ],
+        [
+          "Répartir les tâches",
+          "Confie les entrées et les sorties à main et le calcul à une fonction dédiée. Tu peux ainsi tester le calcul indépendamment de l’affichage."
+        ],
+        [
+          "Déclarer avant l’appel",
+          "Définis la fonction avant son premier appel ou place son prototype avant main. Écrire void dans la liste des paramètres indique que la fonction n’en reçoit aucun. Les arguments sont transmis par valeur."
+        ]
+      ]
+    },
+    "pointers": {
+      "title": "Pointeurs et mémoire",
+      "subtitle": "Suis une adresse pour modifier la bonne valeur.",
+      "concepts": [
+        "adresses",
+        "déréférencement",
+        "paramètres de sortie",
+        "const"
+      ],
+      "lesson": [
+        [
+          "Stocker une adresse",
+          "Un pointeur contient une adresse. Avec int *p = &score, p pointe vers score. & obtient l’adresse et *p accède à la valeur à cette adresse. L’objet pointé doit encore exister lors de cet accès."
+        ],
+        [
+          "Modifier la variable de l’appelant",
+          "Quand on passe un pointeur, la fonction reçoit une copie de l’adresse. Elle peut donc modifier l’objet d’origine. C’est pour cela que scanf utilise &value."
+        ],
+        [
+          "Respecter les durées de vie",
+          "Ne déréférence jamais un pointeur nul ou non initialisé et ne renvoie pas l’adresse d’une variable locale. On peut calculer l’adresse juste après le dernier élément d’un tableau, mais on ne peut pas la déréférencer."
+        ]
+      ]
+    },
+    "strings": {
+      "title": "Chaînes de caractères",
+      "subtitle": "Lis, examine et transforme du texte.",
+      "concepts": [
+        "tableaux de char",
+        "caractère nul",
+        "bornes",
+        "traitement du texte"
+      ],
+      "lesson": [
+        [
+          "Terminer par un zéro",
+          "Une chaîne C est un tableau de char terminé par le caractère nul \\0. Il occupe une case entière. Pour stocker 40 caractères de texte, prévois donc 41 cases."
+        ],
+        [
+          "Limiter la lecture",
+          "fgets lit une ligne. Pour lire un mot dans char word[101], scanf(\"%100s\", word) réserve une case pour la fin de chaîne. Ici, le nom du tableau donne déjà l’adresse de son premier élément."
+        ],
+        [
+          "Parcourir la chaîne",
+          "Continue tant que text[i] != '\\0'. Compare les chaînes caractère par caractère ou avec strcmp. Le test == compare leurs adresses. Les exercices utilisent le jeu de caractères ASCII."
+        ]
+      ]
+    },
+    "structures": {
+      "title": "Structures et enregistrements",
+      "subtitle": "Regroupe les valeurs qui décrivent le même objet.",
+      "concepts": ["struct", "typedef", "champs", "enregistrements"],
+      "lesson": [
+        [
+          "Décrire un objet",
+          "Une structure rassemble des champs dont les types peuvent différer. typedef struct { int x; int y; } Point; donne le nom Point au type représentant ces deux coordonnées."
+        ],
+        [
+          "Accéder à un champ",
+          "Si p est une structure, utilise p.x. Si ptr pointe vers une structure, utilise ptr->x. L’affectation d’une structure copie ses champs, y compris les tableaux qu’elle contient."
+        ],
+        [
+          "Séparer données et opérations",
+          "Une fonction peut recevoir ou renvoyer une structure. Passe un pointeur pour modifier l’enregistrement de l’appelant. Vérifie les données au moment de la lecture et applique le format voulu à l’affichage."
+        ]
+      ]
+    },
+    "dynamic-memory": {
+      "title": "Allocation dynamique",
+      "subtitle": "Réserve la mémoire une fois la taille connue.",
+      "concepts": ["malloc", "free", "realloc", "responsabilité de libération"],
+      "lesson": [
+        [
+          "Allouer à l’exécution",
+          "malloc(n * sizeof *items) réserve de la place pour n éléments et renvoie un pointeur, ou NULL en cas d’échec. Inclus stdlib.h et vérifie le résultat. Les éléments alloués par malloc ne sont pas initialisés."
+        ],
+        [
+          "Libérer chaque allocation",
+          "Décide quelle partie du programme appellera free. Libère la mémoire une seule fois, après sa dernière utilisation. Une lecture après free, une double libération ou la perte du dernier pointeur sont des erreurs."
+        ],
+        [
+          "Agrandir un tableau",
+          "Garde le résultat de realloc dans un pointeur temporaire. Si l’agrandissement échoue, le bloc d’origine reste valide. En cas de succès, utilise le nouveau pointeur."
+        ]
+      ]
+    },
+    "modular": {
+      "title": "En-têtes et fichiers multiples",
+      "subtitle": "Donne à chaque partie du programme son propre fichier.",
+      "concepts": [
+        "en-têtes",
+        "gardes d’inclusion",
+        "unités de traduction",
+        "éditeur de liens"
+      ],
+      "lesson": [
+        [
+          "Déclarer une interface",
+          "Un en-tête présente les prototypes, les types et les constantes partagés. Un fichier .c fournit les définitions. Pour inclure ton propre en-tête, entoure son nom de guillemets doubles."
+        ],
+        [
+          "Compiler puis lier",
+          "Chaque fichier .c est compilé séparément. L’éditeur de liens assemble les fichiers objets et résout les références. Une fonction peut avoir plusieurs déclarations compatibles et, en général, une seule définition."
+        ],
+        [
+          "Protéger l’en-tête",
+          "Place #ifndef NAME_H puis #define NAME_H avant les déclarations et #endif à la fin. Garde les détails d’implémentation dans les fichiers .c. L’atelier compile tous les onglets .c ensemble."
+        ]
+      ]
+    },
+    "randomness": {
+      "title": "Hasard et simulation",
+      "subtitle": "Construis des expériences reproductibles.",
+      "concepts": ["rand", "srand", "graines", "simulation"],
+      "lesson": [
+        [
+          "Reproduire une séquence",
+          "rand() renvoie un entier pseudo-aléatoire entre 0 et RAND_MAX. Pour une même implémentation, srand(seed) permet de retrouver la même suite. Initialise la graine une seule fois au début de la simulation."
+        ],
+        [
+          "Obtenir une valeur dans un intervalle",
+          "Pour un dé de classe, 1 + rand() % 6 donne un entier entre 1 et 6. Le modulo peut introduire un biais. Les valeurs exactes peuvent différer d’une bibliothèque C à l’autre."
+        ],
+        [
+          "Tester des propriétés",
+          "Pour tester rand de façon portable, vérifie les bornes et la répétabilité après réinitialisation. Pour obtenir les mêmes résultats sur tous les compilateurs, les défis utilisent aussi un petit générateur pédagogique défini par (17*state + 43) % 100."
+        ]
+      ]
+    },
+    "files": {
+      "title": "Fichiers et persistance",
+      "subtitle": "Enregistre un résultat, puis relis-le.",
+      "concepts": ["FILE", "fopen", "fclose", "système de fichiers virtuel"],
+      "lesson": [
+        [
+          "Ouvrir et fermer un fichier",
+          "fopen renvoie un pointeur FILE ou NULL en cas d’échec. Le mode \"w\" crée ou vide le fichier, \"a\" ajoute à la fin et \"r\" ouvre en lecture. Vérifie le pointeur et ferme le flux après usage."
+        ],
+        [
+          "Lire et écrire",
+          "fprintf et fscanf fonctionnent comme printf et scanf avec un pointeur FILE en premier argument. Vérifie le résultat des lectures. fgetc renvoie un int pour pouvoir représenter tous les octets et la valeur EOF."
+        ],
+        [
+          "Travailler dans l’atelier",
+          "Le programme accède à un système de fichiers en mémoire. Chaque exécution repart des fichiers de l’éditeur. Les fichiers texte créés peuvent être téléchargés depuis l’onglet Fichiers générés. Ils ne sont pas ajoutés automatiquement à l’exécution suivante."
+        ]
+      ]
+    },
+    "recursion": {
+      "title": "Récursivité et algorithmes",
+      "subtitle": "Résous une version plus petite du même problème.",
+      "concepts": [
+        "cas de base",
+        "appel récursif",
+        "pile d’appels",
+        "complexité"
+      ],
+      "lesson": [
+        [
+          "Atteindre un cas de base",
+          "Une fonction récursive s’appelle avec un problème plus petit. Elle doit finir par atteindre un cas qui renvoie directement un résultat. Chaque appel en attente occupe de la place sur la pile."
+        ],
+        [
+          "Suivre les appels",
+          "Pour la factorielle, fact(0) vaut 1 et fact(n) vaut n*fact(n-1). Descends jusqu’à zéro, puis remonte en notant les résultats. Limite les entrées pour éviter le dépassement d’entier ou de pile."
+        ],
+        [
+          "Choisir une méthode",
+          "La récursivité convient aux arbres et aux algorithmes qui divisent un problème en sous-problèmes. Une boucle suffit souvent pour une répétition linéaire. La version récursive naïve de Fibonacci répète de nombreux calculs."
+        ]
+      ]
+    },
+    "data-structures": {
+      "title": "Piles, files et listes",
+      "subtitle": "Choisis la structure adaptée au problème.",
+      "concepts": ["LIFO", "FIFO", "maillons", "invariants"],
+      "lesson": [
+        [
+          "Dernier entré, premier sorti",
+          "Une pile dépile d’abord la valeur ajoutée en dernier. Un tableau et un compteur suffisent pour une pile de capacité fixe. Vérifie la place avant d’empiler et la présence d’un élément avant de dépiler."
+        ],
+        [
+          "Premier entré, premier sorti",
+          "Une file retire d’abord la valeur présente depuis le plus longtemps. Un indice de tête et un nombre d’éléments permettent de décrire un tampon circulaire. Le modulo ramène l’indice au début du tableau."
+        ],
+        [
+          "Relier des maillons",
+          "Chaque maillon d’une liste chaînée contient une valeur et un pointeur vers le suivant. Conserve ce pointeur avant de libérer le maillon courant. Mets à jour la tête et les liens lors des insertions et suppressions."
+        ]
+      ]
+    }
+  },
+  "exercises": {
+    "hello-world": {
+      "title": "Bonjour, le monde !",
+      "brief": "Écris ton premier programme C. Affiche exactement Hello, world! sur une seule ligne, en respectant la virgule, l’espace et le point d’exclamation.",
+      "input": "Aucune entrée.",
+      "output": "Une ligne contenant Hello, world!",
+      "hints": [
+        "Place un appel à printf dans main.",
+        "Entoure le message de guillemets doubles.",
+        "Termine le message par \\n, puis ferme les guillemets et la parenthèse et ajoute un point-virgule."
+      ]
+    },
+    "boarding-pass": {
+      "title": "Ta carte d’embarquement",
+      "brief": "Un terminal doit imprimer une carte sur trois lignes. Affiche CODEX C, puis Passenger: learner et enfin Status: ready. Respecte la ponctuation.",
+      "input": "Aucune entrée.",
+      "output": "Les trois lignes de l’exemple, dans le même ordre."
+    },
+    "personal-pass": {
+      "title": "Une carte à ton numéro",
+      "brief": "Lis le numéro du passager et reprends la carte d’embarquement. Remplace learner par le numéro lu sur la deuxième ligne.",
+      "input": "Un entier de 1 à 9999.",
+      "output": "CODEX C, Passenger: N et Status: ready, chacun sur sa ligne."
+    },
+    "tiny-banner": {
+      "title": "Une bannière miniature",
+      "brief": "Dessine la bannière de l’exemple avec du texte et des retours à la ligne. La première et la dernière ligne contiennent huit signes égal.",
+      "input": "Aucune entrée.",
+      "output": "La bannière de trois lignes de l’exemple."
+    },
+    "clockwork": {
+      "title": "À la seconde près",
+      "brief": "Un chronomètre donne une durée en secondes. Convertis-la en heures, minutes et secondes. Une durée peut dépasser 23 heures.",
+      "input": "Un entier de 0 à 1 000 000.",
+      "output": "H h M min S sec, sans ajouter de zéros devant les nombres.",
+      "hints": [
+        "Commence par calculer le nombre d’heures entières.",
+        "La division donne les unités entières et le modulo donne ce qui reste.",
+        "Une fois les heures retirées, sépare les secondes restantes en minutes et secondes."
+      ]
+    },
+    "weather-station": {
+      "title": "Station météo",
+      "brief": "Un capteur donne la température en degrés Celsius. Convertis-la en degrés Fahrenheit avec F = 1,8 × C + 32.",
+      "input": "Un réel de -100 à 100.",
+      "output": "La valeur avec un chiffre après le point, suivie d’une espace et de F."
+    },
+    "clockwork-days": {
+      "title": "À la seconde près II : les longs trajets",
+      "brief": "Adapte le chronomètre pour les longs trajets. Extrais les jours entiers, puis les heures restantes (0 à 23), les minutes et les secondes.",
+      "input": "Un entier de 0 à 10 000 000.",
+      "output": "D d H h M min S sec."
+    },
+    "cafe-bill": {
+      "title": "Partager l’addition",
+      "brief": "Trois amis commandent chacun un repas. Lis les trois prix, puis calcule le coût moyen par personne en conservant les décimales.",
+      "input": "Trois prix réels compris entre 0 et 1000.",
+      "output": "La moyenne avec deux chiffres après le point."
+    },
+    "lift-check": {
+      "title": "L’ascenseur peut-il partir ?",
+      "brief": "L’ascenseur peut transporter jusqu’à 500 kg inclus. Lis la charge et indique si le départ est autorisé.",
+      "input": "Une charge entière de 0 à 1000 kg.",
+      "output": "GO jusqu’à 500 kg inclus, sinon WAIT."
+    },
+    "ticket-machine": {
+      "title": "Le guichet du musée",
+      "brief": "L’entrée au musée est gratuite avant 6 ans, coûte 5 euros de 6 à 17 ans inclus et 10 euros à partir de 18 ans.",
+      "input": "Un âge entier de 0 à 120.",
+      "output": "Le prix entier, sans symbole monétaire."
+    },
+    "lift-check-sensors": {
+      "title": "Deux capteurs pour l’ascenseur",
+      "brief": "Le départ exige maintenant deux conditions : une charge maximale de 500 kg et un maximum de six personnes.",
+      "input": "Deux entiers : la charge (0 à 1000), puis le nombre de personnes (0 à 20).",
+      "output": "GO si les deux limites sont respectées, sinon WAIT."
+    },
+    "calendar-check": {
+      "title": "Une année particulière",
+      "brief": "Détermine si l’année est bissextile. Les multiples de 400 le sont. Parmi les autres années, les multiples de 4 le sont, sauf les multiples de 100.",
+      "input": "Une année de 1 à 9999.",
+      "output": "LEAP pour une année bissextile, sinon COMMON."
+    },
+    "countdown": {
+      "title": "Compte à rebours",
+      "brief": "Lis un entier positif. Compte à rebours jusqu’à 1, en affichant un nombre par ligne, puis affiche Lift off!",
+      "input": "Un entier de 1 à 20.",
+      "output": "Les nombres décroissants, puis Lift off! sur la dernière ligne."
+    },
+    "step-counter": {
+      "title": "Un escalier par sections",
+      "brief": "La section 1 a une marche, la section 2 en a deux et ainsi de suite. Calcule le nombre total de marches des n sections avec une boucle.",
+      "input": "Un entier n de 0 à 1000.",
+      "output": "Le nombre total de marches."
+    },
+    "step-counter-even": {
+      "title": "L’escalier II : sections paires",
+      "brief": "Reprends l’escalier en comptant uniquement les sections paires. Additionne 2 + 4 + … jusqu’à n à l’aide d’une boucle.",
+      "input": "Un entier n de 0 à 1000.",
+      "output": "La somme des numéros de section pairs."
+    },
+    "digit-counter": {
+      "title": "Combien de chiffres ?",
+      "brief": "Compte les chiffres d’un entier positif ou nul en le divisant successivement par 10. Zéro s’écrit avec un chiffre.",
+      "input": "Un entier de 0 à 1 000 000 000.",
+      "output": "Le nombre de chiffres."
+    },
+    "sensor-sum": {
+      "title": "Relevés de capteurs",
+      "brief": "Range les relevés dans un tableau, puis calcule leur somme. Certains relevés peuvent être négatifs.",
+      "input": "n (1 à 100), puis n entiers entre -1000 et 1000.",
+      "output": "La somme."
+    },
+    "lost-value": {
+      "title": "À la recherche d’une valeur",
+      "brief": "Cherche une cible dans un tableau. Affiche l’indice de sa première occurrence ou -1 si elle est absente.",
+      "input": "n (1 à 100), n entiers entre -1000 et 1000, puis la cible.",
+      "output": "L’indice à partir de 0, ou -1."
+    },
+    "sensor-range": {
+      "title": "Relevés de capteurs II : les extrêmes",
+      "brief": "Reprends les relevés et détermine le minimum et le maximum en un seul parcours.",
+      "input": "n (1 à 100), puis n entiers entre -1000 et 1000.",
+      "output": "Le minimum et le maximum séparés par une espace."
+    },
+    "reverse-readings": {
+      "title": "Rebobiner les relevés",
+      "brief": "Lis un tableau, puis affiche ses valeurs dans l’ordre inverse. Sépare-les par une seule espace, sans espace finale.",
+      "input": "n (1 à 100), puis n entiers.",
+      "output": "Le tableau en ordre inverse."
+    },
+    "linear-machine": {
+      "title": "La machine à fonctions",
+      "brief": "Écris int transform(int x), qui renvoie 3*x + 2. Dans main, lis x, appelle la fonction et affiche son résultat.",
+      "input": "Un entier de -1000 à 1000.",
+      "output": "L’entier transformé."
+    },
+    "even-predicate": {
+      "title": "Une décision réutilisable",
+      "brief": "Écris int is_even(int n). Elle renvoie 1 si n est pair et 0 sinon. Appelle-la depuis main.",
+      "input": "Un entier de -1000 à 1000.",
+      "output": "1 pour un entier pair, 0 pour un entier impair."
+    },
+    "linear-pipeline": {
+      "title": "La machine à fonctions II",
+      "brief": "Applique deux fois transform(x) = 3*x + 2. Le résultat du premier appel devient l’argument du second.",
+      "input": "Un entier de -1000 à 1000.",
+      "output": "La valeur de transform(transform(x))."
+    },
+    "greatest-common": {
+      "title": "Un diviseur en commun",
+      "brief": "Écris une fonction gcd qui calcule le PGCD avec l’algorithme d’Euclide. Remplace (a,b) par (b,a%b) jusqu’à ce que b soit nul.",
+      "input": "Deux entiers de 1 à 1 000 000.",
+      "output": "Leur plus grand commun diviseur."
+    },
+    "pointer-boost": {
+      "title": "Suivre l’adresse",
+      "brief": "Lis un entier et fais pointer un int * vers lui. Ajoute 1 à cet entier en passant par le pointeur, puis affiche la nouvelle valeur.",
+      "input": "Un entier de -1000 à 1000.",
+      "output": "La valeur mise à jour."
+    },
+    "swap-values": {
+      "title": "Échange de places",
+      "brief": "Implémente void swap(int *a, int *b) avec un entier temporaire. Passe les adresses de deux variables et affiche leurs nouvelles valeurs.",
+      "input": "Deux entiers de -1000 à 1000.",
+      "output": "Les valeurs échangées, séparées par une espace."
+    },
+    "rotate-values": {
+      "title": "Échange de places II : à trois",
+      "brief": "Écris rotate(int *a, int *b, int *c). Place l’ancien c dans a, l’ancien a dans b et l’ancien b dans c.",
+      "input": "Trois entiers de -1000 à 1000.",
+      "output": "Les trois valeurs après rotation, séparées par des espaces."
+    },
+    "pointer-distance": {
+      "title": "L’adresse du premier minimum",
+      "brief": "Lis un tableau et trouve un pointeur vers la première occurrence de son minimum. Soustrais l’adresse du premier élément pour obtenir l’indice.",
+      "input": "n (1 à 100), puis n entiers de -1000 à 1000.",
+      "output": "L’indice du premier minimum."
+    },
+    "word-length": {
+      "title": "Mesurer un mot",
+      "brief": "Calcule la longueur d’un mot sans strlen. Compte les caractères jusqu’au caractère nul.",
+      "input": "Un mot ASCII de 1 à 100 caractères, sans espaces.",
+      "output": "La longueur du mot."
+    },
+    "mirror-word": {
+      "title": "Miroir, miroir",
+      "brief": "Compare les caractères des deux extrémités d’un mot en minuscules pour savoir s’il se lit pareil dans les deux sens.",
+      "input": "Un mot de 1 à 100 lettres minuscules ASCII.",
+      "output": "YES pour un palindrome, sinon NO."
+    },
+    "word-profile": {
+      "title": "Mesurer un mot II : les voyelles",
+      "brief": "Compte les caractères du mot, puis ses voyelles (a, e, i, o, u, y). Les majuscules et les minuscules comptent de la même façon.",
+      "input": "Un mot ASCII de 1 à 100 caractères.",
+      "output": "La longueur et le nombre de voyelles, séparés par une espace."
+    },
+    "reverse-word": {
+      "title": "Retourner un mot",
+      "brief": "Inverse un mot sur place en échangeant successivement les caractères de ses deux extrémités.",
+      "input": "Un mot ASCII de 1 à 100 caractères.",
+      "output": "Le mot inversé."
+    },
+    "point-move": {
+      "title": "Déplacer un point",
+      "brief": "Représente un point par ses champs x et y. Lis sa position et une translation (dx,dy), déplace le point puis affiche sa position.",
+      "input": "Quatre entiers x y dx dy de -1000 à 1000.",
+      "output": "Les nouvelles coordonnées x et y."
+    },
+    "rectangle-record": {
+      "title": "La fiche d’un rectangle",
+      "brief": "Définis une structure Rect contenant une largeur et une hauteur entières. Calcule son aire et son périmètre.",
+      "input": "Une largeur et une hauteur entières de 1 à 1000.",
+      "output": "L’aire et le périmètre séparés par une espace."
+    },
+    "point-route": {
+      "title": "Déplacer un point II : l’itinéraire",
+      "brief": "Fais suivre un itinéraire à ton point. Lis la position initiale, puis n translations, et applique-les dans l’ordre.",
+      "input": "x y, puis n (0 à 100), puis n couples dx dy. Chaque coordonnée et déplacement est compris entre -1000 et 1000.",
+      "output": "Les coordonnées finales x et y."
+    },
+    "top-student": {
+      "title": "En tête de classe",
+      "brief": "Stocke le nom et la note de chaque élève dans une structure. Affiche l’élève qui a la meilleure note. En cas d’égalité, garde le premier.",
+      "input": "n (1 à 30), puis n couples : un nom de 1 à 31 lettres ASCII et une note de 0 à 20.",
+      "output": "Le nom et la note de l’élève retenu."
+    },
+    "dynamic-sum": {
+      "title": "De la place à la demande",
+      "brief": "Alloue un tableau de la taille demandée, lis les valeurs, calcule leur somme et libère la mémoire. Traite les échecs d’allocation.",
+      "input": "n (1 à 1000), puis n entiers de -1000 à 1000.",
+      "output": "La somme."
+    },
+    "dynamic-copy": {
+      "title": "Une copie indépendante",
+      "brief": "Alloue deux tableaux. Lis n valeurs dans le premier et copie-les dans le second. Incrémente uniquement le premier élément de la copie. Affiche les deux premiers éléments et libère les tableaux.",
+      "input": "n (1 à 1000), puis n entiers de -1000 à 1000.",
+      "output": "Le premier élément de l’original, puis celui de la copie."
+    },
+    "dynamic-append": {
+      "title": "De la place à la demande II : agrandir",
+      "brief": "Agrandis le tableau d’un élément avec realloc. Ajoute la dernière valeur et affiche la nouvelle somme. Utilise un pointeur temporaire, puis libère la mémoire.",
+      "input": "n (1 à 1000), n entiers de -1000 à 1000, puis un entier supplémentaire dans le même intervalle.",
+      "output": "La somme après l’ajout."
+    },
+    "dynamic-average": {
+      "title": "Une moyenne à la demande",
+      "brief": "Alloue un tableau de n double, lis les relevés, affiche leur moyenne avec deux décimales, puis libère la mémoire.",
+      "input": "n (1 à 1000), puis n réels entre -1000 et 1000.",
+      "output": "La moyenne avec deux chiffres après le point."
+    },
+    "split-square": {
+      "title": "Ton premier module",
+      "brief": "Place square(x) dans maths.c et sa déclaration dans maths.h. Dans main.c, lis x et affiche son carré.",
+      "input": "Un entier de -20 à 20.",
+      "output": "Le résultat de la fonction."
+    },
+    "split-absolute": {
+      "title": "Un outil pour la valeur absolue",
+      "brief": "Implémente absolute(x) dans maths.c et son prototype dans maths.h. Garde les entrées et les sorties dans main.c.",
+      "input": "Un entier de -20 à 20.",
+      "output": "Le résultat de la fonction."
+    },
+    "split-fourth": {
+      "title": "Ton premier module II",
+      "brief": "Ajoute fourth(x) au module. Appelle square deux fois pour calculer la puissance quatrième et déclare les deux fonctions dans l’en-tête.",
+      "input": "Un entier de -20 à 20.",
+      "output": "Le résultat de la fonction."
+    },
+    "split-sign": {
+      "title": "Le module de signe",
+      "brief": "Crée un module qui renvoie -1 pour un entier négatif, 0 pour zéro et 1 pour un entier positif.",
+      "input": "Un entier de -20 à 20.",
+      "output": "Le résultat de la fonction."
+    },
+    "seed-step": {
+      "title": "Un premier tirage prévisible",
+      "brief": "Calcule une étape du générateur pédagogique avec next = (17*state + 43) % 100. Observe comment l’état change après le calcul.",
+      "input": "Un état entier de 0 à 99.",
+      "output": "L’état suivant."
+    },
+    "rand-repeat": {
+      "title": "Rejouer l’expérience",
+      "brief": "Lis une graine, appelle srand(seed) et mémorise le premier rand(). Réinitialise avec la même graine et compare le nouveau tirage au premier.",
+      "input": "Une graine entière de 0 à 10 000.",
+      "output": "SAME si les tirages coïncident, sinon DIFFERENT."
+    },
+    "seed-sequence": {
+      "title": "Un premier tirage prévisible II",
+      "brief": "Produis n états du générateur. À chaque étape, mets l’état à jour, puis affiche-le.",
+      "input": "L’état initial (0 à 99) puis n (1 à 20).",
+      "output": "Un état produit par ligne."
+    },
+    "dice-range": {
+      "title": "Un dé à six faces",
+      "brief": "Transforme un entier positif ou nul en face de dé avec un reste de division. Cet exercice porte sur le calcul d’intervalle.",
+      "input": "Un entier de 0 à 1 000 000.",
+      "output": "Une valeur de 1 à 6."
+    },
+    "file-roundtrip": {
+      "title": "Une note pour plus tard",
+      "brief": "Lis un entier, écris-le dans value.txt, ferme le fichier, puis rouvre-le en lecture et affiche la valeur relue. Vérifie les deux appels à fopen.",
+      "input": "Un entier de -1000 à 1000.",
+      "output": "La valeur relue dans value.txt."
+    },
+    "file-count": {
+      "title": "Compter les caractères d’un fichier",
+      "brief": "Lis un mot, écris-le dans word.txt sans retour à la ligne, puis rouvre le fichier et compte ses octets avec fgetc jusqu’à EOF.",
+      "input": "Un mot ASCII de 1 à 100 caractères.",
+      "output": "Le nombre de caractères."
+    },
+    "file-roundtrip-many": {
+      "title": "Une note II : toute une collection",
+      "brief": "Écris n entiers dans values.txt, un par ligne. Ferme le fichier et rouvre-le pour calculer la somme à partir des valeurs relues.",
+      "input": "n (1 à 100), puis n entiers de -1000 à 1000.",
+      "output": "La somme des valeurs relues."
+    },
+    "file-append": {
+      "title": "Ajouter une ligne au journal",
+      "brief": "Ouvre journal.txt en écriture et inscris le premier mot suivi d’un retour à la ligne. Ferme le fichier, rouvre-le en ajout et inscris le deuxième mot de la même manière. Relis et affiche les deux lignes.",
+      "input": "Deux mots ASCII de 1 à 100 caractères chacun.",
+      "output": "Les deux mots, chacun sur sa ligne."
+    },
+    "recursive-factorial": {
+      "title": "Jusqu’au cas de base",
+      "brief": "Écris une fonction factorielle récursive. Pose factorial(0) = 1. Pour n positif, multiplie n par factorial(n-1).",
+      "input": "Un entier n de 0 à 12.",
+      "output": "La valeur entière de n!."
+    },
+    "recursive-digits": {
+      "title": "Retirer un chiffre",
+      "brief": "Additionne les chiffres décimaux d’un entier par récursivité. Arrête les appels lorsque l’entier vaut zéro.",
+      "input": "Un entier de 0 à 1 000 000 000.",
+      "output": "La somme de ses chiffres."
+    },
+    "factorial-series": {
+      "title": "Jusqu’au cas de base II",
+      "brief": "Réutilise la factorielle récursive pour calculer 0! + 1! + … + n!. Écris une boucle pour la somme et garde la récursivité dans factorial.",
+      "input": "Un entier n de 0 à 10.",
+      "output": "La somme des factorielles."
+    },
+    "binary-search": {
+      "title": "Retrouver plus vite",
+      "brief": "Cherche une cible par dichotomie dans un tableau strictement croissant. Compare la valeur centrale et élimine la moitié restante qui ne peut pas contenir la cible.",
+      "input": "n (1 à 100), n entiers strictement croissants de -1000 à 1000, puis une cible.",
+      "output": "L’indice de la cible à partir de 0, ou -1."
+    },
+    "stack-undo": {
+      "title": "Une pile pour annuler",
+      "brief": "Implémente une pile avec un tableau. Empile les n valeurs lues, puis dépile-les et affiche chacune sur sa propre ligne.",
+      "input": "n (0 à 100), puis n entiers.",
+      "output": "Les valeurs de la dernière empilée à la première. Aucune sortie si n vaut zéro."
+    },
+    "queue-service": {
+      "title": "Premier arrivé, premier servi",
+      "brief": "Modélise une file avec un tableau. Enfile les n tickets, puis défile-les et affiche-les dans l’ordre d’arrivée. Garde un indice de tête.",
+      "input": "n (0 à 100), puis n numéros de ticket.",
+      "output": "Un ticket par ligne dans l’ordre d’arrivée."
+    },
+    "stack-commands": {
+      "title": "Une pile pour annuler II : les commandes",
+      "brief": "Traite les commandes d’une pile. push X ajoute X. pop retire et affiche la valeur la plus récente, ou affiche EMPTY si la pile est vide. Il y a au plus 100 ajouts.",
+      "input": "q (1 à 100), puis q commandes push X ou pop. X est entier.",
+      "output": "Une ligne pour chaque commande pop."
+    },
+    "linked-chain": {
+      "title": "Construire une liste chaînée",
+      "brief": "Alloue un maillon pour chaque entier et insère-le en tête. Parcours la liste pour afficher une valeur par ligne, puis libère tous les maillons. En cas d’échec d’allocation, libère aussi les maillons déjà créés.",
+      "input": "n (0 à 100), puis n entiers.",
+      "output": "La liste de la tête à la fin, dans l’ordre inverse de la saisie."
+    }
+  },
+  "defaultHints": [
+    "Décris les étapes avec tes propres mots avant d’écrire le code C.",
+    "Suis les variables avec les données de l’exemple, une instruction à la fois.",
+    "Vérifie les cas limites des exemples. Compare ta sortie au résultat demandé, caractère par caractère."
+  ],
+  "projects": {
+    "clock-tower": {
+      "title": "La tour de l’horloge",
+      "tag": "FONDATIONS",
+      "description": "Transforme des secondes en horloge. Crée un menu, gère les changements d’heure et teste le passage des limites.",
+      "deliverables": [
+        "Convertir une durée en jours, heures, minutes et secondes.",
+        "Ajouter des secondes à une horloge en gérant le passage de minuit.",
+        "Créer un menu qui se répète jusqu’à la demande de sortie.",
+        "Écrire cinq exemples d’entrée et de sortie, dont un passage à minuit."
+      ]
+    },
+    "student-register": {
+      "title": "Le registre de classe",
+      "tag": "DONNÉES ET MÉMOIRE",
+      "description": "Crée une petite base de données pour la classe. Modélise les fiches, cherche un nom et conserve les données dans un fichier texte.",
+      "deliverables": [
+        "Représenter un élève avec son nom et sa note.",
+        "Ajouter des fiches à une collection dynamique et vérifier les allocations.",
+        "Chercher par nom et afficher les statistiques de la classe.",
+        "Sauvegarder et relire un format texte documenté en gérant les fichiers absents."
+      ]
+    },
+    "chess-engine": {
+      "title": "Un petit moteur d’échecs",
+      "tag": "PROJET DE SYNTHÈSE",
+      "description": "Dessine un échiquier en texte et valide des déplacements. Sépare les règles de l’affichage pour pouvoir enrichir le jeu.",
+      "deliverables": [
+        "Représenter et afficher un échiquier 8×8 avec un codage documenté pour les pièces.",
+        "Convertir des coordonnées comme e2 en indices valides du tableau.",
+        "Valider les déplacements de quelques pièces avant d’étendre les règles.",
+        "Séparer le plateau, les règles et l’affichage en modules. Documenter les règles encore absentes."
+      ]
+    }
+  }
+}

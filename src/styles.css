@@ -3705,3 +3705,78 @@ details[open] > summary {
   height: 34px;
   font-size: 12px;
 }
+
+.language-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  padding: 0.4rem 0.55rem;
+  min-height: 2.25rem;
+  border: 1px solid currentColor;
+  border-radius: 0.55rem;
+  color: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+.language-switch select {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.language-switch:focus-within {
+  outline: 3px solid #729d41;
+  outline-offset: 3px;
+}
+.language-flag {
+  display: inline-block;
+  width: 1.25rem;
+  height: 0.85rem;
+  border-radius: 2px;
+  box-shadow: 0 0 0 1px #0002;
+}
+.language-flag.fr {
+  background: linear-gradient(
+    to right,
+    #243f96 33.33%,
+    white 33.33% 66.66%,
+    #df333f 66.66%
+  );
+}
+.language-flag.en {
+  background:
+    linear-gradient(90deg, transparent 41%, #c73244 41% 59%, transparent 59%),
+    linear-gradient(transparent 38%, #c73244 38% 62%, transparent 62%),
+    linear-gradient(90deg, transparent 34%, white 34% 66%, transparent 66%),
+    linear-gradient(transparent 28%, white 28% 72%, transparent 72%),
+    linear-gradient(
+      34deg,
+      transparent 43%,
+      white 43% 49%,
+      #c73244 49% 53%,
+      white 53% 57%,
+      transparent 57%
+    ),
+    linear-gradient(
+      -34deg,
+      transparent 43%,
+      white 43% 49%,
+      #c73244 49% 53%,
+      white 53% 57%,
+      transparent 57%
+    ),
+    #203b79;
+}
+@media (max-width: 720px) {
+  .workspace-header .language-switch {
+    padding: 0.35rem;
+    gap: 0.2rem;
+  }
+  .workspace-header .language-switch > svg {
+    display: none;
+  }
+}

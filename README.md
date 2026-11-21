@@ -17,6 +17,7 @@ CODEX C combines a guided learning path with short lessons, runnable examples, c
 
 ## Classroom preview 0.1
 
+- French and English lessons, challenges and workspace controls. Use the flag in the top bar to switch while working.
 - 15 short lessons with complete runnable examples.
 - 60 challenges: 30 core, 15 gold second parts, and 15 optional exercises.
 - A selectable path, searchable exercise library, and three milestone-based projects.

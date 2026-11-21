@@ -26,7 +26,7 @@ import {
   STORAGE_KEY,
   type Progress,
 } from "../state/progress.ts";
-import { chapters, exercises, byChapter } from "../data/curriculum.ts";
+import { useLanguage } from "../i18n/Language.tsx";
 import {
   Modal,
   download,
@@ -39,6 +39,10 @@ export const timeLabel = (seconds: number) =>
     ? `${Math.floor(seconds / 60)}m`
     : `${Math.floor(seconds / 3600)}h ${Math.floor((seconds % 3600) / 60)}m`;
 export function Profile() {
+  const {
+    t,
+    course: { chapters, exercises, byChapter },
+  } = useLanguage();
   const p = useProgress(),
     [edit, setEdit] = useState(false),
     [name, setName] = useState(p.profile.name),
@@ -95,9 +99,11 @@ export function Profile() {
     <div className="page profile-page">
       <div className="page-heading">
         <div>
-          <div className="eyebrow">YOUR OWN LEARNING STORY</div>
-          <h1>Your progress, made visible.</h1>
-          <p>Every small success belongs here. Come back at your own pace.</p>
+          <div className="eyebrow">{t("YOUR OWN LEARNING STORY")}</div>
+          <h1>{t("Your progress, made visible.")}</h1>
+          <p>
+            {t("Every small success belongs here. Come back at your own pace.")}
+          </p>
         </div>
         <button
           className="btn"
@@ -118,7 +124,9 @@ export function Profile() {
                       (e) => e.kind === "core" && p.completed[e.id],
                     ).length,
                   })),
-                  note: "Self-reported local learning summary, not a verified academic record.",
+                  note: t(
+                    "Self-reported local learning summary, not a verified academic record.",
+                  ),
                 },
                 null,
                 2,
@@ -127,7 +135,7 @@ export function Profile() {
           }
         >
           <Download size={16} />
-          Export summary
+          {t("Export summary")}
         </button>
       </div>
       <section className="profile-identity">
@@ -135,9 +143,9 @@ export function Profile() {
           {p.profile.name.slice(0, 2).toUpperCase()}
         </div>
         <div>
-          <div className="eyebrow">C EXPLORER</div>
+          <div className="eyebrow">{t("C EXPLORER")}</div>
           <h2>{p.profile.name}</h2>
-          <p>Building understanding, one program at a time.</p>
+          <p>{t("Building understanding, one program at a time.")}</p>
         </div>
         <button
           className="btn"
@@ -148,7 +156,7 @@ export function Profile() {
           }}
         >
           <Pencil size={15} />
-          Edit profile
+          {t("Edit profile")}
         </button>
       </section>
       <div className="stats-grid four">
@@ -166,32 +174,38 @@ export function Profile() {
             label: "Lessons read",
           },
         ].map((s) => (
-          <div className="stat-card" key={s.label}>
+          <div className="stat-card" key={t(s.label)}>
             <s.icon size={19} />
             <strong>{s.value}</strong>
-            <span>{s.label}</span>
+            <span>{t(s.label)}</span>
           </div>
         ))}
       </div>
       <section className="panel heatmap-panel">
         <div className="section-top">
           <div>
-            <h2>A little history of your learning</h2>
-            <p>The last 13 weeks. No streaks to keep. No days to make up.</p>
+            <h2>{t("A little history of your learning")}</h2>
+            <p>
+              {t("The last 13 weeks. No streaks to keep. No days to make up.")}
+            </p>
           </div>
           <span className="pill">
-            {days.filter((day) => (p.activity[day] || 0) >= 60).length} active
-            days
+            {t("{n} active days", {
+              n: days.filter((day) => (p.activity[day] || 0) >= 60).length,
+            })}
           </span>
         </div>
         <div
           className="heatmap"
           role="img"
-          aria-label={`Activity in the last 91 days: ${days.filter((d) => (p.activity[d] || 0) >= 60).length} days with at least one minute of focused learning.`}
+          aria-label={t(
+            "Activity in the last 91 days: {n} days with at least one minute of focused learning.",
+            { n: days.filter((d) => (p.activity[d] || 0) >= 60).length },
+          )}
         >
           <div className="heatmap-days">
-            <span>13 weeks ago</span>
-            <span>Today</span>
+            <span>{t("13 weeks ago")}</span>
+            <span>{t("Today")}</span>
           </div>
           <div className="heatmap-cells">
             {days.map((day) => {
@@ -201,7 +215,10 @@ export function Profile() {
                   key={day}
                   tabIndex={0}
                   aria-label={`${day}: ${timeLabel(n)}`}
-                  title={`${day} · ${timeLabel(n)} focused`}
+                  title={t("{day} · {time} focused", {
+                    day,
+                    time: timeLabel(n),
+                  })}
                   className={
                     "heat-cell level-" +
                     (n >= 1800 ? 4 : n >= 600 ? 3 : n >= 60 ? 2 : n > 0 ? 1 : 0)
@@ -211,23 +228,23 @@ export function Profile() {
             })}
           </div>
           <div className="heatmap-legend">
-            <small>Less</small>
+            <small>{t("Less")}</small>
             {[0, 1, 2, 3, 4].map((n) => (
               <span key={n} className={"heat-cell level-" + n} />
             ))}
-            <small>More</small>
+            <small>{t("More")}</small>
           </div>
         </div>
         <p className="small muted">
-          Time counts while this tab is visible, focused, and you have
-          interacted in the last minute. It is an estimate, not a measure of
-          ability.
+          {t(
+            "Time counts while this tab is visible, focused, and you have interacted in the last minute. It is an estimate, not a measure of ability.",
+          )}
         </p>
       </section>
       <div className="profile-columns">
         <section className="panel">
-          <h2>Skills taking shape</h2>
-          <p>Core challenges completed in each chapter.</p>
+          <h2>{t("Skills taking shape")}</h2>
+          <p>{t("Core challenges completed in each chapter.")}</p>
           <div className="skill-bars">
             {chapters.map((c) => {
               const done = byChapter(c.id).filter(
@@ -246,33 +263,37 @@ export function Profile() {
           </div>
         </section>
         <section className="panel">
-          <h2>Small milestones</h2>
-          <p>Recognition for exploring, not for showing up every day.</p>
+          <h2>{t("Small milestones")}</h2>
+          <p>{t("Recognition for exploring, not for showing up every day.")}</p>
           <div className="badge-grid">
             {badges.map((b) => (
               <div
                 className={"achievement " + (b.earned ? "earned" : "")}
-                key={b.name}
+                key={t(b.name)}
               >
                 <b.icon size={25} />
-                <b>{b.name}</b>
-                <small>{b.description}</small>
-                <span>{b.earned ? "Earned" : "To discover"}</span>
+                <b>{t(b.name)}</b>
+                <small>{t(b.description)}</small>
+                <span>{b.earned ? t("Earned") : t("To discover")}</span>
               </div>
             ))}
           </div>
           <div className="privacy-note">
             <ShieldCheck size={20} />
             <p>
-              This profile lives in your browser. Share your exported summary
-              yourself if you want to compare experiences with a classmate.
+              {t(
+                "This profile lives in your browser. Share your exported summary yourself if you want to compare experiences with a classmate.",
+              )}
             </p>
           </div>
         </section>
       </div>
       {edit && (
-        <Modal title="Make this space yours" onClose={() => setEdit(false)}>
-          <label htmlFor="profile-name">Your display name</label>
+        <Modal
+          title={t("Make this space yours")}
+          onClose={() => setEdit(false)}
+        >
+          <label htmlFor="profile-name">{t("Your display name")}</label>
           <input
             id="profile-name"
             value={name}
@@ -280,14 +301,14 @@ export function Profile() {
             onChange={(e) => setName(e.target.value)}
           />
           <p className="small muted">
-            A nickname is enough. You do not need an account or an email.
+            {t("A nickname is enough. You do not need an account or an email.")}
           </p>
           <div className="swatches">
             {["#b8ec7d", "#a9d9ed", "#dec1ee", "#f6c898", "#f2b9c4"].map(
               (color) => (
                 <button
                   key={color}
-                  aria-label={`Profile colour ${color}`}
+                  aria-label={t("Profile colour {color}", { color })}
                   aria-pressed={accent === color}
                   style={{ background: color }}
                   onClick={() => setAccent(color)}
@@ -308,7 +329,7 @@ export function Profile() {
               setEdit(false);
             }}
           >
-            Save profile
+            {t("Save profile")}
           </button>
         </Modal>
       )}
@@ -316,6 +337,7 @@ export function Profile() {
   );
 }
 export function Settings() {
+  const { t } = useLanguage();
   const p = useProgress(),
     storageIssue = useStorageIssue(),
     [incoming, setIncoming] = useState<Progress | null>(null),
@@ -339,20 +361,22 @@ export function Settings() {
     <div className="page settings-page">
       <div className="page-heading">
         <div>
-          <div className="eyebrow">YOUR WORK. YOUR CHOICE.</div>
-          <h1>A space that works for you.</h1>
-          <p>Keep a copy of your progress and make the editor comfortable.</p>
+          <div className="eyebrow">{t("YOUR WORK. YOUR CHOICE.")}</div>
+          <h1>{t("A space that works for you.")}</h1>
+          <p>
+            {t("Keep a copy of your progress and make the editor comfortable.")}
+          </p>
         </div>
       </div>
       <section className="panel">
         <div className="settings-icon">
           <HardDrive size={22} />
         </div>
-        <h2>Keep your learning safe</h2>
+        <h2>{t("Keep your learning safe")}</h2>
         <p>
-          Your code, completed challenges, profile, and activity are saved in
-          this browser. Clearing site data or using a different browser will not
-          carry them over.
+          {t(
+            "Your code, completed challenges, profile, and activity are saved in this browser. Clearing site data or using a different browser will not carry them over.",
+          )}
         </p>
         <div className="backup-actions">
           <button
@@ -368,11 +392,11 @@ export function Settings() {
             }}
           >
             <Download size={17} />
-            Export full backup
+            {t("Export full backup")}
           </button>
           <label className="btn upload-button">
             <Upload size={17} />
-            Import a backup
+            {t("Import a backup")}
             <input
               type="file"
               accept=".json,application/json"
@@ -385,17 +409,17 @@ export function Settings() {
         </div>
         {message && (
           <p role="status" className="success-text">
-            {message}
+            {t(message)}
           </p>
         )}
         {error && (
           <p role="alert" className="error-text">
-            {error}
+            {t(error)}
           </p>
         )}
         {storageIssue && (
           <>
-            <p className="error-text">{storageIssue}</p>
+            <p className="error-text">{t(storageIssue)}</p>
             <button
               className="btn"
               onClick={() => {
@@ -403,7 +427,7 @@ export function Settings() {
                   download(
                     "codex-c-recovery.txt",
                     localStorage.getItem(STORAGE_KEY) ||
-                      "(No readable storage found)",
+                      t("(No readable storage found)"),
                     "text/plain",
                   );
                 } catch {
@@ -413,16 +437,16 @@ export function Settings() {
                 }
               }}
             >
-              Export raw recovery data
+              {t("Export raw recovery data")}
             </button>
           </>
         )}
         <div className="info-note">
           <ShieldCheck size={20} />
           <p>
-            Save this JSON file in Google Drive, OneDrive, or any folder you
-            trust. Import it on another device. Automatic cloud sync is not
-            connected in this version.
+            {t(
+              "Save this JSON file in Google Drive, OneDrive, or any folder you trust. Import it on another device. Automatic cloud sync is not connected in this version.",
+            )}
           </p>
         </div>
       </section>
@@ -430,9 +454,9 @@ export function Settings() {
         <div className="settings-icon">
           <Code2 size={22} />
         </div>
-        <h2>Your editor</h2>
+        <h2>{t("Your editor")}</h2>
         <label className="range-label" htmlFor="font-size">
-          Font size <b>{p.settings.fontSize}px</b>
+          {t("Font size")} <b>{p.settings.fontSize}px</b>
         </label>
         <input
           id="font-size"
@@ -451,52 +475,60 @@ export function Settings() {
           int small_steps = 1;{`\n`}printf("Keep going.\\n");
         </pre>
         <p className="small muted">
-          Ctrl / ⌘ + Enter: run · Ctrl / ⌘ + F: find · Tab: indent · Escape then
-          Tab: leave the editor. Panels can collapse or resize with mouse or
-          arrow keys.
+          {t(
+            "Ctrl / ⌘ + Enter: run · Ctrl / ⌘ + F: find · Tab: indent · Escape then Tab: leave the editor. Panels can collapse or resize with mouse or arrow keys.",
+          )}
         </p>
       </section>
       <section className="panel">
-        <h2>About this classroom edition</h2>
+        <h2>{t("About this classroom edition")}</h2>
         <p>
-          CODEX C 0.1 uses a real C17 compiler in your browser. The first run
-          downloads about 53 MB of compiler assets. Programs have a 3-second
-          execution limit per case, bounded output, and a virtual filesystem.
+          {t(
+            "CODEX C 0.1 uses a real C17 compiler in your browser. The first run downloads about 53 MB of compiler assets. Programs have a 3-second execution limit per case, bounded output, and a virtual filesystem.",
+          )}
         </p>
         <p>
-          No accounts, analytics, remote code execution, or competitive
-          leaderboard. Progress is a personal learning record; it can be edited
-          locally and is not suitable as tamper-proof exam grading.
+          {t(
+            "No accounts, analytics, remote code execution, or competitive leaderboard. Progress is a personal learning record; it can be edited locally and is not suitable as tamper-proof exam grading.",
+          )}
         </p>
         <p>
-          Networking, operating-system APIs, native graphics, C23-only syntax,
-          and an arbitrary-program visual debugger are outside this edition.
+          {t(
+            "Networking, operating-system APIs, native graphics, C23-only syntax, and an arbitrary-program visual debugger are outside this edition.",
+          )}
         </p>
         <External href="https://github.com/S-L-A-K-E-R/CODEX_C">
-          Project, documentation & source
+          {t("Project, documentation & source")}
         </External>
       </section>
       {incoming && (
         <Modal
-          title="Merge this learning backup?"
+          title={t("Merge this learning backup?")}
           onClose={() => setIncoming(null)}
         >
           <p>
-            Backup for <strong>{incoming.profile.name}</strong>, with{" "}
-            {Object.keys(incoming.completed).length} completed challenges and{" "}
-            {Object.keys(incoming.drafts).length} saved workspaces.
+            {t(
+              "Backup for {name}, with {completed} completed challenges and {drafts} saved workspaces.",
+              {
+                name: incoming.profile.name,
+                completed: Object.keys(incoming.completed).length,
+                drafts: Object.keys(incoming.drafts).length,
+              },
+            )}
           </p>
           <p>
-            Completed work is combined. For code and profile settings, the more
-            recently saved version wins. Activity totals use the larger daily
-            value, avoiding double counting the same backup.
+            {t(
+              "Completed work is combined. For code and profile settings, the more recently saved version wins. Activity totals use the larger daily value, avoiding double counting the same backup.",
+            )}
           </p>
           <p className="small muted">
-            A copy of your current progress will download before the merge.
+            {t(
+              "A copy of your current progress will download before the merge.",
+            )}
           </p>
           <div className="button-row">
             <button className="btn" onClick={() => setIncoming(null)}>
-              Cancel
+              {t("Cancel")}
             </button>
             <button
               className="btn primary"
@@ -517,7 +549,7 @@ export function Settings() {
                   );
               }}
             >
-              Back up & merge
+              {t("Back up & merge")}
             </button>
           </div>
         </Modal>

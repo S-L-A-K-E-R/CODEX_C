@@ -39,3 +39,40 @@ test("curriculum identifiers, core path and gold dependencies are consistent", (
     }
   }
 });
+
+test("French offers the same lessons, exercises and input/output contracts", () => {
+  const fr = JSON.parse(readFileSync("src/data/fr.json", "utf8"));
+  assert.deepEqual(
+    Object.keys(fr.chapters).sort(),
+    data.chapters.map((c) => c.id).sort(),
+  );
+  assert.deepEqual(
+    Object.keys(fr.exercises).sort(),
+    data.exercises.map((e) => e.id).sort(),
+  );
+  for (const c of data.chapters) {
+    const translated = fr.chapters[c.id];
+    assert.equal(translated.lesson.length, c.lesson.length);
+    assert.equal(translated.concepts.length, c.concepts.length);
+    for (const [heading, body] of translated.lesson) assert.ok(heading && body);
+  }
+  for (const e of data.exercises) {
+    const translated = fr.exercises[e.id];
+    assert.ok(
+      translated.title &&
+        translated.brief &&
+        translated.input &&
+        translated.output,
+    );
+    assert.equal((translated.hints ?? fr.defaultHints).length, e.hints.length);
+    for (const shared of ["starter", "tests", "base", "id", "chapter", "kind"])
+      assert.ok(!(shared in translated), e.id + " must share " + shared);
+  }
+  const messages: Record<string, string> = JSON.parse(
+    readFileSync("src/i18n/fr.json", "utf8"),
+  );
+  const slots = (text: string) =>
+    [...text.matchAll(/\{\w+\}/g)].map((m) => m[0]).sort();
+  for (const [en, translation] of Object.entries(messages))
+    assert.deepEqual(slots(translation), slots(en), en);
+});

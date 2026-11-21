@@ -1,4 +1,5 @@
 import content from "./content.json";
+import fr from "./fr.json";
 import type { TestCase } from "../runtime/types.ts";
 export interface Chapter {
   id: string;
@@ -26,18 +27,14 @@ export interface Exercise {
   base: string | null;
   reference: string;
 }
-export const chapters = content.chapters as Chapter[];
-export const exercises = content.exercises as Exercise[];
-export const stages = [
+const chapters = content.chapters as Chapter[];
+const exercises = content.exercises as Exercise[];
+const stages = [
   "Build your foundations",
   "Understand your data",
   "Think like a programmer",
 ];
-export const byChapter = (id: string) =>
-  exercises.filter((x) => x.chapter === id);
-export const getExercise = (id: string) => exercises.find((x) => x.id === id);
-export const getChapter = (id: string) => chapters.find((x) => x.id === id);
-export const projects = [
+const projects = [
   {
     id: "clock-tower",
     title: "The clock tower",
@@ -96,3 +93,41 @@ export const projects = [
       "https://github.com/S-L-A-K-E-R/C_courses/blob/main/PROJECTS/C_project_chess_v1.4.pdf",
   },
 ];
+
+function catalogue(
+  chapters: Chapter[],
+  exercises: Exercise[],
+  projectsInLanguage: typeof projects,
+) {
+  return {
+    chapters,
+    exercises,
+    stages,
+    projects: projectsInLanguage,
+    byChapter: (id: string) => exercises.filter((e) => e.chapter === id),
+    getExercise: (id: string) => exercises.find((e) => e.id === id),
+    getChapter: (id: string) => chapters.find((c) => c.id === id),
+  };
+}
+
+type ExerciseText = Pick<Exercise, "title" | "brief" | "input" | "output"> & {
+  hints?: string[];
+};
+const frenchExercises: Record<string, ExerciseText> = fr.exercises;
+export const courses = {
+  en: catalogue(chapters, exercises, projects),
+  fr: catalogue(
+    chapters.map((c) => ({
+      ...c,
+      ...fr.chapters[c.id as keyof typeof fr.chapters],
+    })),
+    exercises.map((e) => {
+      const text = frenchExercises[e.id];
+      return { ...e, ...text, hints: text.hints ?? fr.defaultHints };
+    }),
+    projects.map((p) => ({
+      ...p,
+      ...fr.projects[p.id as keyof typeof fr.projects],
+    })),
+  ),
+};

@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 import { CodeEditor } from "../components/CodeEditor.tsx";
 import { Badge, Modal, go, External, download } from "../components/shared.tsx";
-import { getExercise, getChapter, projects } from "../data/curriculum.ts";
+import { useLanguage, LanguageSwitch } from "../i18n/Language.tsx";
 import {
   readProgress,
   saveDraft,
@@ -41,6 +41,10 @@ import {
 } from "../runtime/types.ts";
 
 export function Workspace({ id }: { id: string }) {
+  const {
+    t,
+    course: { getExercise, getChapter, projects },
+  } = useLanguage();
   const exercise = getExercise(id),
     chapter = getChapter(exercise?.chapter || id.replace("example:", ""));
   const project = projects.find((p) => id === "project:" + p.id);
@@ -49,7 +53,9 @@ export function Workspace({ id }: { id: string }) {
   const title =
     exercise?.title ||
     project?.title ||
-    (chapter ? chapter.title + " · example" : "Your C playground");
+    (chapter
+      ? t("{title} · example", { title: chapter.title })
+      : t("Your C playground"));
   const starter = exercise?.starter || {
     "main.c":
       project?.starter ||
@@ -228,21 +234,23 @@ export function Workspace({ id }: { id: string }) {
   if (locked)
     return (
       <main className="locked-page">
+        <LanguageSwitch />
         <LockKeyhole size={40} />
         <Badge kind="gold" />
         <h1>{title}</h1>
         <p>
-          Complete <strong>{getExercise(exercise!.base!)?.title}</strong> to
-          unlock this harder second part.
+          {t("Complete {title} to unlock this harder second part.", {
+            title: getExercise(exercise!.base!)!.title,
+          })}
         </p>
         <button
           className="btn primary"
           onClick={() => go("workspace/" + exercise!.base)}
         >
-          Open the original challenge
+          {t("Open the original challenge")}
         </button>
         <button className="btn quiet" onClick={() => go("path")}>
-          Back to learning path
+          {t("Back to learning path")}
         </button>
       </main>
     );
@@ -251,7 +259,7 @@ export function Workspace({ id }: { id: string }) {
       <header className="workspace-header">
         <button
           className="icon-btn"
-          aria-label="Back to learning path"
+          aria-label={t("Back to learning path")}
           onClick={() => go("path")}
         >
           <ArrowLeft size={20} />
@@ -262,39 +270,41 @@ export function Workspace({ id }: { id: string }) {
         <span className="header-divider" />
         <div className="workspace-title">
           <small>
-            {chapter?.title || (project ? "PROJECT WORKSPACE" : "PLAYGROUND")}
+            {chapter?.title ||
+              (project ? t("PROJECT WORKSPACE") : t("PLAYGROUND"))}
           </small>
           <strong>{title}</strong>
         </div>
         {exercise && <Badge kind={exercise.kind} />}
         <div className="workspace-actions">
+          <LanguageSwitch />
           <button
             className="btn icon-mobile"
-            title="Run code (Ctrl or Command + Enter)"
+            title={t("Run code (Ctrl or Command + Enter)")}
             disabled={busy}
             onClick={() => void run()}
           >
             <Play size={16} />
-            <span>Run code</span>
+            <span>{t("Run code")}</span>
           </button>
           {busy ? (
             <button className="btn danger" onClick={stopProgram}>
               <Square size={15} />
-              Stop
+              {t("Stop")}
             </button>
           ) : exercise ? (
             <button className="btn primary" onClick={() => void run(true)}>
               <CheckCheck size={17} />
-              <span>Check solution</span>
+              <span>{t("Check solution")}</span>
             </button>
           ) : null}
         </div>
       </header>
       <div className="workspace-body">
-        <nav className="activity-bar" aria-label="Workspace panels">
+        <nav className="activity-bar" aria-label={t("Workspace panels")}>
           <button
             className={"icon-btn " + (panel ? "selected" : "")}
-            aria-label={panel ? "Hide instructions" : "Show instructions"}
+            aria-label={panel ? t("Hide instructions") : t("Show instructions")}
             aria-expanded={panel}
             onClick={() => setPanel(!panel)}
           >
@@ -302,7 +312,7 @@ export function Workspace({ id }: { id: string }) {
           </button>
           <button
             className="icon-btn"
-            aria-label="Show hints"
+            aria-label={t("Show hints")}
             onClick={() => {
               setPanel(true);
               setBriefTab("hints");
@@ -312,7 +322,7 @@ export function Workspace({ id }: { id: string }) {
           </button>
           <button
             className="icon-btn"
-            aria-label="Focus editor"
+            aria-label={t("Focus editor")}
             onClick={() => {
               setPanel(false);
               setConsoleOpen(false);
@@ -323,7 +333,7 @@ export function Workspace({ id }: { id: string }) {
           <span />
           <button
             className="icon-btn"
-            aria-label="Show console"
+            aria-label={t("Show console")}
             onClick={() => setConsoleOpen(!consoleOpen)}
           >
             <Terminal size={20} />
@@ -333,22 +343,22 @@ export function Workspace({ id }: { id: string }) {
           <>
             <aside className="brief-panel" style={{ width }}>
               <div className="brief-tabs">
-                {["brief", "lesson", "hints"].map((t) => (
+                {["brief", "lesson", "hints"].map((tab) => (
                   <button
-                    key={t}
-                    className={briefTab === t ? "active" : ""}
-                    onClick={() => setBriefTab(t)}
+                    key={tab}
+                    className={briefTab === tab ? "active" : ""}
+                    onClick={() => setBriefTab(tab)}
                   >
-                    {t === "brief"
-                      ? "Your challenge"
-                      : t === "lesson"
-                        ? "Quick lesson"
-                        : "Hints"}
+                    {tab === "brief"
+                      ? t("Your challenge")
+                      : tab === "lesson"
+                        ? t("Quick lesson")
+                        : t("Hints")}
                   </button>
                 ))}
                 <button
                   className="icon-btn"
-                  aria-label="Collapse instructions"
+                  aria-label={t("Collapse instructions")}
                   onClick={() => setPanel(false)}
                 >
                   <PanelLeftClose size={16} />
@@ -359,51 +369,62 @@ export function Workspace({ id }: { id: string }) {
                   <>
                     <div className="eyebrow">
                       {exercise
-                        ? "THE GOAL"
+                        ? t("THE GOAL")
                         : project
-                          ? "PROJECT BRIEF"
-                          : "ROOM TO EXPERIMENT"}
+                          ? t("PROJECT BRIEF")
+                          : t("ROOM TO EXPERIMENT")}
                     </div>
                     <h1>{title}</h1>
                     <p>
                       {exercise?.brief ||
                         project?.description ||
-                        "Try an idea, run a small program, and see what happens. Your work stays in this browser."}
+                        t(
+                          "Try an idea, run a small program, and see what happens. Your work stays in this browser.",
+                        )}
                     </p>
                     {exercise ? (
                       <>
                         <section>
-                          <h3>What your program receives</h3>
+                          <h3>{t("What your program receives")}</h3>
                           <p>{exercise.input}</p>
                         </section>
                         <section>
-                          <h3>What it should produce</h3>
+                          <h3>{t("What it should produce")}</h3>
                           <p>{exercise.output}</p>
                         </section>
                         <div className="example">
-                          <div>EXAMPLE INPUT</div>
-                          <pre>{exercise.tests[0].input || "(no input)"}</pre>
-                          <div>EXPECTED OUTPUT</div>
-                          <pre>{exercise.tests[0].output || "(no output)"}</pre>
+                          <div>{t("EXAMPLE INPUT")}</div>
+                          <pre>
+                            {exercise.tests[0].input || t("(no input)")}
+                          </pre>
+                          <div>{t("EXPECTED OUTPUT")}</div>
+                          <pre>
+                            {exercise.tests[0].output || t("(no output)")}
+                          </pre>
                         </div>
                         {exercise.tests.length > 1 && (
                           <details>
                             <summary>
-                              See all {exercise.tests.length} cases
+                              {t("See all {n} cases", {
+                                n: exercise.tests.length,
+                              })}
                             </summary>
-                            {exercise.tests.slice(1).map((t, i) => (
+                            {exercise.tests.slice(1).map((test, i) => (
                               <div className="example" key={i}>
-                                <div>{t.label} · INPUT</div>
-                                <pre>{t.input || "(no input)"}</pre>
-                                <div>OUTPUT</div>
-                                <pre>{t.output || "(no output)"}</pre>
+                                <div>
+                                  {t(test.label)} · {t("INPUT")}
+                                </div>
+                                <pre>{test.input || t("(no input)")}</pre>
+                                <div>{t("OUTPUT")}</div>
+                                <pre>{test.output || t("(no output)")}</pre>
                               </div>
                             ))}
                           </details>
                         )}
                         <p className="small muted">
-                          Print only the requested output. One final newline is
-                          optional. Other spaces and letter case matter.
+                          {t(
+                            "Print only the requested output. One final newline is optional. Other spaces and letter case matter.",
+                          )}
                         </p>
                       </>
                     ) : project ? (
@@ -414,16 +435,16 @@ export function Workspace({ id }: { id: string }) {
                       </ol>
                     ) : (
                       <p>
-                        Add .c, .h, and .txt files with the + button. All .c
-                        files are compiled together. Enter program input in the
-                        console before running.
+                        {t(
+                          "Add .c, .h, and .txt files with the + button. All .c files are compiled together. Enter program input in the console before running.",
+                        )}
                       </p>
                     )}
                     {(exercise || chapter) && (
                       <External
                         href={exercise?.reference || chapter!.reference}
                       >
-                        Related course material
+                        {t("Related course material")}
                       </External>
                     )}
                   </>
@@ -431,7 +452,7 @@ export function Workspace({ id }: { id: string }) {
                   <>
                     {chapter ? (
                       <>
-                        <div className="eyebrow">KEEP THIS NEARBY</div>
+                        <div className="eyebrow">{t("KEEP THIS NEARBY")}</div>
                         {chapter.lesson.map(([heading, body]) => (
                           <section key={heading}>
                             <h3>{heading}</h3>
@@ -442,28 +463,33 @@ export function Workspace({ id }: { id: string }) {
                       </>
                     ) : (
                       <>
-                        <h3>A few essentials</h3>
+                        <h3>{t("A few essentials")}</h3>
                         <p>
-                          Execution starts in main. Include stdio.h for printf
-                          and scanf. A semicolon ends most statements. Try a
-                          small change, then run again.
+                          {t(
+                            "Execution starts in main. Include stdio.h for printf and scanf. A semicolon ends most statements. Try a small change, then run again.",
+                          )}
                         </p>
                       </>
                     )}
                   </>
                 ) : (
                   <>
-                    <div className="eyebrow">A NUDGE, WHEN YOU NEED IT</div>
-                    <h2>You can work this out.</h2>
+                    <div className="eyebrow">
+                      {t("A NUDGE, WHEN YOU NEED IT")}
+                    </div>
+                    <h2>{t("You can work this out.")}</h2>
                     <p>
-                      Reveal one hint at a time. Using a hint never costs
-                      progress.
+                      {t(
+                        "Reveal one hint at a time. Using a hint never costs progress.",
+                      )}
                     </p>
                     {(
                       exercise?.hints || [
-                        "Break the problem into one small step.",
-                        "Print intermediate values to understand what changes.",
-                        "Check each boundary and each return value.",
+                        t("Break the problem into one small step."),
+                        t(
+                          "Print intermediate values to understand what changes.",
+                        ),
+                        t("Check each boundary and each return value."),
                       ]
                     )
                       .slice(0, hintCount)
@@ -479,7 +505,9 @@ export function Workspace({ id }: { id: string }) {
                       onClick={() => setHintCount(hintCount + 1)}
                     >
                       <Lightbulb size={16} />
-                      {hintCount >= 3 ? "All hints revealed" : "Reveal a hint"}
+                      {hintCount >= 3
+                        ? t("All hints revealed")
+                        : t("Reveal a hint")}
                     </button>
                   </>
                 )}
@@ -488,7 +516,7 @@ export function Workspace({ id }: { id: string }) {
             <div
               className="splitter vertical"
               role="separator"
-              aria-label="Resize instructions"
+              aria-label={t("Resize instructions")}
               aria-orientation="vertical"
               aria-valuemin={260}
               aria-valuemax={650}
@@ -515,12 +543,12 @@ export function Workspace({ id }: { id: string }) {
             />
           </>
         )}
-        <main className="editor-pane" aria-label="Coding workspace">
+        <main className="editor-pane" aria-label={t("Coding workspace")}>
           <div className="file-tabs">
             {!panel && (
               <button
                 className="icon-btn"
-                aria-label="Show instructions"
+                aria-label={t("Show instructions")}
                 onClick={() => setPanel(true)}
               >
                 <PanelLeftOpen size={17} />
@@ -538,7 +566,7 @@ export function Workspace({ id }: { id: string }) {
             ))}
             <button
               className="icon-btn"
-              aria-label="Add file"
+              aria-label={t("Add file")}
               onClick={() => setNewFile(true)}
             >
               <Plus size={16} />
@@ -546,7 +574,7 @@ export function Workspace({ id }: { id: string }) {
             <div className="file-tools">
               <button
                 className="icon-btn"
-                aria-label="Download current file"
+                aria-label={t("Download current file")}
                 onClick={() =>
                   download(filename, files[filename], "text/plain")
                 }
@@ -555,7 +583,7 @@ export function Workspace({ id }: { id: string }) {
               </button>
               <button
                 className="icon-btn"
-                aria-label="Reset this workspace"
+                aria-label={t("Reset this workspace")}
                 onClick={() => setReset(true)}
               >
                 <RotateCcw size={15} />
@@ -578,7 +606,7 @@ export function Workspace({ id }: { id: string }) {
           <div
             className="splitter horizontal"
             role="separator"
-            aria-label="Resize console"
+            aria-label={t("Resize console")}
             aria-orientation="horizontal"
             aria-valuemin={150}
             aria-valuemax={500}
@@ -613,7 +641,7 @@ export function Workspace({ id }: { id: string }) {
           <section
             className={"console " + (consoleOpen ? "open" : "")}
             style={{ height: consoleOpen ? height : 40 }}
-            aria-label="Program output and input"
+            aria-label={t("Program output and input")}
           >
             <div className="console-tabs">
               {[
@@ -621,28 +649,28 @@ export function Workspace({ id }: { id: string }) {
                 "input",
                 ...(exercise ? ["checks"] : []),
                 "files",
-              ].map((t) => (
+              ].map((tab) => (
                 <button
-                  key={t}
-                  className={outputTab === t ? "active" : ""}
+                  key={tab}
+                  className={outputTab === tab ? "active" : ""}
                   onClick={() => {
-                    setOutputTab(t);
+                    setOutputTab(tab);
                     setConsoleOpen(true);
                   }}
                 >
-                  {t === "output" ? (
+                  {tab === "output" ? (
                     <Terminal size={14} />
-                  ) : t === "files" ? (
+                  ) : tab === "files" ? (
                     <Files size={14} />
                   ) : null}
-                  {t === "input"
-                    ? "Input (stdin)"
-                    : t === "checks"
-                      ? "Test results"
-                      : t === "files"
-                        ? "Generated files"
-                        : "Console"}
-                  {t === "checks" && checks.length > 0 && (
+                  {tab === "input"
+                    ? t("Input (stdin)")
+                    : tab === "checks"
+                      ? t("Test results")
+                      : tab === "files"
+                        ? t("Generated files")
+                        : t("Console")}
+                  {tab === "checks" && checks.length > 0 && (
                     <b>
                       {checks.filter((c) => c.passed).length}/{checks.length}
                     </b>
@@ -651,7 +679,9 @@ export function Workspace({ id }: { id: string }) {
               ))}
               <button
                 className="icon-btn"
-                aria-label={consoleOpen ? "Collapse console" : "Expand console"}
+                aria-label={
+                  consoleOpen ? t("Collapse console") : t("Expand console")
+                }
                 onClick={() => setConsoleOpen(!consoleOpen)}
               >
                 {consoleOpen ? (
@@ -666,8 +696,9 @@ export function Workspace({ id }: { id: string }) {
                 {outputTab === "input" ? (
                   <>
                     <label className="small" htmlFor="stdin">
-                      Provide all input before running. Whitespace separates
-                      numbers; newlines separate lines.
+                      {t(
+                        "Provide all input before running. Whitespace separates numbers; newlines separate lines.",
+                      )}
                     </label>
                     <textarea
                       id="stdin"
@@ -677,7 +708,7 @@ export function Workspace({ id }: { id: string }) {
                         edited.current = true;
                         setInput(e.target.value.slice(0, 50000));
                       }}
-                      placeholder="Type the input for your program here…"
+                      placeholder={t("Type the input for your program here…")}
                     />
                   </>
                 ) : outputTab === "files" ? (
@@ -694,7 +725,7 @@ export function Workspace({ id }: { id: string }) {
                                 download(name, text, "text/plain");
                               }}
                             >
-                              Download
+                              {t("Download")}
                             </button>
                           </summary>
                           <pre>{text}</pre>
@@ -702,8 +733,9 @@ export function Workspace({ id }: { id: string }) {
                       ))
                     ) : (
                       <p className="console-placeholder">
-                        Files written by your program will appear here after it
-                        finishes. Each run starts fresh.
+                        {t(
+                          "Files written by your program will appear here after it finishes. Each run starts fresh.",
+                        )}
                       </p>
                     )}
                   </>
@@ -712,19 +744,20 @@ export function Workspace({ id }: { id: string }) {
                     {busy ? (
                       <div className="running">
                         <LoaderCircle size={16} className="spin" />
-                        {phase}
+                        {t(phase)}
                       </div>
                     ) : null}
                     {response?.error && (
-                      <p className="error-text">{response.error}</p>
+                      <p className="error-text">{t(response.error)}</p>
                     )}
                     {response?.diagnostics && (
                       <pre className="diagnostics">{response.diagnostics}</pre>
                     )}
                     {!busy && !checks.length && (
                       <p className="console-placeholder">
-                        Ready to try? “Check solution” runs your program against
-                        every case.
+                        {t(
+                          "Ready to try? “Check solution” runs your program against every case.",
+                        )}
                       </p>
                     )}
                     {checks.map((c, i) => (
@@ -735,24 +768,24 @@ export function Workspace({ id }: { id: string }) {
                         key={i}
                       >
                         <summary>
-                          {c.passed ? <Check size={15} /> : <X size={15} />}Case{" "}
-                          {i + 1}
+                          {c.passed ? <Check size={15} /> : <X size={15} />}
+                          {t("Case {n}", { n: i + 1 })}
                           <span>
-                            {c.passed ? "Passed" : "Needs another look"}
+                            {c.passed ? t("Passed") : t("Needs another look")}
                           </span>
                         </summary>
                         <div className="comparison">
                           <div>
-                            <small>INPUT</small>
-                            <pre>{c.input || "(none)"}</pre>
+                            <small>{t("INPUT")}</small>
+                            <pre>{c.input || t("(none)")}</pre>
                           </div>
                           <div>
-                            <small>EXPECTED</small>
-                            <pre>{c.expected || "(empty)"}</pre>
+                            <small>{t("EXPECTED")}</small>
+                            <pre>{c.expected || t("(empty)")}</pre>
                           </div>
                           <div>
-                            <small>YOUR OUTPUT</small>
-                            <pre>{c.stdout || "(empty)"}</pre>
+                            <small>{t("YOUR OUTPUT")}</small>
+                            <pre>{c.stdout || t("(empty)")}</pre>
                           </div>
                         </div>
                         {c.stderr && <pre>{c.stderr}</pre>}
@@ -762,15 +795,19 @@ export function Workspace({ id }: { id: string }) {
                       <div className="completion-banner">
                         <CheckCheck size={18} />
                         <div>
-                          <b>One more thing you can do.</b>
+                          <b>{t("One more thing you can do.")}</b>
                           <span>
                             {exercise?.kind === "core"
-                              ? "Core challenge complete. Your progress is saved."
-                              : "Challenge complete. Your progress is saved."}
+                              ? t(
+                                  "Core challenge complete. Your progress is saved.",
+                                )
+                              : t(
+                                  "Challenge complete. Your progress is saved.",
+                                )}
                           </span>
                         </div>
                         <button onClick={() => go("path")}>
-                          Back to path →
+                          {t("Back to path →")}
                         </button>
                       </div>
                     )}
@@ -780,11 +817,11 @@ export function Workspace({ id }: { id: string }) {
                     {busy ? (
                       <div className="running">
                         <LoaderCircle size={16} className="spin" />
-                        {phase}
+                        {t(phase)}
                       </div>
                     ) : null}
                     {response?.error && (
-                      <p className="error-text">{response.error}</p>
+                      <p className="error-text">{t(response.error)}</p>
                     )}
                     {response?.diagnostics && (
                       <pre className="diagnostics">{response.diagnostics}</pre>
@@ -799,10 +836,12 @@ export function Workspace({ id }: { id: string }) {
                     ))}
                     {!busy && !response && (
                       <div className="console-placeholder">
-                        <span className="prompt-symbol">❯</span>Your next small
-                        win starts with Run.
+                        <span className="prompt-symbol">❯</span>
+                        {t("Your next small win starts with Run.")}
                         <small>
-                          Ctrl / ⌘ + Enter to run · No installation needed
+                          {t(
+                            "Ctrl / ⌘ + Enter to run · No installation needed",
+                          )}
                         </small>
                       </div>
                     )}
@@ -817,28 +856,29 @@ export function Workspace({ id }: { id: string }) {
         <span className={storageIssue ? "error-text" : "save-indicator"}>
           <span />
           {storageIssue
-            ? "Not saved to browser"
+            ? t("Not saved to browser")
             : saved
-              ? "Saved in this browser"
-              : "Saving…"}
+              ? t("Saved in this browser")
+              : t("Saving…")}
         </span>
         <span className="runtime-status">
-          {busy ? phase : "C17 · WebAssembly · Local execution"}
+          {busy ? t(phase) : t("C17 · WebAssembly · Local execution")}
         </span>
-        <span>Esc then Tab to leave editor</span>
+        <span>{t("Esc then Tab to leave editor")}</span>
       </footer>
       {reset && (
         <Modal
-          title="Start this workspace again?"
+          title={t("Start this workspace again?")}
           onClose={() => setReset(false)}
         >
           <p>
-            This replaces the current code and input with the starter. Your
-            completed challenges stay completed.
+            {t(
+              "This replaces the current code and input with the starter. Your completed challenges stay completed.",
+            )}
           </p>
           <div className="button-row">
             <button className="btn" onClick={() => setReset(false)}>
-              Keep my code
+              {t("Keep my code")}
             </button>
             <button
               className="btn danger"
@@ -854,14 +894,14 @@ export function Workspace({ id }: { id: string }) {
                 setReset(false);
               }}
             >
-              Reset workspace
+              {t("Reset workspace")}
             </button>
           </div>
         </Modal>
       )}
       {newFile && (
-        <Modal title="Add a file" onClose={() => setNewFile(false)}>
-          <label htmlFor="new-file">Filename</label>
+        <Modal title={t("Add a file")} onClose={() => setNewFile(false)}>
+          <label htmlFor="new-file">{t("Filename")}</label>
           <input
             id="new-file"
             autoFocus
@@ -872,12 +912,13 @@ export function Workspace({ id }: { id: string }) {
             }}
           />
           <p className="small muted">
-            .c files compile together. .h files hold declarations. .txt files
-            become program data.
+            {t(
+              ".c files compile together. .h files hold declarations. .txt files become program data.",
+            )}
           </p>
-          {fileError && <p className="error-text">{fileError}</p>}
+          {fileError && <p className="error-text">{t(fileError)}</p>}
           <button className="btn primary" onClick={addFile}>
-            Create file
+            {t("Create file")}
           </button>
         </Modal>
       )}

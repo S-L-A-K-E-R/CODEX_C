@@ -1,4 +1,6 @@
 import { useEffect, useRef } from "react";
+import { useLanguage } from "../i18n/Language.tsx";
+import { frenchEditor } from "../i18n/editor.ts";
 import { Compartment, EditorState } from "@codemirror/state";
 import {
   EditorView,
@@ -161,6 +163,8 @@ export function CodeEditor({
   diagnostics: string;
   onRun: () => void;
 }) {
+  const { language, t } = useLanguage();
+  const locale = useRef(new Compartment());
   const host = useRef<HTMLDivElement>(null),
     view = useRef<EditorView | null>(null),
     callback = useRef(onChange),
@@ -220,10 +224,7 @@ export function CodeEditor({
           size.current.of(
             EditorView.theme({ "&": { fontSize: fontSize + "px" } }),
           ),
-          EditorView.contentAttributes.of({
-            "aria-label": `C code editor: ${filename}`,
-            spellcheck: "false",
-          }),
+          locale.current.of([]),
           EditorView.updateListener.of((update) => {
             if (update.docChanged)
               callback.current(update.state.doc.toString());
@@ -237,6 +238,17 @@ export function CodeEditor({
       view.current = null;
     };
   }, [filename]);
+  useEffect(() => {
+    view.current?.dispatch({
+      effects: locale.current.reconfigure([
+        EditorState.phrases.of(language === "fr" ? frenchEditor : {}),
+        EditorView.contentAttributes.of({
+          "aria-label": t("C code editor: {name}", { name: filename }),
+          spellcheck: "false",
+        }),
+      ]),
+    });
+  }, [filename, language, t]);
   useEffect(() => {
     const editor = view.current;
     if (editor && editor.state.doc.toString() !== value)
