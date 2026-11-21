@@ -1,0 +1,112 @@
+{
+  "itinerary-clock": {
+    "title": "L'horloge de l'itinéraire",
+    "brief": "Lis une heure et une minute de départ, puis une durée en minutes. Calcule et affiche l'heure d'arrivée sur 24 h, en revenant à zéro après minuit.",
+    "input": "Three integers: hour (0–23), minute (0–59), duration (0–3000).",
+    "output": "arrival=HH:MM, sur deux chiffres pour heure et minute.",
+    "hints": [
+      "Convert the departure time into total minutes.",
+      "Add the duration and take remainder modulo 1440.",
+      "Use /60, %60, and printf %02d to format HH:MM."
+    ]
+  },
+  "itinerary-clock-gold": {
+    "title": "L'itinéraire : jours écoulés",
+    "brief": "Conserve l'heure d'arrivée et indique aussi le nombre de jours complets écoulés depuis le départ.",
+    "input": "Les mêmes trois entiers.",
+    "output": "arrival=HH:MM days=D, avec D égal au nombre de passages à minuit.",
+    "hints": [
+      "Keep the complete minute total before taking its remainder.",
+      "Whole days equal total / 1440.",
+      "Print days after the existing arrival time."
+    ]
+  },
+  "collatz-trail": {
+    "title": "Le chemin de Collatz",
+    "brief": "À partir de N, répète : s'il est pair, divise par 2 ; sinon, multiplie par 3 et ajoute 1. Compte les étapes jusqu'à 1 avec une boucle.",
+    "input": "An integer N in [1,1000].",
+    "output": "steps=S.",
+    "hints": [
+      "Use a while loop that stops when value == 1.",
+      "Test parity with value % 2.",
+      "Increment steps after each transformation."
+    ]
+  },
+  "collatz-trail-gold": {
+    "title": "Le chemin de Collatz : sommet",
+    "brief": "Conserve le nombre d'étapes et indique la plus grande valeur atteinte pendant toute la suite, valeur initiale incluse.",
+    "input": "Le même entier N.",
+    "output": "steps=S peak=P.",
+    "hints": [
+      "Initialise peak to the starting number.",
+      "After each update, compare the new value against peak.",
+      "Print peak after the existing step count."
+    ]
+  },
+  "text-tile": {
+    "title": "Dessiner une tuile",
+    "brief": "Lis une largeur W et une hauteur H. Avec deux boucles imbriquées, affiche H lignes de W caractères '#'.",
+    "input": "Two integers W and H in [1,8].",
+    "output": "Exactement H lignes de W caractères '#'.",
+    "hints": [
+      "The outer loop controls the rows.",
+      "The inner loop prints W characters on each row.",
+      "Print a newline after each row."
+    ]
+  },
+  "text-tile-gold": {
+    "title": "Tuile : centre creux",
+    "brief": "Conserve le rectangle, mais remplis son intérieur de '.', en gardant '#' sur ses bordures.",
+    "input": "Les mêmes dimensions.",
+    "output": "Exactement H lignes : '#' sur le bord, '.' à l'intérieur.",
+    "hints": [
+      "Keep both loops and the newline.",
+      "A cell is on the border if row==0, col==0, row==H-1, or col==W-1.",
+      "Print '.' only when all four border conditions are false."
+    ]
+  },
+  "adjacent-readings": {
+    "title": "Capteurs voisins identiques",
+    "brief": "Stocke N mesures dans un tableau 1D et compte les paires de voisins égaux. Pour 5 5 5, on trouve deux paires égales.",
+    "input": "N (1–20), then N integers in [-100,100].",
+    "output": "pairs=P.",
+    "hints": [
+      "Read N values into an array.",
+      "Compare each cell i with the previous one, starting at i=1.",
+      "Increment a counter when a[i] == a[i-1]."
+    ]
+  },
+  "adjacent-readings-gold": {
+    "title": "Capteurs : série la plus longue",
+    "brief": "Conserve ce comptage et détermine la plus longue série de mesures identiques consécutives (au moins 1).",
+    "input": "Les mêmes N mesures.",
+    "output": "pairs=P streak=S.",
+    "hints": [
+      "Use a current run length starting at 1.",
+      "On equality, increment the run; otherwise reset it to 1.",
+      "Keep the maximum run encountered."
+    ]
+  },
+  "case-swaps": {
+    "title": "Mettre un pseudo en majuscules",
+    "brief": "Lis un mot alphanumérique (30 caractères maximum) et transforme toutes les lettres ASCII minuscules en majuscules sans string.h.",
+    "input": "One nonempty ASCII alphanumeric token of 1–30 characters.",
+    "output": "text=TRANSFORMED (lettres en majuscules).",
+    "hints": [
+      "Use char text[31] and scanf(\"%30s\", text).",
+      "Walk through the string until '\\0'.",
+      "For 'a'..'z', subtract 'a' and add 'A'."
+    ]
+  },
+  "case-swaps-gold": {
+    "title": "Pseudo : inverser la casse",
+    "brief": "Inverse la casse de toutes les lettres ASCII : minuscules vers majuscules et majuscules vers minuscules. Ne modifie pas les chiffres.",
+    "input": "Le même mot.",
+    "output": "text=TRANSFORMED (casse inversée).",
+    "hints": [
+      "Keep the lowercase conversion.",
+      "Also detect 'A'..'Z' and convert them to lowercase.",
+      "Use mutually exclusive if/else if cases so a converted letter is not converted again."
+    ]
+  }
+}
