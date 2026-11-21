@@ -23,12 +23,15 @@ The course sequence is a recommendation. Students can open later chapters direct
 
 ## The 15 ASCII worlds
 
-`src/data/chapterMaps.ts` contains 15 **different handcrafted, printable-ASCII** scenes, along with per-chapter `cores`, `sides`, `sideOrigins`, and `turns` arrays. There are no SVG roads or image backgrounds: `src/data/asciiMap.ts` combines character terrain, road characters and interactive four-character markers into one monospace grid. `src/components/ChapterTrail.tsx` renders the text map and a compact, accessible challenge index beneath it. The light CSS palette lives in `src/styles.css`.
+The learning path has **two map scales**. `src/data/worldAtlas.ts` builds a connected, printable-ASCII overworld whose 15 colored regions link to individual chapter deep links (`#path/<chapter-id>`). `src/components/WorldOverview.tsx` displays this large atlas above the progress section. Clicking a region selects the corresponding stage, expands its chapter and scrolls to it.
 
-* `[@]` = lesson; `[01]` etc. = regular core exercises; `[S1]` etc. = optional branches; `[F!]` below an ASCII `\\^/` = final chapter boss.
+`src/data/chapterMaps.ts` contains 15 **different handcrafted, printable-ASCII** scenes, along with per-chapter `cores`, `sides`, `sideOrigins`, and `turns` arrays. `src/data/asciiMap.ts` builds the character terrain and walking roads; `src/components/ChapterTrail.tsx` shows a zoomed-in map with **color-coded circular challenge markers over the ASCII background**, followed by a compact accessible text index. No SVG or image background is required. Both map scales share the light palette in `src/styles.css`.
+
+* The atlas uses `[01]`–`[15]` to select chapters. In the zoomed map, a **pale green circle** is available, **gray** is locked, **dark green** is complete, and **gold** means the corresponding gold extension has been passed. The crowned finale has its own circle and remains locked until all regular core challenges are completed.
 * The road is drawn from lesson through all regular core challenges to the finale. Optional side branches connect to the core stops specified in `sideOrigins`; they are **not** prerequisites for the finale.
 * `cores`, `sides` and `turns` can have different configurations by chapter. Adding an optional exercise in a chapter shows a new side marker automatically, with a fallback position for new extras until the map layout is hand-tuned.
 * Keep marker coordinates at least one row below the top border and away from other markers. The separate `tests/ascii-map.test.ts` verifies map uniqueness, ASCII-only artwork, connected markers and variable chapter sizes.
+* `tests/world-atlas.test.ts` validates all 15 regions and their route; the headless-browser smoke test checks both scales on several chapters.
 * Keep all exercise IDs stable when moving nodes: existing progress, drafts and completed gold challenges are tied to these IDs, not map coordinates.
 
 ## Exercise contract
