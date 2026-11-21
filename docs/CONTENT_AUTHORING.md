@@ -1,13 +1,13 @@
 # Authoring and reviewing teaching content
 
-The catalogue now contains 15 chapters and 180 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Twelve exercises per chapter (three regular core, one cumulative finale, two optional, each with a gold extension) support additional practice beyond the initial prototype.
+The catalogue now contains 15 chapters and 190 exercises, plus three open project briefs. Its purpose is to establish the teaching format and complete technical path. Each chapter retains three regular core tasks, one cumulative finale, and two or more optional side quests. Every base task has a gold extension. Some maps have more branches, so chapters now contain 12, 14, or 16 exercises including gold versions support additional practice beyond the initial prototype.
 
 ## Files to change
 
-- Keep the original lessons and exercises in `src/data/content.json`; additional exercises are split across `src/data/expansion-1.json` through `src/data/expansion-5.json`, plus `src/data/chapter-finales.json`.
-- For new exercises, put French copy under the same ID in the matching `src/data/expansion-N-fr.json` (chapter finales use `src/data/chapter-finales-fr.json`; original copy remains in `src/data/fr.json`). Both languages share the code, inputs, expected output, and progression IDs.
+- Keep the original lessons and exercises in `src/data/content.json`; additional exercises are split across `src/data/expansion-1.json` through `src/data/expansion-5.json`, plus `src/data/chapter-finales.json` and `src/data/map-extras.json`.
+- For new exercises, put French copy under the same ID in the matching `src/data/expansion-N-fr.json` (chapter finales use `src/data/chapter-finales-fr.json` and additional map side quests use `src/data/map-extras-fr.json`; original copy remains in `src/data/fr.json`). Both languages share the code, inputs, expected output, and progression IDs.
 - Edit `src/data/curriculum.ts` for projects and typed selectors.
-- Add a reference program for every new exercise in the matching `tests/fixtures/expansion-N-solutions.json` (for finales, use `tests/fixtures/chapter-finales-solutions.json`).
+- Add a reference program for every new exercise in the matching `tests/fixtures/expansion-N-solutions.json` (for finales, use `tests/fixtures/chapter-finales-solutions.json`; map side quests use `tests/fixtures/map-extras-solutions.json`).
 - Update source acknowledgements in `ATTRIBUTION.md` when introducing material.
 
 The student bundle intentionally contains test cases. Maintenance solutions are separate from the application imports but remain visible in this public repository.
@@ -19,6 +19,17 @@ Each chapter has a stable `id`, title, subtitle, learning stage, concepts, three
 Illustrations must say what they model. A pointer illustration with fixed symbolic addresses is a conceptual model, not a claim to inspect the student's actual WASM memory. Correctness comes before animation. Respect reduced-motion preferences.
 
 The course sequence is a recommendation. Students can open later chapters directly for teacher-led sessions. Within a chapter, its first core exercise unlocks the remaining regular core exercises and optional side quests. The crowned cumulative finale unlocks only when all three regular core exercises have been completed; side quests do not gate it. Each original unlocks its own gold extension.
+
+
+## The 15 ASCII worlds
+
+`src/data/chapterMaps.ts` contains 15 **different handcrafted, printable-ASCII** scenes, along with per-chapter `cores`, `sides`, `sideOrigins`, and `turns` arrays. There are no SVG roads or image backgrounds: `src/data/asciiMap.ts` combines character terrain, road characters and interactive four-character markers into one monospace grid. `src/components/ChapterTrail.tsx` renders the text map and a compact, accessible challenge index beneath it. The light CSS palette lives in `src/styles.css`.
+
+* `[@]` = lesson; `[01]` etc. = regular core exercises; `[S1]` etc. = optional branches; `[F!]` below an ASCII `\\^/` = final chapter boss.
+* The road is drawn from lesson through all regular core challenges to the finale. Optional side branches connect to the core stops specified in `sideOrigins`; they are **not** prerequisites for the finale.
+* `cores`, `sides` and `turns` can have different configurations by chapter. Adding an optional exercise in a chapter shows a new side marker automatically, with a fallback position for new extras until the map layout is hand-tuned.
+* Keep marker coordinates at least one row below the top border and away from other markers. The separate `tests/ascii-map.test.ts` verifies map uniqueness, ASCII-only artwork, connected markers and variable chapter sizes.
+* Keep all exercise IDs stable when moving nodes: existing progress, drafts and completed gold challenges are tied to these IDs, not map coordinates.
 
 ## Exercise contract
 
