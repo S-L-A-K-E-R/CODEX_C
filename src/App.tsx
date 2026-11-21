@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import type { Chapter } from "./data/curriculum.ts";
 import { ChapterTrail } from "./components/ChapterTrail.tsx";
+import { WorldOverview } from "./components/WorldOverview.tsx";
 import { lockedBy } from "./state/path.ts";
 import { useLanguage, LanguageSwitch } from "./i18n/Language.tsx";
 import { ThemeSwitch } from "./theme/Theme.tsx";
@@ -328,6 +329,13 @@ function LearningPath({ chapterId }: { chapterId: string }) {
   const initialChapter = getChapter(chapterId) || getChapter(next.chapter)!;
   const [stage, setStage] = useState(initialChapter.stage),
     [expanded, setExpanded] = useState(initialChapter.id);
+  useEffect(() => {
+    if (!chapterId || !getChapter(chapterId)) return;
+    const frame = requestAnimationFrame(() => {
+      document.getElementById("chapter-" + chapterId)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [chapterId, getChapter]);
   const done = exercises.filter(
       (e) => e.kind === "core" && p.completed[e.id],
     ).length,
@@ -404,6 +412,7 @@ function LearningPath({ chapterId }: { chapterId: string }) {
           <div className="hero-spark">+</div>
         </div>
       </section>
+      <WorldOverview chapters={chapters} selectedChapter={expanded} />
       <div className="stats-strip">
         <div>
           <div className="stat-icon">
@@ -594,6 +603,7 @@ function ChapterCard({
     index = chapters.indexOf(c) + 1;
   return (
     <article
+      id={"chapter-" + c.id}
       className={
         "chapter-card " +
         (expanded ? "expanded" : "") +
