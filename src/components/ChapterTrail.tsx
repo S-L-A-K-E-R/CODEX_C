@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { BookOpen, Check, Code2, Compass, Crown, LockKeyhole, Star } from "lucide-react";
 import type { Chapter, Exercise } from "../data/curriculum.ts";
 import {
   buildAsciiWorld,
@@ -24,55 +25,62 @@ type MapEntry = {
   completedId?: string;
 };
 
-const tileClass = (tile: MapTile) => "ascii-ink " + tile.kind;
-
-/** Only one interactive text link is rendered for each [01] marker. */
-function mapTextRows(
-  tiles: MapTile[][],
-  entries: ReadonlyMap<string, MapEntry>,
-): ReactNode[] {
+/** Keep the underlying characters, including ASCII roads, but let real circles
+ * replace [01] markers. The row length never changes: overlays line up exactly. */
+function terrainRows(tiles: MapTile[][]): ReactNode[] {
   return tiles.map((row, y) => {
-    const pieces: ReactNode[] = [];
+    const parts: ReactNode[] = [];
     let x = 0;
     while (x < row.length) {
-      const current = row[x];
-      if (current.markerKey) {
-        const entry = entries.get(current.markerKey);
-        const span = entry?.marker.token.length ?? 1;
-        if (entry) {
-          const label = [entry.title, entry.category, entry.blockedBy ?? entry.status].join(" - ");
-          const attributes = {
-            key: "m" + x,
-            className: "ascii-marker " + entry.state + " " + entry.marker.kind,
-            title: label,
-            "aria-label": label,
-          };
-          pieces.push(
-            entry.href ? (
-              <a {...attributes} href={entry.href}>{entry.marker.token}</a>
-            ) : (
-              <span {...attributes} role="img">{entry.marker.token}</span>
-            ),
-          );
-        }
-        x += span;
-        continue;
-      }
-      const kind = current.kind;
-      let glyphs = "";
+      const initial = row[x];
+      const kind = initial.markerKey ? "plain" : initial.kind;
+      let content = "";
       const start = x;
-      while (x < row.length && !row[x].markerKey && row[x].kind === kind) {
-        glyphs += row[x].glyph;
+      while (x < row.length &&
+        (row[x].markerKey ? "plain" : row[x].kind) === kind) {
+        content += row[x].markerKey ? " " : row[x].glyph;
         x++;
       }
-      pieces.push(
-        <span key={start} className={tileClass(current)} aria-hidden="true">
-          {glyphs}
+      parts.push(
+        <span className={"ascii-ink " + kind} key={start} aria-hidden="true">
+          {content}
         </span>,
       );
     }
-    return <span className="ascii-map-row" key={y}>{pieces}{"\n"}</span>;
+    return <span className="ascii-map-row" key={y}>{parts}{"\n"}</span>;
   });
+}
+
+function CircleMarker({ entry }: { entry: MapEntry }) {
+  const { marker } = entry;
+  const Icon = marker.kind === "final" ? Crown :
+    entry.state === "mastered" ? Star :
+    entry.state === "complete" ? Check :
+    entry.state === "locked" ? LockKeyhole :
+    marker.kind === "lesson" ? BookOpen :
+    marker.kind === "optional" ? Compass : Code2;
+  const label = [entry.title, entry.category, entry.blockedBy ?? entry.status].join(" - ");
+  const content = (
+    <>
+      <span className="chapter-map-disc"><Icon aria-hidden="true" size={25} strokeWidth={2.4} /></span>
+      <span className="chapter-map-disc-label" aria-hidden="true">
+        {marker.kind === "lesson" ? "START" :
+          marker.kind === "final" ? "FINAL" : marker.token.slice(1, -1)}
+      </span>
+    </>
+  );
+  const common = {
+    className: "chapter-map-node " + entry.state + " " + marker.kind,
+    style: {
+      left: (marker.x + marker.token.length / 2) + "ch",
+      top: (marker.y + .5) * 18 + "px",
+    },
+    title: label,
+    "aria-label": label,
+  };
+  return entry.href
+    ? <a {...common} href={entry.href}>{content}</a>
+    : <span {...common} aria-disabled="true" tabIndex={0}>{content}</span>;
 }
 
 export function ChapterTrail({
@@ -138,7 +146,6 @@ export function ChapterTrail({
       completedId: done ? exercise.id : undefined,
     };
   });
-  const entriesByKey = new Map(entries.map((entry) => [entry.marker.key, entry]));
   const mainEntries = entries.filter((entry) => entry.marker.kind !== "optional");
   const sideEntries = entries.filter((entry) => entry.marker.kind === "optional");
   const zoneTitle = language === "fr" ? world.titleFr : world.title;
@@ -168,24 +175,30 @@ export function ChapterTrail({
   }
 
   return (
-    <section className="ascii-chapter">
+    <section className="ascii-chapter" aria-label={t("Zoomed chapter region")}>
       <div className="ascii-map-header">
-        <span className="ascii-zone-title">{"//"} {zoneTitle}</span>
-        <span className="ascii-zone-key">
-          {t("ASCII world")} / {t("Click a marker to explore")}
-        </span>
+        <span className="ascii-zone-title">{"//"} {t("Zoomed chapter region")} / {zoneTitle}</span>
+        <button type="button" className="ascii-back-to-world"
+          onClick={() => document.getElementById("world-atlas")?.scrollIntoView({ behavior: "smooth", block: "start" })}>
+          {"↑"} {t("Back to world map")}
+        </button>
       </div>
-      <div className="ascii-map-scroll" role="region" aria-label={t("Chapter path: {title}", { title: chapter.title })} tabIndex={0}>
-        <nav className="ascii-world" data-biome={world.biome} aria-label={t("Chapter path: {title}", { title: chapter.title })}>
-          <pre className="ascii-map-grid">{mapTextRows(world.tiles, entriesByKey)}</pre>
+      <div className="ascii-map-scroll chapter-map-scroll" role="region"
+        aria-label={t("Chapter path: {title}", { title: chapter.title })} tabIndex={0}>
+        <nav className="ascii-world chapter-zoom-world" data-biome={world.biome}
+          aria-label={t("Chapter path: {title}", { title: chapter.title })}>
+          <div className="chapter-map-board" style={{ width: world.width + "ch", height: (world.height * 18) + "px" }}>
+            <pre className="ascii-map-grid" aria-hidden="true">{terrainRows(world.tiles)}</pre>
+            {entries.map((entry) => <CircleMarker key={entry.marker.key} entry={entry} />)}
+          </div>
         </nav>
       </div>
       <div className="ascii-map-key" aria-label={t("Map legend")}>
-        <span><b>[@]</b> {t("Quick lesson")}</span>
-        <span><b>[01]</b> {t("Core challenge")}</span>
-        <span><b>[S1]</b> {t("Side quest")}</span>
-        <span><b>[F!]</b> {t("Final challenge")}</span>
-        <span className="ascii-key-mastered"><b>[**]</b> {t("Gold earned")}</span>
+        <span><i className="chapter-map-key-disc available" /> {t("Available")}</span>
+        <span><i className="chapter-map-key-disc locked" /> {t("Locked")}</span>
+        <span><i className="chapter-map-key-disc complete" /> {t("Completed")}</span>
+        <span><i className="chapter-map-key-disc mastered" /> {t("Gold earned")}</span>
+        <span><Crown size={15} aria-hidden="true" /> {t("Final challenge")}</span>
       </div>
       <div className="ascii-index">
         <div className="ascii-index-group">
