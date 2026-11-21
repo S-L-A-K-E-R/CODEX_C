@@ -267,7 +267,7 @@ The program must not receive real filesystem, process or cloud-account access. B
 
 | Resource                  | Prototype policy                                                            |
 | ------------------------- | --------------------------------------------------------------------------- |
-| Download/initialisation   | 120-second timeout                                                          |
+| Download/initialisation   | 10-minute maximum; 150-second inactivity timeout while downloading, then 120 seconds for compiler preparation                                                          |
 | Compilation and linking   | 30 seconds per phase                                                        |
 | Execution                 | 3 seconds per test case                                                     |
 | Program linear memory     | 64 MiB maximum; 1 MiB stack reservation                                     |
