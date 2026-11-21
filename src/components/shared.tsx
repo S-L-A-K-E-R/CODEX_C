@@ -20,7 +20,7 @@ export function AsciiCMark() {
             <span
               key={index}
               className="brand-spark"
-              style={{ animationDelay: `-${(index * 13) % 37}s` }}
+              style={{ animationDelay: `-${(index % 4) * 4}s` }}
             >
               +
             </span>

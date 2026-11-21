@@ -339,18 +339,25 @@ details[open] > summary {
   white-space: pre;
 }
 .brand-spark {
-  animation: brand-sparkle 37s ease-in-out infinite;
+  animation: brand-sparkle 16s ease-in-out infinite;
 }
 @keyframes brand-sparkle {
   0%,
-  11%,
   100% {
-    color: inherit;
+    color: var(--lime);
     text-shadow: none;
   }
-  5.5% {
-    color: #d7ffa8;
-    text-shadow: 0 0 6px rgb(191 242 132 / 24%);
+  25% {
+    color: #9dcc63;
+    text-shadow: none;
+  }
+  48% {
+    color: #d5ff9b;
+    text-shadow: 0 0 5px rgb(191 242 132 / 30%);
+  }
+  75% {
+    color: var(--lime);
+    text-shadow: none;
   }
 }
 .brand small {
