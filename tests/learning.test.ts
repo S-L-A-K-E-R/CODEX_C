@@ -13,24 +13,23 @@ test("XP rewards distinguish core, side, gold and chapter finals", () => {
   assert.deepEqual(exercises.map(challengeXp), [100, 75, 150, 200]);
 });
 
-test("30-day chart counts completions using their actual dates", () => {
+test("3-month chart counts completions using their actual dates", () => {
   const history = learningHistory({
     core: "2026-11-21T08:00:00Z",
     optional: "2026-11-20T08:00:00Z",
     gold: "2026-11-21T10:00:00Z",
     finale: "2026-09-10T08:00:00Z",
-  }, exercises, "30d", "en", new Date("2026-11-21T12:00:00Z"));
-  assert.equal(history.length, 30);
-  assert.equal(history.reduce((sum, bucket) => sum + bucket.exercises, 0), 3);
-  assert.equal(history.reduce((sum, bucket) => sum + bucket.xp, 0), 325);
+  }, exercises, "3m", "en", new Date("2026-11-21T12:00:00Z"));
+  assert.equal(history.length, 3);
+  assert.equal(history.reduce((sum, bucket) => sum + bucket.exercises, 0), 4);
+  assert.equal(history.reduce((sum, bucket) => sum + bucket.xp, 0), 525);
 });
 
-test("90 days is weekly; long ranges use calendar months", () => {
+test("all three chart ranges use calendar months", () => {
   const now = new Date(2026, 10, 21, 12);
-  assert.equal(learningHistory({}, exercises, "90d", "en", now).length, 13);
+  assert.equal(learningHistory({}, exercises, "3m", "en", now).length, 3);
   assert.equal(learningHistory({}, exercises, "6m", "en", now).length, 6);
   assert.equal(learningHistory({}, exercises, "12m", "en", now).length, 12);
-  assert.equal(learningHistory({}, exercises, "30m", "en", now).length, 30);
 });
 
 test("unknown challenges, invalid timestamps and future dates add nothing", () => {

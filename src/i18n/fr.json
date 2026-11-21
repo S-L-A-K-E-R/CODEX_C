@@ -510,5 +510,12 @@
   "Workshop apprentice": "Apprenti de l’atelier",
   "Complete four project milestones": "Termine quatre étapes de projet",
   "Architect of adventures": "Architecte des aventures",
-  "Finish all four milestones in one project": "Termine les quatre étapes d’un même projet"
+  "Finish all four milestones in one project": "Termine les quatre étapes d’un même projet",
+  "3 months": "3 mois",
+  "Experience earned from completed challenges, not a daily streak.": "Expérience gagnée grâce aux défis terminés, sans obligation quotidienne.",
+  "XP in this period": "XP sur cette période",
+  "{total} XP in the selected period": "{total} XP sur la période choisie",
+  "{date}: {xp} XP": "{date} : {xp} XP",
+  "No experience earned in this period yet. Your first victory will appear here!": "Aucune expérience gagnée sur cette période. Ta première victoire apparaîtra ici !",
+  "Select a bar to inspect a month.": "Sélectionne une barre pour consulter le détail d’un mois."
 }
