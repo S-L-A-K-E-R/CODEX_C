@@ -808,5 +808,409 @@
     "minutes": 50,
     "base": "final-dynamic-memory",
     "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/03_Pointers.pdf"
+  },
+  {
+    "id": "final-modular",
+    "chapter": "modular",
+    "title": "The statistics module",
+    "kind": "core",
+    "finale": true,
+    "brief": "Create stats.h and stats.c with guarded declarations for min3 and max3. Read three integers in main.c, call the functions from the other file, and display their results.",
+    "input": "Three integers in [-100,100].",
+    "output": "min=A max=B.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 9 -2\n",
+        "output": "min=-2 max=9\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 0 0\n",
+        "output": "min=0 max=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "-100 100 1\n",
+        "output": "min=-100 max=100\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n#include \"stats.h\"\nint main(void) {\n    // TODO: Read three integers, use the module, print the report.\n    return 0;\n}\n",
+      "stats.h": "#ifndef STATS_H\n#define STATS_H\nint min3(int a, int b, int c);\nint max3(int a, int b, int c);\n// TODO (gold): declare mean3 and spread3.\n#endif\n",
+      "stats.c": "#include \"stats.h\"\n// TODO: implement the helper functions here.\n"
+    },
+    "hints": [
+      "Declare prototypes inside the stats.h include guard.",
+      "Define the helpers in stats.c and include stats.h there.",
+      "Compile main.c and stats.c together; call from main."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "final-modular-gold",
+    "chapter": "modular",
+    "title": "Statistics module: a complete report",
+    "kind": "gold",
+    "brief": "Keep the separate files. Add mean3 and spread3 to the module, declare them in the header, and use them in the final report (integer average).",
+    "input": "The same three integers.",
+    "output": "min=A max=B mean=M spread=S (spread=max-min).",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "4 9 -2\n",
+        "output": "min=-2 max=9 mean=3 spread=11\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 0 0\n",
+        "output": "min=0 max=0 mean=0 spread=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "-100 100 1\n",
+        "output": "min=-100 max=100 mean=0 spread=200\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "-5 -4 -9\n",
+        "output": "min=-9 max=-4 mean=-6 spread=5\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n#include \"stats.h\"\nint main(void) {\n    // TODO: Read three integers, use the module, print the report.\n    return 0;\n}\n",
+      "stats.h": "#ifndef STATS_H\n#define STATS_H\nint min3(int a, int b, int c);\nint max3(int a, int b, int c);\n// TODO (gold): declare mean3 and spread3.\n#endif\n",
+      "stats.c": "#include \"stats.h\"\n// TODO: implement the helper functions here.\n"
+    },
+    "hints": [
+      "Add mean3 and spread3 prototypes to the header.",
+      "Implement mean3 with integer division and spread3 using min3/max3.",
+      "Update main.c without duplicating the module's logic."
+    ],
+    "minutes": 50,
+    "base": "final-modular",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "final-randomness",
+    "chapter": "randomness",
+    "title": "The reproducible dice contest",
+    "kind": "core",
+    "finale": true,
+    "brief": "Use state=(state*5+1)%97 and roll=state%6+1 (do NOT use rand). From seed and N rolls, report the sum and the number of rolls that were six.",
+    "input": "Seed (0–96) and N (1–30).",
+    "output": "sum=S sixes=C.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1 6\n",
+        "output": "sum=23 sixes=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 1\n",
+        "output": "sum=2 sixes=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "96 15\n",
+        "output": "sum=45 sixes=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Start from the input seed.",
+      "Update state with %97 before each roll.",
+      "Sum all faces and separately count rolls equal to six."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "final-randomness-gold",
+    "chapter": "randomness",
+    "title": "Dice contest: streak tracking",
+    "kind": "gold",
+    "brief": "Keep the same simulated sequence. Also report its first face and the longest consecutive streak of exactly the same face.",
+    "input": "Same seed (0–96) and N (1–30).",
+    "output": "sum=S sixes=C first=F streak=L.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1 6\n",
+        "output": "sum=23 sixes=2 first=1 streak=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0 1\n",
+        "output": "sum=2 sixes=0 first=2 streak=1\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "96 15\n",
+        "output": "sum=45 sixes=0 first=4 streak=2\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "15 30\n",
+        "output": "sum=112 sixes=5 first=5 streak=2\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Save the first roll when i==0.",
+      "Compare each face with the previous one.",
+      "Reset the run on a different face and keep the maximum."
+    ],
+    "minutes": 50,
+    "base": "final-randomness",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/01_Variables_IF_Loops.pdf"
+  },
+  {
+    "id": "final-files",
+    "chapter": "files",
+    "title": "The saved ledger",
+    "kind": "core",
+    "finale": true,
+    "brief": "Read N integers and save them to numbers.txt, one per line. Close and reopen the file; compute the sum and number of strictly positive values from the saved file.",
+    "input": "N (1–20), followed by N integers in [-100,100].",
+    "output": "total=S positives=C.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5\n-2 0 3 9 -1\n",
+        "output": "total=9 positives=2\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "3\n0 -2 -3\n",
+        "output": "total=-5 positives=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1\n7\n",
+        "output": "total=7 positives=1\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Open numbers.txt with fopen(...,\"w\") and write N lines.",
+      "Close the write handle before opening for reading.",
+      "Use fscanf on the file, not on stdin, to build the report."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+  },
+  {
+    "id": "final-files-gold",
+    "chapter": "files",
+    "title": "The saved ledger: positive report",
+    "kind": "gold",
+    "brief": "While reopening numbers.txt, copy positive values to positives.txt. Close and reopen positives.txt to calculate the sum of positive values for the extended report.",
+    "input": "Same input as the original challenge.",
+    "output": "total=S positives=C positive_sum=P.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5\n-2 0 3 9 -1\n",
+        "output": "total=9 positives=2 positive_sum=12\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "3\n0 -2 -3\n",
+        "output": "total=-5 positives=0 positive_sum=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "1\n7\n",
+        "output": "total=7 positives=1 positive_sum=7\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "4\n100 100 -100 -100\n",
+        "output": "total=0 positives=2 positive_sum=200\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Create positives.txt while reading numbers.txt.",
+      "Only copy values > 0; close both files.",
+      "Reopen positives.txt and sum its values with fscanf."
+    ],
+    "minutes": 50,
+    "base": "final-files",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/05_Files.pdf"
+  },
+  {
+    "id": "final-recursion",
+    "chapter": "recursion",
+    "title": "The recursive digit detective",
+    "kind": "core",
+    "finale": true,
+    "brief": "Without loops, implement recursive digitCount(n) and digitSum(n). Count zero as one digit. Read a nonnegative integer and print both results.",
+    "input": "One integer N in [0,999999999].",
+    "output": "digits=D sum=S.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1203\n",
+        "output": "digits=4 sum=6\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "digits=1 sum=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "999999999\n",
+        "output": "digits=9 sum=81\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "digitCount has base case n < 10.",
+      "digitSum has base case n < 10.",
+      "For larger n, recurse on n/10 and use n%10 for the last digit."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "final-recursion-gold",
+    "chapter": "recursion",
+    "title": "Digit detective: backwards",
+    "kind": "gold",
+    "brief": "Keep both recursive functions. Add recursive reverseDigits(n,acc) to reverse the decimal digits; leading zeros in the reversed number disappear.",
+    "input": "Same N in [0,999999999].",
+    "output": "digits=D sum=S reverse=R.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "1203\n",
+        "output": "digits=4 sum=6 reverse=3021\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "digits=1 sum=0 reverse=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "999999999\n",
+        "output": "digits=9 sum=81 reverse=999999999\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "1000\n",
+        "output": "digits=4 sum=1 reverse=1\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "The reverse function needs an accumulator argument.",
+      "On each step, do acc=acc*10+n%10 and recurse on n/10.",
+      "Stop when n==0; N==0 must also return zero."
+    ],
+    "minutes": 50,
+    "base": "final-recursion",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/02_Functions.pdf"
+  },
+  {
+    "id": "final-data-structures",
+    "chapter": "data-structures",
+    "title": "The service desk",
+    "kind": "core",
+    "finale": true,
+    "brief": "Implement a fixed-size circular queue (capacity 32) and a stack of served ticket numbers. Process A X (enqueue) and S (serve the oldest); report waiting count, served count, and last served ticket (0 if none).",
+    "input": "K (0–25), then K commands: A X with X=1–999, or S. Every S is valid; total queue size <= 25.",
+    "output": "waiting=W served=S last=V.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "5\nA 10\nA 20\nS\nA 30\nS\n",
+        "output": "waiting=1 served=2 last=20\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "0\n",
+        "output": "waiting=0 served=0 last=0\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "4\nA 8\nS\nA 6\nA 4\n",
+        "output": "waiting=2 served=1 last=8\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Use an array, front index, and count for the circular queue.",
+      "On A, write at (front+count)%32; on S, advance front.",
+      "Push every served ticket onto a stack; last is its top."
+    ],
+    "minutes": 35,
+    "base": null,
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
+  },
+  {
+    "id": "final-data-structures-gold",
+    "chapter": "data-structures",
+    "title": "Service desk: undo the last service",
+    "kind": "gold",
+    "brief": "Add U to undo the most recently served ticket: pop the served stack and put that ticket back at the FRONT of the circular queue. Also report the next ticket (0 if empty).",
+    "input": "K (0–25), then K commands: A X, S, or U. Every S/U is valid; total queue size <= 25.",
+    "output": "waiting=W served=S last=V next=F.",
+    "tests": [
+      {
+        "label": "Example",
+        "input": "7\nA 10\nA 20\nS\nA 30\nS\nU\nU\n",
+        "output": "waiting=3 served=0 last=0 next=10\n"
+      },
+      {
+        "label": "Case 2",
+        "input": "5\nA 8\nS\nU\nS\nU\n",
+        "output": "waiting=1 served=0 last=0 next=8\n"
+      },
+      {
+        "label": "Case 3",
+        "input": "6\nA 4\nA 9\nS\nU\nS\nS\n",
+        "output": "waiting=0 served=2 last=9 next=0\n"
+      },
+      {
+        "label": "Case 4",
+        "input": "0\n",
+        "output": "waiting=0 served=0 last=0 next=0\n"
+      }
+    ],
+    "starter": {
+      "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Solve the chapter finale.\n    return 0;\n}\n"
+    },
+    "hints": [
+      "Undo works in LIFO order using the served stack.",
+      "Move front backwards modulo 32, then place the popped ticket there.",
+      "Report the next ticket from the queue's front, if present."
+    ],
+    "minutes": 50,
+    "base": "final-data-structures",
+    "reference": "https://github.com/S-L-A-K-E-R/C_courses/blob/main/EXERCISES/LAB_GENERAL/06_Sort-Search-Lists.pdf"
   }
 ]
