@@ -20,10 +20,27 @@ test("comparison results survive backups and merge, older backups remain readabl
   const sample={timeMs:10,workUnits:100,sourceInstructions:20,recordedAt:"2026-11-20T10:00:00Z"};
   const first=recordComparison(markComplete(p,"hello-world"),"hello-world",sample);
   const later=recordComparison(first,"hello-world",{...sample,timeMs:7,workUnits:80,sourceInstructions:12,recordedAt:"2026-11-21T10:00:00Z"});
-  assert.deepEqual(earnedMedals(later.comparisons["hello-world"]),["speed","work","length"]);
+  assert.deepEqual(earnedMedals(later.comparisons["hello-world"]),["work","length"]);
   assert.deepEqual(parseBackup(JSON.stringify(later)),later);
   assert.equal(mergeProgress(first,later).comparisons["hello-world"].fastest,7);
   const old=JSON.parse(JSON.stringify(p));delete old.comparisons;
   assert.deepEqual(parseBackup(JSON.stringify(old)).comparisons,{});
   assert.throws(()=>parseBackup(JSON.stringify({...later,comparisons:{"hello-world":{...later.comparisons["hello-world"],fastest:-1}}})));
+});
+
+test("two device-independent medals can be earned on first verified success", () => {
+  const p=freshProgress();
+  const sample={timeMs:25,workUnits:2,sourceInstructions:2,recordedAt:"2026-11-21T10:00:00Z"};
+  const state=recordComparison(markComplete(p,"hello-world"),"hello-world",sample);
+  const reference={workUnits:2,sourceInstructions:2};
+  assert.deepEqual(earnedMedals(state.comparisons["hello-world"],reference),["work","length"]);
+  assert.deepEqual(earnedMedals(state.comparisons["hello-world"]),[]);
+  assert.deepEqual(earnedMedals(undefined,reference),[]);
+});
+test("execution speed alone never unlocks an achievement", () => {
+  const p=freshProgress();
+  const first={timeMs:100,workUnits:20,sourceInstructions:8,recordedAt:"2026-11-20T10:00:00Z"};
+  const a=recordComparison(p,"challenge",first);
+  const b=recordComparison(a,"challenge",{...first,timeMs:1,recordedAt:"2026-11-21T10:00:00Z"});
+  assert.deepEqual(earnedMedals(b.comparisons.challenge,{workUnits:1,sourceInstructions:1}),[]);
 });

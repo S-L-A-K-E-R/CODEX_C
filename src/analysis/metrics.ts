@@ -43,11 +43,15 @@ export const analyzeSource: (files: Record<string, string>) => SourceMetrics = f
   }
   return {sourceInstructions:Math.min(100000,sourceInstructions),workUnits:Math.min(100000000,Math.round(workUnits))};
 };
-export function earnedMedals(stats?: ChallengeComparison): ("speed" | "work" | "length")[] {
-  if (!stats || stats.checks < 2) return [];
-  const medals: ("speed" | "work" | "length")[] = [];
-  if (stats.first.timeMs > 0.05 && stats.fastest < stats.first.timeMs * 0.8) medals.push("speed");
-  if (stats.leastWork < stats.first.workUnits) medals.push("work");
-  if (stats.shortest < stats.first.sourceInstructions) medals.push("length");
+
+/** The platform's two medals are device-independent. */
+export type MedalKind = "work" | "length";
+export function earnedMedals(stats?: ChallengeComparison, reference?: SourceMetrics): MedalKind[] {
+  if (!stats) return [];
+  const medals: MedalKind[] = [];
+  if ((reference && stats.leastWork <= reference.workUnits) || stats.leastWork < stats.first.workUnits)
+    medals.push("work");
+  if ((reference && stats.shortest <= reference.sourceInstructions) || stats.shortest < stats.first.sourceInstructions)
+    medals.push("length");
   return medals;
 }

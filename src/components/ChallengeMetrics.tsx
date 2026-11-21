@@ -1,16 +1,27 @@
-import { Award, Gauge, Scissors, TrendingUp } from "lucide-react";
+import { Award, Scissors, TrendingUp } from "lucide-react";
 import { useLanguage } from "../i18n/Language.tsx";
 import { earnedMedals, type ChallengeComparison } from "../analysis/metrics.ts";
 import references from "../data/reference-metrics.json";
 
-export function TinyMedals({ stats }: { stats?: ChallengeComparison }) {
+export function TinyMedals({ id, stats }: { id: string; stats?: ChallengeComparison }) {
   const { t } = useLanguage();
-  const icons = { speed: Gauge, work: TrendingUp, length: Scissors };
-  const labels = { speed: "Speedrunner", work: "Optimizer", length: "Minimalist" };
-  return <span className="tiny-medals">{earnedMedals(stats).map(key => {
-    const Icon = icons[key];
-    return <span className={"tiny-medal "+key} title={t(labels[key])} aria-label={t(labels[key])} key={key}><Icon size={11}/></span>;
-  })}</span>;
+  const reference = (references as Record<string, {sourceInstructions:number;workUnits:number}>)[id];
+  const earned = earnedMedals(stats, reference);
+  const options = [
+    {kind:"work" as const, icon:TrendingUp, name:t("Optimizer")},
+    {kind:"length" as const, icon:Scissors, name:t("Minimalist")}
+  ];
+  return <span className="tiny-medals">
+    {options.map(({kind,icon:Icon,name}) => {
+      const unlocked = earned.includes(kind);
+      const tooltip = unlocked ? t("{name} medal earned",{name}) : stats
+        ? t("{name} medal locked — improve your code or match the example",{name})
+        : t("{name} medal locked — check the completed solution to evaluate it",{name});
+      return <span className={"tiny-medal "+kind+(unlocked?" earned":" locked")} title={tooltip} aria-label={tooltip} key={kind}>
+        <Icon size={11} aria-hidden="true"/>
+      </span>;
+    })}
+  </span>;
 }
 function fmt(n:number) { return n>=1000 ? n.toLocaleString() : String(n); }
 function MetricRow({label,value,first,reference,unit,description}: {label:string;value:number;first:number;reference?:number;unit:string;description:string}) {
@@ -35,7 +46,7 @@ export function ChallengeMetrics({id,stats,onClose}: {id:string;stats:ChallengeC
   const reference=(references as Record<string,{sourceInstructions:number;workUnits:number}>)[id];
   return <div className="metrics-dashboard">
     <p className="metrics-lead">{t("Three ways to compare your verified solution. Lower is better.")}</p>
-    <div className="metrics-summary"><span><Award size={15}/>{t("{n} verified attempts",{n:stats.checks})}</span><TinyMedals stats={stats}/></div>
+    <div className="metrics-summary"><span><Award size={15}/>{t("{n} verified attempts",{n:stats.checks})}</span><TinyMedals id={id} stats={stats}/></div>
     <MetricRow label={t("Speed")} value={stats.latest.timeMs} first={stats.first.timeMs} unit="ms" description={t("Measured execution time per test (average); excludes compilation. Browser and device dependent.")}/>
     <MetricRow label={t("Algorithmic work (estimate)")} value={stats.latest.workUnits} first={stats.first.workUnits} reference={reference?.workUnits} unit={t("units")}
       description={t("Static loop-aware estimate, NOT a count of executed instructions. Dynamic loop bounds are approximated.")}/>
@@ -44,7 +55,7 @@ export function ChallengeMetrics({id,stats,onClose}: {id:string;stats:ChallengeC
     <div className="metrics-notes"><b>{t("Personal bests")}</b>
       <span>{t("Speed")}: {stats.fastest.toFixed(2)} ms · {t("Work")}: {fmt(stats.leastWork)} · {t("Length")}: {fmt(stats.shortest)}</span>
       {reference&&<small>{t("Example values come from a bundled solution, not student averages or proven optimal limits.")}</small>}
-      <small>{t("Medals reward improvement over your first verified solution. Retry to earn them.")}</small>
+      <small>{t("Optimizer and Minimalist medals reward matching the example or improving on your first verified solution.")}</small>
     </div>
     <button className="btn primary" onClick={onClose}>{t("Continue coding")}</button>
   </div>;
