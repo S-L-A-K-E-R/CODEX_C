@@ -101,7 +101,7 @@ export class CEngine {
       };
       this.assets = Promise.all(
         names.map((name) =>
-          this.load(name, (loaded, total) => report(name, loaded, total)),
+          this.load(name, (loaded) => report(name, loaded)),
         ),
       )
         .then(async ([c, l, f]) => {
