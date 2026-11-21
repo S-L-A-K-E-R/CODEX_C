@@ -66,8 +66,18 @@ const theme = EditorView.theme(
     },
     ".cm-activeLineGutter, .cm-activeLine": { backgroundColor: "#202b2d" },
     ".cm-cursor": { borderLeftColor: "#b9f46a" },
-    "&.cm-focused .cm-selectionBackground, .cm-selectionBackground, ::selection":
-      { backgroundColor: "#3e5354 !important" },
+    // drawSelection() paints its own selection layer. Style it explicitly rather
+    // than relying on the browser's native ::selection highlight.
+    ".cm-selectionLayer .cm-selectionBackground": {
+      backgroundColor: "#46545f !important",
+    },
+    "&.cm-focused .cm-selectionLayer .cm-selectionBackground": {
+      backgroundColor: "#6c7b85 !important",
+    },
+    // Native selection fallback (for browsers or selections outside the layer).
+    ".cm-content ::selection": {
+      backgroundColor: "#6c7b85 !important",
+    },
     ".cm-panels": { backgroundColor: "#20292e", color: "#dce2e1" },
     ".cm-tooltip": {
       backgroundColor: "#263238",
