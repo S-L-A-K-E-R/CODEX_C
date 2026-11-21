@@ -44,7 +44,7 @@ export function runProgram(
       );
     };
     // A slow but active first download may take much longer than two minutes.
-    // Require activity within 90 seconds, but cap the transfer at ten minutes.
+    // Require activity within 150 seconds, but cap the transfer at ten minutes.
     timer = setTimeout(failDownload, 120_000);
     cancelPending = () =>
       finish({
@@ -58,7 +58,7 @@ export function runProgram(
         onPhase(data.phase);
         if (data.phase.startsWith("Loading C compiler")) {
           downloadDeadline ??= setTimeout(failDownload, 600_000);
-          resetTimer(90_000, downloadError);
+          resetTimer(150_000, downloadError);
         } else {
           clearTimeout(downloadDeadline);
           downloadDeadline = undefined;
@@ -77,7 +77,7 @@ export function runProgram(
       }
       if (data.download) {
         onDownload(data.download);
-        if (downloadDeadline) resetTimer(90_000, downloadError);
+        if (downloadDeadline) resetTimer(150_000, downloadError);
       }
       if (data.done) finish(data);
     };
