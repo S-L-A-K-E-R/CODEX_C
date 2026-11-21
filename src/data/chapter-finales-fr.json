@@ -218,5 +218,115 @@
       "Store realloc's result in a temporary pointer and check it.",
       "Fill new positions and compute statistics over all N+M elements."
     ]
+  },
+  "final-modular": {
+    "title": "Le module de statistiques",
+    "brief": "Crée stats.h et stats.c, déclare min3 et max3 dans un en-tête protégé. Lis trois entiers dans main.c puis appelle les fonctions de l'autre fichier.",
+    "input": "Trois entiers dans [-100,100].",
+    "output": "min=A max=B.",
+    "hints": [
+      "Declare prototypes inside the stats.h include guard.",
+      "Define the helpers in stats.c and include stats.h there.",
+      "Compile main.c and stats.c together; call from main."
+    ]
+  },
+  "final-modular-gold": {
+    "title": "Le module : rapport complet",
+    "brief": "Conserve les fichiers séparés. Ajoute mean3 et spread3 au module et à l'en-tête, puis utilise-les pour le rapport (moyenne entière).",
+    "input": "Les mêmes trois entiers.",
+    "output": "min=A max=B mean=M spread=S (spread=max-min).",
+    "hints": [
+      "Add mean3 and spread3 prototypes to the header.",
+      "Implement mean3 with integer division and spread3 using min3/max3.",
+      "Update main.c without duplicating the module's logic."
+    ]
+  },
+  "final-randomness": {
+    "title": "Le tournoi de dés reproductible",
+    "brief": "Utilise state=(state*5+1)%97 puis roll=state%6+1, sans rand(). Avec une graine et N lancers, affiche la somme et le nombre de six.",
+    "input": "Graine (0–96) et N (1–30).",
+    "output": "sum=S sixes=C.",
+    "hints": [
+      "Start from the input seed.",
+      "Update state with %97 before each roll.",
+      "Sum all faces and separately count rolls equal to six."
+    ]
+  },
+  "final-randomness-gold": {
+    "title": "Tournoi : séries de lancers",
+    "brief": "Conserve la séquence. Ajoute la première face et la plus longue série de lancers consécutifs ayant exactement la même face.",
+    "input": "Même graine et nombre de lancers.",
+    "output": "sum=S sixes=C first=F streak=L.",
+    "hints": [
+      "Save the first roll when i==0.",
+      "Compare each face with the previous one.",
+      "Reset the run on a different face and keep the maximum."
+    ]
+  },
+  "final-files": {
+    "title": "Le registre sauvegardé",
+    "brief": "Lis N entiers et enregistre-les dans numbers.txt, un par ligne. Referme et rouvre le fichier puis calcule somme et nombre de positifs stricts depuis le fichier.",
+    "input": "N (1–20), suivi de N entiers dans [-100,100].",
+    "output": "total=S positives=C.",
+    "hints": [
+      "Open numbers.txt with fopen(...,\"w\") and write N lines.",
+      "Close the write handle before opening for reading.",
+      "Use fscanf on the file, not on stdin, to build the report."
+    ]
+  },
+  "final-files-gold": {
+    "title": "Le registre : rapport des positifs",
+    "brief": "À la relecture de numbers.txt, copie les positifs dans positives.txt. Rouvre ce second fichier pour calculer leur somme et compléter le rapport.",
+    "input": "Identique au défi initial.",
+    "output": "total=S positives=C positive_sum=P.",
+    "hints": [
+      "Create positives.txt while reading numbers.txt.",
+      "Only copy values > 0; close both files.",
+      "Reopen positives.txt and sum its values with fscanf."
+    ]
+  },
+  "final-recursion": {
+    "title": "Le détective des chiffres récursif",
+    "brief": "Sans boucle, crée digitCount(n) et digitSum(n) récursives. Zéro possède un chiffre. Lis un entier positif ou nul et affiche les deux résultats.",
+    "input": "Un entier N dans [0,999999999].",
+    "output": "digits=D sum=S.",
+    "hints": [
+      "digitCount has base case n < 10.",
+      "digitSum has base case n < 10.",
+      "For larger n, recurse on n/10 and use n%10 for the last digit."
+    ]
+  },
+  "final-recursion-gold": {
+    "title": "Détective : lecture à l'envers",
+    "brief": "Conserve les deux fonctions récursives. Ajoute reverseDigits(n,acc) récursive pour inverser les chiffres décimaux (les zéros initiaux du résultat disparaissent).",
+    "input": "Même entier N.",
+    "output": "digits=D sum=S reverse=R.",
+    "hints": [
+      "The reverse function needs an accumulator argument.",
+      "On each step, do acc=acc*10+n%10 and recurse on n/10.",
+      "Stop when n==0; N==0 must also return zero."
+    ]
+  },
+  "final-data-structures": {
+    "title": "Le guichet de tickets",
+    "brief": "Implémente une file circulaire (capacité 32) et une pile de tickets servis. Traite A X (enfiler) et S (servir le plus ancien), puis affiche le nombre en attente, servis et le dernier servi (0 si aucun).",
+    "input": "K (0–25), puis K commandes : A X avec X=1–999, ou S. Tous les S sont valides ; file <=25.",
+    "output": "waiting=W served=S last=V.",
+    "hints": [
+      "Use an array, front index, and count for the circular queue.",
+      "On A, write at (front+count)%32; on S, advance front.",
+      "Push every served ticket onto a stack; last is its top."
+    ]
+  },
+  "final-data-structures-gold": {
+    "title": "Guichet : annuler le dernier service",
+    "brief": "Ajoute U : dépile le dernier ticket servi et replace-le en TÊTE de file. Affiche aussi le prochain ticket (0 si file vide).",
+    "input": "K (0–25), puis K commandes : A X, S ou U. Aucun retrait invalide ; file <=25.",
+    "output": "waiting=W served=S last=V next=F.",
+    "hints": [
+      "Undo works in LIFO order using the served stack.",
+      "Move front backwards modulo 32, then place the popped ticket there.",
+      "Report the next ticket from the queue's front, if present."
+    ]
   }
 }
