@@ -423,5 +423,8 @@
   "Open gold": "Ouvrir le défi doré",
   "{n}/{total} core": "{n}/{total} exercices principaux",
   "Final challenge": "Défi final",
-  "Start in any chapter. The first core opens the road and side quests; finish all three regular cores to unlock the crowned finale.": "Tu peux commencer par n’importe quel chapitre. Le premier défi principal ouvre le chemin et les quêtes annexes ; termine les trois défis principaux habituels pour débloquer le défi final couronné."
+  "Start in any chapter. The first core opens the road and side quests; finish all three regular cores to unlock the crowned finale.": "Tu peux commencer par n’importe quel chapitre. Le premier défi principal ouvre le chemin et les quêtes annexes ; termine les trois défis principaux habituels pour débloquer le défi final couronné.",
+  "ASCII world": "Monde ASCII",
+  "Click a marker to explore": "Clique sur un repère pour explorer",
+  "Map legend": "Légende de la carte"
 }
