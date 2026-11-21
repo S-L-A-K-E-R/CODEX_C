@@ -517,5 +517,7 @@
   "{total} XP in the selected period": "{total} XP sur la période choisie",
   "{date}: {xp} XP": "{date} : {xp} XP",
   "No experience earned in this period yet. Your first victory will appear here!": "Aucune expérience gagnée sur cette période. Ta première victoire apparaîtra ici !",
-  "Select a bar to inspect a month.": "Sélectionne une barre pour consulter le détail d’un mois."
+  "Select a bar to inspect a month.": "Sélectionne une barre pour consulter le détail d’un mois.",
+  "1 week": "1 semaine",
+  "Select a bar to inspect a day or month.": "Sélectionne une barre pour consulter le détail d’un jour ou d’un mois."
 }

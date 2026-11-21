@@ -8,6 +8,8 @@ import {
 } from "../analysis/learning.ts";
 
 const RANGE_LABELS: Record<LearningRange, string> = {
+  "7d": "1 week",
+  "30d": "30 days",
   "3m": "3 months",
   "6m": "6 months",
   "12m": "1 year",
@@ -39,6 +41,8 @@ export function ProfileActivity() {
   const chartPeak = Math.ceil(peak / 100) * 100;
   const spacing = plotWidth / history.length;
   const barWidth = Math.min(100, spacing * 0.66);
+  // Label all dates for a week, but sample labels for 30 days to avoid overlap.
+  const labelEvery = range === "30d" ? 5 : 1;
   const selectedBucket = selected === null ? null : history[selected] ?? null;
 
   return (
@@ -105,9 +109,11 @@ export function ProfileActivity() {
                     <title>{bucket.label}: {bucket.xp} XP</title>
                   </rect>
                 )}
-                <text className="learning-chart-axis" textAnchor="middle" x={x} y={bottom + 22}>
-                  {bucket.label}
-                </text>
+                {(i % labelEvery === 0 || i === history.length - 1) && (
+                  <text className="learning-chart-axis" textAnchor="middle" x={x} y={bottom + 22}>
+                    {bucket.label}
+                  </text>
+                )}
               </g>
             );
           })}
@@ -122,7 +128,7 @@ export function ProfileActivity() {
         <span aria-live="polite">
           {selectedBucket
             ? t("{date}: {xp} XP", { date: selectedBucket.label, xp: selectedBucket.xp })
-            : t("Select a bar to inspect a month.")}
+            : t("Select a bar to inspect a day or month.")}
         </span>
         <small>{t("XP: core 100 · side quest 75 · gold 150 · chapter finale 200. Past completions count automatically.")}</small>
       </div>
