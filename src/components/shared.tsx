@@ -11,13 +11,33 @@ const asciiC = `  ++++
  ++  ++
   ++++`;
 
+export function AsciiCMark() {
+  return (
+    <span className="brand-mark" aria-hidden="true">
+      <span className="brand-mark-glyphs">
+        {Array.from(asciiC, (character, index) =>
+          character === "+" ? (
+            <span
+              key={index}
+              className="brand-spark"
+              style={{ animationDelay: `-${(index * 13) % 37}s` }}
+            >
+              +
+            </span>
+          ) : (
+            character
+          ),
+        )}
+      </span>
+    </span>
+  );
+}
+
 export function Brand() {
   const { t } = useLanguage();
   return (
     <a className="brand" href="#path" aria-label={t("CODEX C home")}>
-      <span className="brand-mark" aria-hidden="true">
-        {asciiC}
-      </span>
+      <AsciiCMark />
       <span>
         CODEX <b>C</b>
         <small>{t("LEARN BY MAKING")}</small>

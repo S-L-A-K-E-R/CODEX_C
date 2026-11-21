@@ -334,6 +334,25 @@ details[open] > summary {
   letter-spacing: 0;
   white-space: pre;
 }
+.brand-mark-glyphs {
+  display: block;
+  white-space: pre;
+}
+.brand-spark {
+  animation: brand-sparkle 37s ease-in-out infinite;
+}
+@keyframes brand-sparkle {
+  0%,
+  11%,
+  100% {
+    color: inherit;
+    text-shadow: none;
+  }
+  5.5% {
+    color: #d7ffa8;
+    text-shadow: 0 0 6px rgb(191 242 132 / 24%);
+  }
+}
 .brand small {
   display: block;
   font-size: 7px;
@@ -2008,15 +2027,21 @@ details[open] > summary {
   flex-shrink: 0;
 }
 .workspace-brand {
-  font-size: 15px;
-  letter-spacing: 1px;
-  font-weight: 700;
-  color: #e6e9e2;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 38px;
+  height: 38px;
 }
-.workspace-brand > b {
-  color: #bae77b;
-  font-weight: 500;
+.workspace-brand .brand-mark {
+  width: 38px;
+  height: 38px;
+}
+.workspace-brand:focus-visible {
+  outline: 2px solid var(--lime);
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 .header-divider {
   height: 26px;
@@ -2872,8 +2897,10 @@ details[open] > summary {
   .workspace-header {
     gap: 10px;
   }
-  .workspace-brand {
-    display: none;
+  .workspace-brand,
+  .workspace-brand .brand-mark {
+    width: 33px;
+    height: 33px;
   }
   .workspace-header .header-divider {
     display: none;

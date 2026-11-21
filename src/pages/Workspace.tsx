@@ -24,7 +24,7 @@ import {
   LoaderCircle,
 } from "lucide-react";
 import { CodeEditor } from "../components/CodeEditor.tsx";
-import { Badge, Modal, go, External, download } from "../components/shared.tsx";
+import { Badge, Modal, go, External, download, AsciiCMark } from "../components/shared.tsx";
 import { useLanguage, LanguageSwitch } from "../i18n/Language.tsx";
 import {
   readProgress,
@@ -273,8 +273,12 @@ export function Workspace({ id }: { id: string }) {
         >
           <ArrowLeft size={20} />
         </button>
-        <a className="workspace-brand" href="#path">
-          CODEX <b>C</b>
+        <a
+          className="workspace-brand"
+          href="#path"
+          aria-label={t("CODEX C home")}
+        >
+          <AsciiCMark />
         </a>
         <span className="header-divider" />
         <div className="workspace-title">
