@@ -1,0 +1,309 @@
+.interactive-lesson {
+  --il-accent: hsl(var(--theme-hue) 52% 39%);
+  --il-surface: hsl(var(--theme-hue) 38% 97%);
+  --il-line: hsl(var(--theme-hue) 23% 83%);
+  margin: 29px 0 34px;
+  padding: clamp(16px, 3vw, 27px);
+  border: 1px solid var(--il-line);
+  border-radius: 14px;
+  background: var(--il-surface);
+  min-width: 0;
+}
+.il-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 22px;
+}
+.il-heading .eyebrow {
+  font-size: 9px;
+  letter-spacing: 1.6px;
+  color: var(--il-accent);
+}
+.il-heading h2 {
+  margin: 9px 0 7px;
+  font-size: clamp(18px, 2.5vw, 24px);
+}
+.il-heading p, .il-footer p, .il-observation {
+  color: hsl(var(--theme-hue) 12% 39%);
+  line-height: 1.65;
+  font-size: 12px;
+}
+.il-step-count {
+  flex: none;
+  border: 1px solid var(--il-line);
+  background: #fff;
+  color: var(--il-accent);
+  border-radius: 99px;
+  font: 600 12px/1.5 monospace;
+  padding: 5px 10px;
+}
+.il-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  padding-bottom: 16px;
+}
+.il-controls label {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  font-size: 12px;
+  color: hsl(var(--theme-hue) 15% 35%);
+}
+.il-controls strong {
+  font: 700 14px monospace;
+  color: var(--il-accent);
+}
+.il-controls input[type="range"] {
+  accent-color: var(--il-accent);
+  width: 100%;
+  min-height: 22px;
+  cursor: pointer;
+}
+.il-edit {
+  padding: 10px 13px;
+  border-radius: 9px;
+  background: hsl(var(--theme-hue) 35% 91% / 0.65);
+  display: grid;
+  gap: 7px;
+}
+.il-modes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 7px;
+}
+.il-modes button {
+  background: #fff;
+  border: 1px solid var(--il-line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+  color: hsl(var(--theme-hue) 13% 39%);
+  cursor: pointer;
+}
+.il-modes button.on {
+  background: hsl(var(--theme-hue) 50% 89%);
+  border-color: var(--il-accent);
+  color: hsl(var(--theme-hue) 49% 25%);
+  font-weight: 700;
+}
+.il-stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+.il-visual, .il-code {
+  border: 1px solid var(--il-line);
+  border-radius: 10px;
+  padding: 15px 13px;
+  min-width: 0;
+  background: #fff;
+}
+.il-panel-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: hsl(var(--theme-hue) 13% 45%);
+  margin-bottom: 13px;
+}
+.il-tiles, .il-flow, .il-files, .il-kpis, .il-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  align-items: center;
+}
+.il-tiles {
+  align-items: stretch;
+}
+.il-flow > svg, .il-files > svg {
+  width: 15px;
+  height: 15px;
+  color: var(--il-accent);
+  flex: none;
+}
+.il-tile {
+  flex: 1 1 54px;
+  min-width: 48px;
+  max-width: 100%;
+  text-align: center;
+  border: 1px solid hsl(var(--theme-hue) 19% 83%);
+  border-radius: 8px;
+  background: hsl(var(--theme-hue) 35% 97%);
+  color: hsl(var(--theme-hue) 18% 31%);
+  padding: 9px 6px;
+  transition: background 140ms ease, border-color 140ms ease, opacity 140ms ease;
+}
+.il-tile small {
+  display: block;
+  font: 10px/1.5 monospace;
+  color: hsl(var(--theme-hue) 13% 45%);
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.il-tile strong {
+  font: 700 18px/1.6 monospace;
+  display: block;
+  overflow-wrap: anywhere;
+}
+button.il-tile {
+  cursor: pointer;
+}
+button.il-tile:hover, button.il-tile:focus-visible {
+  border-color: var(--il-accent);
+  outline-offset: 2px;
+}
+.il-tile.is-active {
+  border: 2px solid var(--il-accent);
+  background: hsl(var(--theme-hue) 61% 89%);
+  color: hsl(var(--theme-hue) 49% 23%);
+  padding: 8px 5px;
+}
+.il-tile.is-faded {
+  opacity: 0.55;
+}
+.il-array .il-tile {
+  flex: 1 1 43px;
+}
+.il-array .il-tile strong, .il-string-cells .il-tile strong {
+  font-size: 20px;
+}
+.il-observation {
+  margin: 15px 0 0;
+}
+.il-kpis {
+  margin-top: 15px;
+}
+.il-kpis .il-tile {
+  max-width: 200px;
+}
+.il-bar, .il-progress {
+  height: 8px;
+  border-radius: 20px;
+  margin-top: 15px;
+  overflow: hidden;
+  background: hsl(var(--theme-hue) 20% 88%);
+}
+.il-bar span, .il-progress span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--il-accent);
+  transition: width 180ms ease;
+}
+.il-branches {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  font: 600 12px monospace;
+}
+.il-branches > div {
+  flex: 1;
+  padding: 12px 8px;
+  border: 1px solid var(--il-line);
+  border-radius: 8px;
+  text-align: center;
+  opacity: 0.5;
+}
+.il-branches > .picked {
+  opacity: 1;
+  background: hsl(var(--theme-hue) 50% 89%);
+  border-color: var(--il-accent);
+}
+.il-record {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 7px;
+}
+.il-record-header {
+  grid-column: 1 / -1;
+  padding: 7px;
+  border-radius: 6px;
+  background: hsl(var(--theme-hue) 23% 92%);
+  font: 600 12px monospace;
+  color: var(--il-accent);
+}
+.il-stack {
+  flex-direction: column-reverse;
+  align-items: stretch;
+}
+.il-stack .il-tile {
+  flex: none;
+}
+.il-code {
+  background: #111b22;
+  border-color: #2a3a45;
+  color: #dce9f1;
+}
+.il-code .il-panel-label {
+  color: #9cb1be;
+}
+.il-code pre {
+  margin: 0;
+  overflow-x: auto;
+  padding: 1px 0;
+  color: inherit;
+  font: 11px/1.8 "Consolas", "SFMono-Regular", monospace;
+  tab-size: 4;
+}
+.il-code-line {
+  display: flex;
+  width: max-content;
+  min-width: 100%;
+  padding-right: 10px;
+  border-left: 3px solid transparent;
+  white-space: pre;
+  transition: background 140ms ease;
+}
+.il-code-line.current {
+  background: #294558;
+  border-left-color: #8bd7a0;
+}
+.il-line-number {
+  flex: none;
+  user-select: none;
+  width: 24px;
+  margin-right: 10px;
+  text-align: right;
+  color: #748e9c;
+}
+.il-keyword { color: #9fc9ff; }
+.il-number { color: #f8d48b; }
+.il-string { color: #bde3a2; }
+.il-comment { color: #9eafbb; }
+.il-footer {
+  margin-top: 15px;
+}
+.il-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.il-actions .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  font-size: 11px;
+  padding: 10px 12px;
+}
+.il-actions .btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+.il-footer p {
+  font-size: 10px;
+  margin: 12px 0 0;
+}
+@media (max-width: 600px) {
+  .interactive-lesson { padding: 13px; }
+  .il-flow > svg, .il-files > svg { display: none; }
+  .il-tile { flex-basis: 45px; }
+  .il-tile strong { font-size: 15px; }
+  .il-code pre { font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .interactive-lesson * { transition: none !important; }
+}
