@@ -34,6 +34,17 @@ The learning path displays a compact chapter index in `src/components/WorldOverv
 * The headless-browser smoke test verifies the chapter index and the chapter-specific map, not the old overworld.
 * Keep all exercise IDs stable when moving nodes: existing progress, drafts and completed gold challenges are tied to these IDs, not map coordinates.
 
+## Interactive lesson visualizations
+
+All 15 chapters now render a dedicated `InteractiveLesson` directly between the three short text sections and the runnable example. This supplements the existing text: do not replace the written explanation or the real, editable C example.
+
+- `src/components/InteractiveLesson.tsx` contains the chapter-indexed metadata (`specs`) and the small deterministic demonstration models (`buildScene`). Every chapter ID in `src/data/content.json` must have an entry. Add matching English and French labels and observations.
+- `src/components/InteractiveLesson.css` contains the responsive diagram, editable array cells and line-by-line C highlighting. Respect the current accent setting and reduced-motion preferences.
+- The sliders change only the **teaching model**, not a student's code. Step controls advance/reverse the model; `Reset` restores its original inputs. Click an array cell to select it, then use the second slider to change its value.
+- Keep displayed code consistent with visible values, array bounds and simulated state. Never claim the displayed values are the actual result of executing user code. The separate workspace example is where students run real C.
+- Treat addresses as symbolic, malloc as potentially fallible, and pseudo-random sequences as implementation-specific unless using an explicitly defined teaching generator. Include the null terminator in string-memory diagrams.
+- Keep a concise, keyboard-accessible control for each lesson, a visible step indication, and a meaningful explanation of what changed. No backend or additional packages are needed.
+
 ## Exercise contract
 
 | Field            | Rule                                                                                  |
