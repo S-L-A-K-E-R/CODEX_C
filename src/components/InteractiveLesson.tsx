@@ -228,10 +228,10 @@ function buildScene(
       return {
         lines: ["int a = " + n + ", b = 25;", "int *p = &" + target + ";", "*p += 5;  // change " + target],
         focus: step,
-        visual: <><div className="il-flow"><Tile label="p points to" value={"&" + target} active />
+        visual: <><div className="il-flow"><Tile label="p points to" value={step >= 1 ? "&" + target : "?"} active={step >= 1} />
           <ArrowRight aria-hidden="true" />
-          <Tile label="a · symbolic &a" value={a} active={!alternate} />
-          <Tile label="b · symbolic &b" value={b} active={alternate} /></div></>,
+          <Tile label="a · symbolic &a" value={a} active={step >= 1 && !alternate} />
+          <Tile label="b · symbolic &b" value={b} active={step >= 1 && alternate} /></div></>,
         observation: ["The address is symbolic: this is an aliasing model, not actual browser memory.", "L'adresse est symbolique : c'est un modèle de pointeur, pas la mémoire réelle du navigateur."],
       };
     }
