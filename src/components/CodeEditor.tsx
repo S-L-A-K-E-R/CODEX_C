@@ -64,7 +64,11 @@ const theme = EditorView.theme(
       border: "none",
       paddingLeft: "8px",
     },
-    ".cm-activeLineGutter, .cm-activeLine": { backgroundColor: "#202b2d" },
+    ".cm-activeLineGutter": { backgroundColor: "#202b2d" },
+    // CodeMirror draws selections behind the text. An opaque active-line
+    // background hides partial selections on the current line.
+    // This translucent overlay keeps the same color over #151c20.
+    ".cm-activeLine": { backgroundColor: "rgba(43, 58, 58, 0.5)" },
     ".cm-cursor": { borderLeftColor: "#b9f46a" },
     // drawSelection() paints its own selection layer. Style it explicitly rather
     // than relying on the browser's native ::selection highlight.
