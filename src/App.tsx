@@ -45,6 +45,7 @@ import {
   Done,
 } from "./components/shared.tsx";
 import { ConceptLab } from "./components/ConceptLab.tsx";
+import { InteractiveLesson } from "./components/InteractiveLesson.tsx";
 
 const nav = [
   { route: "path", label: "Learning path", icon: GitBranch },
@@ -684,6 +685,7 @@ function Lesson({ chapter: c }: { chapter: Chapter }) {
               </div>
             </section>
           ))}
+          <InteractiveLesson key={c.id} chapterId={c.id} />
           <section className="runnable-example">
             <div>
               <span>
