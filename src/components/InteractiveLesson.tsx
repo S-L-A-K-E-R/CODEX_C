@@ -311,8 +311,8 @@ function buildScene(
       };
     }
     case "data-structures": {
-      const data = step >= 1 && step < 3 ? [3, 8, n] : [3, 8];
       const queue = alternate;
+      const data = step >= 1 && step < 3 ? [3, 8, n] : step === 3 && queue ? [8, n] : [3, 8];
       return {
         lines: queue
           ? ["int queue[3] = {3, 8};", "queue[2] = " + n + ";  // enqueue", "int front = queue[0];  // peek", "// dequeue removes 3"]
