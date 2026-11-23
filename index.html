@@ -10,34 +10,329 @@
     />
     <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
     <title>CODEX C — Make it compile. Make it yours.</title>
+    <!-- The startup screen must remain self-contained if the app's CSS or JS fails to download. -->
+    <style>
+      #boot-screen {
+        --boot-accent: #00599c;
+        --boot-light: #659ad2;
+        --boot-dark: #004482;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        min-height: 100dvh;
+        overflow-y: auto;
+        padding: 22px;
+        background:
+          radial-gradient(ellipse at 80% 15%, color-mix(in srgb, var(--boot-light) 16%, transparent), transparent 52%),
+          #f1f5f7;
+        color: #21333e;
+        font: 14px/1.6 Inter, ui-sans-serif, system-ui, sans-serif;
+      }
+      #boot-screen[hidden], #boot-screen [hidden] { display: none !important; }
+      #boot-screen * { box-sizing: border-box; }
+      #boot-screen .boot-card {
+        width: min(100%, 540px);
+        overflow: hidden;
+        border: 1px solid #cfdae0;
+        border-radius: 19px;
+        background: #fff;
+        box-shadow: 0 22px 70px #182f3d14, 0 3px 12px #182f3d09;
+      }
+      #boot-screen .boot-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 17px 24px;
+        background: #121e25;
+        color: #fff;
+      }
+      #boot-screen .boot-brand {
+        font-size: 18px;
+        line-height: 1;
+        font-weight: 750;
+        letter-spacing: 0.05em;
+        white-space: nowrap;
+      }
+      #boot-screen .boot-brand b { color: var(--boot-light); font-weight: 650; }
+      #boot-screen .boot-header small {
+        color: #a5b9c2;
+        font-size: 9px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        white-space: nowrap;
+      }
+      #boot-screen .boot-body { padding: clamp(24px, 5vw, 38px); }
+      #boot-screen .boot-art {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        min-height: 112px;
+        margin-bottom: 26px;
+        padding: 15px 22px;
+        border: 1px solid #d9e2e8;
+        border-radius: 13px;
+        background: linear-gradient(125deg, #f3f8fc, #fafcfd);
+      }
+      #boot-screen .boot-mark {
+        margin: 0;
+        color: var(--boot-accent);
+        font: 800 19px/0.79 "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+        letter-spacing: 0;
+        white-space: pre;
+        animation: boot-glow 4s ease-in-out infinite;
+      }
+      #boot-screen .boot-art-detail {
+        align-self: flex-end;
+        color: #7a8f9a;
+        font: 10px/1.7 "SFMono-Regular", Consolas, monospace;
+        letter-spacing: 0.06em;
+        text-align: right;
+      }
+      #boot-screen .boot-kicker {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        margin-bottom: 11px;
+        color: var(--boot-accent);
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+      }
+      #boot-screen .boot-light {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--boot-accent);
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--boot-light) 20%, transparent);
+        animation: boot-pulse 1.5s ease-in-out infinite;
+      }
+      #boot-screen h1 {
+        margin: 0 0 12px;
+        color: #20313b;
+        font-size: clamp(24px, 5.5vw, 31px);
+        font-weight: 760;
+        line-height: 1.18;
+        letter-spacing: -0.035em;
+      }
+      #boot-screen p { margin: 0; color: #526875; font-size: 14px; line-height: 1.65; }
+      #boot-screen .boot-progress {
+        height: 7px;
+        margin: 27px 0 14px;
+        overflow: hidden;
+        border-radius: 20px;
+        background: #e7eff5;
+      }
+      #boot-screen .boot-progress > span {
+        display: block;
+        width: 38%;
+        height: 100%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, var(--boot-accent), var(--boot-light));
+        animation: boot-sweep 2.1s ease-in-out infinite;
+      }
+      #boot-screen .boot-hint {
+        margin-top: 16px;
+        color: #758893;
+        font-size: 12px;
+      }
+      #boot-screen .boot-retry {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 9px;
+        max-width: 100%;
+        margin-top: 25px;
+        padding: 12px 19px;
+        border: 0;
+        border-radius: 9px;
+        background: var(--boot-accent);
+        color: #fff;
+        font: 700 13px/1.5 inherit;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 700;
+        cursor: pointer;
+        transition: filter 150ms, transform 150ms;
+      }
+      #boot-screen .boot-retry:hover { filter: brightness(1.12); }
+      #boot-screen .boot-retry:active { transform: scale(.98); }
+      #boot-screen .boot-retry:focus-visible { outline: 3px solid var(--boot-light); outline-offset: 4px; }
+      #boot-screen .boot-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        padding: 13px 24px;
+        border-top: 1px solid #e4ebef;
+        background: #fafcfd;
+        color: #8a9ba5;
+        font: 10px/1.5 "SFMono-Regular", Consolas, monospace;
+        letter-spacing: .045em;
+      }
+      #boot-screen[data-failed="true"] .boot-light {
+        background: #c68044;
+        box-shadow: 0 0 0 4px #c6804425;
+        animation: none;
+      }
+      #boot-screen[data-failed="true"] .boot-mark { animation: none; }
+      @keyframes boot-sweep {
+        from { transform: translateX(-110%); }
+        to { transform: translateX(275%); }
+      }
+      @keyframes boot-pulse {
+        0%, 100% { opacity: .5; }
+        50% { opacity: 1; }
+      }
+      @keyframes boot-glow {
+        0%, 100% { text-shadow: none; }
+        50% { text-shadow: 0 0 9px color-mix(in srgb, var(--boot-light) 42%, transparent); }
+      }
+      @media (max-width: 420px) {
+        #boot-screen { padding: 14px; }
+        #boot-screen .boot-header { padding: 17px 19px; }
+        #boot-screen .boot-body { padding: 23px 20px 27px; }
+        #boot-screen .boot-art { padding: 14px 17px; }
+        #boot-screen .boot-footer { padding: 12px 19px; }
+        #boot-screen .boot-art-detail { font-size: 9px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        #boot-screen .boot-mark, #boot-screen .boot-light, #boot-screen .boot-progress > span {
+          animation: none;
+        }
+        #boot-screen .boot-progress > span { width: 100%; opacity: .6; }
+      }
+    </style>
   </head>
   <body>
     <div id="root"></div>
-    <!-- Works even when a cached or missing JavaScript bundle prevents React from starting. -->
-    <div id="boot-recovery" hidden role="alert" style="max-width:540px;margin:10vh auto;padding:24px;border:1px solid #ccd8df;border-radius:12px;background:#f7fafc;color:#1c3142;font:16px/1.6 system-ui,sans-serif;">
-      <h1 style="font-size:24px;margin:0 0 12px;">CODEX C couldn't load</h1>
-      <p style="margin:0 0 14px;">The page may be using an outdated cached version. Your saved progress is not affected.</p>
-      <button id="boot-retry" type="button" style="border:0;border-radius:8px;padding:11px 18px;background:#00599c;color:white;font:inherit;cursor:pointer;">Reload the latest version</button>
+    <div id="boot-screen" role="status" aria-live="polite">
+      <section class="boot-card" aria-label="CODEX C">
+        <header class="boot-header">
+          <span class="boot-brand">CODEX <b>C</b></span>
+          <small>LEARN BY MAKING</small>
+        </header>
+        <div class="boot-body">
+          <div class="boot-art" aria-hidden="true">
+            <pre class="boot-mark">  ++++
+ ++  ++
+++
+++
+ ++  ++
+  ++++</pre>
+            <span class="boot-art-detail">+ write<br />+ run<br />+ learn</span>
+          </div>
+          <div class="boot-kicker">
+            <span class="boot-light" aria-hidden="true"></span>
+            <span id="boot-kicker" data-fr="PRÉPARATION DE TON ESPACE">GETTING THINGS READY</span>
+          </div>
+          <div id="boot-loading">
+            <h1 data-fr="Ton espace prend forme.">Your learning space is taking shape.</h1>
+            <p data-fr="On prépare CODEX C pour toi.">We're getting CODEX C ready for you.</p>
+            <div class="boot-progress" role="progressbar" aria-label="Loading CODEX C"><span></span></div>
+            <p class="boot-hint" data-fr="Tes leçons et ta progression seront bientôt là.">Your lessons and progress will be here shortly.</p>
+          </div>
+          <div id="boot-error" hidden>
+            <h1 data-fr="Un petit imprévu en chemin.">A little detour on the way.</h1>
+            <p data-fr="CODEX C n'a pas pu se charger complètement. Cela peut venir d'une ancienne version en cache ou d'un souci de connexion.">CODEX C couldn't finish loading. An old cached page or a temporary connection issue may be the cause.</p>
+            <button id="boot-retry" class="boot-retry" type="button">
+              <span aria-hidden="true">↻</span>
+              <span data-fr="Recharger la dernière version">Reload the latest version</span>
+            </button>
+            <p class="boot-hint" data-fr="Recharger la page n'effacera pas la progression enregistrée dans ce navigateur.">Reloading won't erase progress saved in this browser.</p>
+          </div>
+        </div>
+        <footer class="boot-footer">
+          <span>{ hello_world.c }</span>
+          <span>CODEX C / 01</span>
+        </footer>
+      </section>
     </div>
     <script>
       (function () {
+        var screen = document.getElementById("boot-screen");
         var root = document.getElementById("root");
-        var recovery = document.getElementById("boot-recovery");
+        var loading = document.getElementById("boot-loading");
+        var error = document.getElementById("boot-error");
+        var kicker = document.getElementById("boot-kicker");
+        var finished = false;
+        var timeout;
+        var observer;
+        // The startup screen has no dependency on the React bundle or its stylesheet.
+        var palettes = {
+          blue: ["#659AD2", "#00599C"],
+          green: ["#83CD48", "#56B436"],
+          yellow: ["#F0FB43", "#FFE600"],
+          orange: ["#FFAB00", "#FF8800"],
+          red: ["#FF5859", "#FD2F30"],
+          pink: ["#FFBBBB", "#DF8A8A"],
+          purple: ["#D98AB5", "#975D8E"],
+          maroon: ["#AF1F72", "#7A1354"],
+          gray: ["#707891", "#51587B"]
+        };
+        try {
+          var saved = localStorage.getItem("codex-c:accent-theme");
+          if (Object.prototype.hasOwnProperty.call(palettes, saved)) {
+            screen.style.setProperty("--boot-light", palettes[saved][0]);
+            screen.style.setProperty("--boot-accent", palettes[saved][1]);
+          }
+        } catch (ignored) {
+          // Private browsing and restricted storage still get the default C blue.
+        }
+        try {
+          var language = localStorage.getItem("codex-c:language");
+          if (language !== "fr" && language !== "en") {
+            language = (navigator.language || "").toLowerCase().startsWith("fr") ? "fr" : "en";
+          }
+          if (language === "fr") {
+            document.documentElement.lang = "fr";
+            screen.querySelectorAll("[data-fr]").forEach(function (element) {
+              element.textContent = element.getAttribute("data-fr");
+            });
+          }
+        } catch (ignored) {
+          // Keep the English fallback if browser preferences are unavailable.
+        }
+        function ready() {
+          if (!root || root.children.length === 0) return;
+          finished = true;
+          clearTimeout(timeout);
+          screen.hidden = true;
+          if (observer) observer.disconnect();
+        }
         function showRecovery() {
-          if (root && root.children.length === 0) recovery.hidden = false;
+          if (finished) return;
+          if (root && root.children.length) {
+            ready();
+            return;
+          }
+          screen.dataset.failed = "true";
+          screen.setAttribute("role", "alert");
+          loading.hidden = true;
+          error.hidden = false;
+          kicker.textContent = document.documentElement.lang === "fr"
+            ? "CHARGEMENT INTERROMPU" : "LOADING INTERRUPTED";
         }
         document.getElementById("boot-retry").addEventListener("click", function () {
           var address = new URL(window.location.href);
           address.searchParams.set("refresh", String(Date.now()));
           window.location.replace(address.toString());
         });
+        if (root && typeof MutationObserver !== "undefined") {
+          observer = new MutationObserver(ready);
+          observer.observe(root, { childList: true });
+        }
         window.addEventListener("error", function (event) {
-          if (event.target && event.target.tagName === "SCRIPT") showRecovery();
+          if (event.target === window || (event.target && /^(SCRIPT|LINK)$/.test(event.target.tagName))) {
+            showRecovery();
+          }
         }, true);
         window.addEventListener("unhandledrejection", function () {
-          window.setTimeout(showRecovery, 100);
+          if (!finished) showRecovery();
         });
-        window.setTimeout(showRecovery, 8000);
+        timeout = window.setTimeout(showRecovery, 9000);
+        ready();
       })();
     </script>
     <script type="module" src="/src/main.tsx"></script>

@@ -46,6 +46,7 @@ import {
 } from "./components/shared.tsx";
 import { ConceptLab } from "./components/ConceptLab.tsx";
 import { InteractiveLesson } from "./components/InteractiveLesson.tsx";
+import { SiteStatus } from "./components/SiteStatus.tsx";
 
 const nav = [
   { route: "path", label: "Learning path", icon: GitBranch },
@@ -106,10 +107,11 @@ export default function App() {
       return (
         <Suspense
           fallback={
-            <div className="locked-page">
-              <Code2 size={40} />
-              <p>{t("Opening your workspace…")}</p>
-            </div>
+            <SiteStatus
+              kind="loading"
+              title={t("Opening your workspace…")}
+              message={t("We're getting your editor and tools ready.")}
+            />
           }
         >
           <Workspace key={id} id={id} />
