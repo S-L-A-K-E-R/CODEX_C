@@ -38,6 +38,8 @@ import { now } from "./state/progress.ts";
 import { Profile, Settings, timeLabel } from "./pages/Profile.tsx";
 import {
   Brand,
+  AsciiCMark,
+  AsciiCodex,
   Badge,
   ProgressBar,
   go,
@@ -351,14 +353,8 @@ function LearningPath({ chapterId }: { chapterId: string }) {
     <div className="page path-page">
       <section className="journey-hero">
         <div className="hero-copy">
-          <div className="eyebrow">
-            <span className="tiny-dot" />
-            {t("YOUR JOURNEY INTO C")}
-          </div>
-          <h1>
-            {t("Small steps.")}
-            <br />
-            {t("Real programs.")}
+          <h1 aria-label="CODEX">
+            <AsciiCodex />
           </h1>
           <p>
             {t("Understand a concept. Try an idea. Make it work.")}
@@ -385,9 +381,6 @@ function LearningPath({ chapterId }: { chapterId: string }) {
               : t("Let’s write your first line")}
             <ArrowRight size={17} />
           </button>
-          <span className="hero-footnote">
-            {t("Your pace. No streaks. Just progress.")}
-          </span>
         </div>
         <div className="hero-accents" aria-hidden="true">
           <span style={{ left: "6%", top: "48%" }}>+</span>
@@ -405,7 +398,7 @@ function LearningPath({ chapterId }: { chapterId: string }) {
           <span className="floating-symbol symbol-one">{"{ }"}</span>
           <span className="floating-symbol symbol-two">{"*"}</span>
           <div className="code-token">
-            <Code2 size={64} strokeWidth={1.35} />
+            <AsciiCMark />
             <small>{t("HELLO, POSSIBILITY.")}</small>
           </div>
           <div className="floating-chip">

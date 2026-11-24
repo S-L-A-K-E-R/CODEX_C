@@ -344,24 +344,31 @@ details[open] > summary {
   white-space: pre;
 }
 .brand-spark {
+  color: var(--brand-spark-base, var(--accent-light));
   animation: brand-sparkle 16s ease-in-out infinite;
 }
 @keyframes brand-sparkle {
   0%,
   100% {
-    color: var(--accent-light);
+    color: var(--brand-spark-base, var(--accent-light));
     text-shadow: none;
   }
   25% {
-    color: color-mix(in srgb, var(--accent-light) 75%, var(--accent-dark));
+    color: var(
+      --brand-spark-low,
+      color-mix(in srgb, var(--accent-light) 75%, var(--accent-dark))
+    );
     text-shadow: none;
   }
   48% {
-    color: color-mix(in srgb, var(--accent-light) 80%, white);
+    color: var(
+      --brand-spark-high,
+      color-mix(in srgb, var(--accent-light) 80%, white)
+    );
     text-shadow: 0 0 5px color-mix(in srgb, var(--accent-light) 40%, transparent);
   }
   75% {
-    color: var(--accent-light);
+    color: var(--brand-spark-base, var(--accent-light));
     text-shadow: none;
   }
 }
@@ -585,6 +592,9 @@ details[open] > summary {
   margin: auto;
 }
 .journey-hero {
+  --brand-spark-base: color-mix(in srgb, var(--accent-main) 65%, var(--ink));
+  --brand-spark-low: color-mix(in srgb, var(--accent-dark) 55%, var(--ink));
+  --brand-spark-high: color-mix(in srgb, var(--accent-light) 70%, var(--ink));
   position: relative;
   min-height: 314px;
   border: 1px solid hsl(var(--theme-hue) 35% 86%);
@@ -597,17 +607,26 @@ details[open] > summary {
   z-index: 2;
   padding: 31px 35px;
   width: 65%;
-}
-.hero-copy .eyebrow {
-  font-size: 8px;
-  letter-spacing: 1.7px;
+  min-width: 0;
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
 }
 .hero-copy h1 {
-  font-size: 48px;
-  font-weight: 640;
-  line-height: 1.07;
-  letter-spacing: -2px;
-  margin: 17px 0 16px;
+  max-width: 100%;
+  margin: 0 0 20px;
+  letter-spacing: 0;
+}
+.hero-copy h1 .brand-mark-glyphs {
+  font:
+    bold 14px/0.65 "SFMono-Regular",
+    Consolas,
+    "Liberation Mono",
+    monospace;
+  font-size: clamp(8px, 3.65cqw, 25px);
+  letter-spacing: 0;
 }
 .hero-copy p {
   color: hsl(var(--theme-hue) 13% 43%);
@@ -618,12 +637,6 @@ details[open] > summary {
   margin-top: 22px;
   font-size: 11px;
   padding: 12px 17px;
-}
-.hero-footnote {
-  display: block;
-  font-size: 9px;
-  color: hsl(var(--theme-hue) 13% 47%);
-  margin-top: 12px;
 }
 .hero-illustration {
   width: 39%;
@@ -664,6 +677,11 @@ details[open] > summary {
   color: hsl(var(--theme-hue) 29% 31%);
   position: relative;
   z-index: 1;
+}
+.code-token .brand-mark {
+  width: auto;
+  height: auto;
+  font-size: clamp(15px, 1.6vw, 23px);
 }
 .code-token small {
   font-size: 6px;
@@ -2674,9 +2692,6 @@ details[open] > summary {
   .hero-copy {
     padding: 37px 42px;
   }
-  .hero-copy h1 {
-    font-size: 55px;
-  }
   .hero-copy p {
     font-size: 14px;
   }
@@ -2719,9 +2734,6 @@ details[open] > summary {
     grid-template-columns: minmax(0, 1fr) 230px;
     gap: 20px;
   }
-  .hero-copy h1 {
-    font-size: 43px;
-  }
   .hero-copy {
     padding: 28px;
   }
@@ -2732,9 +2744,6 @@ details[open] > summary {
   .code-token {
     height: 136px;
     width: 129px;
-  }
-  .code-token > svg {
-    width: 55px;
   }
   .orbit-one {
     width: 235px;
@@ -2858,19 +2867,13 @@ details[open] > summary {
     display: none;
   }
   .hero-copy {
-    width: 73%;
-  }
-  .hero-copy h1 {
-    font-size: 42px;
+    width: 65%;
   }
   .symbol-one {
     right: 21px;
   }
   .hero-copy p {
     font-size: 11px;
-  }
-  .hero-footnote {
-    font-size: 8px;
   }
   .hero-illustration .orbit {
     display: none;
@@ -3019,18 +3022,14 @@ details[open] > summary {
   }
   .hero-copy {
     padding: 25px;
-    width: 80%;
-  }
-  .hero-copy h1 {
-    font-size: 43px;
+    width: 72%;
   }
   .hero-copy p {
     font-size: 10px;
   }
   .hero-illustration {
-    right: -30px;
+    right: 0;
     width: 28%;
-    opacity: 0.55;
   }
   .hero-illustration .code-token {
     width: 97px;
@@ -3450,13 +3449,6 @@ details[open] > summary {
   font-size: 14px;
   color: hsl(var(--theme-hue) 18% 38%);
 }
-.hero-footnote {
-  font-size: 10px;
-  color: hsl(var(--theme-hue) 19% 40%);
-}
-.hero-copy .eyebrow {
-  font-size: 9px;
-}
 .stats-strip strong {
   font-size: 24px;
 }
@@ -3607,9 +3599,6 @@ details[open] > summary {
   }
   .chapter-heading b {
     font-size: 14px;
-  }
-  .hero-copy .eyebrow {
-    font-size: 8px;
   }
   .profile-identity p {
     font-size: 11px;
@@ -5161,4 +5150,29 @@ details[open] > summary {
 @media (prefers-reduced-motion: reduce) {
   .site-status-light, .site-status-progress > span { animation: none; }
   .site-status-progress > span { width: 100%; opacity: .6; }
+}
+
+/* On narrow phones, give the wordmark and C emblem their own space. */
+@media (max-width: 540px) {
+  .journey-hero {
+    flex-direction: column;
+  }
+  .hero-copy {
+    width: 100%;
+    padding: 25px 22px 14px;
+  }
+  .hero-illustration {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: 135px;
+  }
+  .hero-illustration .symbol-one {
+    right: 20%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-hero .brand-spark {
+    animation: none;
+  }
 }

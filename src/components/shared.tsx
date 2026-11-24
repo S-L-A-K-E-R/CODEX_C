@@ -11,26 +11,45 @@ const asciiC = `  ++++
  ++  ++
   ++++`;
 
+const asciiCodex = [
+  "  ++++     +++    +++++    +++++++  ++   ++",
+  " ++  ++   ++ ++   ++  ++   ++        ++ ++",
+  "++       ++   ++  ++   ++  +++++      +++",
+  "++       ++   ++  ++   ++  ++         +++",
+  " ++  ++   ++ ++   ++  ++   ++        ++ ++",
+  "  ++++     +++    +++++    +++++++  ++   ++",
+].join("\n");
+
+function AsciiGlyphs({ art }: { art: string }) {
+  return (
+    <span className="brand-mark-glyphs" aria-hidden="true">
+      {Array.from(art, (character, index) =>
+        character === "+" ? (
+          <span
+            key={index}
+            className="brand-spark"
+            style={{ animationDelay: `-${(index % 4) * 4}s` }}
+          >
+            +
+          </span>
+        ) : (
+          character
+        ),
+      )}
+    </span>
+  );
+}
+
 export function AsciiCMark() {
   return (
     <span className="brand-mark" aria-hidden="true">
-      <span className="brand-mark-glyphs">
-        {Array.from(asciiC, (character, index) =>
-          character === "+" ? (
-            <span
-              key={index}
-              className="brand-spark"
-              style={{ animationDelay: `-${(index % 4) * 4}s` }}
-            >
-              +
-            </span>
-          ) : (
-            character
-          ),
-        )}
-      </span>
+      <AsciiGlyphs art={asciiC} />
     </span>
   );
+}
+
+export function AsciiCodex() {
+  return <AsciiGlyphs art={asciiCodex} />;
 }
 
 export function Brand() {
