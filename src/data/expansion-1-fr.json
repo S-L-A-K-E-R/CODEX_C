@@ -13,15 +13,25 @@
   },
   "terminal-receipt": {
     "title": "Un petit ticket",
-    "brief": "Reproduis un ticket de trois lignes avec ses espaces et quantités.",
+    "brief": "Reproduis un ticket de trois lignes avec les noms des articles et leurs quantités sur deux chiffres.",
     "input": "Aucune entrée.",
-    "output": "Trois lignes : ITEM  QTY ; PEN   02 ; BOOK  01."
+    "output": "Trois lignes : ITEM QTY ; PEN 02 ; BOOK 01. Sépare les deux colonnes par un ou plusieurs espaces ou tabulations.",
+    "hints": [
+      "Utilise printf pour afficher le texte fixe.",
+      "Sépare le nom de la quantité par des espaces ou une tabulation ; garde les deux chiffres ensemble.",
+      "Place un retour à la ligne après chaque ligne du ticket."
+    ]
   },
   "terminal-receipt-gold": {
     "title": "Ticket avec quantités variables",
     "brief": "Lis les quantités de stylos et livres ; affiche chaque quantité sur deux chiffres.",
     "input": "Deux entiers de 0 à 99.",
-    "output": "Le même ticket avec les quantités formatées sur deux chiffres."
+    "output": "Le même ticket avec les quantités formatées sur deux chiffres. Sépare les deux colonnes par un ou plusieurs espaces ou tabulations.",
+    "hints": [
+      "Conserve les noms et sépare les colonnes par des espaces ou des tabulations.",
+      "Lis deux entiers avec scanf.",
+      "Utilise %02d pour afficher les zéros initiaux."
+    ]
   },
   "coin-change": {
     "title": "Euros et centimes",

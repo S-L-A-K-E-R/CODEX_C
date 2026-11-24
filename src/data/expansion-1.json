@@ -68,14 +68,15 @@
     "chapter": "first-programs",
     "title": "Print a tiny receipt",
     "kind": "optional",
-    "brief": "Reproduce a small three-line receipt with fixed spaces and quantities.",
+    "brief": "Reproduce a small three-line receipt with item labels and two-digit quantities.",
     "input": "No input.",
-    "output": "Three lines: ITEM  QTY; PEN   02; BOOK  01.",
+    "output": "Three lines: ITEM QTY; PEN 02; BOOK 01. Separate the two columns with one or more spaces or tabs.",
     "tests": [
       {
         "label": "Example",
         "input": "",
-        "output": "ITEM  QTY\nPEN   02\nBOOK  01\n"
+        "output": "ITEM  QTY\nPEN   02\nBOOK  01\n",
+        "comparison": "line-fields"
       }
     ],
     "starter": {
@@ -83,7 +84,7 @@
     },
     "hints": [
       "Use fixed text with printf.",
-      "There are two spaces between ITEM and QTY.",
+      "Use spaces or a tab between the item label and quantity; keep both digits together.",
       "Place a newline after each row."
     ],
     "minutes": 12,
@@ -97,29 +98,32 @@
     "kind": "gold",
     "brief": "Read pen and book quantities; use leading zeros to keep both quantities two digits wide.",
     "input": "Two integers from 0 to 99.",
-    "output": "The same three-line receipt, with the given two-digit quantities.",
+    "output": "The same three-line receipt, with two-digit quantities. Separate the two columns with one or more spaces or tabs.",
     "tests": [
       {
         "label": "Example",
         "input": "2 1\n",
-        "output": "ITEM  QTY\nPEN   02\nBOOK  01\n"
+        "output": "ITEM  QTY\nPEN   02\nBOOK  01\n",
+        "comparison": "line-fields"
       },
       {
         "label": "Case 2",
         "input": "0 9\n",
-        "output": "ITEM  QTY\nPEN   00\nBOOK  09\n"
+        "output": "ITEM  QTY\nPEN   00\nBOOK  09\n",
+        "comparison": "line-fields"
       },
       {
         "label": "Case 3",
         "input": "99 10\n",
-        "output": "ITEM  QTY\nPEN   99\nBOOK  10\n"
+        "output": "ITEM  QTY\nPEN   99\nBOOK  10\n",
+        "comparison": "line-fields"
       }
     ],
     "starter": {
       "main.c": "#include <stdio.h>\n\nint main(void) {\n    // TODO: Receipt with live quantities\n    return 0;\n}\n"
     },
     "hints": [
-      "Keep the fixed labels and spacing.",
+      "Keep the labels and separate the columns with spaces or tabs.",
       "Read two integers with scanf.",
       "Use %02d to pad with zeroes."
     ],

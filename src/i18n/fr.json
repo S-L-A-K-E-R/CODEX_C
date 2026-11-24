@@ -173,6 +173,8 @@
   "See all {n} cases": "Voir les {n} tests",
   "INPUT": "ENTRÉE",
   "OUTPUT": "SORTIE",
+  "Print only the requested output. One final newline is optional. Spaces and tabs may separate columns; line breaks and letter case matter.": "Affiche uniquement le résultat demandé. Le dernier retour à la ligne est facultatif. Les espaces et tabulations peuvent séparer les colonnes ; les retours à la ligne et la casse comptent.",
+  "Print only the requested output. One final newline is optional. Spaces and tabs at line edges are optional; internal spaces and letter case matter.": "Affiche uniquement le résultat demandé. Le dernier retour à la ligne est facultatif. Les espaces et tabulations en début ou fin de ligne sont facultatifs ; les espaces internes et la casse comptent.",
   "Print only the requested output. One final newline is optional. Other spaces and letter case matter.": "Affiche uniquement le résultat demandé. Le dernier retour à la ligne est facultatif. Les autres espaces et la casse comptent.",
   "Add .c, .h, and .txt files with the + button. All .c files are compiled together. Enter program input in the console before running.": "Ajoute des fichiers .c, .h ou .txt avec le bouton +. Tous les fichiers .c sont compilés ensemble. Saisis les entrées dans la console avant l’exécution.",
   "Related course material": "Consulter le support de cours",

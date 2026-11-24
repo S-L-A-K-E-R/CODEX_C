@@ -1,10 +1,10 @@
-export type OutputComparison = "exact" | "line-padding";
+export type OutputComparison = "exact" | "line-padding" | "line-fields";
 
 export interface TestCase {
   label: string;
   input: string;
   output: string;
-  /** Opt in only when horizontal padding is not part of the task. */
+  /** Opt in only when horizontal whitespace is not part of the task. */
   comparison?: OutputComparison;
 }
 export interface ProgramResult {
@@ -45,12 +45,16 @@ export const matchesOutput = (
 ) => {
   const normalise = (value: string) => {
     const text = normaliseOutput(value);
-    return comparison === "line-padding"
-      ? text
-          .split("\n")
-          .map((line) => line.replace(/^[ \t]+|[ \t]+$/g, ""))
-          .join("\n")
-      : text;
+    if (comparison === "exact") return text;
+    return text
+      .split("\n")
+      .map((line) => {
+        const unpadded = line.replace(/^[ \t]+|[ \t]+$/g, "");
+        return comparison === "line-fields"
+          ? unpadded.replace(/[ \t]+/g, " ")
+          : unpadded;
+      })
+      .join("\n");
   };
   return normalise(actual) === normalise(expected);
 };

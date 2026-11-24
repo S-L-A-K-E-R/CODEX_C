@@ -507,7 +507,11 @@ export function Workspace({ id }: { id: string }) {
                         )}
                         <p className="small muted">
                           {t(
-                            "Print only the requested output. One final newline is optional. Other spaces and letter case matter.",
+                            exercise.tests.every((test) => test.comparison === "line-fields")
+                              ? "Print only the requested output. One final newline is optional. Spaces and tabs may separate columns; line breaks and letter case matter."
+                              : exercise.tests.every((test) => test.comparison === "line-padding")
+                                ? "Print only the requested output. One final newline is optional. Spaces and tabs at line edges are optional; internal spaces and letter case matter."
+                                : "Print only the requested output. One final newline is optional. Other spaces and letter case matter.",
                           )}
                         </p>
                       </>
