@@ -334,7 +334,7 @@
       "title": "Une bannière miniature",
       "brief": "Dessine la bannière de l’exemple avec du texte et des retours à la ligne. La première et la dernière ligne contiennent huit signes égal.",
       "input": "Aucune entrée.",
-      "output": "La bannière de trois lignes de l’exemple."
+      "output": "La bannière de trois lignes de l’exemple. Les espaces et tabulations en début ou en fin de ligne sont facultatifs."
     },
     "clockwork": {
       "title": "À la seconde près",

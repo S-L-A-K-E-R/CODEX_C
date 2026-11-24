@@ -96,6 +96,30 @@ test("comparison allows CRLF and a final newline but keeps meaningful whitespace
   assert.ok(!matchesOutput("Enter number: 42", "42"));
 });
 
+test("tiny banner accepts optional line padding without relaxing other output rules", () => {
+  const banner = chapter.find((e) => e.id === "tiny-banner")!.tests[0];
+  const student = "========\nC MODE\n========";
+  assert.equal(banner.comparison, "line-padding");
+  assert.ok(!matchesOutput(student, banner.output));
+  for (const output of [
+    student,
+    banner.output,
+    "========\r\n\tC MODE \r\n========\r\n",
+  ])
+    assert.ok(matchesOutput(output, banner.output, banner.comparison));
+  for (const output of [
+    "=======\nC MODE\n========",
+    "========\nC  MODE\n========",
+    "========\nc mode\n========",
+    "========\n\nC MODE\n========",
+    "========\nC MODE\n========\n\n",
+    "========C MODE========",
+    "========\nC MODE\n========\nExtra",
+  ])
+    assert.ok(!matchesOutput(output, banner.output, banner.comparison));
+  assert.ok(!matchesOutput("42 ", "42"));
+});
+
 test("backup size is measured in UTF-8 bytes, matching the import file limit", () => {
   const p = freshProgress();
   for (let i = 0; i < 20; i++)

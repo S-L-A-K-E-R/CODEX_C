@@ -465,12 +465,13 @@
       "kind": "optional",
       "brief": "Use text and line breaks to draw this banner. There are eight equals signs on the first and last lines.",
       "input": "No input.",
-      "output": "The three-line banner in the example.",
+      "output": "The three-line banner in the example. Spaces or tabs at the beginning or end of each line are optional.",
       "tests": [
         {
           "label": "Example",
           "input": "",
-          "output": "========\n C MODE \n========\n"
+          "output": "========\n C MODE \n========\n",
+          "comparison": "line-padding"
         }
       ],
       "starter": {

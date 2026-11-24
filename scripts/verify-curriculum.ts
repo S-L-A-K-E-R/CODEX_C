@@ -53,7 +53,7 @@ for (const exercise of exercises) {
         encoding: "utf8",
         timeout: 3000,
       });
-      if (run.status !== 0 || !matchesOutput(run.stdout, test.output))
+      if (run.status !== 0 || !matchesOutput(run.stdout, test.output, test.comparison))
         throw new Error(
           `${exercise.id}: ${JSON.stringify({ test, actual: run.stdout, error: run.stderr })}`,
         );

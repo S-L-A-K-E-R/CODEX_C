@@ -190,7 +190,7 @@ export function Workspace({ id }: { id: string }) {
         passed:
           !!result.results[i] &&
           result.results[i].exitCode === 0 &&
-          matchesOutput(result.results[i].stdout, test.output),
+          matchesOutput(result.results[i].stdout, test.output, test.comparison),
       }));
       setChecks(checked);
       const passed = !result.error && checked.every((x) => x.passed);

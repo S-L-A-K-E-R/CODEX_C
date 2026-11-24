@@ -21,7 +21,7 @@ for (const exercise of exercises) {
   result.results.forEach((actual, i) => {
     if (
       actual.exitCode !== 0 ||
-      !matchesOutput(actual.stdout, exercise.tests[i].output)
+      !matchesOutput(actual.stdout, exercise.tests[i].output, exercise.tests[i].comparison)
     )
       throw new Error(
         `${exercise.id}: ${JSON.stringify({ actual, expected: exercise.tests[i] })}`,
@@ -42,6 +42,22 @@ for (const chapter of chapters) {
 console.log(
   `PASS: ${exercises.length} challenges (${count} cases) and ${chapters.length} lesson examples with the actual browser Clang/WASI engine.`,
 );
+
+// A real beta submission omitted the optional banner padding and final newline.
+const banner = exercises.find((exercise: { id: string }) => exercise.id === "tiny-banner");
+const unpaddedBanner = await engine.run({
+  files: {
+    "main.c": '#include <stdio.h>\nint main(void) { printf("========\\n"); printf("C MODE\\n"); printf("========"); return 0; }',
+  },
+  inputs: [""],
+});
+if (
+  !banner ||
+  unpaddedBanner.error ||
+  unpaddedBanner.results[0]?.exitCode !== 0 ||
+  !matchesOutput(unpaddedBanner.results[0].stdout, banner.tests[0].output, banner.tests[0].comparison)
+)
+  throw new Error("The unpadded tiny banner must pass.");
 
 // Failure paths must behave like C diagnostics, not award success or hang the UI.
 const broken = await engine.run({

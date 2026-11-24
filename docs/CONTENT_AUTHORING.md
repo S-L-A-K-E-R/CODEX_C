@@ -71,7 +71,7 @@ Avoid arithmetic worksheets made only of isolated `a + b` operations. Prefer uni
 
 Use the declared valid domain. Include a typical case, important edges and at least one case that distinguishes the intended behaviour from a plausible mistake. Examples include zero and one, first/last element, empty/full collection, midnight rollover, missing match, negative values when allowed, and repeated values.
 
-`matchesOutput` accepts CRLF or LF and one optional trailing newline. It preserves all other whitespace and case. If arbitrary whitespace or approximate numeric comparison is genuinely required, add a named comparator with independent tests instead of silently relaxing every exercise.
+`matchesOutput` accepts CRLF or LF and one optional trailing newline. By default, it preserves all other whitespace and case. A test may opt into `"comparison": "line-padding"` when spaces or tabs at the beginning and end of each line are not part of the learning objective (for example, `tiny-banner`). This still preserves internal spaces, line count, and case. Document optional padding in both languages. If other whitespace or approximate numeric comparison is required, add a named comparator with independent tests instead of silently relaxing every exercise.
 
 Never expect a raw pointer address, an unseeded random result, undefined behaviour, implementation-dependent evaluation order or unbounded integer arithmetic. Use deterministic custom pseudo-random sequences for portable expected output; `rand()` algorithms differ across C libraries. Define overflow and rounding assumptions.
 
