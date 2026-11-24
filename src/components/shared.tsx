@@ -55,11 +55,11 @@ export function AsciiCodex() {
 export function Brand() {
   const { t } = useLanguage();
   return (
-    <a className="brand" href="#path" aria-label={t("CODEX C home")}>
+    <a className="brand" href="#path" aria-label={t("CODEX home")}>
       <AsciiCMark />
       <span>
-        CODEX <b>C</b>
-        <small>{t("LEARN BY MAKING")}</small>
+        CODEX
+        <small>{t("KNOWLEDGE IN ACTION")}</small>
       </span>
     </a>
   );
